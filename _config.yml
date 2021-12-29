@@ -11,3 +11,5 @@ navigation:
         - text: Staff
           url: /staff.html
 
+
+theme: jekyll-theme-cayman
