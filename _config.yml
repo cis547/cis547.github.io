@@ -1,0 +1,13 @@
+home:
+        - text: "CIS 547 - Software Analysis"
+          url: /index.html
+navigation:
+        - text: Schedule
+          url: /schedule.html
+        - text: Labs
+          url: /labs.html
+        - text: Lectures
+          url: /lectures.html
+        - text: Staff
+          url: /staff.html
+
