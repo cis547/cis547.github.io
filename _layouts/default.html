@@ -12,55 +12,31 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{site.baseurl}}/js/bootstrap.min.js"></script>
-
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-					      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></sc\
-ript>
-    <![endif]-->
 </head>
 
 <body style="padding-top: 90px">
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="row">
-	<div class="col-lg-10 col-lg-offset-1" style="padding-left:0px">
-		<div class="navbar-header">
-			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#nav-top">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
+	<div class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="{{site.baseurl}}{{ site.home.url }}">{{ site.home.title }}</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
 			</button>
-		</div>
-		<div class="navbar-collapse navbar-inverse-collapse collapse" aria-expanded="false" id="nav-top">
-			<ul class="nav navbar-nav">
-				{% for link in site.home %}
-				{% assign current = nil %}
-				{% if page.url == link.url%}
-				{% assign current = 'active' %}
-				{% endif %}
-				<li class="{% if forloop.first %}first{% endif %} {{ current }} {% if forloop.last %}last{% endif %}">
-				<a href="{{site.baseurl}}{{ link.url }}">{{ link.text }}</a>
-				</li>
-				{% endfor %}
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				{% for link in site.navigation %}
-				{% assign current = nil %}
-				{% if page.url == link.url%}
-				{% assign current = 'active' %}
-				{% endif %}
-				<li class="{% if forloop.first %}first{% endif %} {{ current }} {% if forloop.last %}last{% endif %}">
-				<a href="{{site.baseurl}}{{ link.url }}">{{ link.text }}</a>
-				</li>
-				{% endfor %}
-			</ul>
+			<div class="navbar-collapse collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					{% for link in site.navigation %}
+					{% assign current = nil %}
+					{% if page.url == link.url%}
+					{% assign current = 'active' %}
+					{% endif %}
+					<li class="nav-item {% if forloop.first %}first{% endif %} {{ current }} {% if forloop.last %}last{% endif %}">
+					<a class="nav-link" href="{{site.baseurl}}{{ link.url }}">{{ link.title }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
 		</div>
 	</div>
-</div>
-</div>
-</div>
 
 
 <div class="container">
@@ -76,4 +52,3 @@ ript>
 	{% include footer.html %}
 </body>
 </html>
-
