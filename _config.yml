@@ -1,15 +1,15 @@
 home:
-        - text: "CIS 547 - Software Analysis"
-          url: /index.html
+  title: CIS 547 - Software Analysis
+  url: /index.html
 navigation:
-        - text: Schedule
-          url: /schedule.html
-        - text: Labs
-          url: /labs.html
-        - text: Lectures
-          url: /lectures.html
-        - text: Staff
-          url: /staff.html
+  - title: Schedule
+    url: /schedule.html
+  - title: Labs
+    url: /labs.html
+  - title: Lectures
+    url: /lectures.html
+  - title: Staff
+    url: /staff.html
 
 
 theme: jekyll-theme-cayman
