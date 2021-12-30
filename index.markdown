@@ -1,36 +1,12 @@
 ---
 layout: default
-title: Home
+title: CIS 547 - Home
 logo_style: 'width: 280px; height: 70px;'
 ---
 
-<div class="top">
-  <div class="row">
-    <div class="col-md-12 nopadding vcenter">
-     <img src="images/find_bugs.png" width="20%" align="right"/>
-    </div>
-  </div>
-</div>
-
-
-<!--
-<div class="row">
-	<div class="col-md-12">
-		<h4>News</h4>
-	</div>
-	<div class="col-md-12">
-		<ul>
-		{% for news in site.data.news %}
-		<li>	<b>	{{news.date}}: </b>
-				{{news.content}}
-		</li>
-		{% endfor %}
-	</ul>
-		</div>
-</div>
--->
-
 ##### Course Description
+
+<img class="rounded img-fluid float-lg-right" src="images/find_bugs.png" style="padding: 15px; max-width: 25%" align="right"/>
 
 This course provides a rigorous and hands-on introduction to the field of software analysis -- a
 body of powerful yet practical techniques and tools for analyzing modern software, with
@@ -61,7 +37,7 @@ specific scenarios in practice.
 + Understanding of mathematical logic (CIS 160 or CIT 592)
 
 		
-Specifically:
+###### Specifically:
 
 + The assignments involve programming in C++ using the LLVM compiler infrastructure.
 + The lectures and exams presume basic knowledge of algorithms (e.g. graph traversal and asymptotic analysis) and basic background in logic (e.g. set theory and boolean algebra).
