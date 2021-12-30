@@ -41,5 +41,3 @@ specific scenarios in practice.
 
 + The assignments involve programming in C++ using the LLVM compiler infrastructure.
 + The lectures and exams presume basic knowledge of algorithms (e.g. graph traversal and asymptotic analysis) and basic background in logic (e.g. set theory and boolean algebra).
-
-FooBar
