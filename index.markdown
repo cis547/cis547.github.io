@@ -4,7 +4,7 @@ title: Home
 logo_style: 'width: 280px; height: 70px;'
 ---
 
-##### Course Description
+#### Course Description
 
 <img class="rounded img-fluid float-lg-right" src="images/find_bugs.png" style="padding: 15px; max-width: 25%" align="right"/>
 
@@ -23,21 +23,20 @@ This course aims to enable you to become a better software engineer or security
 analyst by learning a rich repertoire of software analysis ideas and know-how to apply them to
 specific scenarios in practice.
 
-##### Learning Objectives
+#### Learning Objectives
 
 + Understand methods for analyzing, testing, debugging, and verifying software.
 + Analyze the tradeoffs and limits of different software analysis techniques in aspects such as scalability, accuracy, and cost.
 + Evaluate the suitability of a software analysis technique under a given set of real-world constraints.
 + Implement and apply a software analysis algorithm to a codebase, application, library, or category of programs.
 
-##### Course Prerequisites
+#### Course Prerequisites
 
 + Experience with C and systems programming (CIS 240 or CIT 595)
 + Familiarity with data structures and algorithms (CIS 120 or CIT 594)
 + Understanding of mathematical logic (CIS 160 or CIT 592)
 
-		
-###### Specifically:
+Specifically:
 
 + The assignments involve programming in C++ using the LLVM compiler infrastructure.
 + The lectures and exams presume basic knowledge of algorithms (e.g. graph traversal and asymptotic analysis) and basic background in logic (e.g. set theory and boolean algebra).
