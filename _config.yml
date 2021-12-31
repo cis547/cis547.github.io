@@ -1,4 +1,5 @@
 title: "CIS 547 - Software Analysis"
+baseurl: https://cis547.github.io/
 navigation:
   - title: Schedule
     url: /schedule.html
