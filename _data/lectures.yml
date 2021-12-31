@@ -82,7 +82,13 @@
 - id: "2"
   title: "Software Specifications"
   description: |
+    This module introduces you to software specifications and their role in software testing. You will learn about the landscape of testing methods and how program analysis can be used to automate testing. You’ll learn about different kinds of specifications, including pre- and post-conditions and loop- and class- invariants, and how they help improve program reliability. You’ll then learn how to automatically infer such specifications using the Houdini algorithm and how to measure the quality of a test suite to make it more robust.
   objectives: |
+    + Classify and compare different testing approaches: Automated testing, Manual testing, Black-box testing, and White-box testing.
+    + Classify program specifications into two categories: Safety Properties and Liveness Properties. Give examples of each category.
+    + Explain and give examples of specifications of different units of a program such as functions, loops, and classes: Pre- and Post- Conditions, Loop Invariants, and Class Invariants.
+    + Apply the Houdini algorithm on programs to automatically infer specifications and explain its pros and cons.
+    + Measure the quality of a test suite using approaches: Code Coverage and Mutation Analysis.
   lessons:
     - title: ""
       segments:
@@ -105,7 +111,12 @@
 - id: "3"
   title: "Random Testing"
   description: |
+    This module introduces the concept of Random Testing and describes its evolution over three generations from its inception to today’s sophisticated fuzzers. You will learn about general-purpose fuzzers, their strengths and limitations, and how to effectively apply them to uncover crashing bugs and security vulnerabilities. You’ll also learn how the random testing paradigm is adapted to test programs in two important domains, mobile applications and multi-threaded programs, and how it can provide a probabilistic worst-case guarantee on finding concurrency bugs.
   objectives: |
+    + Describe the three generations of Random Testing along with its uses and pros and cons.
+    + Describe different fuzzing tools and their usage: AFL, LibFuzzer, OSS Fuzz, and ClusterFuzz.
+    + Explain with examples grammar-based fuzzing in mobile applications.
+    + Explain with examples fuzzing of multi-threaded programs using Bug Depth, the Cuzz algorithm, and its probabilistic guarantee.
   lessons:
     - title: ""
       segments:
@@ -123,7 +134,11 @@
 - id: "4"
   title: "Automated Test Generation"
   description: |
+    This module introduces the concept of automating test generation for units of code. The presented techniques guide test generation by leveraging different kinds of program specifications, such as types, invariants, and pre- and post-conditions. You’ll learn two orthogonal but complementary approaches: Randoop and Korat. Randoop is designed to test classes and libraries while Korat is used to test data structures.
   objectives: |
+    + Describe how to leverage different forms of specifications (types, invariants, and pre- and post-conditions) to guide test generation.
+    + Apply the Randoop approach to test classes and libraries by creating and classifying method sequences.
+    + Apply Korat to test data structures by representing and enumerating different shapes and using pre- and post-conditions and invariants for test generation.
   lessons:
     - title: ""
       segments:
@@ -141,7 +156,13 @@
 - id: "5"
   title: "Dataflow Analysis - Part I"
   description: |
+    This module delves into dataflow analysis -- a popular type of static analysis widely used in compilers and software quality tools. It introduces the WHILE language and the control-flow graph representation of WHILE programs on which dataflow analyses operate. Two classic dataflow analyses are presented: Reaching Definitions Analysis and Very Busy Expressions Analysis. The similarities and differences of the two analyses are discussed.
   objectives: |
+    + Define and represent the result of a Dataflow Analysis using control-flow graphs and the WHILE language.
+    + Understand the properties of Dataflow Analysis and list some of their applications in compilers and software quality tools.
+    + Define the operations and abstract domain of Reaching Definitions Analysis and Very Busy Expressions Analysis.
+    + Demonstrate how Reaching Definitions Analysis works on a program in the WHILE language.
+    + Demonstrate how Very Busy Expressions Analysis works on a program in the WHILE language.
   lessons:
     - title: ""
       segments:
@@ -159,7 +180,13 @@
 - id: "6"
   title: "Dataflow Analysis - Part II"
   description: |
+    This module introduces the two of the remaining classic dataflow analyses – Available Expressions Analysis and Live Variables Analysis. Then you’ll learn about the overall pattern followed by the four classic dataflow analyses. The module also delves into Interval Analysis, a modern dataflow analysis with many applications to finding security bugs. In the end, you’ll learn about the concept of widening to ensure termination of interval analysis.
   objectives: |
+    + Demonstrate how Available Expressions Analysis and Live Variables Analysis work on a program in the WHILE language.
+    + Compare and contrast the four classic Dataflow Analyses based on the dataflow pattern.
+    + Understand the importance of Interval Analysis in finding common errors in software.
+    + Define the operations and abstract domain of Interval Analysis.
+    + Apply the chaotic iteration algorithm to understand the step-by-step operation of Interval Analysis and recognize the importance of Widening.
   lessons:
     - title: ""
       segments:
@@ -177,7 +204,14 @@
 - id: "7"
   title: "Pointer Analysis"
   description: |
+    This module introduces the concept of Pointer Analysis -- a form of dataflow analysis that reasons about the flow of pointers. A popular pointer analysis called Andersen's algorithm and the points-to graph representation is described. Different dimensions for classifying pointer analyses based on accuracy and cost are presented. A more scalable but less precise pointer analysis called Steensgaard's algorithm is introduced. In the end, an important security application of pointer analysis, called Control Flow Integrity, is discussed.
   objectives: |
+    + Understand the need for Pointer Analysis and the two variants of May-alias analysis and Must-alias analysis.
+    + Apply Andersen’s algorithm to compute a Points-to Graph for a program that creates and manipulates objects.
+    + Apply different Heap Abstractions to a program and understand the differences between them.
+    + Classify Pointer Analysis algorithms using four dimensions: Flow Sensitivity, Context Sensitivity, Heap Abstraction, and Aggregate Modeling.
+    + Apply Andersen’s and Steensgaard’s algorithms to a program with stack-directed pointers.
+    + Understand how Pointer Analysis is applied in Control Flow Integrity to enforce security policies.
   lessons:
     - title: ""
       segments:
@@ -195,7 +229,13 @@
 - id: "8"
   title: "Constraint-Based Analysis"
   description: |
+    In this module, you’ll learn about Constraint-Based Analysis, a popular approach to program analysis, and its benefits over the approaches studied earlier. You’ll learn a constraint language called Datalog and how it is used to specify intra-procedural and inter-procedural dataflow analyses. The module will also describe tradeoffs made in context-insensitive and context-sensitive inter-procedural analysis. In the end, you’ll learn about other constraint languages, SAT and SMT, and their applications to program analysis.
   objectives: |
+    + Understand Constraint-Based Analysis and its benefits over other approaches.
+    + Understand the syntax and semantics of the Datalog constraint language.
+    + Use the Datalog constraint language to specify intra-procedural and inter-procedural dataflow analyses.
+    + Understand Context-Insensitive and Context-Sensitive inter-procedural dataflow analysis and their challenges and solutions.
+    + Understand the constraint languages SAT and SMT through applications to program analysis.
   lessons:
     - title: ""
       segments:
@@ -215,6 +255,12 @@
   description: |
     This module introduces a technique for automated test generation called Dynamic Symbolic Execution (DSE). DSE is an example of a hybrid analysis: it collaboratively combines static analysis and dynamic analysis. You’ll learn how it outperforms both random testing, which is based on purely dynamic analysis, and symbolic execution, which is based on purely static analysis. You’ll also learn about the effectiveness of the DSE approach in testing various real-world applications.
   objectives: |
+    + Understand the step-by-step process for Statistical Debugging and identify its benefits and challenges.
+    + Identify the kinds of program predicates to observe in user runs for the purpose of isolating bugs.
+    + Summarize the arrays of predicate counts in a user run and report them in a feedback profile.
+    + Understand different approaches for sampling program predicates and the uncertainty involved in the process.
+    + Compute Failure, Context and Increase metrics to express the likelihood of a bug in a predicate sample.
+    + Apply Statistical Debugging algorithms to isolate bugs in programs.
   lessons:
     - title: ""
       segments:
@@ -232,7 +278,12 @@
 - id: "10"
   title: "Type Systems - Part I"
   description: |
+    This module will introduce you to the most widely used form of static analysis known as Type Systems. You’ll learn a core language, the Lambda Calculus, and notation for specifying a type system for the language in the form of rules. You will then use the rules to determine whether a program is accepted or rejected by the type system. In the end, you’ll learn about soundness and completeness properties of type systems.
   objectives: |
+    + Remember the notation for Type Systems and the type rules for the Lambda Calculus language.
+    + Derive the type of a given program in the Lambda Calculus by constructing a Type Derivation.
+    + Explain the concept of Type Soundness and the guarantee that a sound type system provides for well-typed programs.
+    + Understand the relationship between types in a type system and abstract values in other forms of static analysis.
   lessons:
     - title: ""
       segments:
@@ -250,7 +301,12 @@
 - id: "11"
   title: "Delta Debugging"
   description: |
+    This module introduces Delta Debugging -- a debugging technique that automates the task of minimizing a complex crashing test-case to help localize the cause of the program failure. Starting with an iterative binary search technique that cuts test-cases into half, you’ll learn a formal framework to shrink test-cases, culminating into the Delta Debugging Minimization algorithm. The running time and minimality guarantee provided by the algorithm are discussed. In the end, you’ll learn about applications of this technique to diverse debugging tasks in practice.
   objectives: |
+    + Explain the impact of input granularity on the progress of the iterative Binary Search technique and the chance of finding a failing input subset.
+    + Understand the step-by-step process of decomposing a test-case into a set of changes as part of the Delta Debugging algorithm.
+    + Apply the Delta Debugging Minimization algorithm to find a 1-minimal test-case from the given set of changes.
+    + Discuss different real-world applications of the Delta Debugging Minimization algorithm.
   lessons:
     - title: ""
       segments:
@@ -268,7 +324,12 @@
 - id: "12"
   title: "Type Systems - Part II"
   description: |
+    This module elucidates connections between type systems and other forms of static analysis. It sets out by showing how to perform Type Inference using constraint solving and thereby alleviate annotation burden on programmers. It then demonstrates how other forms of static analyses can be described using the notation of type systems. You will learn how to describe three broad classes of static analyses -- flow-insensitive, flow-sensitive, and path-sensitive -- using type rules and understand their strengths and tradeoffs.
   objectives: |
+    + Apply the Type Inference algorithm to infer the type of a given program in the Lambda Calculus language.
+    + Understand how to specify other forms of Static Analysis using Type System notation.
+    + Explain the type rules for Flow-insensitive, Flow-sensitive, and Path-sensitive analysis.
+    + Determine whether a certain property of a given program can be verified using a Flow-insensitive, Flow-sensitive, or Path-sensitive analysis.
   lessons:
     - title: ""
       segments:
@@ -286,6 +347,7 @@
 - id: "13"
   title: "Dynamic Symbolic Execution"
   description: |
+    This module introduces a technique for automated test generation called Dynamic Symbolic Execution (DSE). DSE is an example of a hybrid analysis: it collaboratively combines static analysis and dynamic analysis. You’ll learn how it outperforms both random testing, which is based on purely dynamic analysis, and symbolic execution, which is based on purely static analysis. You’ll also learn about the effectiveness of the DSE approach in testing various real-world applications.
   objectives: |
     + Visualize execution paths of a program using its Computation Tree to understand how Dynamic Symbolic Execution works.
     + Apply a combination of Concrete Execution and Symbolic Execution to generate numeric and pointer inputs as part of Dynamic Symbolic Execution.
