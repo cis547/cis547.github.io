@@ -6,39 +6,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="{{ site.description }}">
 
-<link href="{{site.baseurl}}/css/bootstrap.css" rel="stylesheet">
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="{{site.baseurl}}/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 
-<body>
-	<div class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="{{site.baseurl}}{{ site.home.url }}">{{ site.home.title }}</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="navbar-collapse collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					{% for link in site.navigation %}
-					{% assign current = nil %}
-					{% if page.url == link.url%}
-					{% assign current = 'active' %}
-					{% endif %}
-					<li class="nav-item {% if forloop.first %}first{% endif %} {{ current }} {% if forloop.last %}last{% endif %}">
-					<a class="nav-link" href="{{site.baseurl}}{{ link.url }}">{{ link.title }}</a>
-					</li>
-					{% endfor %}
-				</ul>
+<body style="padding-top: 90px">
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-10 col-lg-offset-1">
+				<div class="navbar-header">
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#nav-top">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="{{ site.baseurl }}">{{ site.title }}</a>
+				</div>
+				<div class="navbar-collapse navbar-inverse-collapse collapse" aria-expanded="false" id="nav-top">
+					<ul class="nav navbar-nav navbar-right">
+						{% for link in site.navigation %}
+							{% assign current = nil %}
+							{% if page.url == link.url %}
+								{% assign current = 'active' %}
+							{% endif %}
+							<li class="{% if forloop.first %}first{% endif %} {{ current }} {% if forloop.last %}last{% endif %}">
+								<a href="{{site.baseurl}}{{ link.url }}">{{ link.text }}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
-
+</div>
 
 <div class="container">
-<div class="row" style="padding: 2em;">
+<div class="row">
 	<div class="col-lg-10 col-lg-offset-1">
 
 	{{ content }}

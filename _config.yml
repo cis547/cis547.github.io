@@ -1,15 +1,12 @@
-home:
-  title: CIS 547 - Software Analysis
-  url: /index.html
+title: "CIS 547 - Software Analysis"
 navigation:
-  - title: Schedule
+  - text: Schedule
     url: /schedule.html
-  - title: Labs
+  - text: Labs
     url: /labs.html
-  - title: Lectures
+  - text: Lectures
     url: /lectures.html
-  - title: Staff
+  - text: Staff
     url: /staff.html
-
 
 theme: jekyll-theme-cayman
