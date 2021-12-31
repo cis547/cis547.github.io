@@ -7,7 +7,7 @@ logo_style: 'width: 280px; height: 70px;'
 {% for lecture in site.data.lectures %}
 	<h2>Module {{lecture.id}}: {{lecture.title}}</h2>
 	<p>
-		<strong>Description:</strong> {{lecture.description}}
+		<strong>Description:</strong> {{lecture.description | markdownify}}
 	</p>
 	<p>
 		<strong>Objectives:</strong> {{lecture.objectives | markdownify}}
