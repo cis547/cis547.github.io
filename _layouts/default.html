@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 </head>
 
 <body style="padding-top: 90px">
@@ -34,7 +33,7 @@
 								{% assign current = 'active' %}
 							{% endif %}
 							<li class="{% if forloop.first %}first{% endif %} {{ current }} {% if forloop.last %}last{% endif %}">
-								<a href="{{site.baseurl}}{{ link.url }}">{{ link.text }}</a>
+								<a href="{{site.baseurl}}{{ link.url }}">{{ link.title }}</a>
 							</li>
 						{% endfor %}
 					</ul>
@@ -45,15 +44,16 @@
 </div>
 
 <div class="container">
-<div class="row">
-	<div class="col-lg-10 col-lg-offset-1">
+	<div class="row">
+		<div class="col-lg-10 col-lg-offset-1">
 
-	{{ content }}
+		{{ content }}
 
-
+		</div>
+	</div>
+	<div class="row">
+		<hr width="100%"/>
 	</div>
 </div>
-
-	{% include footer.html %}
 </body>
 </html>

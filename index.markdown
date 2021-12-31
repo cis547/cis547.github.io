@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home
+title: CIS 547 - Home
 logo_style: 'width: 280px; height: 70px;'
 ---
 
