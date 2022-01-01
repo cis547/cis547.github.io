@@ -1,10 +1,8 @@
 ---
 layout: default
-title: Lectures
-logo_style: 'width: 280px; height: 70px;'
 ---
 
-{% for lecture in site.data.lectures %}
+{% for lecture in page.lectures %}
 	<h2>Module {{lecture.id}}: {{lecture.title}}</h2>
 	<p>
 		<strong>Description:</strong> {{lecture.description | markdownify}}
