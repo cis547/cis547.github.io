@@ -11,17 +11,11 @@ objectives: |
   + Apply the Houdini algorithm on programs to automatically infer specifications and explain its pros and cons.
   + Measure the quality of a test suite using approaches: Code Coverage and Mutation Analysis.
 lessons:
-  - title: "Introduction"
-    segments:
-      - title: "Introduction"
-        url: ""
-      - title: "Software Development Scenario"
-        url: ""
-      - title: "The Role of Specifications"
-        url: ""
-      - title: "Landscape of Testing Approaches"
-        url: ""
-  - title: "Kinds of Specifications"
+  - title: "Prologue"
+    url: ""
+  - title: "Lesson 1: Overview"
+    url: ""
+  - title: "Lesson 2: Kinds of Specifications"
     segments:
       - title: "Safety and Liveness"
         url: ""
@@ -39,7 +33,7 @@ lessons:
         url: ""
       - title: "Reading: Hardening C/C++ Code with Clang Sanitizers"
         url: ""
-  - title: "Inferring Specifications"
+  - title: "Lesson 3: Inferring Specifications"
     segments:
       - title: "The Houdini Algorithm"
         url: ""
@@ -53,7 +47,7 @@ lessons:
         url: ""
       - title: "Reading: Verifying Program Correctness with Dafny"
         url: ""
-  - title: "Measuring Test Suite Quality"
+  - title: "Lesson 4: Measuring Test Suite Quality"
     segments:
       - title: "How Good Is Your Test Suite?"
         url: ""
@@ -73,8 +67,6 @@ lessons:
         url: ""
       - title: "Quiz 2.5 [Solution] Mutation Analysis (Part 2)"
         url: ""
-  - title: "Review"
-    segments:
-      - title: "What Have We Learned?"
-        url: ""
+  - title: "Epilogue"
+    url: ""
 ---

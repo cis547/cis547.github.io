@@ -16,10 +16,14 @@ slides: intro_to_software_analysis.pdf
 lessons:
   - title: "Prologue"
     url: "https://youtu.be/_h9ljrdS18E"
-  - title: "Lesson 1: Overview of Software Analysis"
-    url: "https://youtu.be/MPc5irh53co"
-  - title: "Lesson 2: Tradeoffs in Software Analysis"
-    url: "https://youtu.be/zhaLrT0XvoQ"
+  - title: "Lesson 1: Motivation and Overview"
+    url: "https://youtu.be/OP5_I76ZBQk"
+  - title: "Lesson 2: An Example: Program Invariants"
+    url: "https://youtu.be/QZrdSuZdXJA"
+  - title: "Lesson 3: Tradeoffs in Software Analysis"
+    url: "https://youtu.be/838LOPYk6PA"
+  - title: "Lesson 4: Use Cases of Software Analysis"
+    url: "https://youtu.be/0yDR42XTeYE"
   - title: "Epilogue"
     url: "https://youtu.be/HDrCeWAGzFM"
 ---
