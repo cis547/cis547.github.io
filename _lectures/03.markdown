@@ -1,0 +1,59 @@
+---
+layout: lecture
+_id: "3"
+title: "Random Testing"
+description: |
+  This module introduces the concept of Random Testing and describes its evolution over three generations from its inception to today’s sophisticated fuzzers. You will learn about general-purpose fuzzers, their strengths and limitations, and how to effectively apply them to uncover crashing bugs and security vulnerabilities. You’ll also learn how the random testing paradigm is adapted to test programs in two important domains, mobile applications and multi-threaded programs, and how it can provide a probabilistic worst-case guarantee on finding concurrency bugs.
+objectives: |
+  + Describe the three generations of Random Testing along with its uses and pros and cons.
+  + Describe different fuzzing tools and their usage: AFL, LibFuzzer, OSS Fuzz, and ClusterFuzz.
+  + Explain with examples grammar-based fuzzing in mobile applications.
+  + Explain with examples fuzzing of multi-threaded programs using Bug Depth, the Cuzz algorithm, and its probabilistic guarantee.
+lessons:
+  - title: "Introduction"
+    segments:
+      - title: "Introduction"
+        url: ""
+      - title: "Random Testing: Motivation and Background"
+        url: ""
+      - title: "The First Fuzzing Study"
+        url: ""
+  - title: "General-Purpose Fuzzing"
+    segments:
+      - title: "Three Generations of Fuzzers"
+        url: ""
+      - title: "Pros and Cons of Random Testing"
+        url: ""
+      - title: "Fuzzers in the Wild"
+        url: ""
+      - title: "Reading: A Fuzzing Lesson (AFL)"
+        url: ""
+  - title: "Domain-Specific Fuzzing"
+    segments:
+      - title: "Two Case Studies"
+        url: ""
+      - title: "Testing Mobile Apps"
+        url: ""
+      - title: "Grammar-Based Fuzzing"
+        url: ""
+      - title: "Quiz 3.1 [Question] Monkey Events (Mobile Apps)"
+        url: ""
+      - title: "Quiz 3.1 [Solution] Monkey Events (Mobile Apps)"
+        url: ""
+      - title: "Testing Concurrent Programs"
+        url: ""
+      - title: "Depth of a Concurrency Bug"
+        url: ""
+      - title: "Quiz 3.2 [Question] Concurrency Bug Depth"
+        url: ""
+      - title: "Quiz 3.2 [Solution] Concurrency Bug Depth"
+        url: ""
+      - title: "Cuzz Algorithm"
+        url: ""
+      - title: "Cuzz Case Study & Key Takeaways"
+        url: ""
+  - title: "Review"
+    segments:
+      - title: "What Have We Learned?"
+        url: ""
+---

@@ -1,0 +1,80 @@
+---
+layout: lecture
+_id: "2"
+title: "Software Specifications"
+description: |
+  This module introduces you to software specifications and their role in software testing. You will learn about the landscape of testing methods and how program analysis can be used to automate testing. You’ll learn about different kinds of specifications, including pre- and post-conditions and loop- and class- invariants, and how they help improve program reliability. You’ll then learn how to automatically infer such specifications using the Houdini algorithm and how to measure the quality of a test suite to make it more robust.
+objectives: |
+  + Classify and compare different testing approaches: Automated testing, Manual testing, Black-box testing, and White-box testing.
+  + Classify program specifications into two categories: Safety Properties and Liveness Properties. Give examples of each category.
+  + Explain and give examples of specifications of different units of a program such as functions, loops, and classes: Pre- and Post- Conditions, Loop Invariants, and Class Invariants.
+  + Apply the Houdini algorithm on programs to automatically infer specifications and explain its pros and cons.
+  + Measure the quality of a test suite using approaches: Code Coverage and Mutation Analysis.
+lessons:
+  - title: "Introduction"
+    segments:
+      - title: "Introduction"
+        url: ""
+      - title: "Software Development Scenario"
+        url: ""
+      - title: "The Role of Specifications"
+        url: ""
+      - title: "Landscape of Testing Approaches"
+        url: ""
+  - title: "Kinds of Specifications"
+    segments:
+      - title: "Safety and Liveness"
+        url: ""
+      - title: "Pre- and Post-Conditions"
+        url: ""
+      - title: "Quiz 2.1 [Question] Pre-Conditions"
+        url: ""
+      - title: "Quiz 2.1 [Solution] Pre-Conditions"
+        url: ""
+      - title: "Quiz 2.2 [Question] Post-Conditions"
+        url: ""
+      - title: "Quiz 2.2 [Solution] Post-Conditions"
+        url: ""
+      - title: "Invariants"
+        url: ""
+      - title: "Reading: Hardening C/C++ Code with Clang Sanitizers"
+        url: ""
+  - title: "Inferring Specifications"
+    segments:
+      - title: "The Houdini Algorithm"
+        url: ""
+      - title: "Houdini on an Example"
+        url: ""
+      - title: "Quiz 2.3 [Question] Inferring Contracts with Houdini"
+        url: ""
+      - title: "Quiz 2.3 [Solution] Inferring Contracts with Houdini"
+        url: ""
+      - title: "Pros and Cons of Houdini"
+        url: ""
+      - title: "Reading: Verifying Program Correctness with Dafny"
+        url: ""
+  - title: "Measuring Test Suite Quality"
+    segments:
+      - title: "How Good Is Your Test Suite?"
+        url: ""
+      - title: "Code Coverage"
+        url: ""
+      - title: "Quiz 2.4 [Question] Code Coverage Metrics"
+        url: ""
+      - title: "Quiz 2.4 [Solution] Code Coverage Metrics"
+        url: ""
+      - title: "Mutation Analysis"
+        url: ""
+      - title: "Quiz 2.5 [Question] Mutation Analysis (Part 1)"
+        url: ""
+      - title: "Quiz 2.5 [Solution] Mutation Analysis (Part 1)"
+        url: ""
+      - title: "Quiz 2.5 [Question] Mutation Analysis (Part 2)"
+        url: ""
+      - title: "Quiz 2.5 [Solution] Mutation Analysis (Part 2)"
+        url: ""
+  - title: "Review"
+    segments:
+      - title: "What Have We Learned?"
+        url: ""
+---

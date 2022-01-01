@@ -1,0 +1,63 @@
+---
+layout: lecture
+_id: "9"
+title: "Statistical Debugging"
+description: |
+  This module introduces a technique for automated test generation called Dynamic Symbolic Execution (DSE). DSE is an example of a hybrid analysis: it collaboratively combines static analysis and dynamic analysis. You’ll learn how it outperforms both random testing, which is based on purely dynamic analysis, and symbolic execution, which is based on purely static analysis. You’ll also learn about the effectiveness of the DSE approach in testing various real-world applications.
+objectives: |
+  + Understand the step-by-step process for Statistical Debugging and identify its benefits and challenges.
+  + Identify the kinds of program predicates to observe in user runs for the purpose of isolating bugs.
+  + Summarize the arrays of predicate counts in a user run and report them in a feedback profile.
+  + Understand different approaches for sampling program predicates and the uncertainty involved in the process.
+  + Compute Failure, Context and Increase metrics to express the likelihood of a bug in a predicate sample.
+  + Apply Statistical Debugging algorithms to isolate bugs in programs.
+lessons:
+  - title: "Introduction"
+    segments:
+      - title: "Introduction"
+        url: ""
+      - title: "Why Statistical Debugging?"
+        url: ""
+      - title: "The Statistical Debugging Approach"
+        url: ""
+  - title: "How to Get Data for Debugging"
+    segments:
+      - title: "Step 1: A Model of Program Behaviors"
+        url: ""
+      - title: "Quiz 9.1 [Question] Identify the Predicates"
+        url: ""
+      - title: "Quiz 9.1 [Solution] Identify the Predicates"
+        url: ""
+      - title: "Step 2: Summarization and Reporting"
+        url: ""
+      - title: "Quiz 9.2 [Question] Abstracting Predicate Counts"
+        url: ""
+      - title: "Quiz 9.2 [Solution] Abstracting Predicate Counts"
+        url: ""
+      - title: "Quiz 9.3 [Question] Populate the Predicates"
+        url: ""
+      - title: "Quiz 9.3 [Solution] Populate the Predicates"
+        url: ""
+      - title: "Step 3: Sampling Program Predicates"
+        url: ""
+      - title: "Quiz 9.4 [Question] Uncertainty Due to Sampling"
+        url: ""
+      - title: "Quiz 9.4 [Solution] Uncertainty Due to Sampling"
+        url: ""
+  - title: "What To Do with Data to Debug"
+    segments:
+      - title: "Step 4: Finding Causes of Bugs"
+        url: ""
+      - title: "Quiz 9.5 [Question] Computing Increase()"
+        url: ""
+      - title: "Quiz 9.5 [Solution] Computing Increase()"
+        url: ""
+      - title: "Step 5.1: Isolating a Bug"
+        url: ""
+      - title: "Step 5.2: Handling Programs with Multiple Bugs"
+        url: ""
+  - title: "Review"
+    segments:
+      - title: "What Have We Learned?"
+        url: ""
+---
