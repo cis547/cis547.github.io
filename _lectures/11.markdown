@@ -1,0 +1,59 @@
+---
+layout: lecture
+_id: "11"
+title: "Delta Debugging"
+description: |
+  This module introduces Delta Debugging -- a debugging technique that automates the task of minimizing a complex crashing test-case to help localize the cause of the program failure. Starting with an iterative binary search technique that cuts test-cases into half, you’ll learn a formal framework to shrink test-cases, culminating into the Delta Debugging Minimization algorithm. The running time and minimality guarantee provided by the algorithm are discussed. In the end, you’ll learn about applications of this technique to diverse debugging tasks in practice.
+objectives: |
+  + Explain the impact of input granularity on the progress of the iterative Binary Search technique and the chance of finding a failing input subset.
+  + Understand the step-by-step process of decomposing a test-case into a set of changes as part of the Delta Debugging algorithm.
+  + Apply the Delta Debugging Minimization algorithm to find a 1-minimal test-case from the given set of changes.
+  + Discuss different real-world applications of the Delta Debugging Minimization algorithm.
+lessons:
+  - title: "Introduction"
+    segments:
+      - title: "Delta Debugging: Introduction"
+        url: ""
+      - title: "Why Simplify?"
+        url: ""
+      - title: "A First Solution"
+        url: ""
+  - title: "Delta Debugging Groundwork"
+    segments:
+      - title: "Choosing Input Granularity"
+        url: ""
+      - title: "Quiz 11.1 [Question] Impact of Input Granularity"
+        url: ""
+      - title: "Quiz 11.1 [Solution] Impact of Input Granularity"
+        url: ""
+      - title: "Test Cases as Sets of Changes"
+        url: ""
+  - title: "Delta Debugging Algorithm"
+    segments:
+      - title: "Minimizing Test Cases"
+        url: ""
+      - title: "Quiz 11.2 [Question] Minimizing Test Cases"
+        url: ""
+      - title: "Quiz 11.2 [Solution] Minimizing Test Cases"
+        url: ""
+      - title: "Minimization Algorithm"
+        url: ""
+      - title: "Quiz 11.3 [Question] Minimization Algorithm"
+        url: ""
+      - title: "Quiz 11.3 [Solution] Minimization Algorithm"
+        url: ""
+  - title: "Real-World Applications"
+    segments:
+      - title: "Debugging a Crashing Compiler"
+        url: ""
+      - title: "Other Debugging Applications"
+        url: ""
+  - title: "Review"
+    segments:
+      - title: "Quiz 11.4 [Question] Delta Debugging"
+        url: ""
+      - title: "Quiz 11.4 [Solution] Delta Debugging"
+        url: ""
+      - title: "What Have We Learned?"
+        url: ""
+---

@@ -1,0 +1,78 @@
+---
+layout: lecture
+_id: "4"
+title: "Automated Test Generation"
+description: |
+  This module introduces the concept of automating test generation for units of code. The presented techniques guide test generation by leveraging different kinds of program specifications, such as types, invariants, and pre- and post-conditions. You’ll learn two orthogonal but complementary approaches: Randoop and Korat. Randoop is designed to test classes and libraries while Korat is used to test data structures.
+objectives: |
+  + Describe how to leverage different forms of specifications (types, invariants, and pre- and post-conditions) to guide test generation.
+  + Apply the Randoop approach to test classes and libraries by creating and classifying method sequences.
+  + Apply Korat to test data structures by representing and enumerating different shapes and using pre- and post-conditions and invariants for test generation.
+lessons:
+  - title: "Introduction"
+    segments:
+      - title: "Introduction"
+        url: ""
+      - title: "Motivation and Outline"
+        url: ""
+      - title: "Leveraging the Specifications"
+        url: ""
+  - title: "Testing Classes and Libraries"
+    segments:
+      - title: "Key Ideas of Randoop"
+        url: ""
+      - title: "The Randoop Algorithm"
+        url: ""
+      - title: "Randoop in Practice"
+        url: ""
+      - title: "Quiz 4.1 [Question] Randoop Test Generation (Part 1)"
+        url: ""
+      - title: "Quiz 4.1 [Solution] Randoop Test Generation (Part 1)"
+        url: ""
+      - title: "Quiz 4.1 [Question] Randoop Test Generation (Part 2)"
+        url: ""
+      - title: "Quiz 4.1 [Solution] Randoop Test Generation (Part 2)"
+        url: ""
+      - title: "Quiz 4.1 [Question] Randoop Test Generation (Part 3)"
+        url: ""
+      - title: "Quiz 4.1 [Solution] Randoop Test Generation (Part 3)"
+        url: ""
+      - title: "Reading: Testing Classes and Libraries with Randoop"
+        url: ""
+  - title: "Testing Data Structures"
+    segments:
+      - title: "Key Ideas of Korat"
+        url: ""
+      - title: "Quiz 4.2 [Question] Representing Shapes"
+        url: ""
+      - title: "Quiz 4.2 [Solution] Representing Shapes"
+        url: ""
+      - title: "A Simple Algorithm"
+        url: ""
+      - title: "Using the Invariant"
+        url: ""
+      - title: "Enumerating Tests"
+        url: ""
+      - title: "Quiz 4.3 [Question] Enumerating Binary Trees (Part 1)"
+        url: ""
+      - title: "Quiz 4.3 [Solution] Enumerating Binary Trees (Part 1)"
+        url: ""
+      - title: "Quiz 4.3 [Question] Enumerating Binary Trees (Part 2)"
+        url: ""
+      - title: "Quiz 4.3 [Solution] Enumerating Binary Trees (Part 2)"
+        url: ""
+      - title: "Korat in Practice"
+        url: ""
+      - title: "Reading: Property-Based Testing with QuickCheck"
+        url: ""
+  - title: "Review"
+    segments:
+      - title: "Quiz 4.4 [Question] Korat and Randoop"
+        url: ""
+      - title: "Quiz 4.4 [Solution] Korat and Randoop"
+        url: ""
+      - title: "The Bigger Picture"
+        url: ""
+      - title: "What Have We Learned?"
+        url: ""
+---
