@@ -10,51 +10,6 @@ objectives: |
   + Compare Dynamic Symbolic Execution to Random Testing and Symbolic Execution.
   + Apply the Dynamic Symbolic Execution approach to test data structures.
   + Illustrate real-world applications of Dynamic Symbolic Execution using examples.
-lessons:
-  - title: "Introduction"
-    segments:
-      - title: "Dynamic Symbolic Execution: Introduction"
-        url: ""
-      - title: "Motivation and Approach"
-        url: ""
-      - title: "Execution Paths of a Program"
-        url: ""
-      - title: "Existing Approaches for Automated Test Generation"
-        url: ""
-  - title: "The DSE Approach"
-    segments:
-      - title: "Example 1: Combined Approach"
-        url: ""
-      - title: "Quiz 13.1 [Question] Computation Tree"
-        url: ""
-      - title: "Quiz 13.1 [Solution] Computation Tree"
-        url: ""
-      - title: "Example 2: A More Complex Example"
-        url: ""
-      - title: "Quiz 13.2 [Question] Example Application"
-        url: ""
-      - title: "Quiz 13.2 [Solution] Example Application"
-        url: ""
-      - title: "Example 3: How Dynamic Differs from Static"
-        url: ""
-      - title: "Quiz 13.3 [Question] Properties of DSE"
-        url: ""
-      - title: "Quiz 13.3 [Solution] Properties of DSE"
-        url: ""
-      - title: "Example 4: Testing Data Structures"
-        url: ""
-      - title: "Quiz 13.4 [Question] Characteristics of DSE"
-        url: ""
-      - title: "Quiz 13.4 [Solution] Characteristics of DSE"
-        url: ""
-  - title: "Real-World Applications"
-    segments:
-      - title: "Case Studies"
-        url: ""
-      - title: "The SAGE Tool at Microsoft"
-        url: ""
-  - title: "Review"
-    segments:
-      - title: "What Have We Learned?"
-        url: ""
+slides: symbolic_execution.pdf
+video: "https://youtu.be/UhtUyTJ-P2c"
 ---

@@ -9,41 +9,6 @@ objectives: |
   + Understand how to specify other forms of Static Analysis using Type System notation.
   + Explain the type rules for Flow-insensitive, Flow-sensitive, and Path-sensitive analysis.
   + Determine whether a certain property of a given program can be verified using a Flow-insensitive, Flow-sensitive, or Path-sensitive analysis.
-lessons:
-  - title: "Type Inference"
-    segments:
-      - title: "Type Inference"
-        url: ""
-      - title: "Example 1 of 2"
-        url: ""
-      - title: "Example 2 of 2"
-        url: ""
-  - title: "Notation for Static Analyses"
-    segments:
-      - title: "Static Analysis Using Type Rules"
-        url: ""
-      - title: "Quiz 12.1 [Question] Example Rules - Part I"
-        url: ""
-      - title: "Quiz 12.1 [Solution] Example Rules - Part I"
-        url: ""
-      - title: "Revisiting Abstract Domains"
-        url: ""
-      - title: "Quiz 12.2 [Question] Example Rules - Part II"
-        url: ""
-      - title: "Quiz 12.2 [Solution] Example Rules - Part II"
-        url: ""
-      - title: "Flow and Path Sensitivity"
-        url: ""
-      - title: "Quiz 12.3 [Question] Flow and Path Sensitivity"
-        url: ""
-      - title: "Quiz 12.3 [Solution] Flow and Path Sensitivity"
-        url: ""
-      - title: "Summary of Type Systems"
-        url: ""
-      - title: "Reading: The Checker Framework"
-        url: ""
-  - title: "Review"
-    segments:
-      - title: "What Have We Learned?"
-        url: ""
+slides: type_systems.pdf
+video: "https://youtu.be/wr54MK77r2w"
 ---

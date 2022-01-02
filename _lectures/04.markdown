@@ -8,17 +8,6 @@ objectives: |
   + Describe how to leverage different forms of specifications (types, invariants, and pre- and post-conditions) to guide test generation.
   + Apply the Randoop approach to test classes and libraries by creating and classifying method sequences.
   + Apply Korat to test data structures by representing and enumerating different shapes and using pre- and post-conditions and invariants for test generation.
-lessons:
-  - title: "Prologue"
-    url: "https://youtu.be/wsSV_FjVHiY"
-  - title: "Lesson 1: Motivation and Outline"
-    url: "https://youtu.be/lkA7tfBKhLM"
-  - title: "Lesson 2: Testing Classes and Libraries"
-    url: "https://youtu.be/e5lv5bQYdE0"
-  - title: "Lesson 3: Testing Data Structures"
-    url: "https://youtu.be/Kb-diriMfKI"
-  - title: "Lesson 4: Retrospective"
-    url: "https://youtu.be/tyb4ohROLIE"
-  - title: "Epilogue"
-    url: "https://youtu.be/XayFL1qsXsI"
+slides: automated_testgen.pdf
+video: "https://youtu.be/1NPFFbPe-6I"
 ---

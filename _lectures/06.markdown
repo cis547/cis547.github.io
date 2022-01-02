@@ -10,47 +10,6 @@ objectives: |
   + Understand the importance of Interval Analysis in finding common errors in software.
   + Define the operations and abstract domain of Interval Analysis.
   + Apply the chaotic iteration algorithm to understand the step-by-step operation of Interval Analysis and recognize the importance of Widening.
-lessons:
-  - title: "Other Classical Dataflow Analyses"
-    segments:
-      - title: "Available Expressions Analysis"
-        url: ""
-      - title: "Live Variables Analysis"
-        url: ""
-  - title: "Characterizing Dataflow Analyses"
-    segments:
-      - title: "Overall Pattern of Dataflow Analyses"
-        url: ""
-      - title: "Quiz 6.1 [Question] Available Expressions Analysis"
-        url: ""
-      - title: "Quiz 6.1 [Solution] Available Expressions Analysis"
-        url: ""
-      - title: "Quiz 6.2 [Question] Live Variables Analysis"
-        url: ""
-      - title: "Quiz 6.2 [Solution] Live Variables Analysis"
-        url: ""
-      - title: "Quiz 6.3 [Question] Classifying Dataflow Analyses"
-        url: ""
-      - title: "Quiz 6.3 [Solution] Classifying Dataflow Analyses"
-        url: ""
-  - title: "Interval Analysis"
-    segments:
-      - title: "What is Interval Analysis"
-        url: ""
-      - title: "Computing Interval Analysis"
-        url: ""
-      - title: "Quiz 6.4 [Question] Interval Analysis (Part 1)"
-        url: ""
-      - title: "Quiz 6.4 [Solution] Interval Analysis (Part 1)"
-        url: ""
-      - title: "Example: Interval Analysis"
-        url: ""
-      - title: "Quiz 6.4 [Question] Interval Analysis (Part 2)"
-        url: ""
-      - title: "Quiz 6.4 [Solution] Interval Analysis (Part 2)"
-        url: ""
-  - title: "Review"
-    segments:
-      - title: "What Have We Learned?"
-        url: ""
+slides: dataflow_analysis.pdf
+video: "https://youtu.be/zNgb5bpFgN0"
 ---

@@ -9,15 +9,6 @@ objectives: |
   + Describe different fuzzing tools and their usage: AFL, LibFuzzer, OSS Fuzz, and ClusterFuzz.
   + Explain with examples grammar-based fuzzing in mobile applications.
   + Explain with examples fuzzing of multi-threaded programs using Bug Depth, the Cuzz algorithm, and its probabilistic guarantee.
-lessons:
-  - title: "Prologue"
-    url: "https://youtu.be/tMv99wy4Zaw"
-  - title: "Lesson 1: Motivation and Background"
-    url: "https://youtu.be/Z6dAnHIO06s"
-  - title: "Lesson 2: General-Purpose Fuzzing"
-    url: "https://youtu.be/hrXXoYZ4cPM"
-  - title: "Lesson 3: Domain-Specific Fuzzing"
-    url: "https://youtu.be/G_dsgFkYKUA"
-  - title: "Epilogue"
-    url: "https://youtu.be/nUXkbOLWF_U"
+slides: random_testing.pdf
+video: "https://youtu.be/nbN3IVkKTOM"
 ---

@@ -9,35 +9,6 @@ objectives: |
   + Derive the type of a given program in the Lambda Calculus by constructing a Type Derivation.
   + Explain the concept of Type Soundness and the guarantee that a sound type system provides for well-typed programs.
   + Understand the relationship between types in a type system and abstract values in other forms of static analysis.
-lessons:
-  - title: "Introduction"
-    segments:
-      - title: "Introduction"
-        url: ""
-      - title: "Motivation and Background"
-        url: ""
-      - title: "Types and Abstraction"
-        url: ""
-  - title: "A Simple Typed Language"
-    segments:
-      - title: "The Lambda Calculus"
-        url: ""
-      - title: "Quiz 10.1 [Question] Programs and Types"
-        url: ""
-      - title: "Quiz 10.1 [Solution] Programs and Types"
-        url: ""
-      - title: "Typing Rules: Part I"
-        url: ""
-      - title: "Typing Rules: Part II"
-        url: ""
-      - title: "Quiz 10.2 [Question] Type Derivations"
-        url: ""
-      - title: "Quiz 10.2 [Solution] Type Derivations"
-        url: ""
-  - title: "Properties of Type Systems"
-    segments:
-      - title: "Quiz 10.3 [Question] Properties of Type Systems"
-        url: ""
-      - title: "Quiz 10.3 [Solution] Properties of Type Systems"
-        url: ""
+slides: type_systems.pdf
+video: "https://youtu.be/wr54MK77r2w"
 ---

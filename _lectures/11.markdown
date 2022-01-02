@@ -9,51 +9,6 @@ objectives: |
   + Understand the step-by-step process of decomposing a test-case into a set of changes as part of the Delta Debugging algorithm.
   + Apply the Delta Debugging Minimization algorithm to find a 1-minimal test-case from the given set of changes.
   + Discuss different real-world applications of the Delta Debugging Minimization algorithm.
-lessons:
-  - title: "Introduction"
-    segments:
-      - title: "Delta Debugging: Introduction"
-        url: ""
-      - title: "Why Simplify?"
-        url: ""
-      - title: "A First Solution"
-        url: ""
-  - title: "Delta Debugging Groundwork"
-    segments:
-      - title: "Choosing Input Granularity"
-        url: ""
-      - title: "Quiz 11.1 [Question] Impact of Input Granularity"
-        url: ""
-      - title: "Quiz 11.1 [Solution] Impact of Input Granularity"
-        url: ""
-      - title: "Test Cases as Sets of Changes"
-        url: ""
-  - title: "Delta Debugging Algorithm"
-    segments:
-      - title: "Minimizing Test Cases"
-        url: ""
-      - title: "Quiz 11.2 [Question] Minimizing Test Cases"
-        url: ""
-      - title: "Quiz 11.2 [Solution] Minimizing Test Cases"
-        url: ""
-      - title: "Minimization Algorithm"
-        url: ""
-      - title: "Quiz 11.3 [Question] Minimization Algorithm"
-        url: ""
-      - title: "Quiz 11.3 [Solution] Minimization Algorithm"
-        url: ""
-  - title: "Real-World Applications"
-    segments:
-      - title: "Debugging a Crashing Compiler"
-        url: ""
-      - title: "Other Debugging Applications"
-        url: ""
-  - title: "Review"
-    segments:
-      - title: "Quiz 11.4 [Question] Delta Debugging"
-        url: ""
-      - title: "Quiz 11.4 [Solution] Delta Debugging"
-        url: ""
-      - title: "What Have We Learned?"
-        url: ""
+slides: delta_debugging.pdf
+video: "https://youtu.be/lGe2-y1xibY"
 ---

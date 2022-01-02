@@ -10,41 +10,6 @@ objectives: |
   + Define the operations and abstract domain of Reaching Definitions Analysis and Very Busy Expressions Analysis.
   + Demonstrate how Reaching Definitions Analysis works on a program in the WHILE language.
   + Demonstrate how Very Busy Expressions Analysis works on a program in the WHILE language.
-lessons:
-  - title: "Introduction"
-    segments:
-      - title: "Introduction"
-        url: ""
-      - title: "Dataflow Analysis for the While Language"
-        url: ""
-      - title: "Quiz 5.1 [Question & Solution] Control Flow Graphs"
-        url: ""
-      - title: "Properties and Uses of Dataflow Analysis"
-        url: ""
-  - title: "Reaching Definitions Analysis"
-    segments:
-      - title: "What is Reaching Definitions Analysis"
-        url: ""
-      - title: "Quiz 5.2 [Question] Reaching Definitions Example"
-        url: ""
-      - title: "Quiz 5.2 [Solution] Reaching Definitions Example"
-        url: ""
-      - title: "Computing Reaching Definitions"
-        url: ""
-      - title: "Example: Reaching Definitions Analysis"
-        url: ""
-      - title: "Quiz 5.3 [Question] Reaching Definitions Analysis"
-        url: ""
-      - title: "Quiz 5.3 [Solution] Reaching Definitions Analysis"
-        url: ""
-  - title: "Other Classical Dataflow Analyses"
-    segments:
-      - title: "Very Busy Expressions Analysis"
-        url: ""
-      - title: "Example: Very Busy Expressions Analysis"
-        url: ""
-      - title: "Quiz 5.4 [Question] Very Busy Expressions Analysis"
-        url: ""
-      - title: "Quiz 5.4 [Solution] Very Busy Expressions Analysis"
-        url: ""
+slides: dataflow_analysis.pdf
+video: "https://youtu.be/zNgb5bpFgN0"
 ---

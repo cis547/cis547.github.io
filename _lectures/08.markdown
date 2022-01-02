@@ -10,53 +10,6 @@ objectives: |
   + Use the Datalog constraint language to specify intra-procedural and inter-procedural dataflow analyses.
   + Understand Context-Insensitive and Context-Sensitive inter-procedural dataflow analysis and their challenges and solutions.
   + Understand the constraint languages SAT and SMT through applications to program analysis.
-lessons:
-  - title: "Introduction"
-    segments:
-      - title: "Introduction"
-        url: ""
-      - title: "Motivation and Background"
-        url: ""
-      - title: "Quiz 8.1 [Question] Specification and Implementation"
-        url: ""
-      - title: "Quiz 8.1 [Solution] Specification and Implementation"
-        url: ""
-  - title: "An Overview of Datalog"
-    segments:
-      - title: "Datalog Syntax and Semantics"
-        url: ""
-      - title: "Quiz 8.2 [Question] Computation Using Datalog"
-        url: ""
-      - title: "Quiz 8.2 [Solution] Computation Using Datalog"
-        url: ""
-  - title: "Analysis Using Datalog"
-    segments:
-      - title: "Reaching Definitions Analysis"
-        url: ""
-      - title: "Quiz 8.3 [Question] Live Variables Analysis"
-        url: ""
-      - title: "Quiz 8.3 [Solution] Live Variables Analysis"
-        url: ""
-      - title: "Intra-Procedural Pointer Analysis"
-        url: ""
-      - title: "Inter-Procedural Pointer Analysis"
-        url: ""
-      - title: "Quiz 8.4 [Question] Querying Pointer Analysis"
-        url: ""
-      - title: "Quiz 8.4 [Solution] Querying Pointer Analysis"
-        url: ""
-      - title: "Context-Sensitive Analysis"
-        url: ""
-  - title: "Analysis Using SAT and SMT"
-    segments:
-      - title: "Constraint Languages"
-        url: ""
-      - title: "Analysis Using SAT"
-        url: ""
-      - title: "Analysis Using SMT"
-        url: ""
-  - title: "Review"
-    segments:
-      - title: "What Have We Learned?"
-        url: ""
+slides: constraint_based_analysis.pdf
+video: "https://youtu.be/tT9m-NQ3NLs"
 ---

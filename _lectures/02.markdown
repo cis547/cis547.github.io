@@ -10,17 +10,6 @@ objectives: |
   + Explain and give examples of specifications of different units of a program such as functions, loops, and classes: Pre- and Post- Conditions, Loop Invariants, and Class Invariants.
   + Apply the Houdini algorithm on programs to automatically infer specifications and explain its pros and cons.
   + Measure the quality of a test suite using approaches: Code Coverage and Mutation Analysis.
-lessons:
-  - title: "Prologue"
-    url: "https://youtu.be/HIzi9T7DIqI"
-  - title: "Lesson 1: Motivation and Outline"
-    url: "https://youtu.be/sXVteTsSQuI"
-  - title: "Lesson 2: Kinds of Specifications"
-    url: "https://youtu.be/gnVnAsHA_Hw"
-  - title: "Lesson 3: Inferring Specifications"
-    url: "https://youtu.be/7OrqZJgWwTo"
-  - title: "Lesson 4: Measuring Test Suite Quality"
-    url: "https://youtu.be/oCs8Bb4qibg"
-  - title: "Epilogue"
-    url: "https://youtu.be/lZh36XmOIjc"
+slides: software_specifications.pdf
+video: "https://youtu.be/Hieo2OygZRY"
 ---

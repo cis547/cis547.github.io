@@ -5,11 +5,4 @@ layout: default
 <h2>Module {{page._id}}: {{page.title}}</h2>
 	<p><strong>Description:</strong> {{page.description | markdownify}}</p>
 	<p><strong>Objectives:</strong> {{page.objectives | markdownify}}</p>
-	<p><strong>Recordings:</strong></p>
-	<ul>
-	{% for lesson in page.lessons %}
-		<li style="margin: 10px 0;">
-			<strong><a href="{{lesson.url}}">{{lesson.title}}</a></strong>
-		</li>
-	{% endfor %}
-	</ul>
+	<p>[<strong><a href="{{page.video}}">Video</a></strong>] [<strong><a href="{{page.slides}}">Slides</a></strong>]</p>
