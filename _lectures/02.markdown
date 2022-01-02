@@ -12,15 +12,15 @@ objectives: |
   + Measure the quality of a test suite using approaches: Code Coverage and Mutation Analysis.
 lessons:
   - title: "Prologue"
-    url: "https://youtu.be/xiuI20UoKF8"
+    url: "https://youtu.be/HIzi9T7DIqI"
   - title: "Lesson 1: Motivation and Outline"
-    url: "https://youtu.be/wprOz37veM0"
+    url: "https://youtu.be/sXVteTsSQuI"
   - title: "Lesson 2: Kinds of Specifications"
-    url: "https://youtu.be/gF_YatmjZ7M"
+    url: "https://youtu.be/gnVnAsHA_Hw"
   - title: "Lesson 3: Inferring Specifications"
-    url: "https://youtu.be/6jLqoec3HTI"
+    url: "https://youtu.be/7OrqZJgWwTo"
   - title: "Lesson 4: Measuring Test Suite Quality"
-    url: "https://youtu.be/Mm46s5miLzw"
+    url: "https://youtu.be/oCs8Bb4qibg"
   - title: "Epilogue"
-    url: "https://youtu.be/M-Hjgx6sIZo"
+    url: "https://youtu.be/lZh36XmOIjc"
 ---
