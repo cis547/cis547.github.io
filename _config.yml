@@ -13,4 +13,6 @@ navigation:
 collections:
   lectures:
     output: true
+  labs:
+    output: true
 theme: jekyll-theme-cayman

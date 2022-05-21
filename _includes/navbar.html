@@ -11,7 +11,18 @@
           {% if page.url == link.url%}
             {% assign current = 'active' %}
           {% endif %}
-          {% if link.title == "Lectures" %}
+          {% if link.title == "Labs" %}
+            <li class="nav-item {{ current }} dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarDropdownLabsLink" data-toggle="dropdown" role="button" href="#">{{ link.title }}</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownLabsLink">
+                <a href="{{ site.baseurl }}{{ link.url }}" class="dropdown-item">Overview</a>
+                <div class="dropdown-divider"></div>
+                {% for lab in site.labs %}
+                  <a class="dropdown-item" href="{{ lab.url }}">{{lab.title}}</a>
+                {% endfor %}
+              </div>
+            </li>
+          {% elsif link.title == "Lectures" %}
             <li class="nav-item {{ current }} dropdown">
               <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarDropdownLecturesLink" data-toggle="dropdown" role="button" href="#">{{ link.title }}</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownLecturesLink">
