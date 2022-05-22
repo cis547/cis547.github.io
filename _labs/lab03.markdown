@@ -192,6 +192,29 @@ i.e., more varied mutations in the input increased our code coverage.
 In its simplest form, this is exactly what a fuzzer does.
 You may take a look at the [Mutation-Based Fuzzing][fuzzing-book-mutaion] chapter in the Fuzzing Book.
 
+##### Feedback-Directed Fuzzing
+
+We’ve seen how randomized testing can find bugs and is
+a useful software analysis tool.
+The previous section describes a brute force generation of test cases;
+we simply perform random mutations hoping that we find a bug.
+This results in a lot of test cases being redundant, and therefore unnecessary.
+
+We can gather additional information about a program’s execution and
+use it as _feedback_ to our fuzzer.
+The following figure shows at a high level what this process looks like:
+
+<img src="{{ '/images/lab3/feedback.png' | relative_url }}" alt="Feedback-Directed Fuzzing" style="width: 45vw;min-width: 600px;margin: 10px auto 20px; display: block;">
+
+Generating new, interesting seeds is the goal of feedback directed fuzzing.
+What does _interesting_ mean?
+We might consider whether a test increases code coverage.
+If so, we have found new execution pathways that we want to continue to explore.
+Another test might significantly increase program runtime, in which case
+we might discover some latent performance bugs.
+In both cases, the tests increased our knowledge of the program;
+hence, we insert these tests into our set of seeds and use them as a
+starting point for future test generation.
 
 [course-vm-doc]: https://cis.upenn.edu/~cis547/vm.doc
 [fuzzing-book-mutaion]: https://fuzzingbook.org/html/MutationFuzzer.html
