@@ -261,6 +261,97 @@ while (true) {
 
 Refer to the function `fuzz` in `src/Fuzzer.cpp` for the implementation of this logic.
 
+##### Possible Mutations
+
+The following is a list of potential suggestions for your mutations:
+
++ Replace bytes with random values.
++ Swap adjacent bytes.
++ Cycle through all values for each byte.
++ Remove a random byte.
++ Insert a random byte.
+
+Feel free to play around with additional mutations, and see if you can speed up
+the search for bugs on the binaries.
+You may use the C++ function `rand()` to generate a random integer.
+
+You will notice that different programs will require different strategies,
+or that in some cases you may even have to switch between different mutation
+strategies in the middle of the fuzzing process.
+You are expected to include a mechanism that will try to choose the best
+strategy for the input program based on the coverage feedback.
+
+##### Overview of the tasks
+
+The lab consists of the following tasks in `Fuzzer.cpp`:
+
+1. Implement your logic for `selectInput` function,
+which selects a mutant string from the `SeedInputs` vector.
+2. Implement mutation functions you think will help your fuzzer
+generate a rich variety of strings.
+Take inspiration from the aforementioned list of mutations.
+3. Implement your logic for `selectMutationFn` to decide which mutation function to pick.
+4. In `feedback` decide whether the mutation was interesting
+based on success or failure of the program, and the code coverage.
+Again, you may follow our groundwork and fill in `feedback`.
+5. Insert an interesting Mutant into the pool of  `SeedInput` to drive further mutation.
+
+One thing to keep in mind is that none of these tasks are compulsorily required,
+your fuzzer can use the default implementations we provide for some of these
+and still get full points, as long as it meets the grading requirements.
+
+##### Code Coverage Metric
+
+Recall that you have a way of checking how much of a particular program gets
+executed using the coverage information output by the instrumentation.
+A `.cov` file will get generated in the working directory for the program
+that is getting fuzzed. This file is read and is made available to you
+through `RawCoverageData` variable inside the `feedback` function.
+You can then use it to decide if a particular mutation is interesting.
+
+##### Few tips
+
+Read through the Notes, Hints, and Comments in `Fuzzer.cpp` file
+before you start, to get a better idea of how everything fits together.
+
+Start small.
+Implement one mutation strategy at a time and try to crash the
+easier test cases first before moving to harder ones.
+Once successful, you can move on to implementing more strategies and
+more sophisticated ways of choosing between them based on the feedback you get.
+
+Do not be afraid to keep track of any state between rounds of the fuzzing.
+
+You may want to try each of your mutation strategies initially to see
+which one generates a test that increases code coverage,
+and then exploit that strategy.
+
+
+##### Grading
+
+We expect your fuzzer to be able to generate crashing inputs for
+all programs we have provided you in `lab3/test`.
+
+Beyond that we will also be testing your fuzzer on ten hidden test programs.
+These programs serve as more challenging test cases for your fuzzer.
+To get full points on the hidden tests, your fuzzer should be able to find
+a crashing input in at least seven of them.
+
+### Submission
+
+Once you are done with the lab, you can create a `submission.zip` file by using the following command:
+
+```sh
+lab3$ make submit
+...
+submission.zip created successfully.
+```
+Then upload the `submission.zip` file to Gradescope.
+
+If you'd like us to use a specific seed value for your fuzzer during grading,
+update `lab3/config.txt` with the seed value you'd like us to use.
+The same seed value will be used for all test cases.
+
 
 [course-vm-doc]: https://cis.upenn.edu/~cis547/vm.doc
 [fuzzing-book-mutaion]: https://fuzzingbook.org/html/MutationFuzzer.html
