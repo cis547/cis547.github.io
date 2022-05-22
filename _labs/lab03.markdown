@@ -1,12 +1,10 @@
 ---
-layout: default
+layout: lab
 _id: "3"
-title: "Lab 3: Random Input Generation"
+title: "Random Input Generation"
+synopsis: |
+  Building a coverage-guided random input generator a.k.a. “fuzzer” for testing C programs.
 ---
-
-### Synopsis
-
-Building a coverage-guided random input generator a.k.a. “fuzzer” for testing C programs.
 
 ### Objective
 
