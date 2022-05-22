@@ -218,5 +218,49 @@ In both cases, the tests increased our knowledge of the program;
 hence, we insert these tests into our set of seeds and use them as a
 starting point for future test generation.
 
+##### Building the Fuzzer
+
+In this lab, you will modify `src/Fuzzer.cpp` to build a coverage guided fuzzer.
+You'll need to implement some variety of mutation functions, a mutation function
+takes a string performs some mutation on it and returns the mutated string.
+You will have to decide which mutation strategies to choose and you will
+implement your logic in `selectMutationFn`.
+It may help to look at the test programs in `src/test/` to see what sort of
+programs your fuzzer would have to explore to find bugs, and what sort of
+mutations you might want to perform.
+
+The fuzzer will start by reading input files from the input directory
+specified on the commandline to initially populate the `SeedInputs` vector.
+After that, it will need to select a particular input from the
+`SeedInputs` vector and a mutation function that will be used to mutate it.
+For this, you will need to implement your logic for
+`selectInput`, and `selectMutationFn` respectively.
+Once the fuzzer has selected an input and a mutation function, it will
+mutate the input.
+The mutated input will be run on the target program, and feedback will be
+provided based on the coverage of that run.
+Using this coverage, you will then decide if this is an _interesting_ seed
+and insert it into the `SeedInput` vector if you find it so.
+This allows the mutated input to be picked later on and be further mutated.
+This process continues until the fuzzer gets interrupted
+(via timeout, or on the terminal by Ctrl+C).
+
+The following pseudocode illustrates this logic:
+
+```
+readSeedInputs(SeedInputs)  // Initialize SeedInputs
+
+while (true) {
+  input <- selectInput()                  // Pick seed input
+  mutation <- selectMutationFn()          // Pick mutation function
+  mutatedInput <- mutation(input)         // Mutate input
+  test(Target, MutatedInput)              // Run target with mutated input
+  feedBack(Target, MutatedInput);         // Provide feedback from the run
+}
+```
+
+Refer to the function `fuzz` in `src/Fuzzer.cpp` for the implementation of this logic.
+
+
 [course-vm-doc]: https://cis.upenn.edu/~cis547/vm.doc
 [fuzzing-book-mutaion]: https://fuzzingbook.org/html/MutationFuzzer.html
