@@ -44,7 +44,7 @@ if the denominator is zero, otherwise the program continues running normally.
 
 ##### Step 1.
 
-The fuzzer and the instrumentation is built using CMake and you can run the following commant to build both of them:
+The fuzzer and the instrumentation is built using CMake and you can run the following command to build both of them:
 
 ```sh
 lab3$ mkdir build && cd build
@@ -52,7 +52,7 @@ lab3/build$ cmake ..
 lab3/build$ make
 ```
 
-After runnning `make`, you should notice `InstrumentPass.so` and `fuzzer`
+After running `make`, you should notice `InstrumentPass.so` and `fuzzer`
 in `lab3/build`.
 The `fuzzer` is the tool that will feed randomized input (that you will generate)
 to a compiled C program that was instrumented to exit gracefully
@@ -70,7 +70,7 @@ lab3/test$ opt -load ../build/InstrumentPass.so -Instrument -S sanity1.ll -o san
 lab3/test$ clang -o sanity1 -L${PWD}/../build -lruntime -lm sanity1.instrumented.ll
 ```
 
-Alternatively you can use tthe provided `Makefile` to do the same with:
+Alternatively you can use the provided `Makefile` to do the same with:
 
 ```sh
 lab3/test$ make sanity1  # To instrument an build just sanity1.
@@ -230,7 +230,7 @@ programs your fuzzer would have to explore to find bugs, and what sort of
 mutations you might want to perform.
 
 The fuzzer will start by reading input files from the input directory
-specified on the commandline to initially populate the `SeedInputs` vector.
+specified on the command line to initially populate the `SeedInputs` vector.
 After that, it will need to select a particular input from the
 `SeedInputs` vector and a mutation function that will be used to mutate it.
 For this, you will need to implement your logic for
@@ -245,7 +245,7 @@ This allows the mutated input to be picked later on and be further mutated.
 This process continues until the fuzzer gets interrupted
 (via timeout, or on the terminal by Ctrl+C).
 
-The following pseudocode illustrates this logic:
+The following pseudo-code illustrates this logic:
 
 ```
 readSeedInputs(SeedInputs)  // Initialize SeedInputs
