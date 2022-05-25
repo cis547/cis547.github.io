@@ -119,10 +119,67 @@ For example, if we encounter `if (p == 10) { ... }` in the code, we need to stor
 
 The skeleton code will go through and print out your maps via `printReport`.  
 
+
 ### Example Input and Output
 
-Your statistical debugger should run on any C code that compiles to LLVM IR.
+---
 
+Your statistical debugger should run on any C code that compiles to LLVM IR.
+As we demonstrated in the Setup section, we will compile code to LLVM and instrument the code with the fuzzer and cbi passes.
+
+```sh
+/cis547vm$ cd lab7/test
+/cis547vm/lab7/test$ clang -emit-llvm -S -fno-discard-value-names -c fuzz1.c -g
+/cis547vm/lab7/test$ opt -load ../build/InstrumentPass.so -Instrument -S fuzz1.ll -o fuzz1.instruented.ll
+/cis547vm/lab7/test$ opt -load ../build/CBIInstrumentPass.so -CBIInstrument -S fuzz1.instrumented.ll -o fuzz1.cbi.instrumented.ll
+/cis547vm/lab7/test$ clang -o fuzz1 -L../build -lruntime fuzz1.cbi.instrumented.ll
+```
+After, we will run the fuzzer to generate a set of passing and failing inputs for use with the cbi tool.
+
+```sh
+/cis547vm/lab7/test$ rm -rf fuzz_output && mkdir fuzz_output
+/cis547vm/lab7/test$ timeout 1 ../build/fuzzer ./fuzz1 fuzz_input fuzz_output 10
+/cis547vm/lab7/test$ ../build/cbi ./fuzz1 fuzz_output
+```
+
+You should expect to generate output similar to the following:
+
+```sh
+== S(P) ==
+Line 10, Col 7, BranchTrue: 0
+Line 10, Col 7, BranchFalse: 4
+Line 14, Col 7, BranchTrue: 2
+Line 14, Col 7, BranchFalse: 2
+== F(P) ==
+Line 10, Col 7, BranchTrue: 1
+Line 10, Col 7, BranchFalse: 0
+Line 14, Col 7, BranchTrue: 0
+Line 14, Col 7, BranchFalse: 0
+== Failure(P) ==
+Line 10, Col 7, BranchTrue: 1
+Line 10, Col 7, BranchFalse: 0
+Line 14, Col 7, BranchTrue: 0
+Line 14, Col 7, BranchFalse: 0
+== Context(P) ==
+Line 10, Col 7, BranchTrue: 0.2
+Line 10, Col 7, BranchFalse: 0.2
+Line 14, Col 7, BranchTrue: 0
+Line 14, Col 7, BranchFalse: 0
+== Increase(P) ==
+Line 10, Col 7, BranchTrue: 0.8 
+Line 10, Col 7, BranchFalse: -0.2 
+Line 14, Col 7, BranchTrue: 0 
+Line 14, Col 7, BranchFalse: 0
+```
+
+
+### Items to Submit
+
+---
+
+Submit files `CBIInstrument.cpp` and `CBI.cpp`.
+
+  
 
 
 
