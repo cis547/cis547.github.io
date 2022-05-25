@@ -63,5 +63,16 @@ Generating log files...
 
 ---
 
+In this lab, you will need to edit the `lab5/src/CBIInstrument.cpp` file to implement the cooperative bug isolation which will instrument branches and return instructions with code to extract and monitor predicates.
+`lab7/lib/runtime.c` contains functions that you will use in your lab:
+
+- `void __cbi_branch__(int line, int col, int cond)`
+   - Append predicate information as "`branch,line,col,cond`" to the running process cbi file.
+- `void __cbi_return__(int line, int col, int rv)`
+   - Append predicate information as "`return,line,col,rv`" to the running process cbi file.
+
+Like you ddi in Lab 3, your LLVM pass shoudl instrument the code with these functions.
+Your pass should instrument each conditional branch with code records whether the branch conditional is true or false on execution.
+Likewise, instrument each integer-returning call instruction with code to record the return value.
 
 
