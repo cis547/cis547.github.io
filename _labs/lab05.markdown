@@ -71,8 +71,58 @@ In this lab, you will need to edit the `lab5/src/CBIInstrument.cpp` file to impl
 - `void __cbi_return__(int line, int col, int rv)`
    - Append predicate information as "`return,line,col,rv`" to the running process cbi file.
 
-Like you ddi in Lab 3, your LLVM pass shoudl instrument the code with these functions.
+Like you did in Lab 3, your LLVM pass should instrument the code with these functions.
 Your pass should instrument each conditional branch with code records whether the branch conditional is true or false on execution.
 Likewise, instrument each integer-returning call instruction with code to record the return value.
+This will create a *feedback profile* for you to perform statistical debugging and generate a *feedback report*.  
+
+In short, the lab consists of the following tasks:
+   1. Implement the `instrumentCBIBranches` function to insert a `__cbi_branch__` call for a predicate (conditional).
+   2. Modify `runOnFunction` to instrument all branching instructions with the predicate recording logic.
+   3. Implement the `instrumentCBIReturns` function to insert a `__cbi_return__` call for a return value.
+   4. Modify `runOnFunction` to instrument all integer return instructions with the return recording logic. 
+   5. Using the feedback profile you construct in 1-4, modify `generateReport` to implement statistical debugging.
+   You should compute `F(P), S(P), Failure(P), Context(P)`, and `Increase(P)` which should be stored in the corresponding data structures in `include/Utils.h`.
+
+**_Revisiting Instrumentation._** By now you should feel comfortable working with the LLVM compiler infrastructure, but for a refresher, consult Lab 3 and see the paragraphs titled "Inserting Instruction into LLVM Code" and "Loading C functions into LLVM".
+
+**_CBI File Infrastructure._** the `cbi` executable will execute the input program on each of the trace `input` files from a `fuzzer` output directory.
+This includes both successful program runs (`fuzz_output/sucess`) and erroneous program runs (`fuzz_output/failure`).
+Each run will generate an analogous feedback profile for each input file.
+The resulting directory tree will look like this:
+```
+   -  fuzz_output/
+      -  success/
+         -  input1
+         -  input1.cbi
+         -  input2
+         -  input2.cbi
+         -  ...
+      -  failure/
+         -  input1
+         -  input1.cbi
+         - ...
+```
+You will use these `.cbi` files to generate the feedback report.
+
+**_Generating the feedback report._** During the lesson, you saw how we use several metrics to help determine which predicates correlate with bugs.
+ One such metric, `Failure(P)`, calculates how often predicate P is true in a failing run.
+ Another metric, `Context(P)`, calculates the background chance of failure when predicate P is observed.
+ Finally, `Increase(P)` calculates the likelihood that P influences the success or failure of the program.  
+
+ We have defined maps `F`, `S`, `Failure`, `Context`, and `Increase` in `lab7/include/Utils.h` that you should populate in `generateReport` located in `lab7/src/CBI.cpp`.
+ Notice each is a mapping from `std::tuple<int, int, State>` to `double`.
+ Here, the tuple represents a predicate, which consists of a line, column, and a State data type that encodes the possible predicates a branch or return has.  
+
+Note that your instrumentation will record where a branch or return occurs and its result, but you need to encode that into a predicate.
+For example, if we encounter `if (p == 10) { ... }` in the code, we need to store two predicates, (p == 10), and (p != 10), which you would represent as `State::BranchTrue` and `State::BranchFalse`.  
+
+The skeleton code will go through and print out your maps via `printReport`.  
+
+### Example Input and Output
+
+Your statistical debugger should run on any C code that compiles to LLVM IR.
+
+
 
 
