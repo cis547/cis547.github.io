@@ -179,7 +179,8 @@ Line 14, Col 7, BranchFalse: 0
 
 Submit files `CBIInstrument.cpp` and `CBI.cpp`.
 
-  
+
+[lab2 instructions]: /labs/lab02.html
 
 
 
