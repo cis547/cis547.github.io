@@ -43,16 +43,16 @@ You will need to edit the `lab4/src/Delta.cpp` file to build a delta debugging t
 
 To perform delta debugging, you will have to repeatedly run the target input with various input strings. The skeleton code provides a couple of auxiliary functions in `lab4/include/Utils.h` to help you with this task:
 
-    - std::string readOneFile(std::string &Path)
-        - Open and read at `Path` and return the content as a single std::string
-    - int runTarget(std::string &Target, std::string &Input)
-        - Run the program (command) `Target`, and pipe `Input` into the running `Target` process. Will return the result of the 'Target' process.
+   - std::string readOneFile(std::string &Path)
+    - Open and read at `Path` and return the content as a single std::string
+   - int runTarget(std::string &Target, std::string &Input)
+    - Run the program (command) `Target`, and pipe `Input` into the running `Target` process. Will return the result of the 'Target' process.
 
 Overall, you need to modify the 'delta' function to implement the 1-minimal minimization algorithm from class. You can break the lab down into subtasks:
 
-    1. Implement the logic to partition the set of changes into delta subsets along with the nabla complement sets.
-    2. Use the `runTarget` function to see which - if any - of the sets cause program failure.
-    3. Repeat (1) and (2) until you have a 1-minimal input.
+   1. Implement the logic to partition the set of changes into delta subsets along with the nabla complement sets.
+   2. Use the `runTarget` function to see which - if any - of the sets cause program failure.
+   3. Repeat (1) and (2) until you have a 1-minimal input.
 
 ### Example Input and Output
 
