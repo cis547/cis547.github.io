@@ -24,11 +24,11 @@ We will frequently refer to the top level directory for Lab 5 as `lab5` when des
 The following commands setup the lab:
 
 ```sh
-/cis547vm$ cd lab7
-/cis547vm/lab7$ mkdir build && cd build
-/cis547vm/lab7/build$ cmake ..
-/cis547vm/lab7/build$ make
-/cis547vm/lab7/build$ export LD_LIBRARY_PATH="/cis547vm/lab7/build/:$LD_LIBRARY_PATH"
+/cis547vm$ cd lab5
+/cis547vm/lab5$ mkdir build && cd build
+/cis547vm/lab5/build$ cmake ..
+/cis547vm/lab5/build$ make
+/cis547vm/lab5/build$ export LD_LIBRARY_PATH="/cis547vm/lab5/build/:$LD_LIBRARY_PATH"
 ```
 
 You should now see `CBIInstrumentPass.so` and `cbi` in the current directory.
@@ -38,11 +38,11 @@ The `cbi` tool performs statistical debugging for a program using a feedback pro
 To help generate program runs that pass or fail, you will use your `fuzzer`:
 
 ```sh
-/cis547vm$ cd lab7/test
-/cis547vm/lab7/test$ make
-/cis547vm/lab7/test$ rm -rf fuzz_output && mkdir fuzz_ouput
-/cis547vm/lab7/test$ timeout 1 ../build/fuzzer ./fuzz0 fuzz_input fuzz_output 10
-/cis547vm/lab7/test$ ../build/cbi ./fuzz0 fuzz_output
+/cis547vm$ cd lab5/test
+/cis547vm/lab5/test$ make
+/cis547vm/lab5/test$ rm -rf fuzz_output && mkdir fuzz_ouput
+/cis547vm/lab5/test$ timeout 1 ../build/fuzzer ./fuzz0 fuzz_input fuzz_output 10
+/cis547vm/lab5/test$ ../build/cbi ./fuzz0 fuzz_output
 ```
 The last argument (10) on the `../build/fuzzer` invocation controls the frequency at which successful runs are written out in the `fuzz_output/success` directory.
 Additionally, before running another invocation of `../build/cbi`, make sure to clean up the `fuzz_output` directory.
@@ -64,7 +64,7 @@ Generating log files...
 ---
 
 In this lab, you will need to edit the `lab5/src/CBIInstrument.cpp` file to implement the cooperative bug isolation which will instrument branches and return instructions with code to extract and monitor predicates.
-`lab7/lib/runtime.c` contains functions that you will use in your lab:
+`lab5/lib/runtime.c` contains functions that you will use in your lab:
 
 - `void __cbi_branch__(int line, int col, int cond)`
    - Append predicate information as "`branch,line,col,cond`" to the running process cbi file.
@@ -110,7 +110,7 @@ You will use these `.cbi` files to generate the feedback report.
  Another metric, `Context(P)`, calculates the background chance of failure when predicate P is observed.
  Finally, `Increase(P)` calculates the likelihood that P influences the success or failure of the program.  
 
- We have defined maps `F`, `S`, `Failure`, `Context`, and `Increase` in `lab7/include/Utils.h` that you should populate in `generateReport` located in `lab7/src/CBI.cpp`.
+ We have defined maps `F`, `S`, `Failure`, `Context`, and `Increase` in `lab5/include/Utils.h` that you should populate in `generateReport` located in `lab5/src/CBI.cpp`.
  Notice each is a mapping from `std::tuple<int, int, State>` to `double`.
  Here, the tuple represents a predicate, which consists of a line, column, and a State data type that encodes the possible predicates a branch or return has.  
 
@@ -128,18 +128,18 @@ Your statistical debugger should run on any C code that compiles to LLVM IR.
 As we demonstrated in the Setup section, we will compile code to LLVM and instrument the code with the fuzzer and cbi passes.
 
 ```sh
-/cis547vm$ cd lab7/test
-/cis547vm/lab7/test$ clang -emit-llvm -S -fno-discard-value-names -c fuzz1.c -g
-/cis547vm/lab7/test$ opt -load ../build/InstrumentPass.so -Instrument -S fuzz1.ll -o fuzz1.instruented.ll
-/cis547vm/lab7/test$ opt -load ../build/CBIInstrumentPass.so -CBIInstrument -S fuzz1.instrumented.ll -o fuzz1.cbi.instrumented.ll
-/cis547vm/lab7/test$ clang -o fuzz1 -L../build -lruntime fuzz1.cbi.instrumented.ll
+/cis547vm$ cd lab5/test
+/cis547vm/lab5/test$ clang -emit-llvm -S -fno-discard-value-names -c fuzz1.c -g
+/cis547vm/lab5/test$ opt -load ../build/InstrumentPass.so -Instrument -S fuzz1.ll -o fuzz1.instruented.ll
+/cis547vm/lab5/test$ opt -load ../build/CBIInstrumentPass.so -CBIInstrument -S fuzz1.instrumented.ll -o fuzz1.cbi.instrumented.ll
+/cis547vm/lab5/test$ clang -o fuzz1 -L../build -lruntime fuzz1.cbi.instrumented.ll
 ```
 After, we will run the fuzzer to generate a set of passing and failing inputs for use with the cbi tool.
 
 ```sh
-/cis547vm/lab7/test$ rm -rf fuzz_output && mkdir fuzz_output
-/cis547vm/lab7/test$ timeout 1 ../build/fuzzer ./fuzz1 fuzz_input fuzz_output 10
-/cis547vm/lab7/test$ ../build/cbi ./fuzz1 fuzz_output
+/cis547vm/lab5/test$ rm -rf fuzz_output && mkdir fuzz_output
+/cis547vm/lab5/test$ timeout 1 ../build/fuzzer ./fuzz1 fuzz_input fuzz_output 10
+/cis547vm/lab5/test$ ../build/cbi ./fuzz1 fuzz_output
 ```
 
 You should expect to generate output similar to the following:
