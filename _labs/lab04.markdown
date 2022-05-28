@@ -33,9 +33,10 @@ The `delta` tool performs delta debugging to shrink a program input. To help gen
 /cis547vm/lab4/test$ rm -rf fuzz_output && mkdir fuzz_output
 /cis547vm/lab4/test$ timeout 1 ../build/fuzzer ./fuzz0 fuzz_input
 fuzz_output
+/cis547vm/lab4/test$ ../build/delta ./fuzz0 fuzz_output/failure/input1
 ```
 
-The last argument (`fuzz_output/failure/input1`) is subject to change depending on what files are available in the `fuzz_output/failure` directory. The reduced input is stored in `fuzz_output/failure/input1.delta`. Additionally, before running another invocation of `../build/delta`, make sure to clean up the `fuzz_output` directory. You can do this by running `rm -rf fuzz_putput && mkdir fuzz_output`.
+The last argument (`fuzz_output/failure/input1`) is subject to change depending on what files are available in the `fuzz_output/failure` directory. The reduced input is stored in `fuzz_output/failure/input1.delta`. Additionally, before running another invocation of `../build/delta`, make sure to clean up the `fuzz_output` directory. You can do this by running `rm -rf fuzz_output && mkdir fuzz_output`.
 
 ### Lab Instructions
 
