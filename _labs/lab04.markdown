@@ -10,18 +10,15 @@ synopsis: |
 In this lab, you will build a delta debugger that implements an efficient algorithm for finding a 1-minimal input. You will combine this tool with your fuzzer from previous labs to minimize the random input that the fuzzer finds.
 
 ### Setup
-The skeleton code for Lab 4 is located under `lab4/`. We will frequently refer to the top-level directory for Lab 4 as `lab4` when describing file locations for the lab. 
+The skeleton code for Lab 4 is located under `cis547vm/lab4/`. We will frequently refer to the top-level directory for Lab 4 as `lab4` when describing file locations for the lab. 
 Open the `lab4` directory in VSCode following the Instructions from [Course VM document][course-vm-doc]
 
 The following commands setup the lab:
 
 ```sh
-/lab4
 /lab4$ mkdir build && cd build
 /lab4/build$ cmake ..
 /lab4/build$ make
-/lab4/build$ export
-LD_LIBRARY_PATH=/lab4/build:$LD_LIBRARY_PATH
 ```
 
 The last `export` command should be run once per terminal session, in order for the correct library path to be set. You should now see delta under `lab4/build/`.
