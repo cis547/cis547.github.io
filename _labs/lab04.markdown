@@ -12,7 +12,6 @@ In this lab, you will build a delta debugger that implements an efficient algori
 ### Setup
 The skeleton code for Lab 4 is located under `cis547vm/lab4/`. We will frequently refer to the top-level directory for Lab 4 as `lab4` when describing file locations for the lab. 
 Open the `lab4` directory in VSCode following the Instructions from [Course VM document][course-vm-doc]
-
 The following commands setup the lab:
 
 ```sh
@@ -21,7 +20,7 @@ The following commands setup the lab:
 /lab4/build$ make
 ```
 
-The last `export` command should be run once per terminal session, in order for the correct library path to be set. You should now see delta under `lab4/build/`.
+You should now see delta under `lab4/build/`.
 
 The `delta` tool performs delta debugging to shrink a program input. To help generate program runs that pass and fail, you will use your `fuzzer`:
 
