@@ -57,7 +57,7 @@ Overall, you need to modify the 'delta' function to implement the 1-minimal mini
 Your delta debugger should run on any C code that accepts standard input. As we demonstrated in the Setup section, we will compile code to LLVM and instrument the code with the fuzzer pass.
 
 ```sh
-/lab4 cd test
+/lab4$ cd test
 /lab4/test$ clang -emit-llvm -S -fno-discard-value-names -c fuzz1.c -g
 /lab4/test$ opt -load ../build/InstrumentPass.so -Instrument -S fuzz1.11 -o fuzz1.instrumented.11
 /lab4/test$ clang -o fuzz1 -L../build -lruntime fuzz1.instrumented.11
