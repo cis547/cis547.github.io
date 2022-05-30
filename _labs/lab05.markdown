@@ -24,11 +24,11 @@ We will frequently refer to the top level directory for Lab 5 as `lab5` when des
 The following commands setup the lab:
 
 ```sh
-/cis547vm$ cd lab5
-/cis547vm/lab5$ mkdir build && cd build
-/cis547vm/lab5/build$ cmake ..
-/cis547vm/lab5/build$ make
-/cis547vm/lab5/build$ export LD_LIBRARY_PATH="/cis547vm/lab5/build/:$LD_LIBRARY_PATH"
+/$ cd lab5
+/lab5$ mkdir build && cd build
+/lab5/build$ cmake ..
+/lab5/build$ make
+/lab5/build$ export LD_LIBRARY_PATH="/cis547vm/lab5/build/:$LD_LIBRARY_PATH"
 ```
 
 You should now see `CBIInstrumentPass.so` and `cbi` in the current directory.
@@ -38,11 +38,11 @@ The `cbi` tool performs statistical debugging for a program using a feedback pro
 To help generate program runs that pass or fail, you will use your `fuzzer`:
 
 ```sh
-/cis547vm$ cd lab5/test
-/cis547vm/lab5/test$ make
-/cis547vm/lab5/test$ rm -rf fuzz_output && mkdir fuzz_ouput
-/cis547vm/lab5/test$ timeout 1 ../build/fuzzer ./fuzz0 fuzz_input fuzz_output 10
-/cis547vm/lab5/test$ ../build/cbi ./fuzz0 fuzz_output
+/$ cd lab5/test
+/lab5/test$ make
+/lab5/test$ rm -rf fuzz_output && mkdir fuzz_ouput
+/lab5/test$ timeout 1 ../build/fuzzer ./fuzz0 fuzz_input fuzz_output 10
+/lab5/test$ ../build/cbi ./fuzz0 fuzz_output
 ```
 The last argument (10) on the `../build/fuzzer` invocation controls the frequency at which successful runs are written out in the `fuzz_output/success` directory.
 Additionally, before running another invocation of `../build/cbi`, make sure to clean up the `fuzz_output` directory.
@@ -128,18 +128,18 @@ Your statistical debugger should run on any C code that compiles to LLVM IR.
 As we demonstrated in the Setup section, we will compile code to LLVM and instrument the code with the fuzzer and cbi passes.
 
 ```sh
-/cis547vm$ cd lab5/test
-/cis547vm/lab5/test$ clang -emit-llvm -S -fno-discard-value-names -c fuzz1.c -g
-/cis547vm/lab5/test$ opt -load ../build/InstrumentPass.so -Instrument -S fuzz1.ll -o fuzz1.instruented.ll
-/cis547vm/lab5/test$ opt -load ../build/CBIInstrumentPass.so -CBIInstrument -S fuzz1.instrumented.ll -o fuzz1.cbi.instrumented.ll
-/cis547vm/lab5/test$ clang -o fuzz1 -L../build -lruntime fuzz1.cbi.instrumented.ll
+/$ cd lab5/test
+/lab5/test$ clang -emit-llvm -S -fno-discard-value-names -c fuzz1.c -g
+/lab5/test$ opt -load ../build/InstrumentPass.so -Instrument -S fuzz1.ll -o fuzz1.instruented.ll
+/lab5/test$ opt -load ../build/CBIInstrumentPass.so -CBIInstrument -S fuzz1.instrumented.ll -o fuzz1.cbi.instrumented.ll
+/lab5/test$ clang -o fuzz1 -L../build -lruntime fuzz1.cbi.instrumented.ll
 ```
 After, we will run the fuzzer to generate a set of passing and failing inputs for use with the cbi tool.
 
 ```sh
-/cis547vm/lab5/test$ rm -rf fuzz_output && mkdir fuzz_output
-/cis547vm/lab5/test$ timeout 1 ../build/fuzzer ./fuzz1 fuzz_input fuzz_output 10
-/cis547vm/lab5/test$ ../build/cbi ./fuzz1 fuzz_output
+/lab5/test$ rm -rf fuzz_output && mkdir fuzz_output
+/lab5/test$ timeout 1 ../build/fuzzer ./fuzz1 fuzz_input fuzz_output 10
+/lab5/test$ ../build/cbi ./fuzz1 fuzz_output
 ```
 
 You should expect to generate output similar to the following:
@@ -173,11 +173,18 @@ Line 14, Col 7, BranchFalse: 0
 ```
 
 
-### Items to Submit
+### Submission
 
 ---
 
-Submit files `CBIInstrument.cpp` and `CBI.cpp`.
+Once you are done with the lab, you can create a `submission.zip` file by using the following command:
+```sh
+lab5$ make submit
+...
+submission.zip created successfully.
+```
+
+Then upload the submission file to Gradescope.
 
 
 [lab2 instructions]: /labs/lab02.html
