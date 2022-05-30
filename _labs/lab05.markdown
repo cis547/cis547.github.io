@@ -24,7 +24,6 @@ We will frequently refer to the top level directory for Lab 5 as `lab5` when des
 The following commands setup the lab:
 
 ```sh
-/$ cd lab5
 /lab5$ mkdir build && cd build
 /lab5/build$ cmake ..
 /lab5/build$ make
@@ -38,7 +37,7 @@ The `cbi` tool performs statistical debugging for a program using a feedback pro
 To help generate program runs that pass or fail, you will use your `fuzzer`:
 
 ```sh
-/$ cd lab5/test
+/lab5$ cd test
 /lab5/test$ make
 /lab5/test$ rm -rf fuzz_output && mkdir fuzz_ouput
 /lab5/test$ timeout 1 ../build/fuzzer ./fuzz0 fuzz_input fuzz_output 10
@@ -128,7 +127,7 @@ Your statistical debugger should run on any C code that compiles to LLVM IR.
 As we demonstrated in the Setup section, we will compile code to LLVM and instrument the code with the fuzzer and cbi passes.
 
 ```sh
-/$ cd lab5/test
+/lab5$ cd test
 /lab5/test$ clang -emit-llvm -S -fno-discard-value-names -c fuzz1.c -g
 /lab5/test$ opt -load ../build/InstrumentPass.so -Instrument -S fuzz1.ll -o fuzz1.instruented.ll
 /lab5/test$ opt -load ../build/CBIInstrumentPass.so -CBIInstrument -S fuzz1.instrumented.ll -o fuzz1.cbi.instrumented.ll
