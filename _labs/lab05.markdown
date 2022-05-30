@@ -83,7 +83,7 @@ In short, the lab consists of the following tasks:
    5. Using the feedback profile you construct in 1-4, modify `generateReport` to implement statistical debugging.
    You should compute `F(P), S(P), Failure(P), Context(P)`, and `Increase(P)` which should be stored in the corresponding data structures in `include/Utils.h`.
 
-**_Revisiting Instrumentation._** By now you should feel comfortable working with the LLVM compiler infrastructure, but for a refresher, consult Lab 3 and see the paragraphs titled "Inserting Instruction into LLVM Code" and "Loading C functions into LLVM".
+**_Revisiting Instrumentation._** By now you should feel comfortable working with the LLVM compiler infrastructure, but for a refresher, consult Lab 3 and see the paragraphs titled ["Inserting Instruction into LLVM Code"][lab2 instructions]{:target="\_blank"} and ["Loading C functions into LLVM"][lab2 instructions]{:target="\_blank"}.
 
 **_CBI File Infrastructure._** the `cbi` executable will execute the input program on each of the trace `input` files from a `fuzzer` output directory.
 This includes both successful program runs (`fuzz_output/sucess`) and erroneous program runs (`fuzz_output/failure`).
@@ -186,7 +186,7 @@ submission.zip created successfully.
 Then upload the submission file to Gradescope.
 
 
-[lab2 instructions]: /labs/lab02.html
+[lab2 instructions]: https://cis.upenn.edu/~cis547/lab2.doc
 
 
 
