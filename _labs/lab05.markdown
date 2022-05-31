@@ -20,6 +20,7 @@ With the large number of inputs, you will obtain the data at runtime and measure
 
 The skeleton code for Lab 5 is located under `/cis547vm/lab5/`.
 We will frequently refer to the top level directory for Lab 5 as `lab5` when describing file locations for the lab.
+Open the lab3 directory in VSCode following the Instructions from [Course VM document][Course VM Document].
 
 The following commands setup the lab:
 
@@ -27,11 +28,9 @@ The following commands setup the lab:
 /lab5$ mkdir build && cd build
 /lab5/build$ cmake ..
 /lab5/build$ make
-/lab5/build$ export LD_LIBRARY_PATH="/cis547vm/lab5/build/:$LD_LIBRARY_PATH"
 ```
 
 You should now see `CBIInstrumentPass.so` and `cbi` in the current directory.
-**The `export LD_LIBRARY_PATH` should be run on each terminal session you begin.**
 
 The `cbi` tool performs statistical debugging for a program using a feedback profile (which you will generate) for successful and erroneous program runs.
 To help generate program runs that pass or fail, you will use your `fuzzer`:
@@ -83,7 +82,7 @@ In short, the lab consists of the following tasks:
    5. Using the feedback profile you construct in 1-4, modify `generateReport` to implement statistical debugging.
    You should compute `F(P), S(P), Failure(P), Context(P)`, and `Increase(P)` which should be stored in the corresponding data structures in `include/Utils.h`.
 
-**_Revisiting Instrumentation._** By now you should feel comfortable working with the LLVM compiler infrastructure, but for a refresher, consult Lab 3 and see the paragraphs titled ["Inserting Instruction into LLVM Code"][lab2 instructions]{:target="\_blank"} and ["Loading C functions into LLVM"][lab2 instructions]{:target="\_blank"}.
+**_Revisiting Instrumentation._** By now you should feel comfortable working with the LLVM compiler infrastructure, but for a refresher, consult Lab 2 and see the paragraphs titled ["Inserting Instruction into LLVM Code"][lab2 instructions] and ["Loading C functions into LLVM"][lab2 instructions].
 
 **_CBI File Infrastructure._** the `cbi` executable will execute the input program on each of the trace `input` files from a `fuzzer` output directory.
 This includes both successful program runs (`fuzz_output/sucess`) and erroneous program runs (`fuzz_output/failure`).
@@ -187,6 +186,7 @@ Then upload the submission file to Gradescope.
 
 
 [lab2 instructions]: https://cis.upenn.edu/~cis547/lab2.doc
+[Course VM Document]: https://cis.upenn.edu/~cis547/vm.doc
 
 
 
