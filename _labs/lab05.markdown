@@ -70,7 +70,7 @@ In this lab, you will need to edit the `lab5/src/CBIInstrument.cpp` file to impl
    - Append predicate information as "`return,line,col,rv`" to the running process cbi file.
 
 Like you did in Lab 3, your LLVM pass should instrument the code with these functions.
-Your pass should instrument each conditional branch with code records whether the branch conditional is true or false on execution.
+Your pass should instrument each conditional branch with code that records whether the branch conditional is true or false on execution.
 Likewise, instrument each integer-returning call instruction with code to record the return value.
 This will create a *feedback profile* for you to perform statistical debugging and generate a *feedback report*.  
 
