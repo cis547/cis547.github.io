@@ -20,7 +20,7 @@ With the large number of inputs, you will obtain the data at runtime and measure
 
 The skeleton code for Lab 5 is located under `/cis547vm/lab5/`.
 We will frequently refer to the top level directory for Lab 5 as `lab5` when describing file locations for the lab.
-Open the lab3 directory in VSCode following the Instructions from [Course VM document][Course VM Document].
+Open the `lab5` directory in VSCode following the Instructions from [Course VM document][Course VM Document].
 
 The following commands setup the lab:
 
