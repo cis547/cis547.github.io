@@ -45,14 +45,14 @@ To build and install the package, run:
 Unlike with `c++`, you *won't* need to re-run this command
 after making changes to your code.
 Further, you will be able to use your delta debugger using the
-`delta-debugger` command from the terminal.
+`delta_debugger` command from the terminal.
 
-The `delta-debugger` tool performs delta debugging to shrink
+The `delta_debugger` tool performs delta debugging to shrink
 a crashing input to a program.
 
 ##### Step 2.
 
-To use `delta-debugger` with a program you first need to find some input
+To use `delta_debugger` with a program you first need to find some input
 that will crash the program.
 To find such an input we will use a fuzzer.
 
@@ -92,18 +92,18 @@ fuzz_output_sanity1
     └── inputN
 ```
 
-You can now use `delta-debugger` to minimize the crashing
+You can now use `delta_debugger` to minimize the crashing
 inputs found by the fuzzer.
 
 ```
 /lab4/test$ delta-debugger ./sanity1 fuzz_output_sanity1/failure/input1
 ```
 
-The last argument (`fuzz_output/failure/input1`) is subject to change depending on what files are available in the `fuzz_output/failure` directory. The reduced input is stored in `fuzz_output/failure/input1.delta`. Additionally, before running another invocation of `../build/delta`, make sure to clean up the `fuzz_output` directory. You can do this by running `rm -rf fuzz_output && mkdir fuzz_output`.
+The last argument (`fuzz_output/failure/input1`) is subject to change depending on what files are available in the `fuzz_output/failure` directory. The reduced input is stored in `fuzz_output/failure/input1.delta`. Additionally, before running another invocation of `delta_debugger`, make sure to clean up the `fuzz_output` directory. You can do this by running `rm -rf fuzz_output && mkdir fuzz_output`.
 
 ### Lab Instructions
 
-You will need to edit the `lab4/src/Delta.cpp` file to build a delta debugging tool. We have provided a template function - `delta` - for you to implement your minimization logic. `delta` should take a `Target` input program, and an `Input` bytestring that causes the Target program to crash, and find a 1-minimal input that still crashes the input program.
+You will need to edit the `lab4/src/delta.py` file to build a delta debugging tool. We have provided a template function - `delta` - for you to implement your minimization logic. `delta` should take a `Target` input program, and an `Input` bytestring that causes the Target program to crash, and find a 1-minimal input that still crashes the input program.
 
 To perform delta debugging, you will have to repeatedly run the target input with various input strings. The skeleton code provides a couple of auxiliary functions in `lab4/include/Utils.h` to help you with this task:
 
@@ -133,7 +133,7 @@ After, we will run the fuzzer to generate a set of passing and failing inputs. Y
 ```sh
 /lab4/test$ rm -rf fuzz_output && mkdir fuzz_output
 /lab4/test$ timeout 1 ../build/fuzzer ./fuzz2 fuzz_input fuzz_output
-/lab4/test$ ../build/delta ./fuzz2 fuzz_output/failure/input1
+/lab4/test$ delta_debugger ./fuzz2 fuzz_output/failure/input1
 ```
 
 The 1-minimal input should be stored at `fuzz_output/failure/input1.delta`.
@@ -142,7 +142,7 @@ As a specific example consider the string: "abckdanmvelcbaghcajbtkzxmntplwqsraks
 
 ```sh
 /lab4/test$ echo -n "abckdanmvelcbaghcajbtkzxmntplwqsrakstuvbxyz" > tmp
-/lab4/test$ delta-debugger ./fuzz2 tmp
+/lab4/test$ delta_debugger ./fuzz2 tmp
 /lab4/test$ cat tmp.delta
 abckdanmvel
 ```
