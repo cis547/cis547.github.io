@@ -3,54 +3,100 @@ layout: lab
 _id: "4"
 title: "Delta Debugging"
 synopsis: |
-  Building a delta debugger for minimizing input that causes a program to crash - this process makes it easier for the user to understand the bug.
+  Building a delta debugger for minimizing inputs that cause a
+  program to crash --- making it easier for the user to
+  understand the bug.
 ---
 
 ### Objective
-In this lab, you will build a delta debugger that implements an efficient algorithm for finding a 1-minimal input. You will combine this tool with the fuzzer you wrote in lab3 to minimize the random input that the fuzzer finds.
+
+In this lab, you will build a delta debugger that implements
+an efficient algorithm for finding a 1-minimal crashing input
+given a large crashing input.
+You will combine this tool with a fuzzer like the one you built
+in `lab3` to minimize the crashing inputs found by the fuzzer.
 
 ### Setup
-The skeleton code for Lab 4 is located under `cis547vm/lab4/`. We will frequently refer to the top-level directory for Lab 4 as `lab4` when describing file locations for the lab. 
-Open the `lab4` directory in VSCode following the Instructions from [Course VM document][course-vm-doc].
-The following commands setup the lab:
+
+The code for Lab 4 is located under `cis547vm/lab4/`.
+We will frequently refer to this directory `lab4`.
+Open the `lab4` directory in VSCode following the Instructions from
+[Course VM document][course-vm-doc].
+
+This lab builds on top of the previous labs.
+We have provided you with pre-compiled binaries for
+the `runtime` library,
+`InstrumentPass` for `coverage` and `sanitize`,
+and a `fuzzer` executable; you can find them under `lab4/lib`.
+Their implementations are identical to the implementations in `lab3`.
+
+
+##### Step 1.
+
+This lab uses python to implement delta debugger.
+We do so by building a python package called `delta_debugger`.
+
+To build and install the package, run:
 
 ```sh
 /lab4$ make install
 ```
 
-You should now see delta under `lab4/build/`.
+Unlike with `c++`, you *won't* need to re-run this command
+after making changes to your code.
+Further, you will be able to use your delta debugger using the
+`delta-debugger` command from the terminal.
 
-The `delta` tool performs delta debugging to shrink a program input. To help generate program runs that pass and fail, you will use your `fuzzer`.
+The `delta-debugger` tool performs delta debugging to shrink
+a crashing input to a program.
 
-Now to run the `fuzzer` you will need to create the output directory
+##### Step 2.
+
+To use `delta-debugger` with a program you first need to find some input
+that will crash the program.
+To find such an input we will use a fuzzer.
+
+Just like `lab3`, to run the `fuzzer` you will first need to instrument
+the program and setup appropriate output directories
 where fuzzer will store its results.
 
 ```sh
-lab3/test$ mkdir fuzz_output_sanity1
+/lab4/test$ make sanity1               # Instrument and build sanity1
+/lab4/test$ mkdir fuzz_output_sanity1  # Create output directory
+# Run the fuzzer on sanity1 with a timeout of 6 seconds.
+/lab4/test$ timeout 6s fuzzer ./sanity1 fuzz_input fuzz_output_sanity1
 ```
 
-You may recall from lab 1, that AFL could generate new inputs forever and never
-stop running. This is also the case for your fuzzer.
-So for this we will use `timeout` to stop the fuzzer after a specified time.
-
-After this you can run your fuzzer on sanity for 1 second with:
+You can also use the Makefile to instrument, build,
+setup output directory and run the fuzzer for you:
 
 ```sh
-lab3/test$ timeout 1s ../build/fuzzer ./fuzz0 fuzz_input fuzz_output_fuzz0
+/lab4/test$ make sanity1               # Instrument and build sanity1
+/lab4/test$ make fuzz-sanity1          # Run the fuzzer on sanity1
 ```
 
-**Note:** the `./` before `fuzz0` is required to let the fuzzer find the executable.
+##### Step 3.
 
-You can also use the Makefile to setup output directory and run the fuzzer for you:
-
-```sh
-lab3/test$ make fuzz-fuzz0
-```
-
-This will run the `fuzzer` on `fuzz0`.
+Once you have run the fuzzer you will find inputs
+that couse the program to crash under
+`test/fuzz_output_sanity1/failure`.
 
 ```
-/lab4/test$ ../build/delta ./fuzz0 fuzz_output/failure/input1
+fuzz_output_sanity1
+├── success
+├── randomSeed.txt
+└── failure                            # Inputs that cause a crash.
+    ├── input0
+    ├── input1
+    │    ...
+    └── inputN
+```
+
+You can now use `delta-debugger` to minimize the crashing
+inputs found by the fuzzer.
+
+```
+/lab4/test$ delta-debugger ./sanity1 fuzz_output_sanity1/failure/input1
 ```
 
 The last argument (`fuzz_output/failure/input1`) is subject to change depending on what files are available in the `fuzz_output/failure` directory. The reduced input is stored in `fuzz_output/failure/input1.delta`. Additionally, before running another invocation of `../build/delta`, make sure to clean up the `fuzz_output` directory. You can do this by running `rm -rf fuzz_output && mkdir fuzz_output`.
