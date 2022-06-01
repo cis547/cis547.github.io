@@ -45,14 +45,14 @@ To build and install the package, run:
 Unlike with `c++`, you *won't* need to re-run this command
 after making changes to your code.
 Further, you will be able to use your delta debugger using the
-`delta_debugger` command from the terminal.
+`delta-debugger` command from the terminal.
 
-The `delta_debugger` tool performs delta debugging to shrink
+The `delta-debugger` tool performs delta debugging to shrink
 a crashing input to a program.
 
 ##### Step 2.
 
-To use `delta_debugger` with a program you first need to find some input
+To use `delta-debugger` with a program you first need to find some input
 that will crash the program.
 To find such an input we will use a fuzzer.
 
@@ -92,14 +92,14 @@ fuzz_output_sanity1
     └── inputN
 ```
 
-You can now use `delta_debugger` to minimize the crashing
+You can now use `delta-debugger` to minimize the crashing
 inputs found by the fuzzer.
 
 ```
 /lab4/test$ delta-debugger ./sanity1 fuzz_output_sanity1/failure/input1
 ```
 
-The last argument (`fuzz_output/failure/input1`) is subject to change depending on what files are available in the `fuzz_output/failure` directory. The reduced input is stored in `fuzz_output/failure/input1.delta`. Additionally, before running another invocation of `delta_debugger`, make sure to clean up the `fuzz_output` directory. You can do this by running `rm -rf fuzz_output && mkdir fuzz_output`.
+The last argument (`fuzz_output/failure/input1`) is subject to change depending on what files are available in the `fuzz_output/failure` directory. The reduced input is stored in `fuzz_output/failure/input1.delta`. Additionally, before running another invocation of `delta-debugger`, make sure to clean up the `fuzz_output` directory. You can do this by running `rm -rf fuzz_output && mkdir fuzz_output`.
 
 ### Lab Instructions
 
@@ -111,7 +111,7 @@ To perform delta debugging, you will have to repeatedly run the target input wit
    - int run_target(Target, Input)
     - Run the program (command) `Target`, and pipe `Input` into the running `Target` process. Will return the result of the 'Target' process.
 
-Overall, you need to modify the `delta_debugger` function to implement the 1-minimal minimization algorithm from class. You can break the lab down into subtasks:
+Overall, you need to modify the `delta-debugger` function to implement the 1-minimal minimization algorithm from class. You can break the lab down into subtasks:
 
    1. Implement the logic to partition the set of changes into delta subsets along with the nabla complement sets.
    2. Use the `run_target` function to see which - if any - of the sets cause program failure.
@@ -133,7 +133,7 @@ After, we will run the fuzzer to generate a set of passing and failing inputs. Y
 ```sh
 /lab4/test$ rm -rf fuzz_output && mkdir fuzz_output
 /lab4/test$ timeout 1 ../build/fuzzer ./fuzz2 fuzz_input fuzz_output
-/lab4/test$ delta_debugger ./fuzz2 fuzz_output/failure/input1
+/lab4/test$ delta-debugger ./fuzz2 fuzz_output/failure/input1
 ```
 
 The 1-minimal input should be stored at `fuzz_output/failure/input1.delta`.
@@ -142,7 +142,7 @@ As a specific example consider the string: "abckdanmvelcbaghcajbtkzxmntplwqsraks
 
 ```sh
 /lab4/test$ echo -n "abckdanmvelcbaghcajbtkzxmntplwqsrakstuvbxyz" > tmp
-/lab4/test$ delta_debugger ./fuzz2 tmp
+/lab4/test$ delta-debugger ./fuzz2 tmp
 /lab4/test$ cat tmp.delta
 abckdanmvel
 ```
