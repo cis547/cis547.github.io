@@ -56,7 +56,7 @@ To use `delta-debugger` with a program you first need to find some input
 that will crash the program.
 To find such an input we will use a fuzzer.
 
-Just like `lab3`, to run the `fuzzer` you will first need to instrument
+Just like [`lab3`][lab3.doc], to run the `fuzzer` you will first need to instrument
 the program and setup appropriate output directories
 where fuzzer will store its results.
 
@@ -99,50 +99,64 @@ inputs found by the fuzzer.
 /lab4/test$ delta-debugger ./sanity1 fuzz_output_sanity1/failure/input1
 ```
 
-The last argument (`fuzz_output/failure/input1`) is subject to change depending on what files are available in the `fuzz_output/failure` directory. The reduced input is stored in `fuzz_output/failure/input1.delta`. Additionally, before running another invocation of `delta-debugger`, make sure to clean up the `fuzz_output` directory. You can do this by running `rm -rf fuzz_output && mkdir fuzz_output`.
+The last argument is path to the crashing input and depends on which input you want to minimize.
+In this example the reduced input is stored in `fuzz_output/failure/input1.delta`.
+Additionally, before running another invocation of `delta-debugger`, make sure to clean up the `fuzz_output` directory.
+
+You can do this by running:
+
+```sh
+/lab4/test$ rm -rf fuzz_output_sanity1 && mkdir fuzz_output_sanity1
+```
 
 ### Lab Instructions
 
-You will need to edit the `lab4/src/delta.py` file to build a delta debugging tool. We have provided a template function - `delta` - for you to implement your minimization logic. `delta` should take a `Target` input program, and an `Input` bytestring that causes the Target program to crash, and find a 1-minimal input that still crashes the input program.
+You will need to edit the `lab4/delta_debugger/delta.py` file to build a delta debugging tool.
+We have provided a template function --- `delta_debug` --- for you to
+implement your minimization logic.
+The `delta_debug` function takes a `target` program, and `input` that causes `target` to crash,
+and is supposed to return a 1-minimal input that still crashes the `target` program.
 
-To perform delta debugging, you will have to repeatedly run the target input with various input strings. The skeleton code provides a couple of auxiliary functions in `lab4/include/Utils.h` to help you with this task:
+To perform delta debugging, you will have to repeatedly run `target` with various `input` strings.
+We provide a `run_target` function to help you run `target` program with an `input`.
+It returns a value of 0 if the target didn't crash.
 
+```py
+def run_target(target: str, input: Union[str, bytes]) -> int:
+    """
+    Run the target program with input on its stdin.
+    :param target: The target program to run.
+    :param input: The input to pass to the target program.
+    :return: The return code of the target program.
+    """
+    ...
+```
 
-   - int run_target(Target, Input)
-    - Run the program (command) `Target`, and pipe `Input` into the running `Target` process. Will return the result of the 'Target' process.
+For this lab you will modify the `delta_debug` function to implement the algorithm to
+you learn in class to find a 1-minimal crashing input.
 
-Overall, you need to modify the `delta-debugger` function to implement the 1-minimal minimization algorithm from class. You can break the lab down into subtasks:
-
-   1. Implement the logic to partition the set of changes into delta subsets along with the nabla complement sets.
-   2. Use the `run_target` function to see which - if any - of the sets cause program failure.
-   3. Repeat (1) and (2) until you have a 1-minimal input.
+You likely want to add a helper function for example called `_delta_debug`
+that takes a `target`, an `input` and a parameter `n`
+that correspond to search granularity, and performs one iteration of delta debugging algorithm to
+return the next `input` and `n`.
 
 ### Example Input and Output
 
-Your delta debugger should run on any C code that accepts standard input. As we demonstrated in the Setup section, we will compile code to LLVM and instrument the code with the fuzzer pass.
+Your delta debugger should run on any executable that accepts input from `stdin`.
+
+You run the delta debugger on a test program by passing in the following arguments:
 
 ```sh
-/lab4$ cd test
-/lab4/test$ clang -emit-llvm -S -fno-discard-value-names -c fuzz1.c -g
-/lab4/test$ opt -load ../build/InstrumentPass.so -Instrument -S fuzz1.11 -o fuzz1.instrumented.11
-/lab4/test$ clang -o fuzz1 -L../build -lruntime fuzz1.instrumented.11
+delta-debugger ./test crashing-input
 ```
 
-After, we will run the fuzzer to generate a set of passing and failing inputs. Your delta debugger should minimize any of the failing input cases.
+And the delta debugger will store its result in `crashing-input.delta` file.
 
-```sh
-/lab4/test$ rm -rf fuzz_output && mkdir fuzz_output
-/lab4/test$ timeout 1 ../build/fuzzer ./fuzz2 fuzz_input fuzz_output
-/lab4/test$ delta-debugger ./fuzz2 fuzz_output/failure/input1
-```
-
-The 1-minimal input should be stored at `fuzz_output/failure/input1.delta`.
-
-As a specific example consider the string: "abckdanmvelcbaghcajbtkzxmntplwqsrakstuvbxyz", which causes `fuzz2` to fail:
+As a specific example consider the string: "abckdanmvelcbaghcajbtkzxmntplwqsrakstuvbxyz", which causes `test3` to fail:
 
 ```sh
 /lab4/test$ echo -n "abckdanmvelcbaghcajbtkzxmntplwqsrakstuvbxyz" > tmp
-/lab4/test$ delta-debugger ./fuzz2 tmp
+/lab4/test$ delta-debugger ./test3 tmp
 /lab4/test$ cat tmp.delta
 abckdanmvel
 ```
@@ -158,4 +172,5 @@ submission.zip created successfully.
 ```
 Then upload the `submission.zip` file to Gradescope.
 
+[lab3.doc]: https://cis.upenn.edu/~cis547/lab3.doc
 [course-vm-doc]: https://cis.upenn.edu/~cis547/vm.doc
