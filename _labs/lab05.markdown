@@ -98,15 +98,20 @@ Before completing the cbi program you should see the following report generated:
 ### Lab Instructions
 
 In short, the lab consists of the following tasks:
-   1. Implement the `instrumentCBIBranche` function to insert a
+   1. Implement the `instrumentBranch` function to insert a
    `__cbi_branch__` call for a predicate (conditional).
-   2. Modify `runOnFunction` to instrument all branching instructions with
-   the predicate recording logic.
+   2. Modify `runOnFunction` to instrument all conditional branching
+   instructions using `instrumentBranch`.
    3. Implement the `instrumentReturn` function to insert a
-   `__cbi_return__` call for a return value.
-   4. Modify `runOnFunction` to instrument all integer return instructions with the return recording logic.
-   5. Using the feedback profile you construct in 1-4, modify `generateReport` to implement statistical debugging.
-   You should compute `F(P), S(P), Failure(P), Context(P)`, and `Increase(P)` which should be stored in the corresponding data structures in `include/Utils.h`.
+   `__cbi_return__` call to log the return value of function calls.
+   4. Modify `runOnFunction` to instrument all call instructions that
+   return an integer usinf `instrumentReturn`.
+   5. Using the feedback profile you construct via 1 through 4,
+   modify `cbi/data_format.py` to implement formula for calculating:
+   `Failure(P)`, `Context(P)`, and `Increase(P)` in the `PredicateInfo` class.
+   6. Modify the `cbi/cbi.py` file using the instruction provided
+   in the file, and compute `S(P)`, `SObs(P)`, `F(P)`, and `FObs(P)`
+   which should be stored in the corresponding data structure (`PredicateInfo`).
 
 ##### Part 1: Instrumentation
 
