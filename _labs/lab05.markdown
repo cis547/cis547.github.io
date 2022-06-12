@@ -297,10 +297,14 @@ class Report:
 **Note:** Your instrumentation will record where a branch or return occurs
 and its result, but you need to encode that into a predicate.
 For example, if we encounter `if (p == 10) { ... }` in the code,
-we need to store two predicates, `(p == 10) is true`, and `(p == 10) is false`, which you would represent as `BranchTrue` and `BranchFalse`.
+we need to store two predicates,
+`(p == 10) is true`, and `(p == 10) is false`,
+which you would represent as `BranchTrue` and `BranchFalse`.
+You may find the `PredicateType.alternatives` function helpful for this.
+
 
 Once you populate the `predicate_infos` dictionary in the `cbi` function,
-the skeleton code will go through and print out the report as well as store a detailed report to `target.report.json` file.
+the skeleton code will go through it and print out the report as well as store a detailed report to `target.report.json` file.
 
 ### Example Input and Output
 
@@ -309,49 +313,47 @@ As we demonstrated in the Setup section, we will compile code to LLVM and instru
 
 ```sh
 lab5$ cd test
-lab5/test$ clang -emit-llvm -S -fno-discard-value-names -c fuzz1.c -g
-lab5/test$ opt -load ../build/InstrumentPass.so -Instrument -S fuzz1.ll -o fuzz1.instruented.ll
-lab5/test$ opt -load ../build/CBIInstrumentPass.so -CBIInstrument -S fuzz1.instrumented.ll -o fuzz1.cbi.instrumented.ll
-lab5/test$ clang -o fuzz1 -L../build -lruntime fuzz1.cbi.instrumented.ll
+lab5/test$ make test2
 ```
-After, we will run the fuzzer to generate a set of passing and failing inputs for use with the cbi tool.
+
+After this, we will run the fuzzer to generate a set of passing and failing inputs for use with the cbi tool, and finally run the cbi tool.
 
 ```sh
-lab5/test$ rm -rf fuzz_output && mkdir fuzz_output
-lab5/test$ timeout 1 ../build/fuzzer ./fuzz1 fuzz_input fuzz_output 10
-lab5/test$ ../build/cbi ./fuzz1 fuzz_output
+lab5/test$ make fuzz-test2
+lab5/test$ cbi ./test2 fuzz_output_test2
 ```
 
 You should expect to generate output similar to the following:
 
-```sh
+```s
 == S(P) ==
-Line 10, Col 7, BranchTrue: 0
-Line 10, Col 7, BranchFalse: 4
-Line 14, Col 7, BranchTrue: 2
-Line 14, Col 7, BranchFalse: 2
+Line 010, Col 007,    BranchFalse: 68.0
+Line 010, Col 007,     BranchTrue: 0
+Line 014, Col 007,    BranchFalse: 65.0
+Line 014, Col 007,     BranchTrue: 3.0
 == F(P) ==
-Line 10, Col 7, BranchTrue: 1
-Line 10, Col 7, BranchFalse: 0
-Line 14, Col 7, BranchTrue: 0
-Line 14, Col 7, BranchFalse: 0
+Line 010, Col 007,    BranchFalse: 0
+Line 010, Col 007,     BranchTrue: 145.0
+Line 014, Col 007,    BranchFalse: 0
+Line 014, Col 007,     BranchTrue: 0
 == Failure(P) ==
-Line 10, Col 7, BranchTrue: 1
-Line 10, Col 7, BranchFalse: 0
-Line 14, Col 7, BranchTrue: 0
-Line 14, Col 7, BranchFalse: 0
+Line 010, Col 007,    BranchFalse: 0
+Line 010, Col 007,     BranchTrue: 1.0
+Line 014, Col 007,    BranchFalse: 0
+Line 014, Col 007,     BranchTrue: 0
 == Context(P) ==
-Line 10, Col 7, BranchTrue: 0.2
-Line 10, Col 7, BranchFalse: 0.2
-Line 14, Col 7, BranchTrue: 0
-Line 14, Col 7, BranchFalse: 0
+Line 010, Col 007,    BranchFalse: 0.6807511737089202
+Line 010, Col 007,     BranchTrue: 0.6807511737089202
+Line 014, Col 007,    BranchFalse: 0.0
+Line 014, Col 007,     BranchTrue: 0.0
 == Increase(P) ==
-Line 10, Col 7, BranchTrue: 0.8 
-Line 10, Col 7, BranchFalse: -0.2 
-Line 14, Col 7, BranchTrue: 0 
-Line 14, Col 7, BranchFalse: 0
+Line 010, Col 007,    BranchFalse: -0.6807511737089202
+Line 010, Col 007,     BranchTrue: 0.31924882629107976
+Line 014, Col 007,    BranchFalse: 0.0
+Line 014, Col 007,     BranchTrue: 0.0
 ```
 
+You can download the input files we used to generate the report above from [here][lab5 sample fuzzer inputs].
 
 ### Submission
 
@@ -366,6 +368,7 @@ Then upload the submission file to Gradescope.
 
 
 [lab2 instructions]: https://cis.upenn.edu/~cis547/lab2.doc
+[lab5 sample fuzzer inputs]: {{ '/downloads/lab5/fuzz_output_test2.zip' | relative_url }}
 [Course VM Document]: https://cis.upenn.edu/~cis547/vm.doc
 
 
