@@ -8,15 +8,11 @@ synopsis: |
 
 ### Objective  
 
----
-
 In this lab, you will implement cooperative bug isolation (CBI) to statistically localize error locations.
 You need to implement an LLVM pass that instruments each branch and function call to report the values of their conditions and return values.
 With the large number of inputs, you will obtain the data at runtime and measure different types of scores that help users find bugs.
 
 ### Setup
-
----
 
 The skeleton code for Lab 5 is located under `/cis547vm/lab5/`.
 We will frequently refer to the top level directory for Lab 5 as `lab5` when describing file locations for the lab.
@@ -58,8 +54,6 @@ Generating log files...
 ```
 
 ### Lab Instructions
-
----
 
 In this lab, you will need to edit the `lab5/src/CBIInstrument.cpp` file to implement the cooperative bug isolation which will instrument branches and return instructions with code to extract and monitor predicates.
 `lab5/lib/runtime.c` contains functions that you will use in your lab:
@@ -120,8 +114,6 @@ The skeleton code will go through and print out your maps via `printReport`.
 
 ### Example Input and Output
 
----
-
 Your statistical debugger should run on any C code that compiles to LLVM IR.
 As we demonstrated in the Setup section, we will compile code to LLVM and instrument the code with the fuzzer and cbi passes.
 
@@ -172,8 +164,6 @@ Line 14, Col 7, BranchFalse: 0
 
 
 ### Submission
-
----
 
 Once you are done with the lab, you can create a `submission.zip` file by using the following command:
 ```sh
