@@ -12,15 +12,29 @@ In this lab, you will implement cooperative bug isolation (CBI) to statistically
 You need to implement an LLVM pass that instruments each branch and function call to report the values of their conditions and return values.
 You will then generate a number of sample inputs using a fuzzer.
 With these inputs, you will obtain the runtime data from the instrumentation
-and measure different types of scores that help isolate bugs and guide de-bugging effort.
+and measure different types of scores that help isolate bugs
+and guide de-bugging effort.
 
 ### Setup
 
 The skeleton code for Lab 5 is located under `/cis547vm/lab5/`.
-We will frequently refer to the top level directory for Lab 5 as `lab5` when describing file locations for the lab.
-Open the `lab5` directory in VSCode following the Instructions from [Course VM document][Course VM Document].
+We will frequently refer to the top level directory for Lab 5 as `lab5`
+when describing file locations for the lab.
+Open the `lab5` directory in VSCode following the Instructions
+from [Course VM document][Course VM Document].
 
-The following commands setup the lab:
+The lab in split into three parts:
+   1. In part 1, you will implement two instrumentations, one to
+   instrument each conditional branch instruction reporting the condition.
+   And  another that instruments all function calls, to report their
+   return values.
+   2. In part 2, you will run a fuzzer to generate a set of inputs
+   that will be used to collect data for performing statistical analysis.
+   3. In part 3, you will run the target program with the inputs generated
+   by the fuzzer to collect cbi logs and analyze the data
+   to report various metrics.
+
+To build the instrumentation, you can use the following commands:
 
 ```sh
 lab5$ mkdir build && cd build
@@ -28,31 +42,55 @@ lab5/build$ cmake ..
 lab5/build$ make
 ```
 
-You should now see `CBIInstrumentPass.so` and `cbi` in the current directory.
+You should now see `CBIInstrumentPass.so`, `libruntime.so`, and
+`InstrumentPass.so` in the build directory.
 
-The `cbi` tool performs statistical debugging for a program using a feedback profile (which you will generate) for successful and erroneous program runs.
-To help generate program runs that pass or fail, you will use your `fuzzer`:
+The `cbi` tool performs statistical debugging for a program using a feedback
+profile (which you will generate) for successful and erroneous program runs.
+
+To help generate program runs that pass or fail, you will use a `fuzzer`:
 
 ```sh
 lab5$ cd test
 lab5/test$ make
-lab5/test$ rm -rf fuzz_output && mkdir fuzz_ouput
-lab5/test$ timeout 1 ../build/fuzzer ./fuzz0 fuzz_input fuzz_output 10
-lab5/test$ ../build/cbi ./fuzz0 fuzz_output
+lab5/test$ rm -rf fuzz_output_sanity && mkdir fuzz_output_sanity
+lab5/test$ timeout 1 fuzzer ./sanity fuzz_input fuzz_output_sanity 10
 ```
-The last argument (10) on the `../build/fuzzer` invocation controls the frequency at which successful runs are written out in the `fuzz_output/success` directory.
-Additionally, before running another invocation of `../build/cbi`, make sure to clean up the `fuzz_output` directory.
-You can do this by running `rm -rf fuzz_output && mkdir fuzz_output`.
 
-You should see the sample output as follows:
+Or alternativele you can have the `Makefile` to do this for you using:
 
 ```sh
-Generating log files...
+lab5/test$ make fuzz-sanity
+```
+
+To setup the `cbi` tool you can run:
+
+```sh
+lab5$ make install
+```
+
+This will install the `cbi` tool, just like what you had in `lab4`
+for the `delta-debugger` tool.
+
+You can then run `cbi` to generate a report of analyzing the runs of a program using:
+
+```sh
+lab5/test$ cbi ./sanity ./fuzz_output_sanity
+```
+
+Before completing the cbi program you should see the following report generated:
+
+```sh
 == S(P) ==
+
 == F(P) ==
+
 == Failure(P) ==
+
 == Context(P) ==
+
 == Increase(P) ==
+
 ```
 
 ### Lab Instructions
