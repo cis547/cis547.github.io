@@ -8,9 +8,11 @@ synopsis: |
 
 ### Objective  
 
-In this lab, you will implement cooperative bug isolation (CBI) to statistically localize error locations.
+In this lab, you will implement cooperative bug isolation (CBI) to statistically localize error locations in a program.
 You need to implement an LLVM pass that instruments each branch and function call to report the values of their conditions and return values.
-With the large number of inputs, you will obtain the data at runtime and measure different types of scores that help users find bugs.
+You will then generate a number of sample inputs using a fuzzer.
+With these inputs, you will obtain the runtime data from the instrumentation
+and measure different types of scores that help isolate bugs and guide de-bugging effort.
 
 ### Setup
 
