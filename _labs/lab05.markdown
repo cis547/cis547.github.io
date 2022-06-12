@@ -234,12 +234,11 @@ and for each predicate you will populate its corresponding
 `PredicateInfo` object with the information required for the report.
 
 This includes:
-   + `s`: The number of times the predicate is true in a successful run.
-   + `s_obs`: The number of times the predicate is either true or false
-   in a successful run.
-   + `f`: The number of times the predicate is true in a failing run.
-   + `f_obs`: The number of times the predicate is either true or false
-   in a failing run.
+   + `s`: The number of successful runs where the predicate was true at least once.
+   + `s_obs`: The number of successful runs where the predicate was either true or false at least once.
+   in a.
+   + `f`: The number of failing runs where the predicate was true at least once.
+   + `f_obs`: The number of failing runs where the predicate was either true or false at least once.
 
 
 We have provided you with a few function declarations in `cbi/cbi.py`
