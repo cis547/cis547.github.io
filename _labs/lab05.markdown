@@ -153,28 +153,51 @@ and see the paragraphs titled
 ["Inserting Instruction into LLVM Code"][lab2 instructions] and
 ["Loading C functions into LLVM"][lab2 instructions].
 
-##### CBI File Infrastructure.
+#### Part 2: Fuzzer
 
-The `cbi` executable will execute the input program on each of the trace `input` files from a `fuzzer` output directory.
-This includes both successful program runs (`fuzz_output/sucess`) and erroneous program runs (`fuzz_output/failure`).
-Each run will generate an analogous feedback profile for each input file.
+Once you have implemented the instrumentation, you will run the
+fuzzer to generate a number of passing as well as failing inputs to
+a target program.
+
+This is done identically as in lab 3 and lab 4 using:
+
+```sh
+lab5/test$ make fuzz-sanity
+```
+
+Depending on your machine, you may need to increase the timeout in the
+`test/Makefile` to allow for the fuzzer to run for a long enough time
+to generate a reasonable number of inputs.
+
+#### Part 3: CBI
+
+The `cbi` program will execute the target program on each of the
+`input` files from the `fuzzer` output directory.
+This includes both successful program runs as well as
+erroneous program runs.
+Each run will generate a corresponding feedback profile as a
+`.cbi.jsonl` file.
 The resulting directory tree will look like this:
-```
-   -  fuzz_output/
-      -  success/
-         -  input1
-         -  input1.cbi
-         -  input2
-         -  input2.cbi
-         -  ...
-      -  failure/
-         -  input1
-         -  input1.cbi
-         - ...
-```
-You will use these `.cbi` files to generate the feedback report.
 
-###### Generating the feedback report.
+```
+fuzz_output_sanity1
+├── success
+│   ├── input0
+│   ├── input0.cbi.jsonl
+│   └──  ...
+└── failure
+    ├── input0
+    ├── input0.cbi.jsonl
+    ├── input1
+    ├── input1.cbi.jsonl
+    └──  ...
+```
+
+The `cbi` then parses each of the `.cbi.jsonl` file into a list of
+`CBILogEntry` objects, and passes it to the `cbi` function in
+`cbi/cbi.py` where you will generate the report.
+
+##### Generating the feedback report.
 
 During the lesson, you saw how we use several metrics to help determine which predicates correlate with bugs.
 One such metric, `Failure(P)`, calculates how often predicate P is true in a failing run.
