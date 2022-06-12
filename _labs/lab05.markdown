@@ -200,19 +200,107 @@ The `cbi` then parses each of the `.cbi.jsonl` file into a list of
 ##### Generating the feedback report.
 
 During the lesson, you saw how we use several metrics to help determine which predicates correlate with bugs.
-One such metric, `Failure(P)`, calculates how often predicate P is true in a failing run.
-Another metric, `Context(P)`, calculates the background chance of failure when predicate P is observed.
-Finally, `Increase(P)` calculates the likelihood that P influences the success or failure of the program.
+One such metric, `Failure(P)`, calculates how often predicate `P`
+is true in a failing run.
+Another metric, `Context(P)`, calculates the background chance
+of failure when predicate `P` is observed.
+Finally, `Increase(P)` calculates the likelihood that `P` influences the success or failure of the program.
 
-We have defined maps `F`, `S`, `Failure`, `Context`, and `Increase` in `lab5/include/Utils.h` that you should populate in `generateReport` located in `lab5/src/CBI.cpp`.
-Notice each is a mapping from `std::tuple<int, int, State>` to `double`.
-Here, the tuple represents a predicate, which consists of a line, column, and a State data type that encodes the possible predicates a branch or return has.
+You will first need to implement the formula for `Failure(P)`, `Context(P)`, and `Increase(P)` in the `PredicateInfo` class.
 
-Note that your instrumentation will record where a branch or return occurs and its result, but you need to encode that into a predicate.
-For example, if we encounter `if (p == 10) { ... }` in the code, we need to store two predicates, (p == 10), and (p != 10), which you would represent as `State::BranchTrue` and `State::BranchFalse`.  
+To help you get started,
+here's what you will be filling in for `Increase(P)`:
 
-The skeleton code will go through and print out your maps via `printReport`.  
+```py
+class PredicateInfo:
+   ...
+   @property
+    def increase(self):
+        """
+        The Increase value of the predicate.
 
+        :return: The increase value.
+        """
+        # TODO: Implement the calculation of the increase value.
+        return self.failure - self.context
+   ...
+```
+
+The `PredicateInfo` class is a simple data structure that holds
+the all the requires information for a predicate.
+
+In the `cbi.py` file, you will go over all the CBILogs
+and for each predicate you will populate its corresponding
+`PredicateInfo` object with the information required for the report.
+
+This includes:
+   + `s`: The number of times the predicate is true in a successful run.
+   + `s_obs`: The number of times the predicate is either true or false
+   in a successful run.
+   + `f`: The number of times the predicate is true in a failing run.
+   + `f_obs`: The number of times the predicate is either true or false
+   in a failing run.
+
+
+We have provided you with a few function declarations in `cbi/cbi.py`
+that may help you break down this task into more reasonable chunks.
+
+It will also be helpful to look at the `cbi/data_format.py` file for the
+data format that you will be using and the available convenience functions.
+
+In particular you have:
+
+```py
+class CBILogEntry:
+   """
+   Data class for a single entry in a CBI log.
+
+   :param kind: The kind of entry [branch/return].
+   :param line: The line number specified in the log.
+   :param column: The column number specified in the log.
+   :param value: The value specified in the log.
+   """
+   ...
+
+class ObservationStatus(Enum):
+   """
+   Enum for the Observation Status of a predicate.
+
+   :param NEVER: The predicate was never observed.
+   :param TRUE: The predicate was observed and was always true.
+   :param FALSE: The predicate was observed and was always false.
+   :param BOTH: The predicate was observed at least once as true and false.
+   """
+   ...
+
+class Predicate:
+   """
+   Data class for a predicate.
+
+   :param line: The line number of the predicate in the program.
+   :param column: The column number of the predicate in the program.
+   :param pred_type: The type of the predicate.
+      One of the predicate types from PredicateType.
+   """
+   ...
+
+class Report:
+   """
+   Data class for the CBI Report.
+
+   :param predicates_info_list: A list of PredicateInfo objects of
+      all predicates in the program.
+   """
+   ...
+```
+
+**Note:** Your instrumentation will record where a branch or return occurs
+and its result, but you need to encode that into a predicate.
+For example, if we encounter `if (p == 10) { ... }` in the code,
+we need to store two predicates, `(p == 10) is true`, and `(p == 10) is false`, which you would represent as `BranchTrue` and `BranchFalse`.
+
+Once you populate the `predicate_infos` dictionary in the `cbi` function,
+the skeleton code will go through and print out the report as well as store a detailed report to `target.report.json` file.
 
 ### Example Input and Output
 
