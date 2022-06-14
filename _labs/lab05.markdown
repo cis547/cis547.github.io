@@ -80,7 +80,14 @@ You can then run `cbi` to generate a report of analyzing the runs of a program u
 lab5/test$ cbi ./sanity ./fuzz_output_sanity
 ```
 
-Before completing the cbi program you should see the following report generated:
+Note that running the `cbi` program before implementing `CBIInstrument.cpp`,
+will result in an error that states that the `.cbi.jsonl` does not exist.
+This is because `.cbi.jsonl` files are created by the `__cbi_branch__`
+and `__cbi_return__` calls.
+Until these calls are added during CBI instrumentation, no `.cbi.jsonl` will be created.
+
+Running `cbi` after completing `CBIInstrument.cpp` but
+before completing `cbi.py` should give you the following report:
 
 ```
 == S(P) ==
