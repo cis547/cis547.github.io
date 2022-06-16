@@ -130,10 +130,10 @@ Note that an `Instruction` is also a `Value`.
 For example, consider the following LLVM program. 
 We have shown the abstract state, denoted **M**, before and after each instruction:
 
-|  ID  | Instruction                    |  Before Instruction    |  After Instruction    |
-| :--: | :----------------------------- | :--------------------- | :-------------------- |
-| I1   | %x = call i32 (...) @input()   | {}                     | {%x: T}               |
-| I2   | %y = add i32 %x, 1             | {%x: T}                | {%x: T, %y: %x + 1}   |
+|  ID  | Instruction                      |  Before Instruction    |  After Instruction    |
+| :--: | :------------------------------- | :--------------------- | :-------------------- |
+| I1   | `%x = call i32 (...) @input()`   | {}                     | {`%x`: T}               |
+| I2   | `%y = add i32 %x, 1`             | {%x: T}                | {`%x`: T, `%y`: `%x + 1`}   |
 
 
 
