@@ -132,8 +132,8 @@ We have shown the abstract state, denoted **M**, before and after each instructi
 
 |  ID    | Instruction                      |  Before Instruction    |  After Instruction        |
 | :----: | :------------------------------- | :--------------------- | :------------------------ |
-| `I1`   | `%x = call i32 (...) @input()`   | {}                     | {`%x`: T}                 |
-| `I2`   | `%y = add i32 %x, 1`             | {`%x`: T}              | {`%x`: T, `%y`: `%x + 1`} |
+| `I1`   | `%x = call i32 (...) @input()`   | `{  }`                 | `{ %x: T }`               |
+| `I2`   | `%y = add i32 %x, 1`             | `{ %x: T }`            | `{ %x: T, %y: %x + 1 }`   |
 
 In the first instruction `I1`, we assign an input integer to variable `%x`.
 In the abstract state, we use an abstract value **T** (also known as "top" or `MaybeZero`) since the value is unknown at compile time. 
