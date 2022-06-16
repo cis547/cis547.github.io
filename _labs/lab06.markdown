@@ -132,8 +132,8 @@ We have shown the abstract state, denoted **M**, before and after each instructi
 
 |  ID    | Instruction                      |  Before Instruction    |  After Instruction        |
 | :----: | :------------------------------- | :--------------------- | :------------------------ |
-| `I1`   | `%x = call i32 (...) @input()`   | {}                     | {`%x`: T}                 |
-| `I2`   | `%y = add i32 %x, 1`             | {`%x`: T}              | {`%x`: T, `%y`: `%x + 1`} |
+| `I1`   | `%x = call i32 (...) @input()`   | `{  }`                 | `{ %x: T }`               |
+| `I2`   | `%y = add i32 %x, 1`             | `{ %x: T }`            | `{ %x: T, %y: %x + 1 }`   |
 
 In the first instruction `I1`, we assign an input integer to variable `%x`.
 In the abstract state, we use an abstract value **T** (also known as "top" or `MaybeZero`) since the value is unknown at compile time. 
@@ -179,52 +179,45 @@ We call this merge point a **phi node**.
 To illustrate phi nodes, consider the following code:
 
 <table>
-<tr>
+<tbody>
+<tr valign="top">
 <td>
-
-```c
+{% highlight c %}
 int f() {
   int y = input();
   int x = 0;
   if (y < 1) {
+  # then
     x++;
+
   } else {
     x--;
   }
+  # end
   return x;
 }
-
-
-
-
-
-
-
-```
+{% endhighlight %}
 
 </td>
 <td>
-
-```sh
+{% highlight llvm %}
 entry:
   %call = call i32 (...) @input()
   %cmp = icmp slt i32 %call, 1
   br i1 %cmp, label %then, label %else
-
 then:                      ; preds = %entry
   %inc = add nsw i32 0, 1  ; equates to x++ to the left
   br label %if.end
-
 else:                      ; preds = % entry
   %dec = add nsw i32 0, -1 ; equates to x-- to the left
   br label %end
-
 end:                       ; preds = %else, %then
   %x = phi i32 [%inc, %then ], [%dec, %else ]
   ret i32 %x
-```
+{% endhighlight %}
 </td>
 </tr>
+</tbody>
 </table>
 
 Depending on the value of `y`, we either take the left branch and execute `x++`, or the right branch and execute `x--`. 
