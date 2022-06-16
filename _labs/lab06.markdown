@@ -283,10 +283,92 @@ Instructions that potentially divide by zero:
   %div = sdiv i32 1, 0
 ```
 
-##### Part 2
+
+##### Part 2 : Putting it all together - dataflow analysis
+
+Now that you have code to populate in and out maps and use them to check for divide-by-zero errors, your next step is to implement the chaotic iteration algorithm in function `doAnalysis`.
+
+First, review the dataflow analysis lecture content. 
+In particular, study the reaching definition analysis and the chaotic iteration algorithm.
+Informally, a dataflow analysis creates and populates an **IN** set and an **OUT** set for each node in the program’s control flow graph. 
+The *flowIn* and *flowOut* operations are repeated until the algorithm has reached a fixed point.
+ 
+More formally, the `doAnalysis` function should maintain a `WorkSet` that holds nodes that "need more work.”
+When the `WorkSet` is empty, the algorithm has reached a fixed point.
+For each instruction in the `WorkSet` your function do the following:
+
+  1. Perform the *flowIn* operation by joining all **OUT** sets of incoming flows and saving the result in the **IN** set for the current instruction. 
+  Here, you will use the entries from the `InMap` and `OutMap` that you populated in Part 1 as the **IN** and **OUT** sets.
+  2. Apply the `transfer` function that you implemented in Part 1 to populate the **OUT** set for the current instruction.
+  3. Perform the *flowOut* operation by updating the `WorkSet` accordingly. 
+  The current instruction’s successors should be added only if the **OUT** set was changed by the `transfer` function.
 
 
+We have sketched out the start of this process for you by initializing the WorkSet with each instruction in the input C program:
 
+```cpp
+void DivZeroAnalysis::doAnalysis(Function &F) {
+  SetVector<Instruction *> WorkSet;
+  for(inst_iterator I = inst_begin(F), E = inst_end(F); I != E; ++I) {
+    WorkSet.insert(&(*I));
+  }
+  // ...
+}
+```
+
+For this lab, we do not need to maintain an explicit control flow graph; LLVM already maintains one in its internals. 
+In order for you to focus on the dataflow portion of this assignment, we have provided two auxiliary functions `getSuccessors` and `getPredecessors` (defined in `lab6/include/DivZeroAnalysis.h`) that lookup and return the successors and predecessors for a given LLVM `Instruction`.
+
+First, uncomment the functions marked under **Part 2**, namely `doAnalysis`, `flowIn`, `flowOut`, `join` and `equal`. 
+After doing so, you will implement each part of the algorithm detailed above in the following steps:
+
+##### Step 1
+In `flowIn`, you will perform the first step of the reaching definitions analysis by taking the union of all **OUT** variables from all predecessors of `I`. 
+You may find the `getPredecessors` method in `lab6/include/DivZeroAnalysis.h` to be helpful here. 
+This should be done in the following function that is templated for you below:
+
+  * `void DivZeroAnalysis:flowIn(Instruction *I, Memory *In)`
+
+Given an `Instruction` `I` and its **IN** set of variables `Memory` `In`, you will need to union the **IN** with the **OUT** of every predecessor of `I`. 
+In order to take the union of two memory states, you will need to implement the join function templated below:
+
+  * `Memory* DivZeroAnalysis::join (Memory *M1, Memory *M2)`
+
+Within this function, you will also need to consider the `Domain` values when merging these `Memory` objects.
+Refer to the abstract domain on why this is necessary. 
+Recall that a `join` operation for combining two abstract values is defined in the `Domain` class.
+
+##### Step 2
+Call the `transfer` function that you implemented in Part 1 to populate the **OUT** set for the current instruction.
+
+##### Step 3
+In `flowOut`, you will determine whether or not a given instruction needs to be analyzed again. 
+This should be done in the following function that is templated for you below:
+
+  * `void DivZeroAnalysis::flowOut(Instruction *I, Memory *Pre, Memory *Post, SetVector<Instruction *> &WorkSet)`
+
+Given an `Instruction` `I`, you will analyze the *pre-transfer memory* `Pre` and the *post-transfer memory* `Post`. 
+If there exists a change between the memory values after the `transfer` is applied, you will need to submit the instruction `I` for additional analysis. 
+To determine if the memory has changed during the `transfer` function, you will implement the function `equal`:
+
+  * `bool DivZeroAnalysis::equal(Memory *M1, Memory * M2)`
+
+In this function, you will again consider the `Domain` values when determining whether two `Memory` objects are equal. 
+Recall that an `equal` operation to evaluate equality between two abstract values is defined in the `Domain` class.
+
+Lastly, in `flowOut` be sure that you update the `OutMap` for instruction `I` to include values in `Post`.
+
+##### Step 4
+Recall in Part 1, a reference `doAnalysis` could be used to verify your `check` and `transfer` implementations. 
+Now that you’re writing your own version of `doAnalysis`, you may need to rebuild the pass without the reference. 
+First, make sure that the `doAnalysis` function in `DivZeroAnalysis.cpp` is **not** commented out.
+Next, follow these steps to compile using your implementation:
+
+```sh
+/lab6/build$ rm CmakeCashe.txt
+/lab6/build$ cmake ..
+/lab6/build$ make
+```
 
 
 ### Submission
