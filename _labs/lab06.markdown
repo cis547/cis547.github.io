@@ -199,6 +199,7 @@ int f() {
 
 
 
+
 ```
 
 </td>
@@ -225,6 +226,66 @@ end:                       ; preds = %else, %then
 </td>
 </tr>
 </table>
+
+Depending on the value of `y`, we either take the left branch and execute `x++`, or the right branch and execute `x--`. 
+In the corresponding LLVM IR, this update on `x` is split into two variables `%inc` and `%dec`. 
+`%x` is assigned after the branch executes with the `phi` instruction; abstractly, `phi i32 [ %inc, %then ], [ %dec, %else ]` says assign `%inc` to `%x` if the then branch is taken, or `%dec` to `%x` if the else branch was taken.
+
+
+Here is a piece of sample code to help you address phi nodes, as the specifics are beyond this course; however, feel free to read up more on SSA if these kinds of compiler details pique your interest.
+
+```cpp
+Domain *evalPhiNode(PHINode *PHI, const Memory *Mem) {
+  Value *cv = PHI->hasConstantValue();
+  if(cv) {
+    // eval cv, manipulate Mem, return
+  }
+  unsigned int n = PHI->getNumIncomingValues();
+  Domain *joined = NULL;
+  for (unsigned int i = 0; i < n; i++) {
+    Domain *V = // eval PHI->getIncomingValue(i), manipulate Mem
+    if (!joined) {
+      joined = V;
+    }
+    joined = Domain::join(joined, V);
+  }
+  return joined;
+}
+```
+
+##### Step 5
+Implement a function `DivZeroAnalysis::check` to check if a specific instruction can incur a divide-by-zero error. 
+You should use `DivZeroAnalysis::InMap` to decide if there is an error or not.
+
+
+To test your `check` and `transfer` functions, we have provided a reference `doAnalysis` binary. 
+In part 2, you will need to implement the `doAnalysis` function yourself, but for now you may test with our binary solution in order to make sure the functions you have implemented thus far are working correctly.
+First, make sure that the skeleton `doAnalysis` function in `DivZeroAnalysis.cpp` is commented out. 
+Next, follow these steps to compile using the reference binary:
+
+```sh
+/lab6/build$ rm CmakeCache.txt
+/lab6/build$ cmake --DUSE_REFERENCE=ON ..
+/lab6/build$ make
+```
+
+As we demonstrated in the Setup section, run your analyzer on the test files using `opt`:
+
+```sh
+/lab6/test$ opt -load ../build/DivZeroPass.so -DivZero -disable-output simple0.opt.ll
+```
+
+If there is a divide-by-zero error in the program, your output should be as follows:
+
+```sh
+Running DivZero on Main
+Instructions that potentially divide by zero:
+  %div = sdiv i32 1, 0
+```
+
+##### Part 2
+
+
 
 
 
