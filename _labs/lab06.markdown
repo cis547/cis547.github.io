@@ -130,12 +130,95 @@ Note that an `Instruction` is also a `Value`.
 For example, consider the following LLVM program. 
 We have shown the abstract state, denoted **M**, before and after each instruction:
 
-|  ID  | Instruction                      |  Before Instruction    |  After Instruction    |
-| :--: | :------------------------------- | :--------------------- | :-------------------- |
-| I1   | `%x = call i32 (...) @input()`   | {}                     | {`%x`: T}               |
-| I2   | `%y = add i32 %x, 1`             | {%x: T}                | {`%x`: T, `%y`: `%x + 1`}   |
+|  ID    | Instruction                      |  Before Instruction    |  After Instruction        |
+| :----: | :------------------------------- | :--------------------- | :------------------------ |
+| `I1`   | `%x = call i32 (...) @input()`   | {}                     | {`%x`: T}                 |
+| `I2`   | `%y = add i32 %x, 1`             | {`%x`: T}              | {`%x`: T, `%y`: `%x + 1`} |
+
+In the first instruction `I1`, we assign an input integer to variable `%x`.
+In the abstract state, we use an abstract value **T** (also known as "top" or `MaybeZero`) since the value is unknown at compile time. 
+Instruction `I2` updates the abstract value of `%y` that is computed using the abstract add operation (denoted `+`) on the abstract value of `%x`.
+Note that, in the LLVM framework, the object for an assignment instruction (e.g., call, binary operator, icmp, etc.) also represents the variable it defines (i.e. its left-hand side). 
+Therefore you will use the objects for instructions `I1` and `I2` to refer to variables `%x` and `%y`, respectively, in your implementation. 
+For example, `variable(I1)` will refer to `%x`.
+
+##### Step 4
+Now that we understand how the pass performs the analysis and how we will store each abstract state, we can begin implementation. 
+First, you will implement a function `DivZeroAnalysis::transfer` to populate the `OutMap` for each instruction. 
+In particular, given an instruction and its incoming abstract state (`const Memory *In`), `transfer` should populate the outgoing abstract state (`Memory *NOut`).
+
+The `Instruction` class represents the parent class of all *types* of instructions. 
+There are [many subclasses][LLVM Instruction Class] of `Instruction`. 
+In order to populate the `OutMap`, each type of instruction should be handled differently.
+
+Recall for this lab you should handle:
+  1. [Binary Operators][LLVM BinOps] (add, mul, sub, etc)
+  2. [CastInst][LLVM CastInst]
+  3. [CmpInst][LLVM CmpInst] (icmp, eq, ne, slt, sgt, sge, etc)
+  4. user input via `getchar()` - recall from above that this is handled using `isInput()` from `lab6/include/DivZeroAnalysis.h`
+
+LLVM provides [several template functions][LLVM template functions] to check the type of an instruction.
+We will focus on `dyn_cast<>` for now.
+In this example, we check if the `Instruction` `I` is a BinaryOperator.
+
+```cpp
+if (BinaryOperator *BO = dyn_cast<BinaryOperator>(I)) {
+  // I is a BinaryOperator, do something
+}
+```
+At runtime, `dyn_cast` will return `I` *casted* to a `BinaryOperator` if possible, and null otherwise.
 
 
+__*Working with LLVM PHI Nodes.*__
+For optimization purposes, compilers often implement their intermediate representation in *static single assignment*(SSA) form and LLVM is no different.
+In SSA form, a variable is assigned and updated at exactly one code point.
+If a variable in the source code has multiple assignments, these assignments are split into seperate variables in the LLVM IR and then *merged* back together.
+We call this merge point a **phi node**.
+
+
+To illustrate phi nodes, consider the following code:
+
+<table>
+<tr>
+<td>
+
+```c
+int f() {
+  int y = input();
+  int x = 0;
+  if (y < 1) {
+    x++;
+  } else {
+    x--;
+  }
+  return x;
+}
+```
+
+</td>
+<td>
+
+```sh
+entry:
+  %call = call i32 (...) @input()
+  %cmp = icmp slt i32 %call, 1
+  br i1 %cmp, label %then, label %else
+
+then:                      ; preds = %entry
+  %inc = add nsw i32 0, 1  ; equates to x++ to the left
+  br label %if.end
+
+else:                      ; preds = % entry
+  %dec = add nsw i32 0, -1 ; equates to x-- to the left
+  br label %end
+
+end:                       ; preds = %else, %then
+  %x = phi i32 [%inc, %then ], [%dec, %else ]
+  ret i32 %x
+```
+</td>
+</tr>
+</table>
 
 
 
