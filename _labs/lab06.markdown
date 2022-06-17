@@ -176,7 +176,7 @@ At runtime, `dyn_cast` will return `I` *casted* to a `BinaryOperator` if possibl
 
 
 __*Working with LLVM PHI Nodes.*__
-For optimization purposes, compilers often implement their intermediate representation in *static single assignment*(SSA) form and LLVM is no different.
+For optimization purposes, compilers often implement their intermediate representation in *static single assignment*(SSA) form and LLVM IR is no different.
 In SSA form, a variable is assigned and updated at exactly one code point.
 If a variable in the source code has multiple assignments, these assignments are split into seperate variables in the LLVM IR and then *merged* back together.
 We call this merge point a **phi node**.
@@ -263,7 +263,7 @@ First, make sure that the skeleton `doAnalysis` function in `DivZeroAnalysis.cpp
 Next, follow these steps to compile using the reference binary:
 
 ```sh
-/lab6/build$ rm CmakeCache.txt
+/lab6/build$ rm CMakeCache.txt
 /lab6/build$ cmake --DUSE_REFERENCE=ON ..
 /lab6/build$ make
 ```
@@ -364,7 +364,7 @@ First, make sure that the `doAnalysis` function in `DivZeroAnalysis.cpp` is **no
 Next, follow these steps to compile using your implementation:
 
 ```sh
-/lab6/build$ rm CmakeCashe.txt
+/lab6/build$ rm CMakeCache.txt
 /lab6/build$ cmake ..
 /lab6/build$ make
 ```
