@@ -37,11 +37,11 @@ One thing to note is the use of the `-DUSE_REFERENCE=ON` flag: this lab comprise
 ```
 
 The first line (`clang`) generates vanilla LLVM IR code from the input C program `simple1.c`.
-the last line (`opt`) optimizes the vanilla code and generates an equivalent LLVM IR program that is simpler to process for the analyzer you will build in this lab; in particular, `-mem2reg` promotes every [AllocaInst][LLVM AllocaInst] to a register, allowing your analyzer to ignore handling pointers in this lab. 
+The last line (`opt`) optimizes the vanilla code and generates an equivalent LLVM IR program that is simpler to process for the analyzer you will build in this lab; in particular, `-mem2reg` promotes every [AllocaInst][LLVM AllocaInst] to a register, allowing your analyzer to ignore handling pointers in this lab. 
 You will extend this lab to handle pointers in Lab 7.
 
 **Step 3.** Similar to former labs, you will implement your analyzer as an LLVM pass, calld `DivZeroPass`.
-User the `opt` command to run this pass on the optimized LLVM IR program as follows:
+Use the `opt` command to run this pass on the optimized LLVM IR program as follows:
 
 ```sh
 /lab6/test$ opt -load ../build/DivZeroPass.so -DivZero -disable-output simple1.opt.ll
@@ -73,6 +73,8 @@ A full-fledged static analyzer has three components:
   1. an abstract domain
   2. abstract transfer functions for individual instructions
   3. combining analysis results of individual instructions to obtain analysis results for entire functions or programs.
+
+
 In this lab, we will focus only on implementing (part 2), and only for the limited subset of instructions as described above.
 More concretely, your task is to implement how the analysis evaluates different LLVM IR instructions on abstract values from a provided abstract domain.
 
