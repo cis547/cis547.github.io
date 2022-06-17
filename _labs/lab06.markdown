@@ -11,6 +11,24 @@ In this lab, you will build a static analyzer that detects potential divide-by-z
 You will accomplish this by writing an LLVM pass.
 Since developing a static analyzer for a full-fledged language like C is a non-trivial endeavor, this lab will be split up into two parts. 
 
+### Checklist
+---
+PART 1
+ 1. Implement "transfer" that computes the semantics of each instruction. This
+ means that you have to complete "eval" function, too.
+ 2. Implement "check" that checks if a given instruction is erroneous or not.
+
+PART 2
+ 1. Uncomment and implement "doAnalysis" that stores your results in "InMap"
+ and "OutMap".
+ 2. Uncomment and implement "flowIn" that joins the memory set of all incoming
+ flows.
+ 3. Uncomment and implement "flowOut" that flows the memory set to all
+ outgoing flows.
+ 4. Uncomment and implement "join" to union two Memory objects, accounting for
+ Domain value.
+ 5. Uncomment and implement "equal" to compare two Memory objects.
+
 ### Setup
 ---
 The skeleton code for Lab6 is located under `/cis547vm/lab6/`.
