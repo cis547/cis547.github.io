@@ -13,10 +13,11 @@ Since developing a static analyzer for a full-fledged language like C is a non-t
 
 ### Setup
 ---
-The skeleton code for Lab4 is located under `/cis547vm/lab6/`.
-We will frequently refer to the top level directory for Lab 6 as `lab6` when describing file locations for the lab.
+The skeleton code for Lab6 is located under `/cis547vm/lab6/`.
+We will frequently refer to the top level directory for Lab 6 as `lab6` when describing file locations for the lab. 
+Open the lab3 directory in VSCode following the Instructions from [Course VM document][Course VM].
 
-**Step 1.** Set up the lab by using the [Cmake][Cmake ref]/[Makefile][Make ref] pattern seen before.
+**Step 1.** The following commands set up the lab, using the [Cmake][Cmake ref]/[Makefile][Make ref] pattern seen before.
 
 ```sh
 /lab6$ mkdir build && cd build
@@ -24,7 +25,7 @@ We will frequently refer to the top level directory for Lab 6 as `lab6` when des
 /lab6/build$ make
 ```
 
-Among the files genereated, you should now see `DivZeroPass.so` in the `lab6/build` directory.
+Among the files generated, you should now see `DivZeroPass.so` in the `lab6/build` directory.
 `DivZeroPass.so` is built from `lab6/src/DivZeroAnalysis.cpp` which you will modify shortly.
 We are now ready to run our bare-bones lab on a sample input C program.
 One thing to note is the use of the `-DUSE_REFERENCE=ON` flag: this lab comprises two parts and this flag will allow you to focus on the features needed for Part 1 independently of Part 2.  
@@ -40,7 +41,7 @@ The first line (`clang`) generates vanilla LLVM IR code from the input C program
 The last line (`opt`) optimizes the vanilla code and generates an equivalent LLVM IR program that is simpler to process for the analyzer you will build in this lab; in particular, `-mem2reg` promotes every [AllocaInst][LLVM AllocaInst] to a register, allowing your analyzer to ignore handling pointers in this lab. 
 You will extend this lab to handle pointers in Lab 7.
 
-**Step 3.** Similar to former labs, you will implement your analyzer as an LLVM pass, calld `DivZeroPass`.
+**Step 3.** Similar to former labs, you will implement your analyzer as an LLVM pass, called `DivZeroPass`.
 Use the `opt` command to run this pass on the optimized LLVM IR program as follows:
 
 ```sh
@@ -59,7 +60,7 @@ Potential Instructions by DivZero:
 Input programs in this lab are assumed to have only sub-features of the C language as follows:
   * All values are integers (i.e. no floating points, pointers, structures, enums, arrays, etc).
     You can ignore other types of values.
-  * You should handle assignments, signed and unsigned arithmetic operations (+, -, *. /), and comparison operations (<, <=, >, >=, ==, !=).
+  * You should handle assignments, signed and unsigned arithmetic operations (+, -, *, /), and comparison operations (<, <=, >, >=, ==, !=).
   All the other instructions are considered to be nop.
   * Input programs can have if-statements and loops.
   * Assume that user inputs are only introduced via the `getchar` library function.
@@ -95,16 +96,19 @@ We have provided a framework to build your division-by-zero static analyzer. The
   Inspect `DivZeroAnalysis::runOnFunction` to understand how, at a high-level, the compiler pass performs the analysis:
   ```cpp
   bool DivZeroAnalysis::runOnFunction(Function &F) {
-      outs() << "Running " << getAnalysisName() << " on " << F.getName() << "\n";
-      for (inst_iterator I = inst_begin(F), E = inst_end(F); I != E; ++I) {
-        InMap[&(*I)] = new Memory;
-        OutMap[&(*I)] = new Memory;
-      }
-      PointerAnalysis *PA = new PointerAnalysis(F);
-      doAnalysis(F, PA);
-  
-      collectErrorInsts(F);
-      ...
+    outs() << "Running " << getAnalysisName() << " on " << F.getName() << "\n";
+
+    // Initializing InMap and OutMap.
+    for (inst_iterator Iter = inst_begin(F), E = inst_end(F); Iter != E; ++Iter) {
+      auto Inst = &(*Iter);
+      InMap[Inst] = new Memory;
+      OutMap[Inst] = new Memory;
+    }
+
+    // The chaotic iteration algorithm is implemented inside doAnalysis().
+    doAnalysis(F);
+
+    ...
   }
 ``` 
 The procedure `runOnFunction` is called for each function in the input C program that the compiler encounters during a pass.
@@ -378,7 +382,7 @@ submission.zip created successfully.
 
 Then upload the submission file to Gradescope.
 
-
+[Course VM]: https://cis.upenn.edu/~cis547/vm.doc
 [LLVM template functions]: http://releases.llvm.org/8.0.0/docs/ProgrammersManual.html#the-isa-cast-and-dyn-cast-templates
 [LLVM CmpInst]: https://llvm.org/doxygen/classllvm_1_1CmpInst.html
 [LLVM CastInst]: https://llvm.org/doxygen/classllvm_1_1CastInst.html
