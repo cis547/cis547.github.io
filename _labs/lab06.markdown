@@ -117,7 +117,7 @@ We have provided a framework to build your division-by-zero static analyzer. The
 %cmp = icmp slt i32 %x, %y
 ```
  
-  The Domain of `%cmp` is not determined by the values of `%x` and `%y` but by the evaluation of their individual Domains with respect to the comparison.
+  The Domain of `%cmp` is not determined by the runtime values of `%x` and `%y` but by the evaluation of their individual Domains with respect to the comparison instruction.
   So, more concretely, if the Domain of `%x` is `Domain::Zero` and the Domain of `%y` is `Domain::Zero`, since the less than comparison would be considered **[False When Equal][LLVM CmpInst]**, the resulting Domain would be `Domain::Zero`.
 
 
@@ -138,6 +138,7 @@ We have provided a framework to build your division-by-zero static analyzer. The
     // The chaotic iteration algorithm is implemented inside doAnalysis().
     doAnalysis(F);
 
+    // Check for Errors in the Function;
     ...
   }
 ``` 
@@ -204,6 +205,15 @@ if (BinaryOperator *BO = dyn_cast<BinaryOperator>(I)) {
 ```
 At runtime, `dyn_cast` will return `I` *casted* to a `BinaryOperator` if possible, and null otherwise.
 
+
+At this point, your `eval(...)` implementation will take the instruction and determine how this instructions Domain is affected by the operation.
+For example, 
+
+```llvm
+%add = add nsw i32 %x, %y
+```
+Assuming `%x` has a domain of `Domain::Zero` and `%y` has a domain of `Domain::NonZero`, the above operation will assign the `Domain::NonZero` domain to `%add`.
+In this way, the `DivZeroAnalysis:transfer` function updates the `OutMap` for the associated action of a given `Instruction`. 
 
 __*Working with LLVM PHI Nodes.*__
 For optimization purposes, compilers often implement their intermediate representation in *static single assignment*(SSA) form and LLVM IR is no different.
