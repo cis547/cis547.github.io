@@ -110,6 +110,17 @@ We have provided a framework to build your division-by-zero static analyzer. The
   These operations will perform an abstract evaluation __*without running the program*__.
   As described in the article, we have defined abstract operators for addition, subtraction, multiplication and division.
 
+  An important part of this analysis is realizing that you are never actually running the program.
+  This means that when you go to evaluate an instrution such as:
+
+```sh
+%cmp = icmp slt i32 %x, %y
+```
+ 
+  The Domain of `%cmp` is not determined by the values of `%x` and `%y` but by the evaluation of their individual Domains with respect to the comparison.
+  So, more concretely, if the Domain of `%x` is `Domain::Zero` and the Domain of `%y` is `Domain::Zero`, since the less than comparison would be considered **[False When Equal][LLVM CmpInst]**, the resulting Domain would be `Domain::Zero`.
+
+
 
 ##### Step 2
   Inspect `DivZeroAnalysis::runOnFunction` to understand how, at a high-level, the compiler pass performs the analysis:
