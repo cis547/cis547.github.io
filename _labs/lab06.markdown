@@ -107,7 +107,7 @@ We have provided a framework to build your division-by-zero static analyzer. The
 
   Once you have a good understanding of abstract domains, study the `Domain` class to understand the abstract domain that we have defined for you to use in this lab.
   The files `lab6/include/Domain.h` and `lab6/src/Domain.cpp` include the abstract values and operations on them.
-  These operations will perform an abstract evaluation *without running the program*.
+  These operations will perform an abstract evaluation __*without running the program*__.
   As described in the article, we have defined abstract operators for addition, subtraction, multiplication and division.
 
 ##### Step 2
