@@ -110,6 +110,7 @@ We have provided a framework to build your division-by-zero static analyzer. The
   These operations will perform an abstract evaluation __*without running the program*__.
   As described in the article, we have defined abstract operators for addition, subtraction, multiplication and division.
 
+
 ##### Step 2
   Inspect `DivZeroAnalysis::runOnFunction` to understand how, at a high-level, the compiler pass performs the analysis:
   ```cpp
@@ -131,7 +132,7 @@ We have provided a framework to build your division-by-zero static analyzer. The
 ``` 
 The procedure `runOnFunction` is called for each function in the input C program that the compiler encounters during a pass.
 Each instruction `I` is used as the key to initialize a new `Memory` object in the global `InMap` and `OutMap` hash maps.
-These maps are described in more detail in the next step, but for now you can think of them as storing hte abstract values of each variable before and after an instruction.
+These maps are described in more detail in the next step, but for now you can think of them as storing the abstract values of each variable before and after an instruction.
 For example, the abstract state might store facts like "*at the point before instruction i, the variable x is positive*".
 Since `InMap` and `OutMap` are global, feel free to use them directly in your code.  
 
