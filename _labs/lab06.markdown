@@ -103,28 +103,30 @@ We have provided a framework to build your division-by-zero static analyzer. The
 
 
 ##### Step 1
-  Refresh your understanding about program abstractions by reading the article on [A Menagerie of Program Abstractions][Menagerie Link]. 
 
-  Once you have a good understanding of abstract domains, study the `Domain` class to understand the abstract domain that we have defined for you to use in this lab.
-  The files `lab6/include/Domain.h` and `lab6/src/Domain.cpp` include the abstract values and operations on them.
-  These operations will perform an abstract evaluation __*without running the program*__.
-  As described in the article, we have defined abstract operators for addition, subtraction, multiplication and division.
+Refresh your understanding about program abstractions by reading the article on [A Menagerie of Program Abstractions][Menagerie Link]. 
 
-  An important part of this analysis is realizing that you are never actually running the program.
-  This means that when you go to evaluate an instrution such as:
+Once you have a good understanding of abstract domains, study the `Domain` class to understand the abstract domain that we have defined for you to use in this lab.
+The files `lab6/include/Domain.h` and `lab6/src/Domain.cpp` include the abstract values and operations on them.
+These operations will perform an abstract evaluation __*without running the program*__.
+As described in the article, we have defined abstract operators for addition, subtraction, multiplication and division.
 
-```sh
+An important part of this analysis is realizing that you are never actually running the program.
+This means that when you go to evaluate an instrution such as:
+
+```llvm
 %cmp = icmp slt i32 %x, %y
 ```
  
-  The Domain of `%cmp` is not determined by the runtime values of `%x` and `%y` but by the evaluation of their individual Domains with respect to the comparison instruction.
-  So, more concretely, if the Domain of `%x` is `Domain::Zero` and the Domain of `%y` is `Domain::Zero`, since the less than comparison would be considered **[False When Equal][LLVM CmpInst]**, the resulting Domain would be `Domain::Zero`.
+The Domain of `%cmp` is not determined by the runtime values of `%x` and `%y` but by the evaluation of their individual Domains with respect to the comparison instruction.
+So, more concretely, if the Domain of `%x` is `Domain::Zero` and the Domain of `%y` is `Domain::Zero`, since the less than comparison would be considered **[False When Equal][LLVM CmpInst]**, the resulting Domain would be `Domain::Zero`.
 
 
 
 ##### Step 2
-  Inspect `DivZeroAnalysis::runOnFunction` to understand how, at a high-level, the compiler pass performs the analysis:
-  ```cpp
+
+Inspect `DivZeroAnalysis::runOnFunction` to understand how, at a high-level, the compiler pass performs the analysis:
+```cpp
   bool DivZeroAnalysis::runOnFunction(Function &F) {
     outs() << "Running " << getAnalysisName() << " on " << F.getName() << "\n";
 
@@ -180,6 +182,7 @@ Therefore you will use the objects for instructions `I1` and `I2` to refer to va
 For example, `variable(I1)` will refer to `%x`.
 
 ##### Step 4
+
 Now that we understand how the pass performs the analysis and how we will store each abstract state, we can begin implementation. 
 First, you will implement a function `DivZeroAnalysis::transfer` to populate the `OutMap` for each instruction. 
 In particular, given an instruction and its incoming abstract state (`const Memory *In`), `transfer` should populate the outgoing abstract state (`Memory *NOut`).
@@ -212,7 +215,8 @@ For example,
 ```llvm
 %add = add nsw i32 %x, %y
 ```
-Assuming `%x` has a domain of `Domain::Zero` and `%y` has a domain of `Domain::NonZero`, the above operation will assign the `Domain::NonZero` domain to `%add`.
+Assuming `%x` has a domain of `Domain::Zero` and `%y` has a domain of `Domain::NonZero`, Since `%y` can take any value that is not zero (positive or negative) the resulting domain for `%add` will be determined by the addition of `Zero` to a `NonZero` value.
+Consequently, the domain for `%add` is determined to be `Domain::NonZero`.
 In this way, the `DivZeroAnalysis:transfer` function updates the `OutMap` for the associated action of a given `Instruction`. 
 
 __*Working with LLVM PHI Nodes.*__
@@ -293,6 +297,7 @@ Domain *evalPhiNode(PHINode *PHI, const Memory *Mem) {
 ```
 
 ##### Step 5
+
 Implement a function `DivZeroAnalysis::check` to check if a specific instruction can incur a divide-by-zero error. 
 You should use `DivZeroAnalysis::InMap` to decide if there is an error or not.
 
@@ -362,6 +367,7 @@ First, uncomment the functions marked under **Part 2**, namely `doAnalysis`, `fl
 After doing so, you will implement each part of the algorithm detailed above in the following steps:
 
 ##### Step 1
+
 In `flowIn`, you will perform the first step of the reaching definitions analysis by taking the union of all **OUT** variables from all predecessors of `I`. 
 You may find the `getPredecessors` method in `lab6/include/DivZeroAnalysis.h` to be helpful here. 
 This should be done in the following function that is templated for you below:
@@ -378,9 +384,11 @@ Refer to the abstract domain on why this is necessary.
 Recall that a `join` operation for combining two abstract values is defined in the `Domain` class.
 
 ##### Step 2
+
 Call the `transfer` function that you implemented in Part 1 to populate the **OUT** set for the current instruction.
 
 ##### Step 3
+
 In `flowOut`, you will determine whether or not a given instruction needs to be analyzed again. 
 This should be done in the following function that is templated for you below:
 
@@ -398,6 +406,7 @@ Recall that an `equal` operation to evaluate equality between two abstract value
 Lastly, in `flowOut` be sure that you update the `OutMap` for instruction `I` to include values in `Post`.
 
 ##### Step 4
+
 Recall in Part 1, a reference `doAnalysis` could be used to verify your `check` and `transfer` implementations. 
 Now that you’re writing your own version of `doAnalysis`, you may need to rebuild the pass without the reference. 
 First, make sure that the `doAnalysis` function in `DivZeroAnalysis.cpp` is **not** commented out.
