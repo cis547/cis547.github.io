@@ -420,7 +420,7 @@ Next, follow these steps to compile using your implementation:
 /lab6/build$ make
 ```
 
-Upon completing the above steps, your analysis will produce 2 output files.
+Upon completing the above steps, your analysis should produce 2 output files.
   1. `test.out`, where test is the program you are testing, is a condensed version of the results with just the instruction that has a potential divide-by-zero operation.
   2. `test.out.err` is a complete report including any instructions with potential divide-by-zero operations as well as the final state of the `InMap` and `OutMap` for each instruction being reviewed.
 
