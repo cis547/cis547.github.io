@@ -220,7 +220,9 @@ For example,
 ```
 Assuming `%x` has a domain of `Domain::Zero` and `%y` has a domain of `Domain::NonZero`, Since `%y` can take any value that is not zero (positive or negative) the resulting domain for `%add` will be determined by the addition of `Zero` to a `NonZero` value.
 Consequently, the domain for `%add` is determined to be `Domain::NonZero`.
-In this way, the `DivZeroAnalysis:transfer` function updates the `OutMap` for the associated action of a given `Instruction`. 
+In this way, the `DivZeroAnalysis:transfer` function updates the `OutMap` for the associated action of a given `Instruction`.
+
+The `eval` function for `PhiNode` has been implemented for you and offers an example of how to use the utility function `getOrExtract` as well as `Domain::join`.
 
 __*Working with LLVM PHI Nodes.*__
 For optimization purposes, compilers often implement their intermediate representation in *static single assignment*(SSA) form and LLVM IR is no different.
