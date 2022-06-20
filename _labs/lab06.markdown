@@ -350,7 +350,7 @@ For each instruction in the `WorkSet` your function do the following:
   The current instruction’s successors should be added only if the **OUT** set was changed by the `transfer` function.
 
 
-Here is an example of how the `WorkSet` needs to be loaded with instructions, feel free to use this code as part of your implementation:
+Here is an example of how the `WorkSet` needs to be loaded with instructions as well as introducing the [llvm::SetVector][LLVM SetVector] container, feel free to use this code as part of your implementation:
 
 ```cpp
 void DivZeroAnalysis::doAnalysis(Function &F) {
@@ -484,6 +484,7 @@ Then upload the submission file to Gradescope.
 [LLVM BinOps]: https://llvm.org/doxygen/classllvm_1_1BinaryOperator.html
 [LLVM Instruction class]: http://releases.llvm.org/8.0.0/docs/ProgrammersManual.html#the-instruction-class
 [LLVM AllocaInst]: https://llvm.org/doxygen/classllvm_1_1AllocaInst.html
+[LLVM SetVector]: https://llvm.org/doxygen/classllvm_1_1SetVector.html
 [CMake Ref]: https://en.wikipedia.org/wiki/CMake
 [Make Ref]: https://www.gnu.org/software/make/manual/html_node/Simple-Makefile.html#Simple-Makefile
 [Menagerie Link]: https://drive.google.com/open?id=1uhCWzfBxsaBQQ6NyMTY64Y6x_qRR1YQwiTpWT0_N2Xc
