@@ -14,20 +14,18 @@ Since developing a static analyzer for a full-fledged language like C is a non-t
 ### Checklist
 ---
 PART 1
- 1. Implement "transfer" that computes the semantics of each instruction. This
- means that you have to complete "eval" function, too.
- 2. Implement "check" that checks if a given instruction is erroneous or not.
-
+  1. Implement `DivZeroAnalysis::check` that checks if a given instruction is erroneous or not.
+  2. Implement `DivZeroAnalysis::transfer` found in the `Transfer.cpp` file in the `src` folder.
+    Part 1 requires the evaluation of `PhiNodes`, `BinaryOperators`, `CastInsts`, and `CmpInsts`.
+  3. Implement the `eval` functions in the `Transfer.cpp` file form the `src` directory.
+    The `eval` function for `PhiNode` has already been completed for you, so you will have the remaining 3 instruction types to evaluate.
+ 
 PART 2
- 1. Uncomment and implement "doAnalysis" that stores your results in "InMap"
- and "OutMap".
- 2. Uncomment and implement "flowIn" that joins the memory set of all incoming
- flows.
- 3. Uncomment and implement "flowOut" that flows the memory set to all
- outgoing flows.
- 4. Uncomment and implement "join" to union two Memory objects, accounting for
- Domain value.
- 5. Uncomment and implement "equal" to compare two Memory objects.
+  1. Implement "doAnalysis" that stores your results in "InMap" and "OutMap".
+  2. Implement "flowIn" that joins the memory set of all incoming flows.
+  3. Implement "flowOut" that flows the memory set to all outgoing flows.
+  4. Implement "join" to union two Memory objects, accounting for Domain value.
+  5. Implement "equal" to compare two Memory objects.
 
 ### Setup
 ---
@@ -95,11 +93,16 @@ A full-fledged static analyzer has three components:
 
 
 In this lab, we will focus only on implementing (part 2), and only for the limited subset of instructions as described above.
-More concretely, your task is to implement how the analysis evaluates different LLVM IR instructions on abstract values from a provided abstract domain.
+More concretely, your task is to implement how the analysis evaluates different LLVM IR instructions on abstract values from a provided abstract domain, defined in `Domain.h`.
 
 We have provided a framework to build your division-by-zero static analyzer. The framework is composed of files `Domain.cpp` and `DivZeroAnalysis.cpp` under `lab6/src/`.
 
-##### **Part 1: Transfer Functions**
+Additionally, you have been provided with a `Utils.cpp` file in the `src` directory.
+ 1. `variable` takes a `Value *` and returns string.
+     This string is used as the key in the Memory maps stored in `InMap` and `OutMap`.
+ 2.  `getOrExtract` takes a `Memory *` and a `Value *` and returns a pointer to the `Domain` for the given `Value` or a default `Domain`.
+
+##### **Part 1: The Check and Transfer Functions**
 
 
 ##### Step 1
@@ -184,7 +187,12 @@ For example, `variable(I1)` will refer to `%x`.
 ##### Step 4
 
 Now that we understand how the pass performs the analysis and how we will store each abstract state, we can begin implementation. 
-First, you will implement a function `DivZeroAnalysis::transfer` to populate the `OutMap` for each instruction. 
+
+First, you can complete the `DivZeroAnalysis::check` function found in the `DivZeroAnalysis.cpp` file in the `src` directory.
+This function checks an `Instruction` to determine if a division-by-zero is **possible**.
+Any Instruction that is a **signed** or **unsigned** division instruction with a divisor whose `Domain` is either `Domain::Zero` or `Domain::MaybeZero` would be considered a potential divide-by-zero.
+
+Second, you will implement a function `DivZeroAnalysis::transfer`, found in the `Transfer.cpp` file in the `src` directory, to populate the `OutMap` for each instruction. 
 In particular, given an instruction and its incoming abstract state (`const Memory *In`), `transfer` should populate the outgoing abstract state (`Memory *NOut`).
 
 The `Instruction` class represents the parent class of all *types* of instructions. 
@@ -207,7 +215,6 @@ if (BinaryOperator *BO = dyn_cast<BinaryOperator>(I)) {
 }
 ```
 At runtime, `dyn_cast` will return `I` *casted* to a `BinaryOperator` if possible, and null otherwise.
-
 
 At this point, your `eval(...)` implementation will take the instruction and determine how this instructions Domain is affected by the operation.
 For example, 
