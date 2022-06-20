@@ -188,12 +188,8 @@ For example, `variable(I1)` will refer to `%x`.
 
 Now that we understand how the pass performs the analysis and how we will store each abstract state, we can begin implementation. 
 
-First, you can complete the `DivZeroAnalysis::check` function found in the `DivZeroAnalysis.cpp` file in the `src` directory.
-This function checks an `Instruction` to determine if a division-by-zero is **possible**.
-Any Instruction that is a **signed** or **unsigned** division instruction with a divisor whose `Domain` is either `Domain::Zero` or `Domain::MaybeZero` would be considered a potential divide-by-zero.
-
-Second, you will implement a function `DivZeroAnalysis::transfer`, found in the `Transfer.cpp` file in the `src` directory, to populate the `OutMap` for each instruction. 
-In particular, given an instruction and its incoming abstract state (`const Memory *In`), `transfer` should populate the outgoing abstract state (`Memory *NOut`).
+First, you will implement a function `DivZeroAnalysis::transfer`, found in the `Transfer.cpp` file in the `src` directory, to populate the `OutMap` for each instruction. 
+In particular, given an instruction and its incoming abstract state (`const Memory *In`), `transfer` should populate the outgoing abstract state (`Memory *NOut`) which is derived from the appropriate implementation of `eval`.
 
 The `Instruction` class represents the parent class of all *types* of instructions. 
 There are [many subclasses][LLVM Instruction Class] of `Instruction`. 
@@ -285,27 +281,26 @@ In the corresponding LLVM IR, this update on `x` is split into two variables `%i
 Here is a piece of sample code to help you address phi nodes, as the specifics are beyond this course; however, feel free to read up more on SSA if these kinds of compiler details pique your interest.
 
 ```cpp
-Domain *evalPhiNode(PHINode *PHI, const Memory *Mem) {
-  Value *cv = PHI->hasConstantValue();
-  if(cv) {
-    // eval cv, manipulate Mem, return
+Domain *eval(PHINode *Phi, const Memory *InMem) {
+  if (auto ConstantVal = Phi->hasConstantValue()) {
+    return new Domain(extractFromValue(ConstantVal));
   }
-  unsigned int n = PHI->getNumIncomingValues();
-  Domain *joined = NULL;
-  for (unsigned int i = 0; i < n; i++) {
-    Domain *V = // eval PHI->getIncomingValue(i), manipulate Mem
-    if (!joined) {
-      joined = V;
-    }
-    joined = Domain::join(joined, V);
+
+  Domain *Joined = new Domain(Domain::Uninit);
+
+  for (unsigned int i = 0; i < Phi->getNumIncomingValues(); i++) {
+    auto Dom = getOrExtract(InMem, Phi->getIncomingValue(i));
+    Joined = Domain::join(Joined, Dom);
   }
-  return joined;
+  return Joined;
 }
 ```
 
 ##### Step 5
 
-Implement a function `DivZeroAnalysis::check` to check if a specific instruction can incur a divide-by-zero error. 
+Implement the `DivZeroAnalysis::check` function found in the `DivZeroAnalysis.cpp` file in the `src` directory.
+This function checks an `Instruction` to determine if a division-by-zero is **possible**.
+Any Instruction that is a **signed** or **unsigned** division instruction with a divisor whose `Domain` is either `Domain::Zero` or `Domain::MaybeZero` would be considered a potential divide-by-zero.
 You should use `DivZeroAnalysis::InMap` to decide if there is an error or not.
 
 
@@ -337,7 +332,7 @@ Instructions that potentially divide by zero:
 
 ##### Part 2 : Putting it all together - dataflow analysis
 
-Now that you have code to populate in and out maps and use them to check for divide-by-zero errors, your next step is to implement the chaotic iteration algorithm in function `doAnalysis`.
+Now that you have code to populate in and out maps and use them to check for divide-by-zero errors, your next step is to implement the chaotic iteration algorithm in function `doAnalysis` found in the `ChaoticIteration.cpp` file in the `src` directory.
 
 First, review the dataflow analysis lecture content. 
 In particular, study the reaching definition analysis and the chaotic iteration algorithm.
@@ -355,7 +350,7 @@ For each instruction in the `WorkSet` your function do the following:
   The current instruction’s successors should be added only if the **OUT** set was changed by the `transfer` function.
 
 
-We have sketched out the start of this process for you by initializing the WorkSet with each instruction in the input C program:
+Here is an example of how the `WorkSet` needs to be loaded with instructions, feel free to use this code as part of your implementation:
 
 ```cpp
 void DivZeroAnalysis::doAnalysis(Function &F) {
@@ -423,6 +418,50 @@ Next, follow these steps to compile using your implementation:
 /lab6/build$ rm CMakeCache.txt
 /lab6/build$ cmake ..
 /lab6/build$ make
+```
+
+Upon completing the above steps, your analysis will produce 2 output files.
+  1. `test.out`, where test is the program you are testing, is a condensed version of the results with just the instruction that has a potential divide-by-zero operation.
+  2. `test.out.err` is a complete report including any instructions with potential divide-by-zero operations as well as the final state of the `InMap` and `OutMap` for each instruction being reviewed.
+
+Your output will be formatted like this:
+
+```
+Dataflow Analysis Results:
+Instruction:   %cmp = icmp ne i32 0, 0
+In set: 
+
+Out set: 
+    [ %cmp     |-> Zero      ]
+
+Instruction:   br i1 %cmp, label %if.then, label %if.end
+In set: 
+    [ %cmp     |-> Zero      ]
+Out set: 
+    [ %cmp     |-> Zero      ]
+
+Instruction:   %div = sdiv i32 1, 0
+In set: 
+    [ %cmp     |-> Zero      ]
+Out set: 
+    [ %cmp     |-> Zero      ]
+    [ %div     |-> Uninit    ]
+
+Instruction:   br label %if.end
+In set: 
+    [ %cmp     |-> Zero      ]
+    [ %div     |-> Uninit    ]
+Out set: 
+    [ %cmp     |-> Zero      ]
+    [ %div     |-> Uninit    ]
+
+Instruction:   ret i32 0
+In set: 
+    [ %cmp     |-> Zero      ]
+    [ %div     |-> Uninit    ]
+Out set: 
+    [ %cmp     |-> Zero      ]
+    [ %div     |-> Uninit    ]
 ```
 
 
