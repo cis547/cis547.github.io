@@ -11,21 +11,19 @@ In this lab, you will build a static analyzer that detects potential divide-by-z
 You will accomplish this by writing an LLVM pass.
 Since developing a static analyzer for a full-fledged language like C is a non-trivial endeavor, this lab will be split up into two parts. 
 
-### Checklist
+##### PART 1
 
-PART 1
-  1. Implement `DivZeroAnalysis::check` that checks if a given instruction is erroneous or not.
-  2. Implement `DivZeroAnalysis::transfer` found in the `Transfer.cpp` file in the `src` folder.
-    Part 1 requires the evaluation of `PhiNodes`, `BinaryOperators`, `CastInsts`, and `CmpInsts`.
-  3. Implement the `eval` functions in the `Transfer.cpp` file form the `src` directory.
-    The `eval` function for `PhiNode` has already been completed for you, so you will have the remaining 3 instruction types to evaluate.
+1. Implement `DivZeroAnalysis::check` that checks if a given instruction is could lead to an error.
+2. Implement `DivZeroAnalysis::transfer` found in the `src/Transfer.cpp`.
+3. Implement the `eval` functions in the `src/Transfer.cpp` by completing the provided function stubs.
  
-PART 2
-  1. Implement "doAnalysis" that stores your results in "InMap" and "OutMap".
-  2. Implement "flowIn" that joins the memory set of all incoming flows.
-  3. Implement "flowOut" that flows the memory set to all outgoing flows.
-  4. Implement "join" to union two Memory objects, accounting for Domain value.
-  5. Implement "equal" to compare two Memory objects.
+##### PART 2
+
+1. Implement `doAnalysis` that stores your results in `InMap` and `OutMap`.
+2. Implement `flowIn` that joins the memory set of all incoming flows.
+3. Implement `flowOut` that flows the memory set to all outgoing flows.
+4. Implement `join` to union two Memory objects, accounting for Domain value.
+5. Implement `equal` to compare two Memory objects.
 
 ### Setup
 
