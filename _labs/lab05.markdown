@@ -19,7 +19,7 @@ and guide debugging effort.
 
 ### Setup
 
-The skeleton code for Lab 5 is located under `/cis547vm/lab5/`.
+The skeleton code for Lab 5 is located under `cis547vm/lab5/`.
 We will frequently refer to the top level directory for Lab 5 as `lab5`
 when describing file locations for the lab.
 Open the `lab5` directory in VSCode following the Instructions
