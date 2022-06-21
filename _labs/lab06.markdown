@@ -105,20 +105,31 @@ We assume that the input programs for this lab may only use the following subset
 ### Lab Instructions
 
 A full-fledged static analyzer has three components: 
-1. an abstract domain
-2. abstract transfer functions for individual instructions
-3. combining analysis results of individual instructions to obtain analysis results for entire functions or programs.
+1. An abstract domain
+2. Transfer functions for individual instructions that evaluates the instruction using abstract domains.
+3. Combining analysis results of individual instructions to obtain analysis results for entire functions or programs.
 
 
-In this lab, we will focus only on implementing (part 2), and only for the limited subset of instructions as described above.
-More concretely, your task is to implement how the analysis evaluates different LLVM IR instructions on abstract values from a provided abstract domain, defined in `Domain.h`.
+In part 1 of the lab, we will focus only on implementing item 2,
+and only for the limited subset of instructions as described above.
 
-We have provided a framework to build your division-by-zero static analyzer. The framework is composed of files `Domain.cpp` and `DivZeroAnalysis.cpp` under `lab6/src/`.
+More concretely, your task is to implement how the analysis evaluates different LLVM IR instructions
+on abstract values from a provided abstract domain, defined in `Domain.h`.
 
-Additionally, you have been provided with a `Utils.cpp` file in the `src` directory.
-1. `variable` takes a `Value *` and returns string.
+In part 2 of the lab, we will focus on implementing item 3, to combine the results of individual
+transfer functions to get an intra-procedural, flow-insensitive Divide-by-Zero analysis.
+Later on in Lab 7 you will further extend on item 3 to use the results of Pointer Analysis.
+
+We have provided a framework to build your division-by-zero static analyzer.
+The framework is composed of files `Domain.cpp`, `Transfer.cpp`, `ChaoticIteration.cpp` and `DivZeroAnalysis.cpp` under `lab6/src/`.
+
+Additionally, you have been provided with a `src/Utils.cpp` it defines a few useful functions:
+
++ `variable` takes a `Value` and returns string.
     This string is used as the key in the Memory maps stored in `InMap` and `OutMap`.
-2.  `getOrExtract` takes a `Memory *` and a `Value *` and returns a pointer to the `Domain` for the given `Value` or a default `Domain`.
++ `getOrExtract` takes a `Memory` and a `Value` and returns the `Domain` corresponding to `Value` in `Memory`, if not found then
+    it tries to extract the `Domain` from the instruction itself.
++ `printMemory`, `printInstructionTransfer` and `printMap` will print various debug information to `stderr`.
 
 ##### **Part 1: The Check and Transfer Functions**
 
