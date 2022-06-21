@@ -6,13 +6,13 @@ synopsis: Building a "division-by-zero" static analysis for a subset of the C la
 ---
 
 ### Objective 
----
+
 In this lab, you will build a static analyzer that detects potential divide-by-zero erros in C programs at compile-time.
 You will accomplish this by writing an LLVM pass.
 Since developing a static analyzer for a full-fledged language like C is a non-trivial endeavor, this lab will be split up into two parts. 
 
 ### Checklist
----
+
 PART 1
   1. Implement `DivZeroAnalysis::check` that checks if a given instruction is erroneous or not.
   2. Implement `DivZeroAnalysis::transfer` found in the `Transfer.cpp` file in the `src` folder.
@@ -28,7 +28,7 @@ PART 2
   5. Implement "equal" to compare two Memory objects.
 
 ### Setup
----
+
 The skeleton code for Lab6 is located under `/cis547vm/lab6/`.
 We will frequently refer to the top level directory for Lab 6 as `lab6` when describing file locations for the lab. 
 Open the lab3 directory in VSCode following the Instructions from [Course VM document][Course VM].
@@ -72,7 +72,7 @@ Potential Instructions by DivZero:
 ```
 
 ### Format of Input Programs
----
+
 Input programs in this lab are assumed to have only sub-features of the C language as follows:
   * All values are integers (i.e. no floating points, pointers, structures, enums, arrays, etc).
     You can ignore other types of values.
@@ -85,7 +85,7 @@ Input programs in this lab are assumed to have only sub-features of the C langua
 
 
 ### Lab Instructions
----
+
 A full-fledged static analyzer has three components: 
   1. an abstract domain
   2. abstract transfer functions for individual instructions
@@ -468,7 +468,6 @@ Out set:
 
 
 ### Submission
----
 
 Once you are done with the lab, you can create a `submission.zip` file by using the following command:
 ```sh
