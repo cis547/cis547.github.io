@@ -91,22 +91,22 @@ The debug output of your program (printed using `errs()`) will be available in t
 ### Format of Input Programs
 
 Input programs in this lab are assumed to have only sub-features of the C language as follows:
-  * All values are integers (i.e. no floating points, pointers, structures, enums, arrays, etc).
-    You can ignore other types of values.
-  * You should handle assignments, signed and unsigned arithmetic operations (+, -, *, /), and comparison operations (<, <=, >, >=, ==, !=).
-  All the other instructions are considered to be nop.
-  * Input programs can have if-statements and loops.
-  * Assume that user inputs are only introduced via the `getchar` library function.
-  The skeleton code provides an auxiliary function `isInput` that checks whether a given instruction is a function call to `getchar`.
-  You can ignore other call instructions to other functions.  
+* All values are integers (i.e. no floating points, pointers, structures, enums, arrays, etc).
+  You can ignore other types of values.
+* You should handle assignments, signed and unsigned arithmetic operations (+, -, *, /), and comparison operations (<, <=, >, >=, ==, !=).
+All the other instructions are considered to be nop.
+* Input programs can have if-statements and loops.
+* Assume that user inputs are only introduced via the `getchar` library function.
+The skeleton code provides an auxiliary function `isInput` that checks whether a given instruction is a function call to `getchar`.
+You can ignore other call instructions to other functions.
 
 
 ### Lab Instructions
 
 A full-fledged static analyzer has three components: 
-  1. an abstract domain
-  2. abstract transfer functions for individual instructions
-  3. combining analysis results of individual instructions to obtain analysis results for entire functions or programs.
+1. an abstract domain
+2. abstract transfer functions for individual instructions
+3. combining analysis results of individual instructions to obtain analysis results for entire functions or programs.
 
 
 In this lab, we will focus only on implementing (part 2), and only for the limited subset of instructions as described above.
@@ -115,9 +115,9 @@ More concretely, your task is to implement how the analysis evaluates different 
 We have provided a framework to build your division-by-zero static analyzer. The framework is composed of files `Domain.cpp` and `DivZeroAnalysis.cpp` under `lab6/src/`.
 
 Additionally, you have been provided with a `Utils.cpp` file in the `src` directory.
- 1. `variable` takes a `Value *` and returns string.
-     This string is used as the key in the Memory maps stored in `InMap` and `OutMap`.
- 2.  `getOrExtract` takes a `Memory *` and a `Value *` and returns a pointer to the `Domain` for the given `Value` or a default `Domain`.
+1. `variable` takes a `Value *` and returns string.
+    This string is used as the key in the Memory maps stored in `InMap` and `OutMap`.
+2.  `getOrExtract` takes a `Memory *` and a `Value *` and returns a pointer to the `Domain` for the given `Value` or a default `Domain`.
 
 ##### **Part 1: The Check and Transfer Functions**
 
@@ -147,22 +147,22 @@ So, more concretely, if the Domain of `%x` is `Domain::Zero` and the Domain of `
 
 Inspect `DivZeroAnalysis::runOnFunction` to understand how, at a high-level, the compiler pass performs the analysis:
 ```cpp
-  bool DivZeroAnalysis::runOnFunction(Function &F) {
-    outs() << "Running " << getAnalysisName() << " on " << F.getName() << "\n";
+bool DivZeroAnalysis::runOnFunction(Function &F) {
+  outs() << "Running " << getAnalysisName() << " on " << F.getName() << "\n";
 
-    // Initializing InMap and OutMap.
-    for (inst_iterator Iter = inst_begin(F), E = inst_end(F); Iter != E; ++Iter) {
-      auto Inst = &(*Iter);
-      InMap[Inst] = new Memory;
-      OutMap[Inst] = new Memory;
-    }
-
-    // The chaotic iteration algorithm is implemented inside doAnalysis().
-    doAnalysis(F);
-
-    // Check for Errors in the Function;
-    ...
+  // Initializing InMap and OutMap.
+  for (inst_iterator Iter = inst_begin(F), E = inst_end(F); Iter != E; ++Iter) {
+    auto Inst = &(*Iter);
+    InMap[Inst] = new Memory;
+    OutMap[Inst] = new Memory;
   }
+
+  // The chaotic iteration algorithm is implemented inside doAnalysis().
+  doAnalysis(F);
+
+  // Check for Errors in the Function;
+  ...
+}
 ``` 
 The procedure `runOnFunction` is called for each function in the input C program that the compiler encounters during a pass.
 Each instruction `I` is used as the key to initialize a new `Memory` object in the global `InMap` and `OutMap` hash maps.
@@ -175,9 +175,9 @@ Once the **In** and **Out** Maps are initialized, `runOnFunction` calls `doAnaly
 For Part 1, you can assume that it simply calls `transfer` using the appropriate `InMap` and `OutMap` maps.
 
 So, at a high level, `runOnFunction` will:
-  1. Initialize the **In** and **Out** maps
-  2. Fill them using a chaotic iteration algorithm
-  3. Find potential divide by zero errors by using the `InMap` entries for each divide instruction to check whether the divisor may be zero  
+1. Initialize the **In** and **Out** maps.
+2. Fill them using a chaotic iteration algorithm.
+3. Find potential divide by zero errors by using the `InMap` entries for each divide instruction to check whether the divisor may be zero.
 
 ##### Step 3
 
@@ -213,10 +213,10 @@ There are [many subclasses][LLVM Instruction Class] of `Instruction`.
 In order to populate the `OutMap`, each type of instruction should be handled differently.
 
 Recall for this lab you should handle:
-  1. [Binary Operators][LLVM BinOps] (add, mul, sub, etc)
-  2. [CastInst][LLVM CastInst]
-  3. [CmpInst][LLVM CmpInst] (icmp, eq, ne, slt, sgt, sge, etc)
-  4. user input via `getchar()` - recall from above that this is handled using `isInput()` from `lab6/include/DivZeroAnalysis.h`
+1. [Binary Operators][LLVM BinOps] (add, mul, sub, etc)
+2. [CastInst][LLVM CastInst]
+3. [CmpInst][LLVM CmpInst] (icmp, eq, ne, slt, sgt, sge, etc)
+4. user input via `getchar()` - recall from above that this is handled using `isInput()` from `lab6/include/DivZeroAnalysis.h`
 
 LLVM provides [several template functions][LLVM template functions] to check the type of an instruction.
 We will focus on `dyn_cast<>` for now.
@@ -362,11 +362,11 @@ More formally, the `doAnalysis` function should maintain a `WorkSet` that holds 
 When the `WorkSet` is empty, the algorithm has reached a fixed point.
 For each instruction in the `WorkSet` your function do the following:
 
-  1. Perform the *flowIn* operation by joining all **OUT** sets of incoming flows and saving the result in the **IN** set for the current instruction. 
-  Here, you will use the entries from the `InMap` and `OutMap` that you populated in Part 1 as the **IN** and **OUT** sets.
-  2. Apply the `transfer` function that you implemented in Part 1 to populate the **OUT** set for the current instruction.
-  3. Perform the *flowOut* operation by updating the `WorkSet` accordingly. 
-  The current instruction’s successors should be added only if the **OUT** set was changed by the `transfer` function.
+1. Perform the *flowIn* operation by joining all **OUT** sets of incoming flows and saving the result in the **IN** set for the current instruction.
+Here, you will use the entries from the `InMap` and `OutMap` that you populated in Part 1 as the **IN** and **OUT** sets.
+2. Apply the `transfer` function that you implemented in Part 1 to populate the **OUT** set for the current instruction.
+3. Perform the *flowOut* operation by updating the `WorkSet` accordingly.
+The current instruction’s successors should be added only if the **OUT** set was changed by the `transfer` function.
 
 
 Here is an example of how the `WorkSet` needs to be loaded with instructions as well as introducing the [llvm::SetVector][LLVM SetVector] container, feel free to use this code as part of your implementation:
@@ -393,12 +393,12 @@ In `flowIn`, you will perform the first step of the reaching definitions analysi
 You may find the `getPredecessors` method in `lab6/include/DivZeroAnalysis.h` to be helpful here. 
 This should be done in the following function that is templated for you below:
 
-  * `void DivZeroAnalysis:flowIn(Instruction *I, Memory *In)`
+* `void DivZeroAnalysis:flowIn(Instruction *I, Memory *In)`
 
 Given an `Instruction` `I` and its **IN** set of variables `Memory` `In`, you will need to union the **IN** with the **OUT** of every predecessor of `I`. 
 In order to take the union of two memory states, you will need to implement the join function templated below:
 
-  * `Memory* DivZeroAnalysis::join (Memory *M1, Memory *M2)`
+* `Memory* DivZeroAnalysis::join (Memory *M1, Memory *M2)`
 
 Within this function, you will also need to consider the `Domain` values when merging these `Memory` objects.
 Refer to the abstract domain on why this is necessary. 
@@ -413,13 +413,13 @@ Call the `transfer` function that you implemented in Part 1 to populate the **OU
 In `flowOut`, you will determine whether or not a given instruction needs to be analyzed again. 
 This should be done in the following function that is templated for you below:
 
-  * `void DivZeroAnalysis::flowOut(Instruction *I, Memory *Pre, Memory *Post, SetVector<Instruction *> &WorkSet)`
+* `void DivZeroAnalysis::flowOut(Instruction *I, Memory *Pre, Memory *Post, SetVector<Instruction *> &WorkSet)`
 
 Given an `Instruction` `I`, you will analyze the *pre-transfer memory* `Pre` and the *post-transfer memory* `Post`. 
 If there exists a change between the memory values after the `transfer` is applied, you will need to submit the instruction `I` for additional analysis. 
 To determine if the memory has changed during the `transfer` function, you will implement the function `equal`:
 
-  * `bool DivZeroAnalysis::equal(Memory *M1, Memory * M2)`
+* `bool DivZeroAnalysis::equal(Memory *M1, Memory * M2)`
 
 In this function, you will again consider the `Domain` values when determining whether two `Memory` objects are equal. 
 Recall that an `equal` operation to evaluate equality between two abstract values is defined in the `Domain` class.
@@ -440,8 +440,8 @@ Next, follow these steps to compile using your implementation:
 ```
 
 Upon completing the above steps, your analysis should produce 2 output files.
-  1. `test.out`, where test is the program you are testing, is a condensed version of the results with just the instruction that has a potential divide-by-zero operation.
-  2. `test.err` is a complete report including any instructions with potential divide-by-zero operations as well as the final state of the `InMap` and `OutMap` for each instruction being reviewed.
+1. `test.out`, where test is the program you are testing, is a condensed version of the results with just the instruction that has a potential divide-by-zero operation.
+2. `test.err` is a complete report including any instructions with potential divide-by-zero operations as well as the final state of the `InMap` and `OutMap` for each instruction being reviewed.
 
 Your output will be formatted like this:
 
