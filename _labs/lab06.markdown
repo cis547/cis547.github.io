@@ -19,19 +19,26 @@ Since developing a static analyzer for a full-fledged language like C is a non-t
  
 ##### PART 2
 
-1. Implement `doAnalysis` that stores your results in `InMap` and `OutMap`.
-2. Implement `flowIn` that joins the memory set of all incoming flows.
-3. Implement `flowOut` that flows the memory set to all outgoing flows.
-4. Implement `join` to union two Memory objects, accounting for Domain value.
-5. Implement `equal` to compare two Memory objects.
+For the second part of this lab you will implement various function in `src/ChaoticIteration`.
+
+1. Implement `doAnalysis` function that performs the chaotic iteration algorithm for your analysis.
+2. Implement `flowIn` function that joins the out memory of all incoming flows.
+3. Implement `flowOut` function that updates out memory and queues all outgoing flows to `WorkSet` as necessary.
+4. Implement `join` function that takes the union of two Memory objects, accounting for Domain values.
+5. Implement `equal` function that checks if two Memory objects are equal, accounting for Domain values.
 
 ### Setup
 
-The skeleton code for Lab6 is located under `/cis547vm/lab6/`.
+The skeleton code for Lab6 is located under `cis547vm/lab6/`.
 We will frequently refer to the top level directory for Lab 6 as `lab6` when describing file locations for the lab. 
 Open the lab3 directory in VSCode following the Instructions from [Course VM document][Course VM].
 
-**Step 1.** The following commands set up the lab, using the [Cmake][Cmake ref]/[Makefile][Make ref] pattern seen before.
+##### Step 1.
+
+The following commands set up the lab, using the [Cmake][Cmake ref]/[Makefile][Make ref] pattern seen before.
+
+One thing to note is the use of the `-DUSE_REFERENCE=ON` flag:
+this lab comprises two parts and this flag will allow you to focus on the features needed for Part 1 independently of Part 2.
 
 ```sh
 /lab6$ mkdir build && cd build
@@ -40,34 +47,46 @@ Open the lab3 directory in VSCode following the Instructions from [Course VM doc
 ```
 
 Among the files generated, you should now see `DivZeroPass.so` in the `lab6/build` directory.
-`DivZeroPass.so` is built from `lab6/src/DivZeroAnalysis.cpp` which you will modify shortly.
+
 We are now ready to run our bare-bones lab on a sample input C program.
-One thing to note is the use of the `-DUSE_REFERENCE=ON` flag: this lab comprises two parts and this flag will allow you to focus on the features needed for Part 1 independently of Part 2.  
 
-**Step 2.** Before running the pass, the LLVM IR code must be generated:
+##### Step 2
+
+Before running the pass on a test program, we need to generate the LLVM IR code for it.
+
+The `clang` command generates LLVM IR program from the input C program `test03.c`.
+
+The `opt` command optimizes that LLVM IR program and generates an equivalent LLVM IR program
+that is simpler to process for the analyzer you will be building in this lab.
+In particular, the `-mem2reg` option promotes every [AllocaInst][LLVM AllocaInst] to a register,
+allowing your analyzer to ignore handling pointers in this lab.
+
+Later in [Lab 7][lab07] you will extend this lab to handle pointers, and we will stop using `-mem2reg`.
 
 ```sh
-/lab6/test$ clang -emit-llvm -S -fno-discard-value-names -Xclang -disable-O0-optnone -c simple1.c
-/lab6/test$ opt -mem2reg -S simple1.ll -o simple1.opt.ll
+/lab6/test$ clang -emit-llvm -S -fno-discard-value-names -Xclang -disable-O0-optnone -c -o test03.ll test03.c
+/lab6/test$ opt -mem2reg -S test03.ll -o test03.opt.ll
 ```
 
-The first line (`clang`) generates vanilla LLVM IR code from the input C program `simple1.c`.
-The last line (`opt`) optimizes the vanilla code and generates an equivalent LLVM IR program that is simpler to process for the analyzer you will build in this lab; in particular, `-mem2reg` promotes every [AllocaInst][LLVM AllocaInst] to a register, allowing your analyzer to ignore handling pointers in this lab. 
-You will extend this lab to handle pointers in Lab 7.
+##### Step 3
 
-**Step 3.** Similar to former labs, you will implement your analyzer as an LLVM pass, called `DivZeroPass`.
-Use the `opt` command to run this pass on the optimized LLVM IR program as follows:
+Similar to former labs, you will implement your analyzer as an LLVM pass, called `DivZeroPass`.
+
+Then you will use the `opt` command to run this pass on the optimized LLVM IR program as follows:
 
 ```sh
-/lab6/test$ opt -load ../build/DivZeroPass.so -DivZero -disable-output simple1.opt.ll
+/lab6/test$ opt -load ../build/DivZeroPass.so -DivZero -disable-output test03.opt.ll > test03.out 2> test03.err
 ```
-Upon successful completion of this lab, the output should be as follows:
 
-```sh
+Upon successful completion of this lab, the output in `test/test03.out` should be as follows:
+
+```
 Running DivZero on main
 Potential Instructions by DivZero:
   %div1 = sdiv i32 %div, %div
 ```
+
+The debug output of your program (printed using `errs()`) will be available in the `test/test03.err` file.
 
 ### Format of Input Programs
 
@@ -422,7 +441,7 @@ Next, follow these steps to compile using your implementation:
 
 Upon completing the above steps, your analysis should produce 2 output files.
   1. `test.out`, where test is the program you are testing, is a condensed version of the results with just the instruction that has a potential divide-by-zero operation.
-  2. `test.out.err` is a complete report including any instructions with potential divide-by-zero operations as well as the final state of the `InMap` and `OutMap` for each instruction being reviewed.
+  2. `test.err` is a complete report including any instructions with potential divide-by-zero operations as well as the final state of the `InMap` and `OutMap` for each instruction being reviewed.
 
 Your output will be formatted like this:
 
@@ -477,6 +496,7 @@ submission.zip created successfully.
 Then upload the submission file to Gradescope.
 
 [Course VM]: https://cis.upenn.edu/~cis547/vm.doc
+[lab07]: https://cis.upenn.edu/~cis547/lab7.doc
 [LLVM template functions]: http://releases.llvm.org/8.0.0/docs/ProgrammersManual.html#the-isa-cast-and-dyn-cast-templates
 [LLVM CmpInst]: https://llvm.org/doxygen/classllvm_1_1CmpInst.html
 [LLVM CastInst]: https://llvm.org/doxygen/classllvm_1_1CastInst.html
