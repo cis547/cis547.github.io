@@ -90,15 +90,16 @@ The debug output of your program (printed using `errs()`) will be available in t
 
 ### Format of Input Programs
 
-Input programs in this lab are assumed to have only sub-features of the C language as follows:
+To reduce the complexity of the lab we restrict the set of instructions that your analysis must handle.
+We assume that the input programs for this lab may only use the following subset of the C language:
+
 * All values are integers (i.e. no floating points, pointers, structures, enums, arrays, etc).
   You can ignore other types of values.
-* You should handle assignments, signed and unsigned arithmetic operations (+, -, *, /), and comparison operations (<, <=, >, >=, ==, !=).
-All the other instructions are considered to be nop.
-* Input programs can have if-statements and loops.
-* Assume that user inputs are only introduced via the `getchar` library function.
-The skeleton code provides an auxiliary function `isInput` that checks whether a given instruction is a function call to `getchar`.
-You can ignore other call instructions to other functions.
+* The program may have assignments, signed and unsigned arithmetic operations (+, -, *, /), and comparison operations (<, <=, >, >=, ==, !=).
+  All the other instructions are considered to be nop.
+* The program may have if-statements and loops.
+* User inputs are only introduced via the set of functions where the provided `isInput` function returns `True`.
+  You can ignore other call instructions to other functions.
 
 
 ### Lab Instructions
