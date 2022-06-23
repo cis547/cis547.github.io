@@ -13,9 +13,9 @@ Since developing a static analyzer for a full-fledged language like C is a non-t
 
 ##### PART 1
 
-1. Implement `DivZeroAnalysis::check` that checks if a given instruction is could lead to an error.
-2. Implement `DivZeroAnalysis::transfer` found in the `src/Transfer.cpp`.
-3. Implement the `eval` functions in the `src/Transfer.cpp` by completing the provided function stubs.
+1. Implement `DivZeroAnalysis::check` that checks if a given instruction could lead to an error.
+2. Implement `DivZeroAnalysis::transfer` found in `src/Transfer.cpp`.
+3. Implement the `eval` functions in `src/Transfer.cpp` by completing the provided function stubs.
  
 ##### PART 2
 
