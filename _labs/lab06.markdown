@@ -329,7 +329,7 @@ Domain *eval(PHINode *Phi, const Memory *InMem) {
 
 ##### Step 5
 
-Implement the `DivZeroAnalysis::check` function found in the `DivZeroAnalysis.cpp` file in the `src` directory.
+Implement the `DivZeroAnalysis::check` function found in `src/DivZeroAnalysis.cpp`.
 This function checks an `Instruction` to determine if a division-by-zero is **possible**.
 Any Instruction that is a **signed** or **unsigned** division instruction with a divisor whose `Domain` is either `Domain::Zero` or `Domain::MaybeZero` would be considered a potential divide-by-zero.
 You should use `DivZeroAnalysis::InMap` to decide if there is an error or not.
@@ -337,7 +337,7 @@ You should use `DivZeroAnalysis::InMap` to decide if there is an error or not.
 
 To test your `check` and `transfer` functions, we have provided a reference `doAnalysis` binary. 
 In part 2, you will need to implement the `doAnalysis` function yourself, but for now you may test with our binary solution in order to make sure the functions you have implemented thus far are working correctly.
-First, make sure that the skeleton `doAnalysis` function in `DivZeroAnalysis.cpp` is commented out. 
+First, make sure that the skeleton `doAnalysis` function in `src/ChaoticIteration.cpp` is commented out.
 Next, follow these steps to compile using the reference binary:
 
 ```sh
