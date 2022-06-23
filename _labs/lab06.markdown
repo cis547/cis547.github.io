@@ -217,7 +217,7 @@ For example, `variable(I1)` will refer to `%x`.
 
 Now that we understand how the pass performs the analysis and how we will store each abstract state, we can begin implementation. 
 
-First, you will implement a function `DivZeroAnalysis::transfer`, found in the `Transfer.cpp` file in the `src` directory, to populate the `OutMap` for each instruction. 
+First, you will implement a function `DivZeroAnalysis::transfer`, found in `src/Transfer.cpp`, to populate the `OutMap` for each instruction. 
 In particular, given an instruction and its incoming abstract state (`const Memory *In`), `transfer` should populate the outgoing abstract state (`Memory *NOut`) which is derived from the appropriate implementation of `eval`.
 
 The `Instruction` class represents the parent class of all *types* of instructions. 
@@ -228,7 +228,7 @@ Recall for this lab you should handle:
 1. [Binary Operators][LLVM BinOps] (add, mul, sub, etc)
 2. [CastInst][LLVM CastInst]
 3. [CmpInst][LLVM CmpInst] (icmp, eq, ne, slt, sgt, sge, etc)
-4. user input via `getchar()` - recall from above that this is handled using `isInput()` from `lab6/include/DivZeroAnalysis.h`
+4. user input via `getchar()` - recall from above that this is handled using `isInput()` from `src/Transfer.cpp`.
 
 LLVM provides [several template functions][LLVM template functions] to check the type of an instruction.
 We will focus on `dyn_cast<>` for now.
@@ -249,7 +249,7 @@ For example,
 ```
 Assuming `%x` has a domain of `Domain::Zero` and `%y` has a domain of `Domain::NonZero`, Since `%y` can take any value that is not zero (positive or negative) the resulting domain for `%add` will be determined by the addition of `Zero` to a `NonZero` value.
 Consequently, the domain for `%add` is determined to be `Domain::NonZero`.
-In this way, the `DivZeroAnalysis:transfer` function updates the `OutMap` for the associated action of a given `Instruction`.
+In this way, the `DivZeroAnalysis::transfer` function updates the `OutMap` for the associated action of a given `Instruction`.
 
 The `eval` function for `PhiNode` has been implemented for you and offers an example of how to use the utility function `getOrExtract` as well as `Domain::join`.
 
