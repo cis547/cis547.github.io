@@ -342,7 +342,7 @@ Next, follow these steps to compile using the reference binary:
 
 ```sh
 /lab6/build$ rm CMakeCache.txt
-/lab6/build$ cmake --DUSE_REFERENCE=ON ..
+/lab6/build$ cmake -DUSE_REFERENCE=ON ..
 /lab6/build$ make
 ```
 
@@ -363,7 +363,7 @@ Instructions that potentially divide by zero:
 
 ##### Part 2 : Putting it all together - dataflow analysis
 
-Now that you have code to populate in and out maps and use them to check for divide-by-zero errors, your next step is to implement the chaotic iteration algorithm in function `doAnalysis` found in the `ChaoticIteration.cpp` file in the `src` directory.
+Now that you have code to populate in and out maps and use them to check for divide-by-zero errors, your next step is to implement the chaotic iteration algorithm in function `doAnalysis` found in `src/ChaoticIteration.cpp`.
 
 First, review the dataflow analysis lecture content. 
 In particular, study the reaching definition analysis and the chaotic iteration algorithm.
