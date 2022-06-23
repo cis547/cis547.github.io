@@ -19,7 +19,7 @@ Since developing a static analyzer for a full-fledged language like C is a non-t
  
 ##### PART 2
 
-For the second part of this lab you will implement various function in `src/ChaoticIteration`.
+For the second part of this lab you will implement various functions in `src/ChaoticIteration`.
 
 1. Implement `doAnalysis` function that performs the chaotic iteration algorithm for your analysis.
 2. Implement `flowIn` function that joins the out memory of all incoming flows.
@@ -31,7 +31,7 @@ For the second part of this lab you will implement various function in `src/Chao
 
 The skeleton code for Lab6 is located under `cis547vm/lab6/`.
 We will frequently refer to the top level directory for Lab 6 as `lab6` when describing file locations for the lab. 
-Open the lab3 directory in VSCode following the Instructions from [Course VM document][Course VM].
+Open the lab3 directory in VSCode following the Instructions from the [Course VM document][Course VM].
 
 ##### Step 1.
 
