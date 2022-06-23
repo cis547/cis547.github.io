@@ -123,7 +123,7 @@ Later on in Lab 7 you will further extend on item 3 to use the results of Pointe
 We have provided a framework to build your division-by-zero static analyzer.
 The framework is composed of files `Domain.cpp`, `Transfer.cpp`, `ChaoticIteration.cpp` and `DivZeroAnalysis.cpp` under `lab6/src/`.
 
-Additionally, you have been provided with a `src/Utils.cpp` it defines a few useful functions:
+Additionally, you have been provided with `src/Utils.cpp` which defines a few useful functions:
 
 + `variable` takes a `Value` and returns string.
     This string is used as the key in the Memory maps stored in `InMap` and `OutMap`.
