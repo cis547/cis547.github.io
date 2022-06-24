@@ -337,8 +337,7 @@ You should use `DivZeroAnalysis::InMap` to decide if there is an error or not.
 
 To test your `check` and `transfer` functions, we have provided a reference `doAnalysis` binary. 
 In part 2, you will need to implement the `doAnalysis` function yourself, but for now you may test with our binary solution in order to make sure the functions you have implemented thus far are working correctly.
-First, make sure that the skeleton `doAnalysis` function in `src/ChaoticIteration.cpp` is commented out.
-Next, follow these steps to compile using the reference binary:
+Follow these steps to compile using the reference binary:
 
 ```sh
 /lab6/build$ rm CMakeCache.txt
