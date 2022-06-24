@@ -394,7 +394,7 @@ void DivZeroAnalysis::doAnalysis(Function &F) {
 ```
 
 For this lab, we do not need to maintain an explicit control flow graph; LLVM already maintains one in its internals. 
-In order for you to focus on the dataflow portion of this assignment, we have provided two auxiliary functions `getSuccessors` and `getPredecessors` (defined in `lab6/include/DivZeroAnalysis.h`) that lookup and return the successors and predecessors for a given LLVM `Instruction`.
+In order for you to focus on the dataflow portion of this assignment, we have provided two auxiliary functions `getSuccessors` and `getPredecessors` (defined in `include/DivZeroAnalysis.h`) that lookup and return the successors and predecessors for a given LLVM `Instruction`.
 
 First, uncomment the functions marked under **Part 2**, namely `doAnalysis`, `flowIn`, `flowOut`, `join` and `equal`. 
 After doing so, you will implement each part of the algorithm detailed above in the following steps:
@@ -402,12 +402,12 @@ After doing so, you will implement each part of the algorithm detailed above in 
 ##### Step 1
 
 In `flowIn`, you will perform the first step of the reaching definitions analysis by taking the union of all **OUT** variables from all predecessors of `I`. 
-You may find the `getPredecessors` method in `lab6/include/DivZeroAnalysis.h` to be helpful here. 
+You may find the `getPredecessors` method in `include/DivZeroAnalysis.h` to be helpful here. 
 This should be done in the following function that is templated for you below:
 
 * `void DivZeroAnalysis:flowIn(Instruction *I, Memory *In)`
 
-Given an `Instruction` `I` and its **IN** set of variables `Memory` `In`, you will need to union the **IN** with the **OUT** of every predecessor of `I`. 
+Given an `Instruction` `I` and its **IN** set of variables, Memory `In`, you will need to union the **IN** with the **OUT** of every predecessor of `I`. 
 In order to take the union of two memory states, you will need to implement the join function templated below:
 
 * `Memory* DivZeroAnalysis::join (Memory *M1, Memory *M2)`
@@ -427,7 +427,7 @@ This should be done in the following function that is templated for you below:
 
 * `void DivZeroAnalysis::flowOut(Instruction *I, Memory *Pre, Memory *Post, SetVector<Instruction *> &WorkSet)`
 
-Given an `Instruction` `I`, you will analyze the *pre-transfer memory* `Pre` and the *post-transfer memory* `Post`. 
+Given an `Instruction` `I`, you will analyze the *pre-transfer* Memory `Pre` and the *post-transfer* Memory `Post`. 
 If there exists a change between the memory values after the `transfer` is applied, you will need to submit the instruction `I` for additional analysis. 
 To determine if the memory has changed during the `transfer` function, you will implement the function `equal`:
 
