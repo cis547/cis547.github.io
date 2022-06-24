@@ -31,7 +31,7 @@ For the second part of this lab you will implement various functions in `src/Cha
 
 The skeleton code for Lab6 is located under `cis547vm/lab6/`.
 We will frequently refer to the top level directory for Lab 6 as `lab6` when describing file locations for the lab. 
-Open the lab3 directory in VSCode following the Instructions from the [Course VM document][Course VM].
+Open the lab6 directory in VSCode following the Instructions from the [Course VM document][Course VM].
 
 ##### Step 1.
 
@@ -204,7 +204,7 @@ We have shown the abstract state, denoted **M**, before and after each instructi
 |  ID    | Instruction                      |  Before Instruction    |  After Instruction        |
 | :----: | :------------------------------- | :--------------------- | :------------------------ |
 | `I1`   | `%x = call i32 (...) @input()`   | `{  }`                 | `{ %x: T }`               |
-| `I2`   | `%y = add i32 %x, 1`             | `{ %x: T }`            | `{ %x: T, %y: %x + 1 }`   |
+| `I2`   | `%y = add i32 %x, 1`             | `{ %x: T }`            | `{ %x: T, %y: T }`   |
 
 In the first instruction `I1`, we assign an input integer to variable `%x`.
 In the abstract state, we use an abstract value **T** (also known as "top" or `MaybeZero`) since the value is unknown at compile time. 
@@ -396,8 +396,7 @@ void DivZeroAnalysis::doAnalysis(Function &F) {
 For this lab, we do not need to maintain an explicit control flow graph; LLVM already maintains one in its internals. 
 In order for you to focus on the dataflow portion of this assignment, we have provided two auxiliary functions `getSuccessors` and `getPredecessors` (defined in `include/DivZeroAnalysis.h`) that lookup and return the successors and predecessors for a given LLVM `Instruction`.
 
-First, uncomment the functions marked under **Part 2**, namely `doAnalysis`, `flowIn`, `flowOut`, `join` and `equal`. 
-After doing so, you will implement each part of the algorithm detailed above in the following steps:
+You will next implement the various parts of the chaotic iteration algorithm.
 
 ##### Step 1
 
@@ -442,8 +441,7 @@ Lastly, in `flowOut` be sure that you update the `OutMap` for instruction `I` to
 
 Recall in Part 1, a reference `doAnalysis` could be used to verify your `check` and `transfer` implementations. 
 Now that you’re writing your own version of `doAnalysis`, you may need to rebuild the pass without the reference. 
-First, make sure that the `doAnalysis` function in `DivZeroAnalysis.cpp` is **not** commented out.
-Next, follow these steps to compile using your implementation:
+Follow these steps to compile using your implementation:
 
 ```sh
 /lab6/build$ rm CMakeCache.txt
