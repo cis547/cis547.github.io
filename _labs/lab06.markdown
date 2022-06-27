@@ -408,7 +408,7 @@ This should be done in the following function that is templated for you below:
 Given an `Instruction` `I` and its **IN** set of variables, Memory `In`, you will need to union the **IN** with the **OUT** of every predecessor of `I`. 
 In order to take the union of two memory states, you will need to implement the join function templated below:
 
-* `Memory* DivZeroAnalysis::join (Memory *M1, Memory *M2)`
+* `Memory* join (Memory *M1, Memory *M2)`
 
 Within this function, you will also need to consider the `Domain` values when merging these `Memory` objects.
 Refer to the abstract domain on why this is necessary. 
@@ -429,7 +429,7 @@ Given an `Instruction` `I`, you will analyze the *pre-transfer* Memory `Pre` and
 If there exists a change between the memory values after the `transfer` is applied, you will need to submit the instruction `I` for additional analysis. 
 To determine if the memory has changed during the `transfer` function, you will implement the function `equal`:
 
-* `bool DivZeroAnalysis::equal(Memory *M1, Memory * M2)`
+* `bool equal(Memory *M1, Memory * M2)`
 
 In this function, you will again consider the `Domain` values when determining whether two `Memory` objects are equal. 
 Recall that an `equal` operation to evaluate equality between two abstract values is defined in the `Domain` class.
