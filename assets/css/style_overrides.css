@@ -2,3 +2,26 @@
 td, th {
     padding: 10px;
 }
+
+div.staff-profiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100% / 3, 500px), 1fr));
+    margin: auto;
+}
+
+div.profile {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+div.profile > img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.staff-name {
+    font-size: 1em;
+    font-weight: bold;
+}
