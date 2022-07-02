@@ -1,0 +1,24 @@
+instructors:
+  - name: "Dr. Mayur Naik"
+    pennid: "mhnaik"
+    school: "seas"
+    university_email_provider: "seas.upenn.edu"
+    external_email: ""
+    website: "https://www.cis.upenn.edu/~mhnaik/"
+teaching_assistants:
+  2022-summer:
+    - name: "Harsh Parekh"
+      position: "Head TA"
+      pennid: "hpar"
+      school: "seas"
+      university_email_provider: "seas.upenn.edu"
+      external_email: "harsh_parekh@outlook.com"
+      website: "https://harsh.parekh.page/"
+  2021-fall:
+    - name: "Harsh Parekh"
+      position: "TA"
+      pennid: "hpar"
+      school: "seas"
+      university_email_provider: "seas.upenn.edu"
+      external_email: "harsh_parekh@outlook.com"
+      website: "https://harsh.parekh.page/"
