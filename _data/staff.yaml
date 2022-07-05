@@ -14,6 +14,13 @@ teaching_assistants:
       university_email_provider: "seas.upenn.edu"
       external_email: "harsh_parekh@outlook.com"
       website: "https://harsh.parekh.page/"
+    - name: "Josh Hanson"
+      position: "TA"
+      pennid: "jmhanson"
+      school: "seas"
+      university_email_provider: "seas.upenn.edu"
+      external_email: "jmhanson@alumni.upenn.edu"
+      website: "https://www.linkedin.com/in/josh-m-hanson/"
   2021-fall:
     - name: "Harsh Parekh"
       position: "TA"
