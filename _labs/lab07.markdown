@@ -14,20 +14,22 @@ You will combine the dataflow analysis from the previous lab with a flow-insensi
 
 The skeleton code for Lab 7 is located under `/lab7`.
 We will frequently refer to the top level directory for Lab 7 as `lab7` when describing file locations.
-This lab is built upon your work from [Lab 6][Lab06], so you can reuse your content from the `src` directory.
+This lab is built upon your work from [Lab 6][Lab06], so you can reuse most of your content from the `/lab6/src` directory.
 
 #### Step 1.
 
 The following commands set up the lab, using the CMake/Makefile pattern seen before.
 
 ```sh
-/lab7$ mkdir build && cd  build
+/lab7$ mkdir build && cd build
 /lab7$ cmake ..
 /lab7$ make
 ```
 
-Among the files generated, you should now see `DivZeroPass.so` in the `lab7/build` directory, similar to the previous lab.
-In this lab you will modify `src/ChaoticIteration.cpp`.
+Among the files generated, you should see `DivZeroPass.so` in the `build` directory, similar to the previous lab.
+In this lab you will modify `src/ChaoticIteration.cpp`, `DivZeroAnalysis.cpp`, and `Transfer.cpp`.
+Most of these changes can be copied over from the previous lab and then be modified to suit the new requirements.
+
 We are now ready to run our bare-bones lab on a sample input C program.
 
 #### Step 2.
