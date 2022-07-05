@@ -311,4 +311,4 @@ submission.zip created successfully.
 Then upload the submission file to Gradescope.
 
 [LLVM AllocaInst]: https://llvm.org/doxygen/classllvm_1_1AllocaInst.html
-[lab06]: https://cis.upenn.edu/~cis547/lab6.doc
+[lab06]: {{ '/labs/lab06' | relative_url }}
