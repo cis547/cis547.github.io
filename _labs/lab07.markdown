@@ -12,7 +12,7 @@ You will combine the dataflow analysis from the previous lab with a flow-insensi
 
 ### Setup
 
-The skeleton code for Lab 7 is located under `/cis547vm/lab7/`.
+The skeleton code for Lab 7 is located under `/lab7`.
 We will frequently refer to the top level directory for Lab 7 as `lab7` when describing file locations.
 This lab is built upon your work from [Lab 6][Lab06], so you can reuse your content from the `src` directory.
 
