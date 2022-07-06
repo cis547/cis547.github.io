@@ -21,6 +21,13 @@ teaching_assistants:
       university_email_provider: "seas.upenn.edu"
       external_email: "jmhanson@alumni.upenn.edu"
       website: "https://www.linkedin.com/in/josh-m-hanson/"
+    - name: "Rob Stanton"
+      position: "TA"
+      pennid: "rstant"
+      school: "seas"
+      university_email_provider: "seas.upenn.edu"
+      external_email: "rstanton11@yahoo.com"
+      website: ""
   2021-fall:
     - name: "Harsh Parekh"
       position: "TA"
