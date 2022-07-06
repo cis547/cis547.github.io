@@ -36,21 +36,22 @@ We are now ready to run our bare-bones lab on a sample input C program.
 
 Before running the pass, the LLVM IR code must be generated.
 
-The first line (`clang`) generates vanilla LLVM IR code from the input C program `test03.c`.
-
-The last line (`opt`) runs the pass over the compiled LLVM assembly code.
-
-In prior labs, we used an intermediate step with the argument `-mem2reg` which promoted every [AllocaInst][LLVM AllocaInst] to a register, allowing your analyzer to ignore handling pointers in this lab.
-However, this is no longer needed because you will extend your previous code to handle pointers.
-
 ```sh
-/lab7/test$ clang -emit-llvm -S -fno-discard-value-names -Xclang -disable-O0-optnone -c test03.c -o test03.opt.ll
-/lab7/test$ opt -load ../build/DivZeroPass.so -DivZero test03.opt.ll
+/lab7/test$ clang -emit-llvm -S -fno-discard-value-names -Xclang -disable-O0-optnone -c test03.c -o test03.ll
+/lab7/test$ opt -load ../build/DivZeroPass.so -DivZero test03.ll
 ```
+
+The first line (`clang`) generates LLVM IR code from the input C program `test03.c`.
+The next line (`opt`) runs your pass over the compiled LLVM IR code.
+
+In prior lab, we used an intermediate step with the argument `-mem2reg` which promoted every
+[AllocaInst][LLVM AllocaInst] to a register, allowing your analyzer to ignore handling pointers in this lab.
+However, in this lab we no longer do that so you will extend your previous code to handle pointers.
 
 Upon successful completion of this lab, the output should be as follows:
 
 ```sh
+/lab7/test$ opt -load ../build/DivZeroPass.so -DivZero test03.ll
 Running DivZero on f
 Potential Instructions by DivZero:
     %div = sdiv i32 1, %2
