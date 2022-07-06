@@ -61,12 +61,12 @@ Potential Instructions by DivZero:
 
 The input format of this lab is the same as that of Lab 6 except now you will handle pointers:
 
-* You can ignore precisely handling values other than integers but your LLVM pass must not raise a segmentation fault when encountered with other kinds of values.
-* You should handle assignments, arithmetic operations (+, -, *, /), comparison operations (<, <=, >, >=, ==, !=), and branches.
-You do not have to handle XOR, OR, AND, and Shift operations precisely but your program must not raise a segmentation fault in these cases.
-* Input programs can have if-statements and loops.
-* User inputs are only introduced via the set of functions where the provided `isInput` function returns `True`.
-You can ignore other call instructions to other functions.
+* You *can* ignore precisely handling values other than integers but your LLVM pass must not raise a segmentation fault when encountered with other kinds of values.
+* You *must* handle assignments, arithmetic operations (+, -, *, /), comparison operations (<, <=, >, >=, ==, !=), and branches.
+* You *do not* have to handle XOR, OR, AND, and Shift operations precisely but your program must not raise a segmentation fault in these cases.
+* Input programs *can* have if-statements and loops.
+* User inputs are *only* introduced via the set of functions where the provided `isInput` function returns `True`.
+* You *can ignore* other call instructions to other functions.
 
 ### Lab Instructions
 
