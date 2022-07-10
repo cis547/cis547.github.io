@@ -89,7 +89,10 @@ store i32 0, i32* x     ; I2
 a = load i32, i32* x    ; I3
 store i32 a, i32* y     ; I4
 ```
-We ignore alloca instructions and consider that each store instruction defines the second argument. In the case of the above example, you should have `Def(I0,I2)`, because x corresponds to x in LLVM IR. Likewise, consider each load instruction uses the argument. In the example, you should have `Use(I0,I3)` and `Def(I3,I3)` because load instructions define a non-pointer variable which is represented as the instruction itself in LLVM. Finally, you should have `Use(I3,I4)` and `Def(I1,I4)` for instruction I4.
+We ignore alloca instructions and consider that each store instruction defines the second argument.
+In the case of the above example, you should have `Def(I0,I2)`, because x corresponds to x in LLVM IR. Likewise, consider each load instruction uses the argument.
+In the example, you should have `Use(I0,I3)` and `Def(I3,I3)` because load instructions define a non-pointer variable which is represented as the instruction itself in LLVM.
+Finally, you should have `Use(I3,I4)` and `Def(I1,I4)` for instruction I4.
 
 **Defining Datalog Rules from C++ API**. You will write your Datalog rules in the function `initialize` using the relations above. Consider  an example Datalog rule:
 
@@ -137,14 +140,14 @@ Input programs in this lab are assumed to have only sub-features of the C langua
 Your analyzer should run on LLVM IR. For example:
 
 ```sh
-cd lab8/test
-clang -emit-llvm -S -fno-discard-value-names -c loop0.c
-../build/constraint loop0.ll
+/lab8$ cd ./test
+/lab8/test$ clang -emit-llvm -S -fno-discard-value-names -c loop0.c
+/lab8/test$ ../build/constraint loop0.ll
 ```
 
 If the input program has exploitable divide-by-zero errors, it should print out the corresponding  LLVM instructions.
 
-```sh
+```
 Potential divide-by-zero points:
 %div = sdiv i32 4, %3
 ```
