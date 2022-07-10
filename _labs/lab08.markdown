@@ -6,11 +6,14 @@ synopsis: Writing a constraint-based static analysis for C programs with LLVM an
 ---
 
 ### Objective 
----
-In this lab, you will implement a constraint-based analysis to detect exploitable divide-by-zero bugs. A bug is exploitable if hackers can control inputs or environments, thereby triggering unintended behaviors (e.g., denial-of-service) through the bug. For example, [a recently reported divide-by-zero bug][bug] in the Linux kernel can be exploitable and crash the system. You will design a static analysis that detects such bugs by combining reaching definition analysis and taint analysis on top of a constraint solver, Z3.
+
+In this lab, you will implement a constraint-based analysis to detect exploitable divide-by-zero bugs.
+A bug is exploitable if hackers can control inputs or environments, thereby triggering unintended behaviors (e.g., denial-of-service) through the bug.
+For example, [a recently reported divide-by-zero bug][bug] in the Linux kernel can be exploitable and crash the system.
+You will design a static analysis that detects such bugs by combining reaching definition analysis and taint analysis on top of a constraint solver, Z3.
 
 ### Setup
----
+
 The skeleton code for Lab8 is located under `/cis547vm/lab8/`.
 We will frequently refer to the top level directory for Lab 8 as `lab8` when describing file locations for the lab. Open the `lab8` directory in VSCode following the Instructions from [Course VM document][course-vm-doc]
 
@@ -25,25 +28,28 @@ The following commands set up the lab, using the [Cmake][Cmake ref]/[Makefile][M
 The above command will generate an executable file 'constraint' that checks whether the input program has an exploitable divide-by-zero bug:
 
 ```sh
-cd lab8/test
-clang -emit-llvm -S -fno-discard-value-names -c simple0.c
-../build/constraint simple0.ll
+/lab8$ cd ./test
+/lab8/test$ clang -emit-llvm -S -fno-discard-value-names -c simple0.c
+/lab8/test$ ../build/constraint simple0.ll
 ```
 
 If you’ve done everything correctly up to this point you should see 'Potential divide-by-zero points:'. 
 
 ### Lab Instructions
----
-In this lab, you will design a reaching definition analysis and taint analysis using [Z3][Z3Guide]. The main tasks are to design the analysis in the form of Datalog rules through the [Z3 C++ API][Z3C++API], and implement a function that extracts logical constraints in the form of Datalog facts for each LLVM instruction.
 
-We will then feed these constraints, along with your Datalog rules, into the Z3 solver which should report any *exploitable* divide-by-zero errors. The `main` function of `src/Constraint.cpp` ties this logic together.
+In this lab, you will design a reaching definition analysis and taint analysis using [Z3][Z3Guide].
+The main tasks are to design the analysis in the form of Datalog rules through the [Z3 C++ API][Z3C++API], and implement a function that extracts logical constraints in the form of Datalog facts for each LLVM instruction.
+
+We will then feed these constraints, along with your Datalog rules, into the Z3 solver which should report any *exploitable* divide-by-zero errors.
+The `main` function of `src/Constraint.cpp` ties this logic together.
 
 In short, the lab consists of the following tasks:
 
 1.) Write Datalog rules in the initialize function in `Extractor.cpp` to define the reaching definition analysis and taint analysis.
 2.) Write the `extractContraints` function in `Extractor.cpp` that extracts Datalog facts from LLVM IR `Instruction`.
 
-**Relations for Datalog Analysis**. The skeleton code provides the definitions of necessary Datalog relations over LLVM IR in `Extractor.h`. In the following subsection, we will show how to represent LLVM IR programs using these relations.
+**Relations for Datalog Analysis**. The skeleton code provides the definitions of necessary Datalog relations over LLVM IR in `Extractor.h`.
+In the following subsection, we will show how to represent LLVM IR programs using these relations.
 
 The relations for def and use of variables are as follows:
 
@@ -120,14 +126,14 @@ You might take a look at the important classes including [expr][expression] and 
 **Miscellaneous**. For easy debugging, you can use the print function in `Extract.cpp`. If the -d option is passed through the command line (e.g., `constraint simple0.ll -d`), it will print out tuples of several relations. You can extend the function for your purpose. 
 
 ### Format of Input Programs
----
+
 Input programs in this lab are assumed to have only sub-features of the C language as follows:
 
 - All values are integers (i.e., no floating points, pointers, structures, enums, arrays, etc). You can ignore other types of values.
 - Assume that there is no function call to a function with a void return type. You must handle the function calls to `tainted_input` and `sanitizer` in a special way which represents their actions as described previously.
 
 ### Example Input and Output
----
+
 Your analyzer should run on LLVM IR. For example:
 
 ```sh
@@ -144,7 +150,7 @@ Potential divide-by-zero points:
 ```
 
 ### Submission
----
+
 
 Once you are done with the lab, you can create a `submission.zip` file by using the following command:
 ```sh
