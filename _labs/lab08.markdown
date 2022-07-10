@@ -53,28 +53,29 @@ In the following subsection, we will show how to represent LLVM IR programs usin
 
 The relations for def and use of variables are as follows:
 
-- `Def(Var, Inst)`: Variable Var is defined at instruction Inst.
-- `Use(Var, Inst)`: Variable Var is used at instruction Inst.
+- `def(var,inst)`: Variable var is defined at instruction inst.
+- `use(var,inst)`: Variable var is used at instruction inst.
 
 The relations for the reaching definition analysis are as follows: 
 
-- `Kill(CurrInst, OldInst)`: Instruction Var kills definition at instruction Loc.
-- `Next(CurrInst, NextInst)`: Instruction Loc is an immediate successor of instruction Var.
-- `In(Inst, DefInst)`: Definition at defining instruction DefInst may reach the program point just before instruction Inst.
-- `Out(Inst, DefInst)`: Definition at defining instruction DefInst may reach the program point just after instruction Inst.
+- `kill(curr_inst, old_inst)`: Instruction curr_inst kills definition at instruction old_inst.
+- `next(curr_inst, next_inst)`: Instruction curr_inst is an immediate successor of instruction next_inst.
+- `in(inst, def_inst)`: Definition at defining instruction def_inst may reach the program point just before instruction inst.
+- `out(inst, def_inst)`: Definition at defining instruction def_inst may reach the program point just after instruction inst.
 
 Note that the `Kill` relation can be derived by using the `Def` relation by writing a Datalog rule.
 
 The relations for the taint analysis are as follows: 
 
-- `Taint(Inst)` : There exists a function call at intruction Inst that reads a tainted input.
-- `Edge(From, To)`: There exists an immediate data-flow from instruction From to instruction To.
-- `Path(From, To)`: There exists a transitive tainted data-flow from instruction From to instruction To.
-- `Sanitizer(Inst)` : There exists a function call at intruction Inst that sanitizes a tainted input.
-- `Div(Denom, Inst)` : There exists a division operation at instruction Inst whose divisor is variable Denom.
-- `Alarm(Inst)` : There exists a potential exploitable divide-by-zero error at instruction Inst.
+- `taint(inst)` : There exists a function call at intruction inst that reads a tainted input.
+- `edge(from, to)`: There exists an immediate data-flow from instruction `from` to instruction `to`.
+- `Path(from, to)`: There exists a transitive tainted data-flow from instruction `from` to instruction `to`.
+- `sanitizer(inst)` : There exists a function call at intruction inst that sanitizes a tainted input.
+- `div(denom, inst)` : There exists a division operation at instruction inst whose divisor is variable denom.
+- `alarm(inst)` : There exists a potential exploitable divide-by-zero error at instruction inst.
 
-Assume that input programs may contain function calls to `tainted_input` and `sanitizer` that read and sanitize a tainted input, respectively. The final output relation for potential bug reports is `Alarm`.
+
+Assume that input programs may contain function calls to `tainted_input` and `sanitizer` that read and sanitize a tainted input, respectively. The final output relation for potential bug reports is `alarm`.
 
 You will use these relations to build rules for the definition analysis and taint analysis in `Extractor.cpp`.
 
