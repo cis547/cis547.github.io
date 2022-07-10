@@ -47,26 +47,26 @@ In short, the lab consists of the following tasks:
 
 The relations for def and use of variables are as follows:
 
-- `Def(Var,Loc)`: Variable Var is defined at instruction Loc.
-- `Use(Var,Loc)`: Variable Var is used at instruction Loc.
+- `Def(Var, Inst)`: Variable Var is defined at instruction Inst.
+- `Use(Var, Inst)`: Variable Var is used at instruction Inst.
 
 The relations for the reaching definition analysis are as follows: 
 
-- `Kill(Var,Loc)`: Instruction Var kills definition at instruction Loc.
-- `Next(Var,Loc)`: Instruction Loc is an immediate successor of instruction Var.
-- `In(Var,Loc)`: Definition at instruction Loc may reach the program point just before instruction Var.
-- `Out(Var,Loc)`: Definition at instruction Loc may reach the program point just after instruction Var.
+- `Kill(CurrInst, OldInst)`: Instruction Var kills definition at instruction Loc.
+- `Next(CurrInst, NextInst)`: Instruction Loc is an immediate successor of instruction Var.
+- `In(Inst, DefInst)`: Definition at defining instruction DefInst may reach the program point just before instruction Inst.
+- `Out(Inst, DefInst)`: Definition at defining instruction DefInst may reach the program point just after instruction Inst.
 
 Note that the `Kill` relation can be derived by using the `Def` relation by writing a Datalog rule.
 
 The relations for the taint analysis are as follows: 
 
-- `Taint(Var)` : There exists a function call at intruction Var that reads a tainted input.
-- `Edge(Var,Loc)`: There exists an immediate data-flow from instruction Var to instruction Loc.
-- `Path(Var,Loc)`: There exists a transitive tainted data-flow from instruction Var to instruction Loc.
-- `Sanitizer(Var)` : There exists a function call at intruction Var that sanitizes a tainted input.
-- `Div(Var,Loc)` : There exists a division operation at instruction Loc whose divisor is variable Var.
-- `Alarm(Var)` : There exists a potential exploitable divide-by-zero error at instruction Var.
+- `Taint(Inst)` : There exists a function call at intruction Inst that reads a tainted input.
+- `Edge(From, To)`: There exists an immediate data-flow from instruction From to instruction To.
+- `Path(From, To)`: There exists a transitive tainted data-flow from instruction From to instruction To.
+- `Sanitizer(Inst)` : There exists a function call at intruction Inst that sanitizes a tainted input.
+- `Div(Denom, Inst)` : There exists a division operation at instruction Inst whose divisor is variable Denom.
+- `Alarm(Inst)` : There exists a potential exploitable divide-by-zero error at instruction Inst.
 
 Assume that input programs may contain function calls to `tainted_input` and `sanitizer` that read and sanitize a tainted input, respectively. The final output relation for potential bug reports is `Alarm`.
 
