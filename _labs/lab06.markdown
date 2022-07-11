@@ -400,7 +400,7 @@ You will next implement the various parts of the chaotic iteration algorithm.
 ##### Step 1
 
 In `flowIn`, you will perform the first step of the reaching definitions analysis by taking the union of all **OUT** variables from all predecessors of `I`. 
-You may find the `getPredecessors` method in `include/DivZeroAnalysis.h` to be helpful here. 
+You may find the `getPredecessors` method in `src/ChaoticIteration.cpp` to be helpful here. 
 This should be done in the following function that is templated for you below:
 
 * `void DivZeroAnalysis:flowIn(Instruction *I, Memory *In)`
