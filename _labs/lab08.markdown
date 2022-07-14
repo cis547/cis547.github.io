@@ -9,12 +9,12 @@ synopsis: Writing a constraint-based static analysis for C programs with LLVM an
 
 In this lab, you will implement a constraint-based analysis to detect exploitable divide-by-zero bugs.
 A bug is exploitable if hackers can control inputs or environments, thereby triggering unintended behaviors (e.g., denial-of-service) through the bug.
-For example, [a recently reported divide-by-zero bug][bug] in the Linux kernel can be exploitable and crash the system.
+For example, [a recently reported divide-by-zero bug][bug] in the Linux kernel can be exploitable and crash the system; another example was the [Log4Shell][log4shell] incident.
 You will design a static analysis that detects such bugs by combining reaching definition analysis and taint analysis on top of a constraint solver, Z3.
 
 ### Setup
 
-The skeleton code for Lab8 is located under `/cis547vm/lab8/`.
+The skeleton code for Lab8 is located under `cis547/lab8/`.
 We will frequently refer to the top level directory for Lab 8 as `lab8` when describing file locations for the lab. Open the `lab8` directory in VSCode following the Instructions from [Course VM document][course-vm-doc]
 
 The following commands set up the lab, using the [Cmake][Cmake ref]/[Makefile][Make ref] pattern seen before.
@@ -25,52 +25,55 @@ The following commands set up the lab, using the [Cmake][Cmake ref]/[Makefile][M
 /lab8/build$ make
 ```
 
-The above command will generate an executable file 'constraint' that checks whether the input program has an exploitable divide-by-zero bug:
+The above command will generate an executable file 'constraint' in build directory that checks whether the input program has an exploitable divide-by-zero bug:
 
 ```sh
 /lab8$ cd ./test
 /lab8/test$ clang -emit-llvm -S -fno-discard-value-names -c simple0.c
-/lab8/test$ ../build/constraint simple0.ll
+/lab8/test$ mkdir -p simple0/input simple0/output
+/lab8/test$ ../build/constraint simple0.ll ./simple0/input
+/lab8/test$ souffle -F ./simple0/input -D ./simple0/output ../src/analysis.d
 ```
 
-If you’ve done everything correctly up to this point you should see 'Potential divide-by-zero points:'. 
+If you’ve done everything correctly up to this point you should see 'Potential divide-by-zero points:' you should see the instruction that could potentially cause a divide-by-zero in ./simple0/output/alarm.csv. 
 
 ### Lab Instructions
 
-In this lab, you will design a reaching definition analysis and taint analysis using [Z3][Z3Guide].
-The main tasks are to design the analysis in the form of Datalog rules through the [Z3 C++ API][Z3C++API], and implement a function that extracts logical constraints in the form of Datalog facts for each LLVM instruction.
+In this lab, you will design a reaching definition analysis and taint analysis using [Z3][Z3Guide] using [datalog][souffle].
+The main tasks are to design the analysis in the form of logical rules as a Datalog program, and implement a function that extracts logical relations form a test program in the form of Datalog facts for each LLVM instruction.
 
-We will then feed these constraints, along with your Datalog rules, into the Z3 solver which should report any *exploitable* divide-by-zero errors.
+We will use the datalog rules with the facts you extracted from each instruction to find any *exploitable* divide-by-zero errors.
 The `main` function of `src/Constraint.cpp` ties this logic together.
 
 In short, the lab consists of the following tasks:
 
-1.) Write Datalog rules in the initialize function in `Extractor.cpp` to define the reaching definition analysis and taint analysis.
-2.) Write the `extractContraints` function in `Extractor.cpp` that extracts Datalog facts from LLVM IR `Instruction`.
+1.) Write Datalog rules in `analysis.dl` to define the reaching definition analysis and taint analysis.
+2.) Write the `extractContraints` function in `Extractor.cpp` that extracts Datalog facts from LLVM IR `Instruction` and dumps them to appropriate .facts files.
 
-**Relations for Datalog Analysis**. The skeleton code provides the definitions of necessary Datalog relations over LLVM IR in `Extractor.h`.
+## Relations for Datalog Analysis
+The skeleton code provides the definitions of necessary Datalog relations over LLVM IR in `Extractor.h`.
 In the following subsection, we will show how to represent LLVM IR programs using these relations.
 
 The relations for def and use of variables are as follows:
 
-- `def(var,inst)`: Variable var is defined at instruction inst.
-- `use(var,inst)`: Variable var is used at instruction inst.
+- `def(var, inst)`: Variable `var` is defined at instruction `inst`.
+- `use(var, inst)`: Variable `var` is used at instruction `inst`.
 
 The relations for the reaching definition analysis are as follows: 
 
-- `kill(curr_inst, old_inst)`: Instruction curr_inst kills definition at instruction old_inst.
-- `next(curr_inst, next_inst)`: Instruction curr_inst is an immediate successor of instruction next_inst.
-- `in(inst, def_inst)`: Definition at defining instruction def_inst may reach the program point just before instruction inst.
-- `out(inst, def_inst)`: Definition at defining instruction def_inst may reach the program point just after instruction inst.
+- `kill(curr_inst, old_inst)`: Instruction `curr_inst` kills definition at instruction `old_inst`.
+- `next(curr_inst, next_inst)`: Instruction `curr_inst` is an immediate successor of instruction `next_inst`.
+- `in(inst, def_inst)`: Definition at defining instruction `def_inst` may reach the program point just before instruction `inst`.
+- `out(inst, def_inst)`: Definition at defining instruction `def_inst` may reach the program point just after instruction `inst`.
 
-Note that the `Kill` relation can be derived by using the `Def` relation by writing a Datalog rule.
+Note that the `kill` relation can be derived by using the `def` relation by writing a Datalog rule.
 
 The relations for the taint analysis are as follows: 
 
-- `taint(inst)` : There exists a function call at intruction inst that reads a tainted input.
+- `taint(inst)` : There exists a function call at intruction `inst` that reads a tainted input.
 - `edge(from, to)`: There exists an immediate data-flow from instruction `from` to instruction `to`.
 - `Path(from, to)`: There exists a transitive tainted data-flow from instruction `from` to instruction `to`.
-- `sanitizer(inst)` : There exists a function call at intruction inst that sanitizes a tainted input.
+- `sanitizer(inst)` : There exists a function call at intruction `inst` that sanitizes a tainted input.
 - `div(denom, inst)` : There exists a division operation at instruction inst whose divisor is variable denom.
 - `alarm(inst)` : There exists a potential exploitable divide-by-zero error at instruction inst.
 
@@ -79,47 +82,58 @@ Assume that input programs may contain function calls to `tainted_input` and `sa
 
 You will use these relations to build rules for the definition analysis and taint analysis in `Extractor.cpp`.
 
-**Encoding LLVM Instruction in Datalog**. Recall that, in LLVM IR, values and instructions are interchangable. Therefore, all variables X, Y, and Z are an instance of LLVM’s `Value` class. 
+## Encoding LLVM Instruction in Datalog
+Recall that, in LLVM IR, values and instructions are interchangable.
+Therefore, all variables X, Y, and Z are an instance of LLVM’s `Value` class. 
 
-Assume that input C programs do not have pointer variables. Therefore, we abuse pointer variables in LLVM IR as their dereference expressions. Consider the following simplified LLVM program from a simple C program `int x = 0; int y = x;`:
+Assume that input C programs do not have pointer variables.
+Therefore, we abuse pointer variables in LLVM IR as their dereference expressions.
+Consider the following simplified LLVM program from a simple C program `int x = 0; int y = x;`:
 
-```sh
+<table>
+<tbody>
+<tr valign="top">
+<td>
+{% highlight llvm %}
 x = alloca i32          ; I0
 y = alloca i32          ; I1
 store i32 0, i32* x     ; I2
 a = load i32, i32* x    ; I3
 store i32 a, i32* y     ; I4
-```
+</td>
+</tr>
+</tbody>
+</table>
+
 We ignore alloca instructions and consider that each store instruction defines the second argument.
-In the case of the above example, you should have `Def(I0,I2)`, because x corresponds to x in LLVM IR. Likewise, consider each load instruction uses the argument.
+In the case of the above example, you should have `Def(I0,I2)`, because I0 corresponds to x in LLVM IR and I2 defines the variable x.
+Likewise, consider each load instruction uses the argument.
 In the example, you should have `Use(I0,I3)` and `Def(I3,I3)` because load instructions define a non-pointer variable which is represented as the instruction itself in LLVM.
 Finally, you should have `Use(I3,I4)` and `Def(I1,I4)` for instruction I4.
 
-**Defining Datalog Rules from C++ API**. You will write your Datalog rules in the function `initialize` using the relations above. Consider  an example Datalog rule:
-
+## Defining Datalog Rules from C++ API
+You will write your Datalog rules in `src/analysis.dl` using the relations above.
+Consider an example Datalog rule:
+```dl
 A(X, Y) :- B(X, Z), C(Z, Y).
+```
 
-This rule corresponds to the following formula:
-X,Y,Z. B(X,Z) C(Z,Y) A(X,Y).
-
-In Z3, you can specify the formula in the following sequence of APIs in `initialize`:
-
-```sh
+```
 /* Declare quantified variables */
 z3::expr X = C.bv_const(“X”, 32);   // encode X as a 32-bit bitvector (bv)
 z3::expr Y = C.bv_const(“Y”, 32);
 z3::expr Z = C.bv_const(“Z”, 32);
 /* Define and register rules */
 z3::expr R0 = z3::forall(X, Y, Z, z3::implies(B(X,Z) && C(Z, Y), A(X,Y)));
-Solver->add_rule(R0, C.str_symbol(“R0”));
 ```
 
-You might take a look at the important classes including [expr][expression] and [fixed point][fixed-point] as well as [an example][example] of using Z3 C++ API.
-
-**Extracting Datalog Facts**. You will need to implement the function `extractConstraints` in 'Extractor.cpp' to extract Datalog facts for each LLVM instruction. The skeleton code provides a couple of auxiliary functions in `lab8/src/Extract.cpp` and `lab8/src/Utils.cpp` help you with this task:
+## Extracting Datalog Facts
+You will need to implement the function `extractConstraints` in 'Extractor.cpp' to extract Datalog facts for each LLVM instruction.
+The skeleton code provides a couple of auxiliary functions in `lab8/src/Extract.cpp` and `lab8/src/Utils.cpp` help you with this task:
 
 - `void addX(const InstMapTy &InstMap, ...)`
-- - X denotes the name of a relation. These functions add a fact of X to the solver. It takes `InstMap` that encodes each LLVM instruction as an integer. This map is initialized in the `main` function.
+- - X denotes the name of a relation. These functions add a fact of X to the facts file.
+- - It takes `InstMap` that encodes each LLVM instruction as an integer. This map is initialized in the `main` function.
 - `vector<Instruction*> getPredecessors(Instruction *I)`
 - - Returns a set of predecessors of a given LLVM instruction `I`.
 - `bool isTaintedInput(CallInst *CI)`
@@ -127,14 +141,18 @@ You might take a look at the important classes including [expr][expression] and 
 - `bool isSanitizer(CallInst *CI)`
 - - Checks whether a given LLVM call instruction `CI` sanitizes a tainted input or not.
 
-**Miscellaneous**. For easy debugging, you can use the print function in `Extract.cpp`. If the -d option is passed through the command line (e.g., `constraint simple0.ll -d`), it will print out tuples of several relations. You can extend the function for your purpose. 
+**Miscellaneous**.
+For easy debugging, you can use the print function in `Extract.cpp`.
+If the -d option is passed through the command line (e.g., `constraint simple0.ll -d`), it will print out tuples of several relations.
+You can extend the function for your purpose. 
 
 ### Format of Input Programs
 
 Input programs in this lab are assumed to have only sub-features of the C language as follows:
 
 - All values are integers (i.e., no floating points, pointers, structures, enums, arrays, etc). You can ignore other types of values.
-- Assume that there is no function call to a function with a void return type. You must handle the function calls to `tainted_input` and `sanitizer` in a special way which represents their actions as described previously.
+- Assume that there is no function call to a function with a void return type.
+- You must handle the function calls to `tainted_input` and `sanitizer` in a special way which represents their actions as described previously.
 
 ### Example Input and Output
 
@@ -164,6 +182,8 @@ submission.zip created successfully.
 ```
 
 [bug]: https://www.cvedetails.com/cve/CVE-2019-14284/
+[log4shell]: https://en.wikipedia.org/wiki/Log4Shell
+[souffle]: https://souffle-lang.github.io/simple
 [Z3C++API]: https://z3prover.github.io/api/html/namespacez3.html
 [Z3Guide]: https://web.archive.org/web/20210119175613/https://rise4fun.com/Z3/tutorial/guide
 [expression]: https://z3prover.github.io/api/html/classz3_1_1expr.html
