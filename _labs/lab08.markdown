@@ -25,7 +25,8 @@ The following commands set up the lab, using the [Cmake][Cmake ref]/[Makefile][M
 /lab8/build$ make
 ```
 
-The above command will generate an executable file 'constraint' in build directory that checks whether the input program has an exploitable divide-by-zero bug:
+The above command will generate an executable file 'constraint' in build directory that extracts facts about the program that will be used by `src/analysis.dl`
+to check if the input program has an exploitable divide-by-zero bug:
 
 ```sh
 /lab8$ cd ./test
