@@ -2,7 +2,7 @@
 layout: lab
 _id: "8"
 title: "Constraint-Based Analysis"
-synopsis: Writing a constraint-based static analysis for C programs with LLVM and Z3.
+synopsis: Writing a constraint-based static analysis for C programs with LLVM and Datalog.
 ---
 
 ### Objective 
@@ -10,7 +10,7 @@ synopsis: Writing a constraint-based static analysis for C programs with LLVM an
 In this lab, you will implement a constraint-based analysis to detect exploitable divide-by-zero bugs.
 A bug is exploitable if hackers can control inputs or environments, thereby triggering unintended behaviors (e.g., denial-of-service) through the bug.
 For example, [a recently reported divide-by-zero bug][bug] in the Linux kernel can be exploitable and crash the system; another example was the [Log4Shell][log4shell] incident.
-You will design a static analysis that detects such bugs by combining reaching definition analysis and taint analysis on top of a constraint solver, Z3.
+You will design a static analysis that detects such bugs by combining reaching definition analysis and taint analysis using a datogon engine, souffle.
 
 ### Setup
 
@@ -185,4 +185,3 @@ submission.zip created successfully.
 [bug]: https://www.cvedetails.com/cve/CVE-2019-14284/
 [log4shell]: https://en.wikipedia.org/wiki/Log4Shell
 [souffle]: https://souffle-lang.github.io/simple
-[example]: https://github.com/Z3Prover/z3/blob/master/examples/c%2B%2B/example.cpp
