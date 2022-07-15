@@ -36,29 +36,32 @@ to check if the input program has an exploitable divide-by-zero bug:
 /lab8/test$ souffle -F ./simple0/input -D ./simple0/output ../src/analysis.d
 ```
 
-If you’ve done everything correctly up to this point you should see 'Potential divide-by-zero points:' you should see the instruction that could potentially cause a divide-by-zero in ./simple0/output/alarm.csv. 
+After completing the lab implementation, you should see the instruction that could potentially cause a divide-by-zero in `./simple0/output/alarm.csv`. 
 
 ### Lab Instructions
 
-In this lab, you will design a reaching definition analysis and taint analysis using [Z3][Z3Guide] using [datalog][souffle].
+In this lab, you will design a reaching definition analysis and taint analysis using [datalog][souffle].
+
 The main tasks are to design the analysis in the form of logical rules as a Datalog program, and implement a function that extracts logical relations form a test program in the form of Datalog facts for each LLVM instruction.
 
 We will use the datalog rules with the facts you extracted from each instruction to find any *exploitable* divide-by-zero errors.
-The `main` function of `src/Constraint.cpp` ties this logic together.
 
 In short, the lab consists of the following tasks:
 
-1.) Write Datalog rules in `analysis.dl` to define the reaching definition analysis and taint analysis.
-2.) Write the `extractContraints` function in `Extractor.cpp` that extracts Datalog facts from LLVM IR `Instruction` and dumps them to appropriate .facts files.
+1. Write Datalog rules in `analysis.dl` to define the reaching the taint analysis.
+2. Write the `extractContraints` function in `Extractor.cpp` that extracts Datalog facts from LLVM IR `Instruction` and dumps them to appropriate `.facts` files.
+    Detailed instructions provided in comments.
 
-## Relations for Datalog Analysis
-The skeleton code provides the definitions of necessary Datalog relations over LLVM IR in `Extractor.h`.
-In the following subsection, we will show how to represent LLVM IR programs using these relations.
+#### Relations for Datalog Analysis
+
+The skeleton code in `Extractor.cpp` provides the definitions of various functions that will help you dump the necessary Datalog relations declared in `src/analysis.dl` file.
+
+Here we will explain what each of the datalog relation mean.
 
 The relations for def and use of variables are as follows:
 
 - `def(var, inst)`: Variable `var` is defined at instruction `inst`.
-- `use(var, inst)`: Variable `var` is used at instruction `inst`.
+- `use(var, inst)`: Variable `var` is used in instruction `inst`.
 
 The relations for the reaching definition analysis are as follows: 
 
@@ -79,11 +82,13 @@ The relations for the taint analysis are as follows:
 - `alarm(inst)` : There exists a potential exploitable divide-by-zero error at instruction inst.
 
 
-Assume that input programs may contain function calls to `tainted_input` and `sanitizer` that read and sanitize a tainted input, respectively. The final output relation for potential bug reports is `alarm`.
+Assume that input programs may contain function calls to `tainted_input` and `sanitizer` that read and sanitize a tainted input, respectively.
+The final output relation for potential bug reports is `alarm`.
 
-You will use these relations to build rules for the definition analysis and taint analysis in `Extractor.cpp`.
+You will use these relations to build rules for the definition analysis and taint analysis in `analysis.dl`.
 
-## Encoding LLVM Instruction in Datalog
+#### Encoding LLVM Instruction in Datalog
+
 Recall that, in LLVM IR, values and instructions are interchangable.
 Therefore, all variables X, Y, and Z are an instance of LLVM’s `Value` class. 
 
@@ -91,49 +96,47 @@ Assume that input C programs do not have pointer variables.
 Therefore, we abuse pointer variables in LLVM IR as their dereference expressions.
 Consider the following simplified LLVM program from a simple C program `int x = 0; int y = x;`:
 
-<table>
-<tbody>
-<tr valign="top">
-<td>
-{% highlight llvm %}
+```llvm
 x = alloca i32          ; I0
 y = alloca i32          ; I1
 store i32 0, i32* x     ; I2
 a = load i32, i32* x    ; I3
 store i32 a, i32* y     ; I4
-</td>
-</tr>
-</tbody>
-</table>
+```
 
 We ignore alloca instructions and consider that each store instruction defines the second argument.
-In the case of the above example, you should have `Def(I0,I2)`, because I0 corresponds to x in LLVM IR and I2 defines the variable x.
-Likewise, consider each load instruction uses the argument.
-In the example, you should have `Use(I0,I3)` and `Def(I3,I3)` because load instructions define a non-pointer variable which is represented as the instruction itself in LLVM.
-Finally, you should have `Use(I3,I4)` and `Def(I1,I4)` for instruction I4.
 
-## Defining Datalog Rules from C++ API
-You will write your Datalog rules in `src/analysis.dl` using the relations above.
+In the case of the above example, you should have `addDef(I0,I2)`, because `I0` corresponds to `x` in LLVM IR and `I2` defines the variable `x`.
+Likewise, consider each load instruction uses the argument.
+In the example, you should have `addUse(I0,I3)` and `addDef(I3,I3)` because load instructions define a non-pointer variable which is represented as the instruction itself in LLVM.
+Finally, you should have `addUse(I3,I4)` and `addDef(I1,I4)` for instruction `I4`.
+
+#### Defining Datalog Rules
+
+You will write your Datalog rules for taint analysis in `src/analysis.dl` using the relations above.
+
+Please refer to the souffle's [documentation][souffle] for the datalog language and its syntax.
+
+Here's a quick example to help you get started.
+
 Consider an example Datalog rule:
+
 ```dl
 A(X, Y) :- B(X, Z), C(Z, Y).
 ```
 
-```
-/* Declare quantified variables */
-z3::expr X = C.bv_const(“X”, 32);   // encode X as a 32-bit bitvector (bv)
-z3::expr Y = C.bv_const(“Y”, 32);
-z3::expr Z = C.bv_const(“Z”, 32);
-/* Define and register rules */
-z3::expr R0 = z3::forall(X, Y, Z, z3::implies(B(X,Z) && C(Z, Y), A(X,Y)));
-```
+It adds a rule which says that there is a relation `A` between `X` and `Y` if,
+there is a relation `B` between `X` and some `Z` and there is also a
+relation `C` between that `Z` and `Y`.
 
-## Extracting Datalog Facts
-You will need to implement the function `extractConstraints` in 'Extractor.cpp' to extract Datalog facts for each LLVM instruction.
+#### Extracting Datalog Facts
+
+You will need to implement the function `extractConstraints` in
+`Extractor.cpp` to extract Datalog facts for each LLVM instruction.
 The skeleton code provides a couple of auxiliary functions in `lab8/src/Extract.cpp` and `lab8/src/Utils.cpp` help you with this task:
 
 - `void addX(const InstMapTy &InstMap, ...)`
-- - X denotes the name of a relation. These functions add a fact of X to the facts file.
+- - `X` denotes the name of a relation. These functions add a fact to the facts file for `X`.
 - - It takes `InstMap` that encodes each LLVM instruction as an integer. This map is initialized in the `main` function.
 - `vector<Instruction*> getPredecessors(Instruction *I)`
 - - Returns a set of predecessors of a given LLVM instruction `I`.
@@ -142,10 +145,9 @@ The skeleton code provides a couple of auxiliary functions in `lab8/src/Extract.
 - `bool isSanitizer(CallInst *CI)`
 - - Checks whether a given LLVM call instruction `CI` sanitizes a tainted input or not.
 
-**Miscellaneous**.
-For easy debugging, you can use the print function in `Extract.cpp`.
-If the -d option is passed through the command line (e.g., `constraint simple0.ll -d`), it will print out tuples of several relations.
-You can extend the function for your purpose. 
+#### Miscellaneous
+
+For debugging, after you run `constraint` you can inspect the `./test/simple0/input` for files containing the extracted relations.
 
 ### Format of Input Programs
 
@@ -161,15 +163,13 @@ Your analyzer should run on LLVM IR. For example:
 
 ```sh
 /lab8$ cd ./test
-/lab8/test$ clang -emit-llvm -S -fno-discard-value-names -c loop0.c
-/lab8/test$ ../build/constraint loop0.ll
+/lab8/test$ make loop0
 ```
 
-If the input program has exploitable divide-by-zero errors, it should print out the corresponding  LLVM instructions.
+If the input program has exploitable divide-by-zero errors, then you should see entries in `loop0/output/alarm.csv`.
 
-```
-Potential divide-by-zero points:
-%div = sdiv i32 4, %3
+```llvm
+%div
 ```
 
 ### Submission
@@ -185,8 +185,4 @@ submission.zip created successfully.
 [bug]: https://www.cvedetails.com/cve/CVE-2019-14284/
 [log4shell]: https://en.wikipedia.org/wiki/Log4Shell
 [souffle]: https://souffle-lang.github.io/simple
-[Z3C++API]: https://z3prover.github.io/api/html/namespacez3.html
-[Z3Guide]: https://web.archive.org/web/20210119175613/https://rise4fun.com/Z3/tutorial/guide
-[expression]: https://z3prover.github.io/api/html/classz3_1_1expr.html
-[fixed-point]: https://z3prover.github.io/api/html/classz3_1_1fixedpoint.html
 [example]: https://github.com/Z3Prover/z3/blob/master/examples/c%2B%2B/example.cpp
