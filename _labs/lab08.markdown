@@ -17,7 +17,7 @@ You will design a static analysis that detects such bugs by combining reaching d
 The skeleton code for Lab8 is located under `cis547/lab8/`.
 We will frequently refer to the top level directory for Lab 8 as `lab8` when describing file locations for the lab. Open the `lab8` directory in VSCode following the Instructions from [Course VM document][course-vm-doc]
 
-The following commands set up the lab, using the [Cmake][Cmake ref]/[Makefile][Make ref] pattern seen before.
+The following commands set up the lab, using the [Cmake][CMake Ref]/[Makefile][Make Ref] pattern seen before.
 
 ```sh
 /lab8$ mkdir build && cd build
@@ -44,13 +44,13 @@ In this lab, you will design a reaching definition analysis and taint analysis u
 
 The main tasks are to design the analysis in the form of logical rules as a Datalog program, and implement a function that extracts logical relations form a test program in the form of Datalog facts for each LLVM instruction.
 
-We will use the datalog rules with the facts you extracted from each instruction to find any *exploitable* divide-by-zero errors.
+We will then use the datalog rules with the facts you extracted from each instruction in a program to find any *exploitable* divide-by-zero errors.
 
 In short, the lab consists of the following tasks:
 
-1. Write Datalog rules in `analysis.dl` to define the reaching the taint analysis.
-2. Write the `extractContraints` function in `Extractor.cpp` that extracts Datalog facts from LLVM IR `Instruction` and dumps them to appropriate `.facts` files.
-    Detailed instructions provided in comments.
+1. Write Datalog rules in `analysis.dl` for taint analysis.
+2. Implement the `extractContraints` function in `Extractor.cpp` that extracts Datalog facts from LLVM IR `Instruction` and dumps them to appropriate `.facts` files.
+   Detailed instructions provided in comments.
 
 #### Relations for Datalog Analysis
 
@@ -182,6 +182,9 @@ lab8$ make submit
 submission.zip created successfully.
 ```
 
+[CMake Ref]: https://en.wikipedia.org/wiki/CMake
+[Make Ref]: https://www.gnu.org/software/make/manual/html_node/
+[course-vm-doc]: https://cis.upenn.edu/~cis5470/vm.doc
 [bug]: https://www.cvedetails.com/cve/CVE-2019-14284/
 [log4shell]: https://en.wikipedia.org/wiki/Log4Shell
 [souffle]: https://souffle-lang.github.io/simple
