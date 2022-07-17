@@ -66,7 +66,7 @@ The relations for def and use of variables are as follows:
 The relations for the reaching definition analysis are as follows: 
 
 - `kill(curr_inst, old_inst)`: Instruction `curr_inst` kills definition at instruction `old_inst`.
-- `next(curr_inst, next_inst)`: Instruction `curr_inst` is an immediate successor of instruction `next_inst`.
+- `next(curr_inst, next_inst)`: Instruction `next_inst` is an immediate successor of instruction `curr_inst`.
 - `in(inst, def_inst)`: Definition at defining instruction `def_inst` may reach the program point just before instruction `inst`.
 - `out(inst, def_inst)`: Definition at defining instruction `def_inst` may reach the program point just after instruction `inst`.
 
