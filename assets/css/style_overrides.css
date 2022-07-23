@@ -5,12 +5,13 @@ td, th {
 
 div.staff-profiles {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100% / 3, 500px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     margin: auto;
+    column-gap: min(10%, 40px);
 }
 
 div.profile {
-    max-width: 500px;
+    max-width: 200px;
     margin: auto;
     text-align: center;
 }
