@@ -91,21 +91,253 @@ You should see several files created in the `lab2/build` directory. Among other 
 The remaining steps follow the depicted workflow from left to right:
 
 
+<img src="../images/lab2_flow_diagram.png" style="height: auto; width: 100%">
+
+##### Step 2
+
+As noted in Step 1, you will implement the functionality of this lab as two LLVM passes called StaticAnalysisPass and DynamicAnalysisPass. LLVM passes are subprocesses of the LLVM framework.
+They usually perform transformations, optimizations, or analyses on programs.
+Each pass operates on the LLVM IR representation of the input program.
+So, to exercise this lab on an input C program, you must first compile the program to LLVM IR, as you did in Part 1:
+
+```sh
+/lab2$ cd test
+/lab2/test$ clang -emit-llvm -S -fno-discard-value-names -c -o simple0.ll
+simple0.c -g
+```
+
+##### Step 3
+
+Next, we use opt to run the provided StaticAnalysisPass pass on the compiled C
+program:
+
+```sh
+/lab2/test$ opt -load ../build/StaticAnalysisPass.so -StaticAnalysisPass -S
+simple0.ll -o simple0.static.ll
+...
+```
+`opt` is an LLVM tool that performs analyses and optimizations on LLVM IR.
+The option `-load` loads our LLVM pass library while `-StaticAnalysisPass` instructs opt to run the pass on `simple0.ll`.
+(Libraries can and often do contain multiple LLVM passes.)
+Consult the [documentation of opt][opt-doc] to understand the potential ways to use the tool; it may help you build and debug your solutions.
+Similarly, we use `opt` to run the provided `DynamicAnalysisPass` pass on the compiled C program:
+
+```sh
+/lab2/test$ opt -load ../build/DynamicAnalysisPass.so -DynamicAnalysisPass -S
+simple0.ll -o simple0.dynamic.ll
+```
+
+The program produced in `simple0.static.ll` should be identical to `simple0.ll` while the program in `simple0.dynamic.ll` won’t be for this lab.
+You can use `diff` to verify this:
+
+```sh
+/lab2/test$ diff simple0.static.ll simple0.ll
+1c1
+< ; ModuleID = 'simple0.ll'
+---
+> ; ModuleID = 'simple0.c'
+/lab2/test$ diff simple0.dynamic.ll simple0.ll
+...
+```
+
+##### Step 4
+
+Next, compile the instrumented program and link it with the provided runtime library to produce a standalone executable named `simple0`:
+
+```sh
+/lab2/test$ clang -o simple0 -L../build -lruntime simple0.dynamic.ll
+```
+
+##### Step 5
+
+Finally run the executable on the empty input; note that you may have to manually provide test input for programs that expect non-empty input:
+
+```sh
+/lab2/test$ ./simple0
+```
+
+In this lab, you will add your code to `src/StaticAnalysisPass.cpp` and
+`src/DynamicAnalysisPass.cpp`.
+The provided `StaticAnalysisPass` reports the location of all instructions in the program and you will be implementing functionality to report the location,
+type and operands of every binary operator in a program.
+The provided `DynamicAnalysisPass` modifies the program in a manner such that when executing the program, it will report whenever an instruction is executed by printing the line and column number of the instruction to a coverage file.
+You will be implementing additional functionality that modifies a program to also report the location, type and the runtime values of the operands of a binary operator when it is executed.
+We will specify the exact output format in the next section but after completion your output for `StaticAnalysisPass` on `simple0.c` should be:
+
+```sh
+Running Static Analysis Pass on function main
+Locating Instructions
+2, 7
+2, 7
+3, 7
+3, 7
+4, 7
+4, 11
+4, 15
+4, 13
+4, 7
+5, 3
+Division on Line 4, Column 13 with first operand %0 and second operand %1
+```
+
+You may notice here that multiple instructions can have the same location.
+We will explore the reasoning behind this later in the document.
+After completing `DynamicAnalysisPass`, executing `simple0` should create two files: `simple0.cov` and `simple0.binops` with the following contents:
+
+```sh
+# simple0.cov
+2, 7
+2, 7
+3, 7
+3, 7
+4, 7
+4, 11
+4, 15
+4, 13
+4, 7
+5, 3
+# simple0.binops
+Division on Line 4, Column 13 with first operand=3 and second operand=2
+```
+
+### Lab Instructions
+
+**Static Analysis**.
+As mentioned previously, you are provided with `src/StaticAnalysisPass.cpp` that contains one static analysis that reports the location of all instructions in the program, and you will be adding another analysis to it.
+First spend some time to understand the provided analysis that prints out the location of all Instructions, the LLVM primer will be helpful for understanding the API’s used here.
+Next you will implement a static analysis that prints out the kind, location and the operands of every instructions of type BinaryOperator and print in the following format:
+
+```sh
+Division on Line 4, Column 13 with first operand %0 and second operand %1
+<Operator> on Line <Line>, Column <Col> with first operand <OP1> and second
+operand <OP2>
+```
+
+You will find the functions `getBinOpSymbol` and `getBinOpName` from `Utils.h` helpful in doing this, it is recommended that you take a glance at the implementation of `getBinOpSymbol`.
+You can use the `variable` function from `Utils.h` to get the name of an operand from its corresponding LLVM Value.
+
+**Dynamic Analysis**.
+It involves inspecting a running program for information about its state and behavior during runtime; this is in contrast to static analysis which analyzes the properties of code independent of any execution.
+One way to inspect the runtime behavior of a program is by injecting code into the program during compile time; this technique falls under the umbrella term [instrumentation][instrumentation-def].
+For both static analysis in `src/StaticAnalysisPass.cpp` we will have a corresponding dynamic analysis instrumentation in `src/DynamicAnalysisPass.cpp`.
+We have provided you with an implementation for the first analysis which injects a call to `__coverage__` function before every instruction, this function stores the line and column of the executing instruction to a coverage file.
+Study the implementation to understand the APIs used for injecting the function.
+You will implement a dynamic analysis that tracks the kind, location as well as the runtime values of the operands to a binary operator.
+For this you will have to check if an instruction is a `BinaryOperator` and instrument it with the `instrumentBinOpOperands` function, which you will be implementing next.
+The `instrumentBinOpOperands` function has to inject calls to `__binop_op__` before every binary operator.
+You can see that `__binop_op__` takes 5 arguments, namely, a symbol for the operator, the line and column of the operation and the runtime values of the two operands.
+You can use the `getBinOpSymbol` function to get the symbol corresponding to the operator.
+Inorder to get the runtime values of the operands, it is necessary to keep in mind that in LLVM **a variable defined by an instruction is represented by the instruction itself**.
+
+**_Code Coverage Primer_**.
+Code coverage is a measure of how much of a program’s code is executed in a particular run.
+There are a number of different criterias to describe coverage.
+In this lab we are providing line coverage and you are implementing an artificial criteria of tracking binary operators during the execution of a program using the same mechanisms underlying modern code coverage tools, such as the LLVM’s source-based code coverage tool and gcov.
+It instruments the program’s LLVM IR instructions at compile-time to record the line and column number of the program’s source-level instructions that are executed at run-time.
+This seemingly primitive information enables powerful software analysis use-cases.
+In the next lab, you will use line coverage information to guide an automated test input generator, thereby realizing the architecture of modern industrial-strength fuzzers.
+
+<img src="../images/code_coverages_example.png" style="height: auto; width: 100%">
+
+**_Debug Location Primer_**.
+When you compile a C program with the `-g` option, LLVM will include debug information for LLVM IR instructions.
+Using the aforementioned instrumentation techniques, your LLVM pass can gather this debug information for an `Instruction`, and use it in your analysis.
+We will discuss the specifics of this interface in the following sections.
+
+**_Instrumentation Pass_**.
+We have provided a framework from which you can build your LLVM pass.
+You will need to edit the `src/DynamicAnalysisPass.cpp` file to implement features to your LLVM Pass.
+File `lib/runtime.c` contains functions that you will inject using your pass:
+
+```c
+void __binop_op__(char c, int line, int col, int op1, int op2);
+```
+As you will create a dynamic analysis, your pass should instrument the code with calls to these functions.
+In short, to complete `DynamicAnalysisPass` in this lab you have the following high level tasks:
+
++ Check for binary operators and instrument it using `instrumentBinOpOperands`.
++ Implement `instrumentBinOpOperands` to insert calls to `__binop_op__`.
+
+**_Inserting Instructions into LLVM code_**.
+Once you are familiar with the organization of LLVM IR, LLVM instructions, and the `Instruction` class after finishing Part 1 and completing static analysis You can start working on `DynamicAnalysisPass`, for this you will need to use the LLVM API to insert additional instructions into a program.
+There are [manys ways to do this in LLVM][insert-instrx].
+One common pattern when working with LLVM is to create a new instruction and insert it directly before some instruction.
+For example, consider this code snippet:
+
+```cpp
+Instruction* ExistingInstruction = ...;
+auto *NewInst = new Instruction(..., ExistingInstruction);
+```
+
+A new instruction (`NewInst`) is created and inserted before an existing Instruction `ExistingInstruction`.
+Subclasses of `Instruction` have similar methods for doing this.
+In particular, for this lab you can use this pattern to create and insert a call instruction (`CallInst`), as discussed below.
+You should also take a look at how a call instruction was inserted into a program in the `instrumentCoverage` function, as an example of the instructions below.
+
+**_Loading C functions into LLVM code_**.
+We have provided the definition of C functions in the `runtime.c` file for you, but you have to inject LLVM instructions to call them from instrumented code.
+
+Before a function can be called within a Module, it has to be loaded into the Module using the appropriate LLVM API [Module::getOrInsertFunction][getOrInsert].
+One way to do this is illustrated below:
+
+```cpp
+M->getOrInsertFunction(FunctionName, return_type, arg1_type, …, argN_type);
+```
+
+Here, `return_type`, `arg1_type`, … `argN_type`, are variables that describe the LLVM Type of the arguments to the function.
+For example, the C-type int is usually the LLVM Type i32, and char is i8, boolean is i1.
+This step is akin to declaring a function in C or C++.
+
+Next say, you want the function to be called right before some instruction I. 
+For this you will have to create a call instruction using [CallInst::Create][create] as illustrated below:
+
+```cpp
+Instruction I = ...;
+auto *NewFunction = M->getFunction(FunctionName);
+CallInst::Create(NewFunction, Args, "", &I);
+```
+
+Here, you should populate `std::vector<Value *> Args` with appropriate values for arguments to the function.
+Additionally as previously stated, in LLVM, a variable defined by an instruction is represented by the instruction itself.
+Furthermore, the `Instruction` class is a subclass of the `Value`; this makes passing a variable defined by an Instruction to a function as an argument relatively straightforward.
+
+**_Debug Locations_**.
+As we alluded previously, LLVM will store code location information of the _original C program for_ LLVM instructions when compiled with `-g`.
+This is done through the DebugLoc class:
+
+```cpp
+Instruction* I = …;
+DebugLoc Debug = I->getDebugLoc();
+printf(“Line No: %d\n”, Debug.getLine());
+```
+
+You will need to gather and forward this information to the appropriate functions.
+Not every single LLVM instruction corresponds to a specific line in its C source code.
+So before using debug information, you generally need to check if an Instruction actually has it.
+
+### Understanding Static and Dynamic Properties of Code
+
+Code has two types of properties, static and dynamic.
+Static properties are things that can be inferred from the source representation of the code and are independent of any specific run of the program.
+On the other hand, behavior of code during runtime is captured by its dynamic properties.
+In Part 2, you implement a LLVM pass that statically finds all the binary operators and its operands; you also implement a LLVM pass that instruments all binary operators to collect the dynamic property describing which binary operators are executed in a given run of a program, in what order, and with what operands.
+Both static and dynamic properties tell us interesting facts about a program that can be leveraged in various ways.
+In particular, for this course we shall use them to find bugs in a program.
+
 
 ### Submission
 
 Once you are done with the lab, you can create a `submission.zip` file by using the following command:
 
 ```sh
-lab2$ make submit
+/lab2$ make submit
 ...
 submission.zip created successfully.
 ```
 Then upload the `submission.zip` file to Gradescope.
 
 
-[course-vm-doc]: https://cis.upenn.edu/~cis547/vm.doc
-[llvm-primer]: https://cis.upenn.edu/~cis547/primer.doc
+[llvm-primer]: https://cis.upenn.edu/cis547/primer.doc
 [llvm-lang-ref]: https://llvm.org/docs/LangRef.html
 [llvm-api]: https://releases.llvm.org/8.0.1/docs/index.html
 [llvm-pass]: https://llvm.org/docs/WritingAnLLVMPass.html
@@ -113,4 +345,8 @@ Then upload the `submission.zip` file to Gradescope.
 [clang-clie-opts]: https://releases.llvm.org/8.0.0/tools/clang/docs/UsersManual.html#command-line-options
 [cmake-tutorial]: https://cmake.org/cmake/help/latest/guide/tutorial/index.html
 [makefile-tutorial]: https://www.gnu.org/software/make/manual/html_node/Simple-Makefile.html#Simple-Makefile
-
+[opt-doc]: https://releases.llvm.org/8.0.0/docs/CommandGuide/opt.html
+[instrumentation-def]: https://en.wikipedia.org/wiki/Instrumentation_(computer_programming)
+[insert-instrx]: https://releases.llvm.org/8.0.0/docs/ProgrammersManual.html#creating-and-inserting-new-instructions
+[getOrInsert]: https://llvm.org/doxygen/classllvm_1_1Module.html
+[create]: https://llvm.org/doxygen/classllvm_1_1CallInst.html#a850d8262cd900958b3153c4aa080b2bb
