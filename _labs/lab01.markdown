@@ -10,7 +10,7 @@ synopsis: |
 
 The objective of this lab is to use standard analysis tools for static and
 dynamic analysis on C programs to discover divide-by-zero errors and interpreting
-their results to better understand various tradeoffs between the techniques.
+their results to better understand various trade-offs between the techniques.
 
 ### Pre-Requisites
 
@@ -84,7 +84,7 @@ and difference bound matrix (dbm) abstractions.
 /lab1$ make
 ```
 
-On running the abouve command, you will see the output that looks
+On running the above command, you will see the output that looks
 something like this:
 
 ```
