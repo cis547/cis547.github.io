@@ -15,7 +15,7 @@ In each lab, you will implement or apply a software analysis technique that is t
 in the lectures, mostly using C++.
 If you are new to C++, read the article
 [A Whirlwind Tour of C++][whirlwind-tour-of-cpp]
-and complete the warmup exercise.
+and complete the warm-up exercise.
 The aim of each of the labs is to reinforce concepts learned in the lectures
 while also preparing you to develop and tailor software analyses
 for a broad range of use-cases in the real world.
@@ -31,8 +31,8 @@ It is widely used in industry including at Apple, Facebook, Google, and Microsof
 The duration of each lab is a week or two.
 It is impractical to implement a standalone software analysis for the entire C
 language in that duration.
-To allow you to focus on essential concepts, we have provided a containierized
-virtual machine (VM) based on Ubuntu 18.04 preloaded with tools and libraries
+To allow you to focus on essential concepts, we have provided a containerized
+virtual machine (VM) based on Ubuntu 18.04 pre-loaded with tools and libraries
 required to conduct the labs.
 Lab instructions assume you are using the course VM and
 it has been set up following this document.
@@ -53,7 +53,7 @@ how to install more, and some FAQs.
 The labs for this course are delivered through the course’s Github repository.
 So you will need to install git on your machine.
 You can find the instructions [here][git-install].
-Once you have installed git you should, clone the course repository from github with:
+Once you have installed git, you should clone the course repository from GitHub with:
 
 ```sh
 $ git clone https://github.com/cis547/cis547vm.git
@@ -75,7 +75,7 @@ but will be added as the course progresses.
 
 ##### Pulling Changes and Fixes.
 
-Using a git repository allows changes and hotfixes to assignments to be made
+Using a git repository allows changes and hot-fixes to assignments to be made
 on the fly by the course team.
 In order to grab these changes, we may ask you to run a `git pull` in order to get some of the latest lab content.
 
@@ -227,9 +227,9 @@ rather than the `cis547vm` folder.
 
 The labs are located under `./cis547vm/` in separate folders
 named `lab1` thru `lab9`.
-To work on a lab you open it's corresponding folder in VS Code
+To work on a lab you open its corresponding folder in VS Code
 and follow the above steps to reopen it in a container.
-The container comes preloaded with the following software:
+The container comes pre-loaded with the following software:
 
 + Course software such as clang, gcc, afl, souffle … That you will learn about and use for the labs.
 + Debugging tools [GDB][gdb] and [Valgrind][valgrind]. GDB offers extensive facilities for tracing and altering the execution of programs. Valgrind includes runtime tools to find memory errors, profile your program’s performance, and more.
@@ -304,7 +304,7 @@ navigate to System > Acceleration, and change the paravirtualization interface t
 
 ![003-virtualbox-hyperv][003-virtualbox-hyperv]
 
-This should enable you to keep Hyper-V enabled on your host machine while preserving the ability to use Docker and VirtualBox VMs at the same time.
+This should enable you to keep Hyper-V enabled on your host machine whilst preserving the ability to use Docker and VirtualBox VMs at the same time.
 
 Alternatively, it’s also possible to run Docker within a Linux-based VM.
 You can follow [installation instructions][docker-ubuntu] here for Ubuntu, but if you’re not using
