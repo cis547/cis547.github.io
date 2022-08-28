@@ -31,7 +31,7 @@ For the second part of this lab you will implement various functions in `src/Cha
 
 The skeleton code for Lab6 is located under `cis547vm/lab6/`.
 We will frequently refer to the top level directory for Lab 6 as `lab6` when describing file locations for the lab. 
-Open the lab6 directory in VSCode following the Instructions from the [Course VM document][Course VM].
+Open the lab6 directory in VSCode following the Instructions from the [Course VM document][course-vm].
 
 ##### Step 1.
 
@@ -504,8 +504,8 @@ submission.zip created successfully.
 
 Then upload the submission file to Gradescope.
 
-[Course VM]: https://cis.upenn.edu/~cis547/vm.doc
-[lab07]: https://cis.upenn.edu/~cis547/lab7.doc
+[course-vm]: {{ site.baseurl }}/resources/course-vm
+[lab07]: {{ site.baseurl }}/labs/lab07
 [LLVM template functions]: http://releases.llvm.org/8.0.0/docs/ProgrammersManual.html#the-isa-cast-and-dyn-cast-templates
 [LLVM CmpInst]: https://llvm.org/doxygen/classllvm_1_1CmpInst.html
 [LLVM CastInst]: https://llvm.org/doxygen/classllvm_1_1CastInst.html

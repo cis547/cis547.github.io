@@ -23,7 +23,7 @@ The skeleton code for Lab 5 is located under `cis547vm/lab5/`.
 We will frequently refer to the top level directory for Lab 5 as `lab5`
 when describing file locations for the lab.
 Open the `lab5` directory in VSCode following the Instructions
-from [Course VM document][Course VM Document].
+from [Course VM document][course-vm].
 
 The lab in split into three parts:
    1. In part 1, you will implement two instrumentations, one to
@@ -150,8 +150,8 @@ and generate a *feedback report*.
 By now you should feel comfortable working with the LLVM compiler
 infrastructure, but for a refresher, consult Lab 2
 and see the paragraphs titled
-["Inserting Instruction into LLVM Code"][lab2 instructions] and
-["Loading C functions into LLVM"][lab2 instructions].
+["Inserting Instruction into LLVM Code"][lab02] and
+["Loading C functions into LLVM"][lab02].
 
 #### Part 2: Fuzzer
 
@@ -366,9 +366,9 @@ submission.zip created successfully.
 Then upload the submission file to Gradescope.
 
 
-[lab2 instructions]: https://cis.upenn.edu/~cis547/lab2.doc
+[lab02]: {{ site.baseurl }}/labs/lab02
 [lab5 sample fuzzer inputs]: {{ '/downloads/lab5/fuzz_output_test2.zip' | relative_url }}
-[Course VM Document]: https://cis.upenn.edu/~cis547/vm.doc
+[course-vm]: {{ site.baseurl }}/resources/course-vm
 
 
 
