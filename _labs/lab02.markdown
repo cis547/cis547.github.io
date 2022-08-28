@@ -91,7 +91,7 @@ You should see several files created in the `lab2/build` directory. Among other 
 The remaining steps follow the depicted workflow from left to right:
 
 
-<img src="../images/lab2_flow_diagram.png" style="height: auto; width: 100%">
+<img src="../images/lab2/lab2_flow_diagram.png" style="height: auto; width: 100%">
 
 ##### Step 2
 
@@ -237,7 +237,7 @@ It instruments the program’s LLVM IR instructions at compile-time to record th
 This seemingly primitive information enables powerful software analysis use-cases.
 In the next lab, you will use line coverage information to guide an automated test input generator, thereby realizing the architecture of modern industrial-strength fuzzers.
 
-<img src="../images/code_coverages_example.png" style="height: auto; width: 100%">
+<img src="../images/lab2/code_coverages_example.png" style="height: auto; width: 100%">
 
 **_Debug Location Primer_**.
 When you compile a C program with the `-g` option, LLVM will include debug information for LLVM IR instructions.
