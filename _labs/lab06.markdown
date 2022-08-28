@@ -505,7 +505,7 @@ submission.zip created successfully.
 Then upload the submission file to Gradescope.
 
 [course-vm]: {{ site.baseurl }}/resources/course-vm
-[lab07]: https://cis.upenn.edu/~cis547/lab7.doc
+[lab07]: {{ site.baseurl }}/labs/lab07
 [LLVM template functions]: http://releases.llvm.org/8.0.0/docs/ProgrammersManual.html#the-isa-cast-and-dyn-cast-templates
 [LLVM CmpInst]: https://llvm.org/doxygen/classllvm_1_1CmpInst.html
 [LLVM CastInst]: https://llvm.org/doxygen/classllvm_1_1CastInst.html

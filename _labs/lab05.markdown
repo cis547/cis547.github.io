@@ -150,8 +150,8 @@ and generate a *feedback report*.
 By now you should feel comfortable working with the LLVM compiler
 infrastructure, but for a refresher, consult Lab 2
 and see the paragraphs titled
-["Inserting Instruction into LLVM Code"][lab2 instructions] and
-["Loading C functions into LLVM"][lab2 instructions].
+["Inserting Instruction into LLVM Code"][lab02] and
+["Loading C functions into LLVM"][lab02].
 
 #### Part 2: Fuzzer
 
@@ -366,7 +366,7 @@ submission.zip created successfully.
 Then upload the submission file to Gradescope.
 
 
-[lab2 instructions]: https://cis.upenn.edu/~cis547/lab2.doc
+[lab02]: {{ site.baseurl }}/labs/lab02
 [lab5 sample fuzzer inputs]: {{ '/downloads/lab5/fuzz_output_test2.zip' | relative_url }}
 [course-vm]: {{ site.baseurl }}/resources/course-vm
 

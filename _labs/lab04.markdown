@@ -56,7 +56,7 @@ To use `delta-debugger` with a program you first need to find some input
 that will crash the program.
 To find such an input we will use a fuzzer.
 
-Just like [`lab3`][lab3.doc], to run the `fuzzer` you will first need to instrument
+Just like [`lab3`][lab03], to run the `fuzzer` you will first need to instrument
 the program and setup appropriate output directories
 where fuzzer will store its results.
 
@@ -172,5 +172,5 @@ submission.zip created successfully.
 ```
 Then upload the `submission.zip` file to Gradescope.
 
-[lab3.doc]: https://cis.upenn.edu/~cis547/lab3.doc
+[lab03]: {{ site.baseurl }}/labs/lab3
 [course-vm]: {{ site.baseurl }}/resources/course-vm
