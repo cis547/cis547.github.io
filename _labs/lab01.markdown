@@ -24,7 +24,7 @@ static and dynamic analysis, soundness, completeness, precision, F1, and more.
 ##### Step 1.
 
 Set up the course development environment by following the instructions outlined
-in [Course VM and Lab Instructions][course-vm-doc].
+in [Course VM and Lab Instructions][course-vm].
 The skeleton code for Lab 1 is located under `/lab1`.
 We will refer to this top-level directory for Lab 1 simply as `lab1`
 when describing file locations for the lab.
@@ -169,7 +169,7 @@ Then upload the `submission.zip` file to Gradescope.
 
 [^1]: The file name encodes various things such as the ID of the crashing input, the crashing signal, the non-crashing seed input from which this crashing input was produced -- which in our case is always the file lab1/afl_input/seed.txt, and the operations by which the non-crashing seed input was transformed into this crashing input.
 
-[course-vm-doc]: https://cis.upenn.edu/~cis5470/vm.doc
+[course-vm]: {{ site.baseurl }}/resources/course-vm
 [cmake-tutorial]: https://cmake.org/cmake/help/latest/guide/tutorial/index.html
 [makefile-tutorial]: https://www.gnu.org/software/make/manual/html_node/Simple-Makefile.html
 [learn-make-in-y-minutes]: https://learnxinyminutes.com/docs/make/

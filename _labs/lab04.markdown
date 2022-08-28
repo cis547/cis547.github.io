@@ -21,7 +21,7 @@ in `lab3` to minimize the crashing inputs found by the fuzzer.
 The code for Lab 4 is located under `cis547vm/lab4/`.
 We will frequently refer to this directory `lab4`.
 Open the `lab4` directory in VSCode following the Instructions from
-[Course VM document][course-vm-doc].
+[Course VM document][course-vm].
 
 This lab builds on top of the previous labs.
 We have provided you with pre-compiled binaries for
@@ -173,4 +173,4 @@ submission.zip created successfully.
 Then upload the `submission.zip` file to Gradescope.
 
 [lab3.doc]: https://cis.upenn.edu/~cis547/lab3.doc
-[course-vm-doc]: https://cis.upenn.edu/~cis547/vm.doc
+[course-vm]: {{ site.baseurl }}/resources/course-vm

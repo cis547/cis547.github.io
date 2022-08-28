@@ -15,7 +15,7 @@ You will design a static analysis that detects such bugs by combining reaching d
 ### Setup
 
 The skeleton code for Lab8 is located under `cis547/lab8/`.
-We will frequently refer to the top level directory for Lab 8 as `lab8` when describing file locations for the lab. Open the `lab8` directory in VSCode following the Instructions from [Course VM document][course-vm-doc]
+We will frequently refer to the top level directory for Lab 8 as `lab8` when describing file locations for the lab. Open the `lab8` directory in VSCode following the Instructions from [Course VM document][course-vm]
 
 The following commands set up the lab, using the [Cmake][CMake Ref]/[Makefile][Make Ref] pattern seen before.
 
@@ -184,7 +184,7 @@ submission.zip created successfully.
 
 [CMake Ref]: https://en.wikipedia.org/wiki/CMake
 [Make Ref]: https://www.gnu.org/software/make/manual/html_node/
-[course-vm-doc]: https://cis.upenn.edu/~cis5470/vm.doc
+[course-vm]: {{ site.baseurl }}/resources/course-vm
 [bug]: https://www.cvedetails.com/cve/CVE-2019-14284/
 [log4shell]: https://en.wikipedia.org/wiki/Log4Shell
 [souffle]: https://souffle-lang.github.io/simple

@@ -23,7 +23,7 @@ The skeleton code for Lab 5 is located under `cis547vm/lab5/`.
 We will frequently refer to the top level directory for Lab 5 as `lab5`
 when describing file locations for the lab.
 Open the `lab5` directory in VSCode following the Instructions
-from [Course VM document][Course VM Document].
+from [Course VM document][course-vm].
 
 The lab in split into three parts:
    1. In part 1, you will implement two instrumentations, one to
@@ -368,7 +368,7 @@ Then upload the submission file to Gradescope.
 
 [lab2 instructions]: https://cis.upenn.edu/~cis547/lab2.doc
 [lab5 sample fuzzer inputs]: {{ '/downloads/lab5/fuzz_output_test2.zip' | relative_url }}
-[Course VM Document]: https://cis.upenn.edu/~cis547/vm.doc
+[course-vm]: {{ site.baseurl }}/resources/course-vm
 
 
 

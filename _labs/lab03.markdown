@@ -29,7 +29,7 @@ such as seed inputs, mutations, and feedback-directed testing.
 The code for Lab3 is located under `cis547vm/lab3`.
 We will frequently refer to the top level directory for Lab 3 as `lab3`
 when describing file locations for the lab.
-Open the `lab3` directory in VSCode following the Instructions from [Course VM document][course-vm-doc]
+Open the `lab3` directory in VSCode following the Instructions from [Course VM document][course-vm]
 
 This lab builds off the code coverage instrumentation from Lab 2.
 You are provided with a `Instrument.cpp` file in `lab3/src`;
@@ -353,5 +353,5 @@ update `lab3/config.txt` with the seed value you'd like us to use.
 The same seed value will be used for all test cases.
 
 
-[course-vm-doc]: https://cis.upenn.edu/~cis547/vm.doc
+[course-vm]: {{ site.baseurl }}/resources/course-vm
 [fuzzing-book-mutaion]: https://fuzzingbook.org/html/MutationFuzzer.html
