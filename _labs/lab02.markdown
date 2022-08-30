@@ -49,10 +49,12 @@ throughout the rest of the course to be able to read LLVM IR for debugging purpo
 Study the [LLVM Primer][llvm-primer] to understand the structure of the LLVM IR. The
 primer shows how to run LLVM on a sample C program to generate the corresponding LLVM
 IR program. You can use the C programs under `/lab2/test` directory to try it out:
+
 ```sh
 /lab2$ cd test
 /lab2/test$ clang -emit-llvm -S -fno-discard-value-names -c simple0.c
 ```
+
 `clang` is a compiler front-end for C that uses LLVM as a back-end. The user manual
 of clang has a useful reference to its [command-line options][clang-cli-opts].
 Briefly, 
@@ -138,6 +140,7 @@ program:
 simple0.ll -o simple0.static.ll
 ...
 ```
+
 `opt` is an LLVM tool that performs analyses and optimizations on LLVM IR. The option
 `-load` loads our LLVM pass library while `-StaticAnalysisPass` instructs opt to run
 the pass on `simple0.ll`. (Libraries can and often do contain multiple LLVM passes.)
@@ -305,6 +308,7 @@ you will inject using your pass:
 ```c
 void __binop_op__(char c, int line, int col, int op1, int op2);
 ```
+
 As you will create a dynamic analysis, your pass should instrument the code with
 calls to these functions. In short, to complete `DynamicAnalysisPass` in this lab you
 have the following high level tasks:
@@ -407,6 +411,7 @@ following command:
 ...
 submission.zip created successfully.
 ```
+
 Then upload the `submission.zip` file to Gradescope.
 
 
