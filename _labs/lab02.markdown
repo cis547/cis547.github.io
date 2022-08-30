@@ -16,7 +16,6 @@ It is the intermediate representation used by [LLVM][llvm], a popular compiler f
 + Understanding the [LLVM API][llvm-api] by using it to write a [LLVM pass][llvm-pass] and running it to statically find all the binary operators in a program and instrument them.
 + Understanding the differences between static and dynamic properties of a program, by executing instrumented code.
 
-
 ### Pre-Requisites
 
 + Watch the video lectures corresponding to the module on “The LLVM Framework”.
@@ -49,16 +48,12 @@ You can use the C programs under `/lab2/test` directory to try it out:
 `clang` is a compiler front-end for C that uses LLVM as a back-end. The user manual of clang has a useful reference to its [command-line options][clang-cli-opts].
 Briefly, 
 + `-S` instructs clang to perform preprocessing and compilation steps only
-+ `-emit-llvm` instructs the compiler to generate LLVM IR (which will be saved to
-  simple0.ll)
++ `-emit-llvm` instructs the compiler to generate LLVM IR (which will be saved to simple0.ll)
 + `-fno-discard-value-names` preserves names of values in the generated LLVM for improving readability.
-
 
 ##### Step 2
 
-Write by hand the C programs corresponding to the LLVM IR programs under the
-`/lab2/ir_programs` directory by filling in the provided template code in the
-`/lab2/c_programs` directory.
+Write by hand the C programs corresponding to the LLVM IR programs under the `/lab2/ir_programs` directory by filling in the provided template code in the `/lab2/c_programs` directory.
 Ensure that running the above command on your hand-written C programs generates the exact LLVM IR programs provided as we will auto-grade them.
 You can do so by using the diff command-line utility to check if your files are the same.
 
@@ -91,11 +86,11 @@ Run the following commands to set up this part of the lab:
 /lab2$ mkdir -p build && cd build
 /lab2/build$ cmake ..
 /lab2/build$ make
-```
+``` 
 
 You should see several files created in the `lab2/build` directory.
-Among other files, this builds two LLVM pass named `DynamicAnalysisPass.so` and `StaticAnalysisPass.so` from code that we have provided in `lab2/src/DynamicAnalysisPass.cpp` and `lab2/src/StaticAnalysisPass.cpp` (you will
-modify both these files in this lab), and a runtime library, named `libruntime.so` that provides some functions that are used in the lab. The remaining steps follow the depicted workflow from left to right:
+Among other files, this builds two LLVM pass named `DynamicAnalysisPass.so` and `StaticAnalysisPass.so` from code that we have provided in `lab2/src/DynamicAnalysisPass.cpp` and `lab2/src/StaticAnalysisPass.cpp` (you will modify both these files in this lab), and a runtime library, named `libruntime.so` that provides some functions that are used in the lab.
+The remaining steps follow the depicted workflow from left to right:
 
 <img src="{{ '/images/lab2/flowchart.png' | relative_url }}" style="height: auto;
 width: 100%">
@@ -163,8 +158,7 @@ Finally run the executable on the empty input; note that you may have to manuall
 /lab2/test$ ./simple0
 ```
 
-In this lab, you will add your code to `src/StaticAnalysisPass.cpp` and
-`src/DynamicAnalysisPass.cpp`.
+In this lab, you will add your code to `src/StaticAnalysisPass.cpp` and `src/DynamicAnalysisPass.cpp`.
 The provided `StaticAnalysisPass` reports the location of all instructions in the program and you will be implementing functionality to report the location, type and operands of every binary operator in a program.
 The provided `DynamicAnalysisPass` modifies the program in a manner such that when executing the program, it will report whenever an instruction is executed by printing the line and column number of the instruction to a coverage file.
 You will be implementing additional functionality that modifies a program to also report the location, type and the runtime values of the operands of a binary operator when it is executed.
@@ -187,7 +181,8 @@ Division on Line 4, Column 13 with first operand %0 and second operand %1
 ```
 
 You may notice here that multiple instructions can have the same location.
-We will explore the reasoning behind this later in the document. After completing `DynamicAnalysisPass`, executing `simple0` should create two files: `simple0.cov` and `simple0.binops` with the following contents:
+We will explore the reasoning behind this later in the document.
+After completing `DynamicAnalysisPass`, executing `simple0` should create two files: `simple0.cov` and `simple0.binops` with the following contents:
 
 ```
 # simple0.cov
@@ -301,7 +296,8 @@ auto *NewFunction = M->getFunction(FunctionName);
 CallInst::Create(NewFunction, Args, "", &I);
 ```
 
-Here, you should populate `std::vector<Value *> Args` with appropriate values for arguments to the function. Additionally as previously stated, in LLVM, a variable defined by an instruction is represented by the instruction itself. 
+Here, you should populate `std::vector<Value *> Args` with appropriate values for arguments to the function.
+Additionally as previously stated, in LLVM, a variable defined by an instruction is represented by the instruction itself. 
 Furthermore, the `Instruction` class is a subclass of the `Value`; this makes passing a variable defined by an Instruction to a function as an argument relatively straightforward.
 
 ##### Debug Locations
@@ -329,8 +325,7 @@ In particular, for this course we shall use them to find bugs in a program.
 
 ### Submission
 
-Once you are done with the lab, you can create a `submission.zip` file by using the
-following command:
+Once you are done with the lab, you can create a `submission.zip` file by using the following command:
 
 ```sh
 /lab2$ make submit
@@ -339,7 +334,6 @@ submission.zip created successfully.
 ```
 
 Then upload the `submission.zip` file to Gradescope.
-
 
 [llvm-primer]: https://cis.upenn.edu/cis547/primer.doc
 [llvm-lang]: https://llvm.org/docs/LangRef.html
