@@ -47,7 +47,7 @@ throughout the rest of the course to be able to read LLVM IR for debugging purpo
 ##### Step 1
 
 Study the [LLVM Primer][llvm-primer] to understand the structure of the LLVM IR. The
-primer shows how to run LLVM on a sample C program to generate the corresponding LLVM
+primer shows how to run `clang` on a sample C program to generate the corresponding LLVM
 IR program. You can use the C programs under `/lab2/test` directory to try it out:
 
 ```sh
