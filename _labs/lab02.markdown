@@ -27,8 +27,9 @@ by executing instrumented code.
 The lectures introduce the LLVM framework and the toolchain which will be used
 throughout the entire course.
 + Read the [LLVM Primer][llvm-primer]: Part I (Overview of LLVM) and Part II
-(Structure of LLVM IR). This is required for the first part of this lab as well
-as throughout the rest of the course to be able to read LLVM IR for debugging purposes.
+(Structure of LLVM IR).
+This is required for the first part of this lab as well as throughout the rest
+of the course to be able to read LLVM IR for debugging purposes.
 + Keep [LLVM Primer][llvm-primer]: Part III (The LLVM API) at hand as a quick
 reference for most of the LLVM API used in this lab and also throughout the course.
 
@@ -263,15 +264,17 @@ operand <OP2>
 
 You will find the functions `getBinOpSymbol` and `getBinOpName` from `Utils.h`
 helpful in doing this, it is recommended that you take a glance at the implementation
-of `getBinOpSymbol`. You can use the `variable` function from `Utils.h` to get the
-name of an operand from its corresponding LLVM Value.
+of `getBinOpSymbol`.
+You can use the `variable` function from `Utils.h` to get the name of an operand from
+its corresponding LLVM Value.
 
 ##### Dynamic Analysis
 It involves inspecting a running program for information about its state and
 behavior during runtime; this is in contrast to static analysis which analyzes
-the properties of code independent of any execution. One way to inspect the runtime
-behavior of a program is by injecting code into the program during compile time;
-this technique falls under the umbrella term [instrumentation][instrumentation-def].
+the properties of code independent of any execution.
+One way to inspect the runtime behavior of a program is by injecting code into
+the program during compile time; this technique falls under the umbrella term
+[instrumentation][instrumentation-def].
 For both static analysis in `src/StaticAnalysisPass.cpp` we will have a corresponding
 dynamic analysis instrumentation in `src/DynamicAnalysisPass.cpp`.
 We have provided you with an implementation for the first analysis which injects a
@@ -344,7 +347,8 @@ start working on `DynamicAnalysisPass`, for this you will need to use the LLVM A
 to insert additional instructions into a program.
 There are [manys ways to do this in LLVM][llvm-insert-inst].
 One common pattern when working with LLVM is to create a new instruction and insert
-it directly **_before_** some instruction. For example, consider this code snippet:
+it directly **_before_** some instruction.
+For example, consider this code snippet:
 
 ```cpp
 Instruction* ExistingInstruction = ...;
@@ -445,9 +449,9 @@ Then upload the `submission.zip` file to Gradescope.
 [llvm]: https://llvm.org/
 [clang-clie-opts]:https://releases.llvm.org/8.0.0/tools/clang/docs/UsersManual.html#command-line-options
 [cmake-tutorial]: https://cmake.org/cmake/help/latest/guide/tutorial/index.html
-[makefile-tutorial]:https://www.gnu.org/software/make/manual/html_node/Simple-Makefile.html#Simple-Makefile
+[makefile-tutorial]: https://www.gnu.org/software/make/manual/html_node/Simple-Makefile.html#Simple-Makefile
 [opt-doc]: https://releases.llvm.org/8.0.0/docs/CommandGuide/opt.html
-[instrumentation-def]:https://en.wikipedia.org/wiki/Instrumentation_(computer_programming)
-[llvm-insert-inst]:https://releases.llvm.org/8.0.0/docs/ProgrammersManual.html#creating-and-inserting-new-instructions
+[instrumentation-def]: https://en.wikipedia.org/wiki/Instrumentation_(computer_programming)
+[llvm-insert-inst]: https://releases.llvm.org/8.0.0/docs/ProgrammersManual.html#creating-and-inserting-new-instructions
 [llvm-insert-function]: https://llvm.org/doxygen/classllvm_1_1Module.html
-[callinst-create]:https://llvm.org/doxygen/classllvm_1_1CallInst.html#a850d8262cd900958b3153c4aa080b2bb
+[callinst-create]: https://llvm.org/doxygen/classllvm_1_1CallInst.html#a850d8262cd900958b3153c4aa080b2bb
