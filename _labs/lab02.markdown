@@ -442,7 +442,7 @@ submission.zip created successfully.
 
 Then upload the `submission.zip` file to Gradescope.
 
-[llvm-primer]: https://cis.upenn.edu/cis547/primer.doc
+[llvm-primer]: https://www.cis.upenn.edu/~cis5470/llvm.pdf
 [llvm-lang]: https://llvm.org/docs/LangRef.html
 [llvm-api]: https://releases.llvm.org/8.0.1/docs/index.html
 [llvm-pass]: https://llvm.org/docs/WritingAnLLVMPass.html
