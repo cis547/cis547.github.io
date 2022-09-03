@@ -3,6 +3,11 @@ td, th {
     padding: 10px;
 }
 
+code, kbd, pre, samp {
+ font-family: 'Fira Code', monospace;
+ font-size: 1em;
+}
+
 div.staff-profiles {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
