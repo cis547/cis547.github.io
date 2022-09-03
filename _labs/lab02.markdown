@@ -3,7 +3,7 @@ layout: lab
 _id: "2"
 title: "The LLVM Framework"
 synopsis: |
-  "Building an understanding of the LLVM framework: IR, API, and the toolchain."
+  Building an understanding of the LLVM framework: IR, API, and the toolchain.
 
 
 ---
@@ -269,6 +269,7 @@ You can use the `variable` function from `Utils.h` to get the name of an operand
 its corresponding LLVM Value.
 
 ##### Dynamic Analysis
+
 It involves inspecting a running program for information about its state and
 behavior during runtime; this is in contrast to static analysis which analyzes
 the properties of code independent of any execution.
@@ -296,6 +297,7 @@ that in LLVM **a variable defined by an instruction is represented by the
 instruction itself**.
 
 ##### Code Coverage Primer
+
 Code coverage is a measure of how much of a program’s code is executed in a
 particular run.
 There are a number of different criterias to describe coverage.
@@ -316,6 +318,7 @@ style="height: auto; width:
 100%">
 
 ##### Debug Location Primer
+
 When you compile a C program with the `-g` option, LLVM will include debug information
 for LLVM IR instructions.
 Using the aforementioned instrumentation techniques, your LLVM pass can gather this
@@ -323,6 +326,7 @@ debug information for an `Instruction`, and use it in your analysis.
 We will discuss the specifics of this interface in the following sections.
 
 ##### Instrumentation Pass
+
 We have provided a framework from which you can build your LLVM pass.
 You will need to edit the `src/DynamicAnalysisPass.cpp` file to implement features to
 your LLVM Pass.
@@ -341,6 +345,7 @@ level tasks:
 + Implement `instrumentBinOpOperands` to insert calls to `__binop_op__`.
 
 ##### Inserting Instructions into LLVM code
+
 Once you are familiar with the organization of LLVM IR, LLVM instructions, and the
 `Instruction` class after finishing Part 1 and completing static analysis You can
 start working on `DynamicAnalysisPass`, for this you will need to use the LLVM API
@@ -364,6 +369,7 @@ You should also take a look at how a call instruction was inserted into a progra
 in the `instrumentCoverage` function, as an example of the instructions below.
 
 ##### Loading C functions into LLVM code
+
 We have provided the definition of C functions in the `runtime.c` file for you, but
 you have to inject LLVM instructions to call them from instrumented code.
 Before a function can be called within a Module, it has to be loaded into the Module
@@ -371,10 +377,10 @@ using the appropriate LLVM API [Module::getOrInsertFunction][llvm-insert-functio
 One way to do this is illustrated below:
 
 ```cpp
-M->getOrInsertFunction(FunctionName, return_type, arg1_type, …, argN_type);
+M->getOrInsertFunction(FunctionName, return_type, arg1_type, ..., argN_type);
 ```
 
-Here, `return_type`, `arg1_type`, … `argN_type`, are variables that describe the
+Here, `return_type`, `arg1_type`, ... `argN_type`, are variables that describe the
 LLVM Type of the arguments to the function.
 For example, the C-type `int` is usually the LLVM Type `i32`, and `char` is `i8`,
 `boolean` is `i1`.
@@ -399,14 +405,15 @@ passing a variable defined by an Instruction to a function as an argument
 relatively straightforward.
 
 ##### Debug Locations
+
 As we alluded previously, LLVM will store code location information of the
 _original C program for_ LLVM instructions when compiled with `-g`.
 This is done through the DebugLoc class:
 
 ```cpp
-Instruction* I = …;
+Instruction* I = ...;
 DebugLoc Debug = I->getDebugLoc();
-printf(“Line No: %d\n”, Debug.getLine());
+printf("Line No: %d\n", Debug.getLine());
 ```
 
 You will need to gather and forward this information to the appropriate functions.
