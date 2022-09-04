@@ -3,6 +3,22 @@ layout: default
 ---
 
 <h2>Module {{page._id}}: {{page.title}}</h2>
-	<p>[<strong><a href="{{page.video}}">Video</a></strong>] [<strong><a href="{{page.slides}}">Slides</a></strong>]</p>
-	<p><strong>Description:</strong> {{page.description | markdownify}}</p>
-	<p><strong>Objectives:</strong> {{page.objectives | markdownify}}</p>
+<p>
+	{% if page.video %}
+	[<strong><a href="{{ page.video }}">Video</a></strong>]
+	{% endif %}
+	{% if page.slides %}
+	[<strong><a href="{{ page.slides }}">Slides</a></strong>]
+	{% endif %}
+</p>
+
+<p>
+	{% if page.description %}
+	<strong>Description:</strong> {{ page.description | markdownify}}
+	{% endif %}
+</p>
+<p>
+	{% if page.objectives %}
+	<strong>Objectives:</strong> {{ page.objectives | markdownify}}
+	{% endif %}
+</p>
