@@ -1,16 +1,16 @@
 ---
 layout: lecture
-_id: "9"
-title: "Statistical Debugging"
+_id: 9
+title: "Pointer Analysis"
 description: |
-  This module introduces Statistical Debugging -- a debugging technique that uses data collected from program runs by the user base to identify and fix bugs. Throughout this module, you’ll learn what data is worth collecting from the user base, how to collect this data, and then how to find bugs by analyzing the data. You’ll learn statistical measures and algorithms for isolating bugs that affect the user base.
+  This module introduces the concept of Pointer Analysis -- a form of dataflow analysis that reasons about the flow of pointers. A popular pointer analysis called Andersen's algorithm and the points-to graph representation is described. Different dimensions for classifying pointer analyses based on accuracy and cost are presented. A more scalable but less precise pointer analysis called Steensgaard's algorithm is introduced. In the end, an important security application of pointer analysis, called Control Flow Integrity, is discussed.
 objectives: |
-  + Understand the step-by-step process for Statistical Debugging and identify its benefits and challenges.
-  + Identify the kinds of program predicates to observe in user runs for the purpose of isolating bugs.
-  + Summarize the arrays of predicate counts in a user run and report them in a feedback profile.
-  + Understand different approaches for sampling program predicates and the uncertainty involved in the process.
-  + Compute Failure, Context and Increase metrics to express the likelihood of a bug in a predicate sample.
-  + Apply Statistical Debugging algorithms to isolate bugs in programs.
-slides: statistical_debugging.pdf
-video: "https://youtu.be/SuleZwpoFAw"
+  + Understand the need for Pointer Analysis and the two variants of May-alias analysis and Must-alias analysis.
+  + Apply Andersen’s algorithm to compute a Points-to Graph for a program that creates and manipulates objects.
+  + Apply different Heap Abstractions to a program and understand the differences between them.
+  + Classify Pointer Analysis algorithms using four dimensions: Flow Sensitivity, Context Sensitivity, Heap Abstraction, and Aggregate Modeling.
+  + Apply Andersen’s and Steensgaard’s algorithms to a program with stack-directed pointers.
+  + Understand how Pointer Analysis is applied in Control Flow Integrity to enforce security policies.
+slides: pointer_analysis.pdf
+video: "https://youtu.be/4_TTHz54_vc"
 ---

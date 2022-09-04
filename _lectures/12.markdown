@@ -1,14 +1,14 @@
 ---
 layout: lecture
-_id: "12"
-title: "Type Systems - Part II"
+_id: 12
+title: "Type Systems - Part I"
 description: |
-  This module elucidates connections between type systems and other forms of static analysis. It sets out by showing how to perform Type Inference using constraint solving and thereby alleviate annotation burden on programmers. It then demonstrates how other forms of static analyses can be described using the notation of type systems. You will learn how to describe three broad classes of static analyses -- flow-insensitive, flow-sensitive, and path-sensitive -- using type rules and understand their strengths and tradeoffs.
+  This module will introduce you to the most widely used form of static analysis known as Type Systems. You’ll learn a core language, the Lambda Calculus, and notation for specifying a type system for the language in the form of rules. You will then use the rules to determine whether a program is accepted or rejected by the type system. In the end, you’ll learn about soundness and completeness properties of type systems.
 objectives: |
-  + Apply the Type Inference algorithm to infer the type of a given program in the Lambda Calculus language.
-  + Understand how to specify other forms of Static Analysis using Type System notation.
-  + Explain the type rules for Flow-insensitive, Flow-sensitive, and Path-sensitive analysis.
-  + Determine whether a certain property of a given program can be verified using a Flow-insensitive, Flow-sensitive, or Path-sensitive analysis.
+  + Remember the notation for Type Systems and the type rules for the Lambda Calculus language.
+  + Derive the type of a given program in the Lambda Calculus by constructing a Type Derivation.
+  + Explain the concept of Type Soundness and the guarantee that a sound type system provides for well-typed programs.
+  + Understand the relationship between types in a type system and abstract values in other forms of static analysis.
 slides: type_systems.pdf
 video: "https://youtu.be/wr54MK77r2w"
 ---

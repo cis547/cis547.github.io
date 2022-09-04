@@ -1,14 +1,15 @@
 ---
 layout: lecture
-_id: "10"
-title: "Type Systems - Part I"
+_id: 10
+title: "Constraint-Based Analysis"
 description: |
-  This module will introduce you to the most widely used form of static analysis known as Type Systems. You’ll learn a core language, the Lambda Calculus, and notation for specifying a type system for the language in the form of rules. You will then use the rules to determine whether a program is accepted or rejected by the type system. In the end, you’ll learn about soundness and completeness properties of type systems.
+  In this module, you’ll learn about Constraint-Based Analysis, a popular approach to program analysis, and its benefits over the approaches studied earlier. You’ll learn a constraint language called Datalog and how it is used to specify intra-procedural and inter-procedural dataflow analyses. The module will also describe tradeoffs made in context-insensitive and context-sensitive inter-procedural analysis. In the end, you’ll learn about other constraint languages, SAT and SMT, and their applications to program analysis.
 objectives: |
-  + Remember the notation for Type Systems and the type rules for the Lambda Calculus language.
-  + Derive the type of a given program in the Lambda Calculus by constructing a Type Derivation.
-  + Explain the concept of Type Soundness and the guarantee that a sound type system provides for well-typed programs.
-  + Understand the relationship between types in a type system and abstract values in other forms of static analysis.
-slides: type_systems.pdf
-video: "https://youtu.be/wr54MK77r2w"
+  + Understand Constraint-Based Analysis and its benefits over other approaches.
+  + Understand the syntax and semantics of the Datalog constraint language.
+  + Use the Datalog constraint language to specify intra-procedural and inter-procedural dataflow analyses.
+  + Understand Context-Insensitive and Context-Sensitive inter-procedural dataflow analysis and their challenges and solutions.
+  + Understand the constraint languages SAT and SMT through applications to program analysis.
+slides: constraint_based_analysis.pdf
+video: "https://youtu.be/tT9m-NQ3NLs"
 ---

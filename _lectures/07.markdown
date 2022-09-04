@@ -1,16 +1,15 @@
 ---
 layout: lecture
-_id: "7"
-title: "Pointer Analysis"
+_id: 7
+title: "Dataflow Analysis - Part I"
 description: |
-  This module introduces the concept of Pointer Analysis -- a form of dataflow analysis that reasons about the flow of pointers. A popular pointer analysis called Andersen's algorithm and the points-to graph representation is described. Different dimensions for classifying pointer analyses based on accuracy and cost are presented. A more scalable but less precise pointer analysis called Steensgaard's algorithm is introduced. In the end, an important security application of pointer analysis, called Control Flow Integrity, is discussed.
+  This module delves into Dataflow Analysis -- a popular type of static analysis widely used in compilers and software quality tools. It introduces the WHILE language and the control-flow graph representation of WHILE programs on which dataflow analyses operate. Two classic dataflow analyses are presented: Reaching Definitions Analysis and Very Busy Expressions Analysis. The similarities and differences of the two analyses are discussed.
 objectives: |
-  + Understand the need for Pointer Analysis and the two variants of May-alias analysis and Must-alias analysis.
-  + Apply Andersen’s algorithm to compute a Points-to Graph for a program that creates and manipulates objects.
-  + Apply different Heap Abstractions to a program and understand the differences between them.
-  + Classify Pointer Analysis algorithms using four dimensions: Flow Sensitivity, Context Sensitivity, Heap Abstraction, and Aggregate Modeling.
-  + Apply Andersen’s and Steensgaard’s algorithms to a program with stack-directed pointers.
-  + Understand how Pointer Analysis is applied in Control Flow Integrity to enforce security policies.
-slides: pointer_analysis.pdf
-video: "https://youtu.be/4_TTHz54_vc"
+  + Define and represent the result of a Dataflow Analysis using control-flow graphs and the WHILE language.
+  + Understand the properties of Dataflow Analysis and list some of their applications in compilers and software quality tools.
+  + Define the operations and abstract domain of Reaching Definitions Analysis and Very Busy Expressions Analysis.
+  + Demonstrate how Reaching Definitions Analysis works on a program in the WHILE language.
+  + Demonstrate how Very Busy Expressions Analysis works on a program in the WHILE language.
+slides: dataflow_analysis.pdf
+video: "https://youtu.be/zNgb5bpFgN0"
 ---

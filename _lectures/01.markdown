@@ -1,6 +1,6 @@
 ---
 layout: lecture
-_id: "1"
+_id: 1
 title: "Introduction to Software Analysis"
 description: |
   This module will introduce you to the domain of Software Analysis -- interchangeably called Program Analysis -- and its role in checking correctness properties of programs. You will learn about a general class of properties, called program invariants, and how they can be checked using static and dynamic analyses. Then, you’ll learn a step-by-step process of designing a static analysis to check program invariants. Through different examples, you will witness how this process achieves its objective by abstractly evaluating programs.

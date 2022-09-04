@@ -1,15 +1,15 @@
 ---
 layout: lecture
-_id: "8"
-title: "Constraint-Based Analysis"
+_id: 8
+title: "Dataflow Analysis - Part II"
 description: |
-  In this module, you’ll learn about Constraint-Based Analysis, a popular approach to program analysis, and its benefits over the approaches studied earlier. You’ll learn a constraint language called Datalog and how it is used to specify intra-procedural and inter-procedural dataflow analyses. The module will also describe tradeoffs made in context-insensitive and context-sensitive inter-procedural analysis. In the end, you’ll learn about other constraint languages, SAT and SMT, and their applications to program analysis.
+  This module introduces the two of the remaining classic dataflow analyses – Available Expressions Analysis and Live Variables Analysis. Then you’ll learn about the overall pattern followed by the four classic dataflow analyses. The module also delves into Interval Analysis, a modern dataflow analysis with many applications to finding security bugs. In the end, you’ll learn about the concept of widening to ensure termination of interval analysis.
 objectives: |
-  + Understand Constraint-Based Analysis and its benefits over other approaches.
-  + Understand the syntax and semantics of the Datalog constraint language.
-  + Use the Datalog constraint language to specify intra-procedural and inter-procedural dataflow analyses.
-  + Understand Context-Insensitive and Context-Sensitive inter-procedural dataflow analysis and their challenges and solutions.
-  + Understand the constraint languages SAT and SMT through applications to program analysis.
-slides: constraint_based_analysis.pdf
-video: "https://youtu.be/tT9m-NQ3NLs"
+  + Demonstrate how Available Expressions Analysis and Live Variables Analysis work on a program in the WHILE language.
+  + Compare and contrast the four classic Dataflow Analyses based on the dataflow pattern.
+  + Understand the importance of Interval Analysis in finding common errors in software.
+  + Define the operations and abstract domain of Interval Analysis.
+  + Apply the chaotic iteration algorithm to understand the step-by-step operation of Interval Analysis and recognize the importance of Widening.
+slides: dataflow_analysis.pdf
+video: "https://youtu.be/zNgb5bpFgN0"
 ---
