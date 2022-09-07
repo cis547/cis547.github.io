@@ -23,9 +23,6 @@ by executing instrumented code.
 
 ### Pre-Requisites
 
-+ Watch the video lectures corresponding to the module on “The LLVM Framework”.
-The lectures introduce the LLVM framework and the toolchain which will be used
-throughout the entire course.
 + Read the [LLVM Primer][llvm-primer]: Part I (Overview of LLVM) and Part II
 (Structure of LLVM IR).
 This is required for the first part of this lab as well as throughout the rest
