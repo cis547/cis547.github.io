@@ -220,6 +220,8 @@ Locating Instructions
 4, 7
 5, 3
 Division on Line 4, Column 13 with first operand %0 and second operand %1
+4, 7
+5, 3
 ```
 
 You may notice here that multiple instructions can have the same location.
