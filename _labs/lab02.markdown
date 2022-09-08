@@ -214,8 +214,6 @@ Locating Instructions
 4, 11
 4, 15
 4, 13
-4, 7
-5, 3
 Division on Line 4, Column 13 with first operand %0 and second operand %1
 4, 7
 5, 3
