@@ -451,7 +451,7 @@ Then upload the `submission.zip` file to Gradescope.
 [llvm-api]: https://releases.llvm.org/8.0.1/docs/index.html
 [llvm-pass]: https://llvm.org/docs/WritingAnLLVMPass.html
 [llvm]: https://llvm.org/
-[clang-clie-opts]:https://releases.llvm.org/8.0.0/tools/clang/docs/UsersManual.html#command-line-options
+[clang-cli-opts]:https://releases.llvm.org/8.0.0/tools/clang/docs/UsersManual.html#command-line-options
 [cmake-tutorial]: https://cmake.org/cmake/help/latest/guide/tutorial/index.html
 [makefile-tutorial]: https://www.gnu.org/software/make/manual/html_node/Simple-Makefile.html#Simple-Makefile
 [opt-doc]: https://releases.llvm.org/8.0.0/docs/CommandGuide/opt.html
