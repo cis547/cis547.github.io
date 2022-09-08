@@ -32,8 +32,10 @@ reference for most of the LLVM API used in this lab and also throughout the cour
 
 ### Setup
 
-+ Navigate to the `lab2` folder on your computer and open it in VS code.
-+ Press F1 key to display a search bar, search and select `Reopen in Container`.
++ Open the lab2 folder in VS Code, using the terminal command `code <lab2 directory>` 
+or 'Open Folder' option in VS Code.
++ Make sure the Docker is running on your machine.
++ Open the VS Code [Command Palette](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_command-palette); search and select `Reopen in Container`.
 + This will set up the development environment for this lab in VS Code.
 + Inside the development environment the skeleton code for Lab 2 will be locate
 under `/lab2`.
@@ -247,7 +249,7 @@ As mentioned previously, you are provided with `src/StaticAnalysisPass.cpp` that
 contains one static analysis that reports the location of all instructions in the
 program, and you will be adding another analysis to it.
 First spend some time to understand the provided analysis that prints out the location
-of all Instructions, the LLVM primer will be helpful for understanding the API’s used
+of all Instructions; the LLVM primer will be helpful for understanding the API’s used
 here.
 Next you will implement a static analysis that prints out the kind, location and the
 operands of every instructions of type BinaryOperator and print in the following
@@ -273,7 +275,7 @@ the properties of code independent of any execution.
 One way to inspect the runtime behavior of a program is by injecting code into
 the program during compile time; this technique falls under the umbrella term
 [instrumentation][instrumentation-def].
-For both static analysis in `src/StaticAnalysisPass.cpp` we will have a corresponding
+For each static analysis in `src/StaticAnalysisPass.cpp`, we will have a corresponding
 dynamic analysis instrumentation in `src/DynamicAnalysisPass.cpp`.
 We have provided you with an implementation for the first analysis which injects a
 call to `__coverage__` function before every instruction, this function stores the
@@ -343,7 +345,7 @@ level tasks:
 ##### Inserting Instructions into LLVM code
 
 Once you are familiar with the organization of LLVM IR, LLVM instructions, and the
-`Instruction` class after finishing Part 1 and completing static analysis You can
+`Instruction` class after finishing Part 1 and completing static analysis, you can
 start working on `DynamicAnalysisPass`, for this you will need to use the LLVM API
 to insert additional instructions into a program.
 There are [manys ways to do this in LLVM][llvm-insert-inst].
@@ -456,5 +458,5 @@ Then upload the `submission.zip` file to Gradescope.
 [opt-doc]: https://releases.llvm.org/8.0.0/docs/CommandGuide/opt.html
 [instrumentation-def]: https://en.wikipedia.org/wiki/Instrumentation_(computer_programming)
 [llvm-insert-inst]: https://releases.llvm.org/8.0.0/docs/ProgrammersManual.html#creating-and-inserting-new-instructions
-[llvm-insert-function]: https://llvm.org/doxygen/classllvm_1_1Module.html
+[llvm-insert-function]: https://llvm.org/doxygen/classllvm_1_1Module.html#a89b5f89041a0375f7ece431f29421bee
 [callinst-create]: https://llvm.org/doxygen/classllvm_1_1CallInst.html#a850d8262cd900958b3153c4aa080b2bb
