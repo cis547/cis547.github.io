@@ -1,6 +1,6 @@
 ---
 layout: lecture
-_id: "7"
+_id: 9
 title: "Pointer Analysis"
 description: |
   This module introduces the concept of Pointer Analysis -- a form of dataflow analysis that reasons about the flow of pointers. A popular pointer analysis called Andersen's algorithm and the points-to graph representation is described. Different dimensions for classifying pointer analyses based on accuracy and cost are presented. A more scalable but less precise pointer analysis called Steensgaard's algorithm is introduced. In the end, an important security application of pointer analysis, called Control Flow Integrity, is discussed.

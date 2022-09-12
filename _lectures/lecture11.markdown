@@ -1,6 +1,6 @@
 ---
 layout: lecture
-_id: "4"
+_id: 11
 title: "Automated Test Generation"
 description: |
   This module introduces the concept of automating test generation for units of code. The presented techniques guide test generation by leveraging different kinds of program specifications, such as types, invariants, and pre- and post-conditions. You’ll learn two orthogonal but complementary approaches: Randoop and Korat. Randoop is designed to test classes and libraries while Korat is used to test data structures.

@@ -1,6 +1,6 @@
 ---
 layout: lecture
-_id: "6"
+_id: 8
 title: "Dataflow Analysis - Part II"
 description: |
   This module introduces the two of the remaining classic dataflow analyses – Available Expressions Analysis and Live Variables Analysis. Then you’ll learn about the overall pattern followed by the four classic dataflow analyses. The module also delves into Interval Analysis, a modern dataflow analysis with many applications to finding security bugs. In the end, you’ll learn about the concept of widening to ensure termination of interval analysis.

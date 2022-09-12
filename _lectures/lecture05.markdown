@@ -1,6 +1,6 @@
 ---
 layout: lecture
-_id: "11"
+_id: 5
 title: "Delta Debugging"
 description: |
   This module introduces Delta Debugging -- a debugging technique that automates the task of minimizing a complex crashing test-case to help localize the cause of the program failure. Starting with an iterative binary search technique that cuts test-cases into half, you’ll learn a formal framework to shrink test-cases, culminating into the Delta Debugging Minimization algorithm. The running time and minimality guarantee provided by the algorithm are discussed. In the end, you’ll learn about applications of this technique to diverse debugging tasks in practice.

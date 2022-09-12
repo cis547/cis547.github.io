@@ -1,6 +1,6 @@
 ---
 layout: lecture
-_id: "12"
+_id: 13
 title: "Type Systems - Part II"
 description: |
   This module elucidates connections between type systems and other forms of static analysis. It sets out by showing how to perform Type Inference using constraint solving and thereby alleviate annotation burden on programmers. It then demonstrates how other forms of static analyses can be described using the notation of type systems. You will learn how to describe three broad classes of static analyses -- flow-insensitive, flow-sensitive, and path-sensitive -- using type rules and understand their strengths and tradeoffs.

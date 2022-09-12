@@ -1,6 +1,6 @@
 ---
 layout: lecture
-_id: "10"
+_id: 12
 title: "Type Systems - Part I"
 description: |
   This module will introduce you to the most widely used form of static analysis known as Type Systems. You’ll learn a core language, the Lambda Calculus, and notation for specifying a type system for the language in the form of rules. You will then use the rules to determine whether a program is accepted or rejected by the type system. In the end, you’ll learn about soundness and completeness properties of type systems.

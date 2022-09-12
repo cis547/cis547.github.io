@@ -1,6 +1,6 @@
 ---
 layout: lecture
-_id: "2"
+_id: 3
 title: "Software Specifications"
 description: |
   This module introduces you to Software Specifications and their role in software testing. You will learn about the landscape of testing methods and how program analysis can be used to automate testing. You’ll learn about different kinds of specifications, including pre- and post-conditions and loop- and class- invariants, and how they help improve program reliability. You’ll then learn how to automatically infer such specifications using the Houdini algorithm and how to measure the quality of a test suite to make it more robust.

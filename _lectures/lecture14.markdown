@@ -1,6 +1,6 @@
 ---
 layout: lecture
-_id: "13"
+_id: 14
 title: "Dynamic Symbolic Execution"
 description: |
   This module introduces a technique for automated test generation called Dynamic Symbolic Execution (DSE). DSE is an example of a hybrid analysis: it collaboratively combines static analysis and dynamic analysis. You’ll learn how it outperforms both random testing, which is based on purely dynamic analysis, and symbolic execution, which is based on purely static analysis. You’ll also learn about the effectiveness of the DSE approach in testing various real-world applications.
