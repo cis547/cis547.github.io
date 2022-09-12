@@ -314,7 +314,7 @@ Ubuntu there are some other flavors of Linux on the left navigation panel.
 [002-docker-settings]: ../images/resources/course-vm/002-docker-settings.png
 [003-virtualbox-hyperv]: ../images/resources/course-vm/003-virtualbox-hyperv.png
 
-[whirlwind-tour-of-cpp]: https://www.cis.upenn.edu/~cis5470/cpp.doc
+[whirlwind-tour-of-cpp]: {{ site.baseurl }}/resources/cpp
 [llvm]: https://llvm.org
 [git-install]: https://git-scm.com/
 [github]: https://github.com/
