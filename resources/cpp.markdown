@@ -440,7 +440,7 @@ int* baz = new int[100]; // allocates memory for 100 int array
 delete [] baz; // deletes memory pointed to by baz
 ```
 
-delete with [] indicates that the entire array should be deleted
+`delete` with `[]` indicates that the entire array should be deleted
 rather than a single element. Note: normally when an object's scope is
 left, its destructor will be called. However, if the object was
 dynamically declared using the new keyword, then it will persist in
