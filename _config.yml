@@ -2,12 +2,12 @@ title: "CIS 547 - Software Analysis"
 course: "CIS 547"
 url: https://cis547.github.io/
 navigation:
-  - title: Schedule
-    url: /schedule
   - title: Labs
     url: /labs
   - title: Lectures
     url: /lectures
+  - title: Schedule
+    url: /schedule
   - title: Staff
     url: /staff
 collections:
