@@ -10,6 +10,6 @@ objectives: |
   + Understand the importance of Interval Analysis in finding common errors in software.
   + Define the operations and abstract domain of Interval Analysis.
   + Apply the chaotic iteration algorithm to understand the step-by-step operation of Interval Analysis and recognize the importance of Widening.
-slides: dataflow_analysis.pdf
+slides: dataflow-analysis.pdf
 video: "https://youtu.be/zNgb5bpFgN0"
 ---

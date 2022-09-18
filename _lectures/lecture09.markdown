@@ -11,6 +11,6 @@ objectives: |
   + Classify Pointer Analysis algorithms using four dimensions: Flow Sensitivity, Context Sensitivity, Heap Abstraction, and Aggregate Modeling.
   + Apply Andersen’s and Steensgaard’s algorithms to a program with stack-directed pointers.
   + Understand how Pointer Analysis is applied in Control Flow Integrity to enforce security policies.
-slides: pointer_analysis.pdf
+slides: pointer-analysis.pdf
 video: "https://youtu.be/4_TTHz54_vc"
 ---

@@ -10,6 +10,6 @@ objectives: |
   + Use the Datalog constraint language to specify intra-procedural and inter-procedural dataflow analyses.
   + Understand Context-Insensitive and Context-Sensitive inter-procedural dataflow analysis and their challenges and solutions.
   + Understand the constraint languages SAT and SMT through applications to program analysis.
-slides: constraint_based_analysis.pdf
+slides: constraint-based-analysis.pdf
 video: "https://youtu.be/tT9m-NQ3NLs"
 ---
