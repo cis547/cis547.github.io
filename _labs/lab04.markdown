@@ -172,5 +172,5 @@ submission.zip created successfully.
 ```
 Then upload the `submission.zip` file to Gradescope.
 
-[lab03]: {{ site.baseurl }}/labs/lab3
+[lab03]: {{ site.baseurl }}/labs/lab03
 [course-vm]: {{ site.baseurl }}/resources/course-vm
