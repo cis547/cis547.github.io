@@ -226,9 +226,11 @@ class.
 
 As shown in the above-linked example, inheritance is specified using
 access modifiers `public`, `protected`, or `private`:
+
 ```cpp
 class Rectangle: public Shape { ... }
 ```
+
 A public inheritance (as above) behaves as expected: the variables
 inherited from the base class keep their access status.
 Conversely, in private inheritance, all inherited members become
@@ -263,6 +265,7 @@ Class B : public virtual A { }
 
 Class C : public virtual A { }
 ```
+
 This structure ensures that a class `D` that inherits from `B` and `C` would
 only contain one copy of `A`'s member variables. Read
 [Understanding Virtual Tables in C++](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/)
@@ -415,12 +418,14 @@ In some cases you can also specify reference semantics so that you're
 accessing the elements themselves rather than copies of each element.
 
 For example, after executing the below lines:
+
 ```cpp
 std::string s = "hello";
 for (auto& c : s) {
     c = 'a';
 }
 ```
+
 the string `s` will be set to `"aaaaa"`.
 
 #### `new` and `delete` keywords
