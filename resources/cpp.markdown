@@ -662,12 +662,12 @@ suggestions to improve this article.
 [online-cpp-repl]: https://repl.it/languages/cpp
 [cpp-classes]: https://www.cplusplus.com/doc/tutorial/classes/
 [separate-header-and-implementation-files]: https://www.cppforschool.com/tutorial/pdf/chapter21-separate-header-and-implementation-files.pdf
-[overloading-class-constructors]: http://th.cpp.sh/543b
+[overloading-class-constructors]: https://onlinegdb.com/Yx8IOx_h9
 [this-pointer]: https://www.cs.technion.ac.il/users/yechiel/c++-faq/using-this-in-ctors.html
-[isitme]: http://th.cpp.sh/5m2
-[class-friendship]: http://th.cpp.sh/3ws
-[member-friendship]: http://th.cpp.sh/3bu
-[inheritance]: http://th.cpp.sh/6sv7cq
+[isitme]: https://www.onlinegdb.com/iDyO5pvie
+[class-friendship]: https://onlinegdb.com/NPJCrr0M1
+[member-friendship]: https://onlinegdb.com/z-Y6zCzKv
+[inheritance]: https://onlinegdb.com/4TWMp-p5V
 [virtual-inheritance]: https://www.cprogramming.com/tutorial/virtual_inheritance.html
 [understanding-virtual-tables]: https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/
 [templates]: http://ultra.sdk.free.fr/docs/DxO/C%2B%2B%20Templates%20The%20Complete%20Guide.pdf
