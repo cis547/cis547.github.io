@@ -9,5 +9,5 @@ objectives: |
   + Become familiar with the LLVM API, understand how it can be used to analyze or instrument code.
   + Understand how to navigate through the complex LLVM documentation.
   + Hands-on practice with the LLVM IR and API to write your first Static and Dynamic analysis.
-slides: llvm.pdf
+slides: llvm-framework-primer.pdf
 ---

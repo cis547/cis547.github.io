@@ -9,6 +9,6 @@ objectives: |
   + Understand how to specify other forms of Static Analysis using Type System notation.
   + Explain the type rules for Flow-insensitive, Flow-sensitive, and Path-sensitive analysis.
   + Determine whether a certain property of a given program can be verified using a Flow-insensitive, Flow-sensitive, or Path-sensitive analysis.
-slides: type_systems.pdf
+slides: type-systems.pdf
 video: "https://youtu.be/wr54MK77r2w"
 ---

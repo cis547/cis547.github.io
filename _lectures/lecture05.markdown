@@ -9,6 +9,6 @@ objectives: |
   + Understand the step-by-step process of decomposing a test-case into a set of changes as part of the Delta Debugging algorithm.
   + Apply the Delta Debugging Minimization algorithm to find a 1-minimal test-case from the given set of changes.
   + Discuss different real-world applications of the Delta Debugging Minimization algorithm.
-slides: delta_debugging.pdf
+slides: delta-debugging.pdf
 video: "https://youtu.be/lGe2-y1xibY"
 ---

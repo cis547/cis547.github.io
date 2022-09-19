@@ -10,6 +10,6 @@ objectives: |
   + Compare Dynamic Symbolic Execution to Random Testing and Symbolic Execution.
   + Apply the Dynamic Symbolic Execution approach to test data structures.
   + Illustrate real-world applications of Dynamic Symbolic Execution using examples.
-slides: symbolic_execution.pdf
+slides: dynamic-symbolic-execution.pdf
 video: "https://youtu.be/UhtUyTJ-P2c"
 ---

@@ -9,6 +9,6 @@ objectives: |
   + Describe different fuzzing tools and their usage: AFL, LibFuzzer, OSS Fuzz, and ClusterFuzz.
   + Explain with examples grammar-based fuzzing in mobile applications.
   + Explain with examples fuzzing of multi-threaded programs using Bug Depth, the Cuzz algorithm, and its probabilistic guarantee.
-slides: random_testing.pdf
+slides: random-testing.pdf
 video: "https://youtu.be/nbN3IVkKTOM"
 ---

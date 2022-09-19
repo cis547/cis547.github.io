@@ -10,6 +10,6 @@ objectives: |
   + Explain and give examples of specifications of different units of a program such as functions, loops, and classes: Pre- and Post- Conditions, Loop Invariants, and Class Invariants.
   + Apply the Houdini algorithm on programs to automatically infer specifications and explain its pros and cons.
   + Measure the quality of a test suite using approaches: Code Coverage and Mutation Analysis.
-slides: software_specifications.pdf
+slides: software-specifications.pdf
 video: "https://youtu.be/Hieo2OygZRY"
 ---

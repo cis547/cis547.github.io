@@ -10,6 +10,6 @@ objectives: |
   + Define the operations and abstract domain of Reaching Definitions Analysis and Very Busy Expressions Analysis.
   + Demonstrate how Reaching Definitions Analysis works on a program in the WHILE language.
   + Demonstrate how Very Busy Expressions Analysis works on a program in the WHILE language.
-slides: dataflow_analysis.pdf
+slides: dataflow-analysis.pdf
 video: "https://youtu.be/zNgb5bpFgN0"
 ---

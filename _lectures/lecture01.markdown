@@ -13,6 +13,6 @@ objectives: |
   + Characterize program analyses (static and dynamic) on the basis of Soundness and Completeness and determine the tradeoffs made.
   + Characterize program analyses (static and dynamic) and quantify the accuracy of an analysis on the basis of Precision, Recall, and F-Measure.
   + List the primary consumers of program analysis: Compilers, Software Quality Tools, and Integrated Development Environments and give their examples.
-slides: intro_to_software_analysis.pdf
+slides: intro-to-software-analysis.pdf
 video: "https://youtu.be/v0dKdfmziHs"
 ---
