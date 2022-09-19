@@ -8,11 +8,11 @@ author: "Elizabeth Dinella"
 
 Author: {{ page.author }}
 
-C++ was originally created in the 1980s as an [extension of the C
-language](http://www-cs-students.stanford.edu/~sjac/c-to-cpp-info/c-to-cpp-differ)
+C++ was originally created in the 1980s as an
+[extension of the C language][c-cpp-differences]
 to add support for classes. Since its inception, C++ has grown
-enormously to include a host of features such as [exception
-handling](https://www.tutorialspoint.com/cplusplus/cpp_exceptions_handling.htm),
+enormously to include a host of features such as
+[exception handling][cpp-exception-handling],
 templates, an expansion of library functions, stronger type checking,
 inheritance, and other object-oriented concepts. This article will serve
 as a primer for C++ in this course as well as a source of resources for
@@ -22,18 +22,18 @@ This article is organized into three parts: *Classes & Objects, General
 Use C++,* and *C++ for LLVM*. *Classes & Objects* will cover classes in
 C++, access modifiers, and object-oriented concepts such as single and
 multiple inheritance, and polymorphism. *C++ for LLVM* will serve as an
-introduction to the [LLVM API](http://llvm.org/docs/ProgrammersManual.html)
+introduction to the [LLVM API][llvm-programmers-manual]
 which will be heavily used in the assignments for this course. Conversely,
 *General Use C++* will detail features that are not specific to the LLVM API,
 but will likely be frequently used in the assignments for this course.
 
-You are encouraged to try out different C++ features in this [Online
-C++ IDE](https://repl.it/languages/cpp) as you read through the
+You are encouraged to try out different C++ features in this
+[Online C++ IDE][online-cpp-repl] as you read through the
 rest of this article.
 
 ### Part 1: Classes & Objects
 
-> [Classes](http://www.cplusplus.com/doc/tutorial/classes/) are an
+> [Classes][cpp-classes] are an
 > expanded concept of *data structures*: like data structures, they can
 > contain data members, but they can also contain functions as members.
 > An object is an instantiation of a class. In terms of variables, a class
@@ -57,8 +57,8 @@ execute when called are written in the implementation file. The header
 and implementation files typically share the same name and end in ".h"
 and ".cpp" respectively.
 
-Here is an [example of a Time
-class](http://www.cppforschool.com/tutorial/pdf/chapter21-separate-header-and-implementation-files.pdf)
+Here is an
+[example of a Time class][separate-header-and-implementation-files]
 split between a header and implementation file. In this example, notice
 that the header file is referenced in the implementation file using:
 
@@ -132,7 +132,7 @@ variables and/or perform some setup. The *default constructor* is a
 special constructor that is called when an object of the class is
 declared but is not initialized with any arguments. For example,
 consider the following declarations of the Rectangle class from
-[here](http://th.cpp.sh/543b):
+[here][overloading-class-constructors]:
 
 ```cpp
 Rectangle r1; // ok, default constructor called
@@ -178,17 +178,15 @@ Rectangle::Rectangle(int x, int y) : width(x), height(y) { }
 
 #### `this` keyword
 
-> The keyword
-> [this](http://www.cs.technion.ac.il/users/yechiel/c++-faq/using-this-in-ctors.html)
+> The keyword [this][this-pointer]
 > represents a pointer to the object whose member function is being
-> executed. It is used within a
-> [class](http://www.cplusplus.com/doc/tutorial/classes/)'s member
+> executed. It is used within a [class][cpp-classes]'s member
 > function to refer to the object itself.
 
 It is often used to resolve ambiguity between a member variable of the
 object executing the call and an object of the same class passed as a
 parameter. An example illustrating this is shown in the member function
-[isitme](http://th.cpp.sh/5m2).
+[isitme][isitme].
 
 #### Static members
 
@@ -207,18 +205,18 @@ The `friend` keyword defines access relationships between functions and
 classes. If a class A is a "friend" of class B, member functions in
 class A can access private and protected members of class B. Friendship
 is defined in the class giving access (Class B in this example). An
-example of friend classes is shown [here](http://th.cpp.sh/3ws).
+example of friend classes is shown [here][class-friendship].
 
 Similarly, if a function is a "friend" of class B, it can access private
 and protected members of class B within its function body. An example of
-a friend function is shown [here](http://th.cpp.sh/3bu).
+a friend function is shown [here][member-friendship].
 
 #### Inheritance
 
 Inheritance creates an "*is-a*" relationship between the *derived* and
 *base* class. The derived class inherits member variables and functions
 from the base class. It can also include its own member variables and
-functions. An example can be found [here](http://th.cpp.sh/6sv7cq).
+functions. An example can be found [here][inheritance].
 The Rectangle class is derived from the base class, Shape.
 
 Recall that derived classes can access protected members in the base
@@ -256,9 +254,8 @@ Consider the infamous "Diamond Problem":
 
 Both B and C inherit from A and thus contain A's member variables. This
 could lead to ambiguities and duplicate copies of A's member variables
-in class D. To solve this, we can use *[Virtual
-Inheritance](https://www.cprogramming.com/tutorial/virtual_inheritance.html)*
-as follows:
+in class D. To solve this, we can use
+*[Virtual Inheritance][virtual-inheritance]* as follows:
 
 ```cpp
 Class B : public virtual A { }
@@ -268,7 +265,7 @@ Class C : public virtual A { }
 
 This structure ensures that a class `D` that inherits from `B` and `C` would
 only contain one copy of `A`'s member variables. Read
-[Understanding Virtual Tables in C++](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/)
+[Understanding Virtual Tables in C++][understanding-virtual-tables]
 to gain a deeper understanding of how this works under the hood.
 
 #### Polymorphism
@@ -288,8 +285,7 @@ specify types in nearly all declarations. However, this can lead to
 unnecessary repetition of code that is somewhat type independent.
 Consider the code for the STL vector. Regardless of the element type,
 the code to add an element, remove an element, calculate size, and even
-sort are likely identical.
-[Templates](http://ultra.sdk.free.fr/docs/DxO/C%2B%2B%20Templates%20The%20Complete%20Guide.pdf)
+sort are likely identical. [Templates][templates]
 provide a way to write programs that are *generic* or independent of any
 particular type. Below is an example of a templated swap function. So
 long as the types of n1 and n2 are equivalent, this function will be
@@ -375,7 +371,7 @@ instead of the more verbose version:
 ```
 
 In contrast, a reference is an alias to another variable.
-[References](https://www.tutorialspoint.com/cplusplus/cpp_references.htm)
+[References][references]
 are often used to pass objects to a function to persist modifications.
 By default, objects are passed by value, meaning they are copied at call
 time; any modifications of the object that occur in the function body
@@ -460,7 +456,7 @@ set of features. In this document, we will detail, arguably, the most
 important features: iterators, strings, I/O streams, and data
 structures.
 
-##### [Iterators](http://www.cplusplus.com/reference/iterator/)
+##### [Iterators][iterators]
 
 Iterators provide an interface to traverse containers (vectors,
 sets, maps, etc.) and view / edit specific elements stored in such
@@ -479,7 +475,7 @@ for (i = v.begin(); i != v.end(); ++i) {
 }
 ```
 
-##### [Strings](http://www.cplusplus.com/reference/string/string/)
+##### [Strings][strings]
 This powerful library simplifies the tedious character array
 manipulation tasks left to the developer in C. C++ strings are a
 wrapper around the array of characters that would be explicitly
@@ -491,7 +487,7 @@ manipulated in C. Developers can:
 - Access particular characters using the `[]` operator
 - Erase a substring from a string
 
-##### [I/O Streams](http://www.cplusplus.com/doc/tutorial/basic_io/)
+##### [I/O Streams][io-streams]
 
 The IOStream library is intended to replace the stdio library for
 an easier and more flexible input and output developer experience.
@@ -520,16 +516,14 @@ int main() {
 }
 ```
 
-However, according to the [LLVM style
-guide](https://llvm.org/docs/CodingStandards.html#include-iostream-is-forbidden),
+However, according to the [LLVM style guide][llvm-iostream-forbidden],
 IOStreams are forbidden. Instead, developers are encouraged to use
 LLVM's `raw_ostream`. For more details, we refer the reader to the *C++
 for LLVM* section below.
 
 ##### Data Structures
 
-The
-[C++ Standard Library (STL)](https://www.geeksforgeeks.org/the-c-standard-template-library-stl/)
+The [C++ Standard Library (STL)][standard-template-library]
 defines many useful containers that will feel familiar to readers
 with experience in Java or Python. The STL includes vectors,
 lists, queues, stacks, sets, and maps. Each of these containers
@@ -539,8 +533,7 @@ experience regardless of the container or element type. For
 example, `size()`, `empty()`, `max_size()`, `==`, `!=`, `swap`,
 a default constructor, copy constructor, and assignment constructor are
 shared by all STL containers. Here is a
-[detailed list](http://www.cs.ust.hk/~dekai/library/ECKEL_Bruce/) of
-STL containers and properties.
+[detailed list][stl-containers] of STL containers and properties.
 
 ##### Smart Pointers
 
@@ -575,8 +568,7 @@ are the three main types of smart pointers:
 
 #### LLVM data structures
 
-C++ [STL data
-structures](https://www.cs.helsinki.fi/u/tpkarkka/alglib/k06/lectures/containers.html)
+C++ [STL data structures][stl-containers]
 are for general-purpose use and have performance that is platform
 dependent.
 
@@ -639,9 +631,8 @@ A dynamic cast converts pointers to a more specific type in its class
 hierarchy at runtime.
 
 Consider the "*is-a*" relationship between an LLVM
-[AllocaInst](https://llvm.org/doxygen/classllvm_1_1AllocaInst.html)
-and an LLVM Instruction. In the assignments, we will often write control
-flow similar to the following structure:
+[AllocaInst][llvm-allocainst] and an LLVM Instruction. In the assignments, we
+will often write control flow similar to the following structure:
 
 ```cpp
 if (auto *AI = dyn_cast<AllocationInst>(Val)) {
@@ -664,3 +655,27 @@ We thank Kihong Heo, Greg Kofman, and Pardis Pashakhanloo for
 suggestions to improve this article.
 
 [001-diamond-inheritance]: ../images/resources/cpp/001-diamond-inheritance.svg
+
+[c-cpp-differences]: http://www-cs-students.stanford.edu/~sjac/c-to-cpp-info/c-to-cpp-differ
+[cpp-exception-handling]: https://www.tutorialspoint.com/cplusplus/cpp_exceptions_handling.htm
+[llvm-programmers-manual]: https://llvm.org/docs/ProgrammersManual.html
+[online-cpp-repl]: https://repl.it/languages/cpp
+[cpp-classes]: https://www.cplusplus.com/doc/tutorial/classes/
+[separate-header-and-implementation-files]: https://www.cppforschool.com/tutorial/pdf/chapter21-separate-header-and-implementation-files.pdf
+[overloading-class-constructors]: http://th.cpp.sh/543b
+[this-pointer]: https://www.cs.technion.ac.il/users/yechiel/c++-faq/using-this-in-ctors.html
+[isitme]: http://th.cpp.sh/5m2
+[class-friendship]: http://th.cpp.sh/3ws
+[member-friendship]: http://th.cpp.sh/3bu
+[inheritance]: http://th.cpp.sh/6sv7cq
+[virtual-inheritance]: https://www.cprogramming.com/tutorial/virtual_inheritance.html
+[understanding-virtual-tables]: https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/
+[templates]: http://ultra.sdk.free.fr/docs/DxO/C%2B%2B%20Templates%20The%20Complete%20Guide.pdf
+[references]: https://www.tutorialspoint.com/cplusplus/cpp_references.htm
+[iterators]: http://www.cplusplus.com/reference/iterator/
+[strings]: http://www.cplusplus.com/reference/string/string/
+[io-streams]: http://www.cplusplus.com/doc/tutorial/basic_io/
+[llvm-iostream-forbidden]: https://llvm.org/docs/CodingStandards.html#include-iostream-is-forbidden
+[standard-template-library]: https://www.geeksforgeeks.org/the-c-standard-template-library-stl/
+[stl-containers]: https://www.cs.helsinki.fi/u/tpkarkka/alglib/k06/lectures/containers.html
+[llvm-allocainst]: https://llvm.org/doxygen/classllvm_1_1AllocaInst.html
