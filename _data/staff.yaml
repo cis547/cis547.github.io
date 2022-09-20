@@ -1,38 +1,66 @@
-instructors:
-  - name: "Dr. Mayur Naik"
-    pennid: "mhnaik"
-    school: "seas"
-    university_email_provider: "seas.upenn.edu"
-    external_email: ""
-    website: "https://www.cis.upenn.edu/~mhnaik/"
-teaching_assistants:
-  2022-summer:
-    - name: "Harsh Parekh"
+people:
+  instructors:
+    - &mhnaik
+      name: "Dr. Mayur Naik"
+      pennid: "mhnaik"
+      school: "seas"
+      university_email_provider: "seas.upenn.edu"
+      external_email: ""
+      website: "https://www.cis.upenn.edu/~mhnaik/"
+  teaching_assistants:
+    - &hpar
+      name: "Harsh Parekh"
       position: "Head TA"
       pennid: "hpar"
       school: "seas"
       university_email_provider: "seas.upenn.edu"
       external_email: "harsh_parekh@outlook.com"
       website: "https://harsh.parekh.page/"
-    - name: "Josh Hanson"
+    - &jmhanson
+      name: "Josh Hanson"
       position: "TA"
       pennid: "jmhanson"
       school: "seas"
       university_email_provider: "seas.upenn.edu"
       external_email: "jmhanson@alumni.upenn.edu"
       website: "https://www.linkedin.com/in/josh-m-hanson/"
-    - name: "Rob Stanton"
+    - &masseybr
+      name: "Brendan"
+      position: "TA"
+      pennid: "masseybr"
+      school: "seas"
+      university_email_provider: "seas.upenn.edu"
+      external_email: ""
+      website: "https://www.linkedin.com/in/brendanmassey/"
+    - &nduddles
+      name: "Nathan Duddles"
+      position: "TA"
+      pennid: "nduddles"
+      school: "seas"
+      university_email_provider: "seas.upenn.edu"
+      external_email: "https://www.linkedin.com/in/nathanduddles/"
+    - &rstant
+      name: "Rob Stanton"
       position: "TA"
       pennid: "rstant"
       school: "seas"
       university_email_provider: "seas.upenn.edu"
       external_email: "rstanton11@yahoo.com"
       website: ""
+
+instructors:
+  - *mhnaik
+teaching_assistants:
+  2022-fall:
+    - *hpar
+    - *masseybr
+    - *nduddles
+    - *rstant
+  2022-summer:
+    - *hpar
+    - *jmhanson
+    - *rstant
+    - *masseybr
+    - *nduddles
   2021-fall:
-    - name: "Harsh Parekh"
-      position: "TA"
-      pennid: "hpar"
-      school: "seas"
-      university_email_provider: "seas.upenn.edu"
-      external_email: "harsh_parekh@outlook.com"
-      website: "https://harsh.parekh.page/"
+    - *hpar
