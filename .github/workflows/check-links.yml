@@ -1,0 +1,46 @@
+name: Check for broken links
+
+on:
+  workflow_dispatch: # Allow manual triggering.
+  schedule:
+    # Run every day at 10:10 AM.
+    - cron: "10 10 * * *"
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install wget
+        run: sudo apt-get install wget
+
+      - name: Setup workdir
+        run: mkdir -p /tmp/workdir
+
+      - name: Crawl the website
+        run: |
+          export CNAME="$(cat ./CNAME)"
+          pushd /tmp/workdir
+          wget \
+            --recursive \
+            --page-requisites \
+            --timestamping \
+            --no-host-directories \
+            --output-file=logfile.log \
+            --level=inf \
+            --execute robots=off \
+            "$CNAME"
+      
+      - name: Check for broken links
+        run: |
+          RESULT="$(grep --before-context=5 --ignore-case --line-number 'error' /tmp/logfile.log)"
+          if [ -z "$RESULT" ]; then
+            echo "No broken links found"
+          else
+            echo "Broken links found:"
+            echo "$RESULT"
+            exit 1
+          fi
