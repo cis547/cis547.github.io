@@ -29,14 +29,14 @@ jobs:
             --page-requisites \
             --timestamping \
             --no-host-directories \
-            --output-file=logfile.log \
+            --output-file=/tmp/logfile.log \
             --level=inf \
             --execute robots=off \
             "$CNAME"
       
       - name: Check for broken links
         run: |
-          RESULT="$(grep --before-context=5 --ignore-case --line-number 'error' /tmp/logfile.log)"
+          export RESULT="$(grep --before-context=5 --ignore-case --line-number 'error' /tmp/logfile.log)"
           if [ -z "$RESULT" ]; then
             echo "No broken links found"
           else
