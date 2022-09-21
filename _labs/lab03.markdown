@@ -204,9 +204,9 @@ We can gather additional information about a program’s execution and
 use it as _feedback_ to our fuzzer.
 The following figure shows at a high level what this process looks like:
 
-<img src="{{ '/images/lab3/feedback.png' | relative_url }}"
-    alt="Feedback-Directed Fuzzing"
-    style="width: 45vw;min-width: 600px;margin: 10px auto 20px; display: block;">
+<img src="/images/labs/lab3/feedback.png"
+  alt="Feedback-Directed Fuzzing"
+  style="width: 45vw;min-width: 600px;margin: 10px auto 20px; display: block;">
 
 Generating new, interesting seeds is the goal of feedback directed fuzzing.
 What does _interesting_ mean?
