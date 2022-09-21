@@ -32,10 +32,12 @@ reference for most of the LLVM API used in this lab and also throughout the cour
 
 ### Setup
 
-+ Open the lab2 folder in VS Code, using the terminal command `code <lab2 directory>` 
-or 'Open Folder' option in VS Code.
++ Open the `lab2` folder in VS Code, using the 'Open Folder' option in VS Code or the terminal command:
+```
+code <lab2 directory>
+```
 + Make sure the Docker is running on your machine.
-+ Open the VS Code [Command Palette](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_command-palette); search and select `Reopen in Container`.
++ Open the VS Code [Command Palette](command-palette); search and select `Reopen in Container`.
 + This will set up the development environment for this lab in VS Code.
 + Inside the development environment the skeleton code for Lab 2 will be locate
 under `/lab2`.
@@ -452,6 +454,7 @@ Then upload the `submission.zip` file to Gradescope.
 [llvm-api]: https://releases.llvm.org/8.0.1/docs/index.html
 [llvm-pass]: https://llvm.org/docs/WritingAnLLVMPass.html
 [llvm]: https://llvm.org/
+[command-palette]: https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_command-palette
 [clang-cli-opts]:https://releases.llvm.org/8.0.0/tools/clang/docs/UsersManual.html#command-line-options
 [cmake-tutorial]: https://cmake.org/cmake/help/latest/guide/tutorial/index.html
 [makefile-tutorial]: https://www.gnu.org/software/make/manual/html_node/Simple-Makefile.html#Simple-Makefile
