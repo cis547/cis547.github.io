@@ -266,8 +266,8 @@ class ObservationStatus(Enum):
    Enum for the Observation Status of a predicate.
 
    :param NEVER: The predicate was never observed.
-   :param TRUE: The predicate was observed and was always true.
-   :param FALSE: The predicate was observed and was always false.
+   :param ONLY_TRUE: The predicate was observed and was always true.
+   :param ONLY_FALSE: The predicate was observed and was always false.
    :param BOTH: The predicate was observed at least once as true and false.
    """
    ...
@@ -367,7 +367,7 @@ Then upload the submission file to Gradescope.
 
 
 [lab02]: {{ site.baseurl }}/labs/lab02
-[lab5 sample fuzzer inputs]: {{ '/downloads/lab5/fuzz_output_test2.zip' | relative_url }}
+[lab5 sample fuzzer inputs]: {{ site.baseurl }}/downloads/lab5/fuzz_output_test2.zip
 [course-vm]: {{ site.baseurl }}/resources/course-vm
 
 
