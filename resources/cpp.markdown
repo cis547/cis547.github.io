@@ -2,11 +2,12 @@
 layout: default
 title: "A Whirlwind Tour of C++"
 author: "Elizabeth Dinella"
+editor: "Josh Hanson"
 ---
 
 ## {{ page.title }}
 
-Author: {{ page.author }}
+Author: {{ page.author }} | Editor: {{ page.editor }}
 
 C++ was originally created in the 1980s as an
 [extension of the C language][c-cpp-differences]
@@ -18,13 +19,16 @@ inheritance, and other object-oriented concepts. This article will serve
 as a primer for C++ in this course as well as a source of resources for
 a more complete documentation.
 
-This article is organized into three parts: *Classes & Objects, General
-Use C++,* and *C++ for LLVM*. *Classes & Objects* will cover classes in
-C++, access modifiers, and object-oriented concepts such as single and
-multiple inheritance, and polymorphism. *C++ for LLVM* will serve as an
-introduction to the [LLVM API][llvm-programmers-manual]
-which will be heavily used in the assignments for this course. Conversely,
-*General Use C++* will detail features that are not specific to the LLVM API,
+This article is organized into three parts:
+*[Classes & Objects](#part-1-classes--objects)*,
+*[General Use C++](#part-2-general-c),*
+and *[C++ for LLVM](#part-3-c-for-llvm)*.
+*Classes & Objects* will cover classes in C++, access modifiers,
+and object-oriented concepts such as single and multiple inheritance,
+and polymorphism.
+*C++ for LLVM* will serve as an introduction to the [LLVM API][llvm-programmers-manual]
+which will be heavily used in the assignments for this course.
+Conversely, *General Use C++* will detail features that are not specific to the LLVM API,
 but will likely be frequently used in the assignments for this course.
 
 You are encouraged to try out different C++ features in this
