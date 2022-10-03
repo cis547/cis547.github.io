@@ -32,7 +32,7 @@ jobs:
             --output-file=/tmp/logfile.log \
             --level=inf \
             --execute robots=off \
-            "$CNAME"
+            "$CNAME" || :
       
       - name: Check for broken links
         run: |

@@ -37,7 +37,7 @@ reference for most of the LLVM API used in this lab and also throughout the cour
 code <lab2 directory>
 ```
 + Make sure the Docker is running on your machine.
-+ Open the VS Code [Command Palette](command-palette); search and select `Reopen in Container`.
++ Open the VS Code [Command Palette][command-palette]; search and select `Reopen in Container`.
 + This will set up the development environment for this lab in VS Code.
 + Inside the development environment the skeleton code for Lab 2 will be locate
 under `/lab2`.
