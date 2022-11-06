@@ -117,7 +117,7 @@ More concretely, your task is to implement how the analysis evaluates different 
 on abstract values from a provided abstract domain, defined in `Domain.h`.
 
 In part 2 of the lab, we will focus on implementing item 3, to combine the results of individual
-transfer functions to get an intra-procedural, flow-insensitive Divide-by-Zero analysis.
+transfer functions to get an intra-procedural, flow-sensitive, path-insensitive Divide-by-Zero analysis.
 Later on in Lab 7 you will further extend on item 3 to use the results of Pointer Analysis.
 
 We have provided a framework to build your division-by-zero static analyzer.
