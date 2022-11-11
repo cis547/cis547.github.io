@@ -298,90 +298,20 @@ You will define the symbolic manipulation functions for LLVM instructions using 
 Consider the following LLVM code equivalent to a simple C program `int x = 1; int y = x;` (types are
 omitted for simplicity):
 
-<table>
-<thead>
-  <tr valign="top">
-    <th>Instrumented</th>
-    <th>Concrete Memory</th>
-    <th>Stack</th>
-    <th>Symbolic Memory</th>
-  </tr>
-</thead>
-<tbody>
-  <tr valign="top">
-    <td>%x = alloca</td>
-    <td>%x : 0x1000</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr valign="top">
-    <td>__DSE_Alloca__(0,%x)</td>
-    <td></td>
-    <td>[]</td>
-    <td>Reg(0) : 0x1000</td>
-  </tr>
-  <tr valign="top">
-    <td>%y = alloca</td>
-    <td>%y : 0x1004</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr valign="top">
-    <td>__DSE_Alloca__(1,%y)</td>
-    <td></td>
-    <td>[]</td>
-    <td>Reg(1) : 0x1004</td>
-  </tr>
-  <tr valign="top">
-    <td>__DSE_Const__(1)</td>
-    <td></td>
-    <td>[Const(1)]</td>
-    <td></td>
-  </tr>
-  <tr valign="top">
-    <td>__DSE_Store__(%x)</td>
-    <td></td>
-    <td>[]</td>
-    <td>0x1000 : 1</td>
-  </tr>
-  <tr valign="top">
-    <td>store 1, %x</td>
-    <td>0x1000 : 1</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr valign="top">
-    <td>__DSE_Load__(2,%x)</td>
-    <td></td>
-    <td>[]</td>
-    <td>Reg(2) : 1</td>
-  </tr>
-  <tr valign="top">
-    <td>%a = load %x</td>
-    <td>%a : 1</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr valign="top">
-    <td>__DSE_Register__(2)</td>
-    <td></td>
-    <td>[Reg(2)]</td>
-    <td></td>
-  </tr>
-  <tr valign="top">
-    <td>__DSE_Store__(%y)</td>
-    <td></td>
-    <td>[]</td>
-    <td>0x1004 : 1</td>
-  </tr>
-  <tr valign="top">
-    <td>store %a, %y</td>
-    <td>0x1004 : 1</td>
-    <td></td>
-    <td></td>
-  </tr>
-</tbody>
-</table>
+| Instrumented           | Concrete Memory | Stack        | Symbolic Memory   |
+|------------------------|-----------------|--------------|-------------------|
+| `%x = alloca`          | `%x : 0x1000`   |              |                   |
+| `__DSE_Alloca__(0,%x)` |                 | `[]`         | `Reg(0) : 0x1000` |
+| `%y = alloca`          | `%y : 0x1004`   |              |                   |
+| `__DSE_Alloca__(1,%y)` |                 | `[]`         | `Reg(1) : 0x1004` |
+| `__DSE_Const__(1)`     |                 | `[Const(1)]` |                   |
+| `__DSE_Store__(%x)`    |                 | `[]`         | `0x1000 : 1`      |
+| `store 1, %x`          | `0x1000 : 1`    |              |                   |
+| `__DSE_Load__(2,%x)`   |                 | `[]`         | `Reg(2) : 1`      |
+| `%a = load %x`         | `%a : 1`        |              |                   |
+| `__DSE_Register__(2)`  |                 | `[Reg(2)]`   |                   |
+| `__DSE_Store__(%y)`    |                 | `[]`         | `0x1004 : 1`      |
+| `store %a, %y`         | `0x1004 : 1`    |              |                   |
 
 -   `__DSE_Alloca__` takes the ID of the register in the left hand side and the address of a newly allocated physical memory block.
     In the above example, the ID of `%x` is 0 and the physical memory address is 0x1000.
@@ -402,24 +332,10 @@ The Z3 API uses a feature of C++ called [operator-overloading](https://en.cppref
 We show some examples below to represent arithmetic and comparison expressions on `z3::expr` objects.
 These examples assume that E1 and E2 are two objects of type `z3::expr`, and their result is stored in another object `E` of type `z3::expr`.
 
-<table>
-<thead>
-  <tr valign="top">
-    <th>Operation</th>
-    <th>Representation</th>
-  </tr>
-</thead>
-<tbody>
-  <tr valign="top">
-    <td>Addition</td>
-    <td>E = (E1 + E2)</td>
-  </tr>
-  <tr valign="top">
-    <td>Less-Than</td>
-    <td>E = (E1 &lt; E2)</td>
-  </tr>
-</tbody>
-</table>
+| Operation | Representation  |
+|-----------|-----------------|
+| Addition  | `E = (E1 + E2)` |
+| Less-Than | `E = (E1 < E2)` |
 
 ### Part 3: Backtracking Strategy
 
