@@ -12,7 +12,7 @@ You will use an LLVM pass to encode C programs into our symbolic interpretation 
 The resulting tool will find assignments for input variables that crash an input C program.
 
 This lab is divided into three parts:
-1. Complete the instrumentation functions in `src/Instrument.cpp`.
+1. Complete the instrumentation functions in `src/DSEInstrument.cpp`.
 2. Using Z3's C++ API, write the constraint logic for dynamic symbolic interpretation in `src/Runtime.cpp`.
 3. Implement a backtracking search algorithm for exploring new program paths in `src/Strategy.cpp`.
 
@@ -25,12 +25,8 @@ The following commands setup the lab:
 
 ```sh
 /lab9$ mkdir build && cd build
-/lab9/build$ cmake ..
-/lab9/build$ make
-/lab9/build$ export LD_LIBRARY_PATH=/lab9/build:$LD_LIBRARY_PATH
 ```
 
-**The `export LD_LIBRARY_PATH` command should be run on each terminal session you begin.**
 You should now see `dse` and `InstrumentPass.so` in the current directory (lab9/build).
 
 `dse` is a tool that performs dynamic symbolic execution on an input program using Z3.
@@ -77,12 +73,13 @@ We have provided the backbone for a symbolic interpreter using [Z3](https://gith
 You will need to encode a C program into this symbolic interpreter API as well as write the code that drives the dynamic symbolic execution.
 We provide several details on how to do this in the following sections.
 
-This lab assumes that input programs only have integer variables (no pointers or other types of variables) and do not have functions (no `CallInstr`).
+This lab assumes that input programs only have integer variables (no pointers or other types of variables) and do not have functions (no `CallInst`).
 
 #### Understanding Z3
 
 Z3 is a theorem prover developed at Microsoft.
-It's a large and complex tool, so this will serve as a cursory guide for its capabilities and what it can do. Consider a simple, generic system of equations such as the following, where X and Y are integers:
+It's a large and complex tool, so this will serve as a cursory guide for its capabilities and what it can do.
+Consider a simple, generic system of equations such as the following, where `X` and `Y` are integers:
 
 ```
 X < Y
@@ -94,7 +91,7 @@ You may resort to using loops to check numbers or finding a library to handle ma
 This is because most of these programming languages are imperatively-directed, meaning there's a sequence of commands needed to solve the problem.
 
 On the other hand, Z3 has a declarative interface, which in this case means all you need to give it is the list of constraints (in this case, `X < Y` and `X > 2`).
-Plug the following into an [online Z3 solver](https://rise4fun.com/Z3/tutorial/guide) to see the results:
+Plug the following into an [online Z3 solver](https://compsys-tools.ens-lyon.fr/z3/index.php) to see the results:
 
 
 ```
@@ -116,10 +113,10 @@ If you're curious about Z3 and want more information, you can check out the foll
 
 ### Part 1: LLVM Instrumentation
 
-The first component of this dynamic symbolic execution implementation is instrumentation of the input program, which is done in `src/Instrument.cpp`.
+The first component of this dynamic symbolic execution implementation is instrumentation of the input program, which is done in `src/DSEInstrument.cpp`.
 This follows the familiar format and pattern seen in prior labs, except now this LLVM pass will inject various functions defined in `src/Runtime.cpp`, accompanied with the appropriate metadata from each valid LLVM Instruction.
 This will enable DSE to interact with Z3 at runtime.
-Specifically, these are the functions that will require instrumentation (from `include/Instrument.h`):
+Specifically, these are the functions that will require instrumentation (from `include/DSEInstrument.h`):
 
 ```cpp
 static const char *DSEInitFunctionName = "__DSE_Init__";
@@ -284,7 +281,7 @@ An instance of the `Address` class represents a symbolic memory address.
 A symbolic address is either a memory address or a register, following the definition of LLVM IR.
 The `Type` field denotes the type of address.
 For memory addresses (allocated via `AllocaInstruction` of LLVM), we will use their physical addresses as symbolic addresses.
-For registers, we will assign unique register IDs via `getRegisterID()` in `Instrument.h`.
+For registers, we will assign unique register IDs via `getRegisterID()` in `DSEInstrument.h`.
 For symbolic expressions, you will reuse Z3's expressions, which are instances of the `z3::expr` class.
 
 Symbolic manipulation of concrete execution is performed using two auxiliary functions `__DSE_Const__`, `__DSE_Register__`, each of which encodes concrete constants and registers to their symbolic counterparts.
