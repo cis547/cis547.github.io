@@ -25,6 +25,8 @@ The following commands setup the lab:
 
 ```sh
 /lab9$ mkdir build && cd build
+/lab9/build$ cmake ..
+/lab9/build$ make
 ```
 
 You should now see `dse` and `InstrumentPass.so` in the current directory (lab9/build).
