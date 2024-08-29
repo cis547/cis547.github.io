@@ -1,4 +1,4 @@
-# [software-analysis-class.org][cis547/website]
+# [https://cis547.github.io/][cis547/website]
 
 [![No broken links][no-broken-links/badge]][no-broken-links/workflow]
 
