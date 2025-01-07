@@ -1,4 +1,4 @@
-# [https://cis5470.github.io/][cis547/website]
+# [https://cis5470.github.io/][cis5470/website]
 
 [![No broken links][no-broken-links/badge]][no-broken-links/workflow]
 
