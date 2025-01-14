@@ -672,7 +672,7 @@ suggestions to improve this article.
 [llvm-programmers-manual]: https://llvm.org/docs/ProgrammersManual.html
 [online-cpp-repl]: https://repl.it/languages/cpp
 [cpp-classes]: https://www.cplusplus.com/doc/tutorial/classes/
-[separate-header-and-implementation-files]: https://www.cppforschool.com/tutorial/pdf/chapter21-separate-header-and-implementation-files.pdf
+[separate-header-and-implementation-files]: https://p2p.wrox.com/c-programming/92954-c-class-example-separate-header-implementation-file.html
 [overloading-class-constructors]: https://onlinegdb.com/Yx8IOx_h9
 [this-pointer]: https://www.cs.technion.ac.il/users/yechiel/c++-faq/using-this-in-ctors.html
 [isitme]: https://www.onlinegdb.com/iDyO5pvie
