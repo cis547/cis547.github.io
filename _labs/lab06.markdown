@@ -506,11 +506,11 @@ Then upload the submission file to Gradescope.
 
 [course-vm]: {{ site.baseurl }}/resources/course-vm
 [lab07]: {{ site.baseurl }}/labs/lab07
-[LLVM template functions]: http://releases.llvm.org/8.0.0/docs/ProgrammersManual.html#the-isa-cast-and-dyn-cast-templates
+[LLVM template functions]: http://releases.llvm.org/9.0.0/docs/ProgrammersManual.html#the-isa-cast-and-dyn-cast-templates
 [LLVM CmpInst]: https://llvm.org/doxygen/classllvm_1_1CmpInst.html
 [LLVM CastInst]: https://llvm.org/doxygen/classllvm_1_1CastInst.html
 [LLVM BinOps]: https://llvm.org/doxygen/classllvm_1_1BinaryOperator.html
-[LLVM Instruction class]: http://releases.llvm.org/8.0.0/docs/ProgrammersManual.html#the-instruction-class
+[LLVM Instruction class]: http://releases.llvm.org/9.0.0/docs/ProgrammersManual.html#the-instruction-class
 [LLVM AllocaInst]: https://llvm.org/doxygen/classllvm_1_1AllocaInst.html
 [LLVM SetVector]: https://llvm.org/doxygen/classllvm_1_1SetVector.html
 [CMake Ref]: https://en.wikipedia.org/wiki/CMake

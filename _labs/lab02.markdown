@@ -451,15 +451,15 @@ Then upload the `submission.zip` file to Gradescope.
 
 [llvm-primer]: https://www.cis.upenn.edu/~cis5470/llvm.pdf
 [llvm-lang]: https://llvm.org/docs/LangRef.html
-[llvm-api]: https://releases.llvm.org/8.0.1/docs/index.html
+[llvm-api]: https://releases.llvm.org/9.0.0/docs/index.html
 [llvm-pass]: https://llvm.org/docs/WritingAnLLVMPass.html
 [llvm]: https://llvm.org/
 [command-palette]: https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_command-palette
-[clang-cli-opts]:https://releases.llvm.org/8.0.0/tools/clang/docs/UsersManual.html#command-line-options
+[clang-cli-opts]:https://releases.llvm.org/9.0.0/tools/clang/docs/UsersManual.html#command-line-options
 [cmake-tutorial]: https://cmake.org/cmake/help/latest/guide/tutorial/index.html
 [makefile-tutorial]: https://www.gnu.org/software/make/manual/html_node/Simple-Makefile.html#Simple-Makefile
-[opt-doc]: https://releases.llvm.org/8.0.0/docs/CommandGuide/opt.html
+[opt-doc]: https://releases.llvm.org/9.0.0/docs/CommandGuide/opt.html
 [instrumentation-def]: https://en.wikipedia.org/wiki/Instrumentation_(computer_programming)
-[llvm-insert-inst]: https://releases.llvm.org/8.0.0/docs/ProgrammersManual.html#creating-and-inserting-new-instructions
+[llvm-insert-inst]: https://releases.llvm.org/9.0.0/docs/ProgrammersManual.html#creating-and-inserting-new-instructions
 [llvm-insert-function]: https://llvm.org/doxygen/classllvm_1_1Module.html#a89b5f89041a0375f7ece431f29421bee
 [callinst-create]: https://llvm.org/doxygen/classllvm_1_1CallInst.html#a850d8262cd900958b3153c4aa080b2bb
