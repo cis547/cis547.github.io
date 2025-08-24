@@ -3,15 +3,14 @@ layout: default
 ---
 
 <h2>Module {{page._id}}: {{page.title}}</h2>
-
-<div class="lecture-resources">
+<p>
 	{% if page.video %}
-	<a href="{{ page.video }}" class="resource-link video-link" target="_blank">Video</a>
+	[<strong><a href="{{ page.video }}">Video</a></strong>]
 	{% endif %}
 	{% if page.slides %}
-	<a href="/downloads/lecture/{{ page.slides }}" class="resource-link slides-link" target="_blank">Slides</a>
+	[<strong><a href="/downloads/lecture/{{ page.slides }}">Slides</a></strong>]
 	{% endif %}
-</div>
+</p>
 
 <p>
 	{% if page.description %}
@@ -23,4 +22,3 @@ layout: default
 	<strong>Objectives:</strong> {{ page.objectives | markdownify}}
 	{% endif %}
 </p>
-

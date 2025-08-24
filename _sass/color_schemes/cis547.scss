@@ -1,0 +1,47 @@
+// CIS 547 Custom Color Scheme
+// Penn colors with software analysis theme
+
+// Penn Brand Colors
+$penn-blue: #011F5B;
+$penn-red: #990000;
+$light-blue: #4A90E2;
+$analysis-purple: #7B1FA2;
+
+// Base colors
+$white: #fff;
+$grey-dk-000: #959396;
+$grey-dk-100: #5c5962;
+$grey-dk-200: #44434d;
+$grey-dk-250: #302d36;
+$grey-dk-300: #27262b;
+$grey-lt-000: #f5f6fa;
+$grey-lt-100: #eeebee;
+$grey-lt-200: #ecebed;
+$grey-lt-300: #e1e1e4;
+
+// Color assignments
+$body-background-color: $white;
+$sidebar-color: $grey-lt-000; // Changed to default grey color
+$search-background-color: $white;
+$table-background-color: $white;
+$code-background-color: $grey-lt-000;
+
+$body-text-color: $grey-dk-100;
+$body-heading-color: $penn-blue;
+$search-result-preview-color: $grey-dk-100;
+$nav-child-link-color: $grey-dk-100;
+// Removed custom link colors to use theme defaults
+$base-button-color: #f7f7f7;
+
+// Code colors
+$code-linenumber-color: $grey-dk-000;
+// Removed feedback-color to use theme default instead of green
+
+// Custom additions
+$header-gradient-start: $penn-blue;
+$header-gradient-end: lighten($penn-blue, 10%);
+$accent-color: $analysis-purple;
+
+// Fonts
+$body-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$mono-font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', SFMono-Regular, Menlo, Consolas, monospace;

@@ -1,0 +1,5 @@
+{% if page.has_toc != false %}
+<nav id="nav-sidebar" class="hidden-print hidden-xs hidden-sm affix bs-docs-sidebar">
+    {% include toc.html id='sidebar' class='nav.nav-stacked' item_class='toc_li' html=content %}
+</nav>
+{% endif %}

@@ -1,13 +1,190 @@
+/* CIS 547 Custom Theme Overrides */
 
-td, th {
-    padding: 10px;
+/* Penn colors */
+:root {
+  --penn-blue: #011F5B;
+  --penn-red: #990000;
+  --light-blue: #4A90E2;
+  --code-green: #00C853;
+  --analysis-purple: #7B1FA2;
 }
 
-code, kbd, pre, samp {
- font-family: 'Fira Code', monospace;
- font-size: 1em;
+/* Header improvements */
+.page-header {
+  background: linear-gradient(135deg, #011F5B 0%, #1a3d7a 100%);
+  padding: 3rem 1rem;
 }
 
+.project-name {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.project-tagline {
+  opacity: 0.95;
+  font-weight: 300;
+}
+
+/* Navigation bar */
+.main-content h1:first-of-type {
+  color: var(--penn-blue);
+  border-bottom: 3px solid var(--light-blue);
+  padding-bottom: 0.5rem;
+}
+
+/* Course info grid */
+.main-content h2 {
+  color: var(--penn-blue);
+  margin-top: 2rem;
+  border-bottom: 2px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+}
+
+.main-content h3 {
+  color: #1a3d7a;
+  font-size: 1.2rem;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table thead {
+  background: var(--penn-blue) !important;
+  color: white;
+}
+
+table thead th {
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: white !important;
+}
+
+table tbody tr {
+  border-bottom: 1px solid #e1e4e8;
+}
+
+table tbody tr:hover {
+  background-color: #f6f8fa;
+}
+
+table tbody td, table tbody th {
+  padding: 0.75rem;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0.25rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  text-decoration: none;
+}
+
+/* Code blocks */
+pre {
+  background: #f6f8fa;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+code {
+  background: #f6f8fa;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+}
+
+/* Links */
+a {
+  color: var(--light-blue);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--penn-blue);
+  text-decoration: underline;
+}
+
+/* Responsive grid */
+@media (max-width: 768px) {
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Text utilities */
+.text-center {
+  text-align: center !important;
+}
+
+.text-muted {
+  color: #586069 !important;
+  font-style: italic;
+}
+
+/* Lists with icons */
+.main-content ul li {
+  margin: 0.5rem 0;
+}
+
+/* Emphasis for important info */
+strong {
+  color: var(--penn-blue);
+  font-weight: 600;
+}
+
+/* Schedule highlights */
+tr[style*="background: #e3f2fd"] {
+  font-weight: 500;
+}
+
+tr[style*="background: #ffebee"] strong {
+  color: #c62828;
+}
+
+/* Improved spacing */
+
+hr {
+  margin: 2rem 0;
+  border: none;
+  border-top: 2px solid #e1e4e8;
+}
+
+/* Icons alignment */
+.main-content p {
+  line-height: 1.6;
+}
+
+/* Definition lists */
+dl dt {
+  font-weight: 700;
+  color: var(--penn-blue);
+  margin-top: 1rem;
+}
+
+dl dd {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Staff profiles (keeping existing) */
 div.staff-profiles {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -27,15 +204,161 @@ div.profile > img {
     border-radius: 50%;
 }
 
+.staff-name {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+/* Blockquote styling */
 blockquote {
     padding: 1em 3.5em;
+    border-left: 4px solid var(--light-blue);
+    background: #f6f8fa;
 }
 
 blockquote > p {
     margin-bottom: 0;
 }
 
-.staff-name {
-    font-size: 1em;
-    font-weight: bold;
+/* Page TOC (Table of Contents) sidebar */
+.page-toc {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 250px;
+  background: white;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 1000;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.page-toc-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--penn-blue);
+  margin: 0 0 0.75rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.page-toc-nav {
+  font-size: 0.85rem;
+}
+
+.page-toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.page-toc-list li {
+  margin: 0.25rem 0;
+}
+
+.page-toc-link {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  color: #586069;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  line-height: 1.3;
+}
+
+.page-toc-link:hover {
+  background-color: #f6f8fa;
+  color: var(--penn-blue);
+  text-decoration: none;
+  transform: translateX(2px);
+}
+
+/* Hide TOC on smaller screens */
+@media (max-width: 1200px) {
+  .page-toc {
+    display: none;
+  }
+}
+
+/* Removed custom margin overrides to use theme defaults */
+
+/* Lecture resource links with icons */
+.lecture-resources {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.resource-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(135deg, var(--penn-blue) 0%, #1a3d7a 100%);
+  color: white !important;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(1, 31, 91, 0.2);
+  min-width: 120px;
+  justify-content: center;
+}
+
+.resource-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(1, 31, 91, 0.3);
+  color: white !important;
+  text-decoration: none;
+}
+
+.resource-link.video-link {
+  background: linear-gradient(135deg, var(--penn-red) 0%, #b71c1c 100%);
+  box-shadow: 0 2px 8px rgba(153, 0, 0, 0.2);
+}
+
+.resource-link.video-link:hover {
+  box-shadow: 0 6px 20px rgba(153, 0, 0, 0.3);
+}
+
+.resource-link.slides-link {
+  background: linear-gradient(135deg, var(--analysis-purple) 0%, #4a148c 100%);
+  box-shadow: 0 2px 8px rgba(123, 31, 162, 0.2);
+}
+
+.resource-link.slides-link:hover {
+  box-shadow: 0 6px 20px rgba(123, 31, 162, 0.3);
+}
+
+/* Icons using Unicode symbols */
+.resource-link::before {
+  font-size: 1.2em;
+  font-weight: normal;
+}
+
+.resource-link.video-link::before {
+  content: "▶";
+}
+
+.resource-link.slides-link::before {
+  content: "📄";
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .lecture-resources {
+    flex-direction: column;
+  }
+  
+  .resource-link {
+    width: 100%;
+    justify-content: center;
+  }
 }

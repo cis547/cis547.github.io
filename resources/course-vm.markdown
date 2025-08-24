@@ -1,6 +1,8 @@
 ---
 layout: default
 title: "Course VM Instructions"
+parent: Resources
+nav_order: 1
 ---
 
 ## Course VM Instructions

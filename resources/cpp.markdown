@@ -1,6 +1,8 @@
 ---
 layout: default
 title: "A Whirlwind Tour of C++"
+parent: Resources
+nav_order: 2
 author: "Elizabeth Dinella"
 editor: "Josh Hanson"
 ---
