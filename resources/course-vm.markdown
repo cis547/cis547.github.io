@@ -233,10 +233,15 @@ To work on a lab you open its corresponding folder in VS Code
 and follow the above steps to reopen it in a container.
 The container comes pre-loaded with the following software:
 
-+ Course software such as clang, gcc, afl, souffle … That you will learn about and use for the labs.
++ Course software such as clang, gcc, gemini, afl, souffle … That you will learn about and use for the labs.
 + Debugging tools [GDB][gdb] and [Valgrind][valgrind]. GDB offers extensive facilities for tracing and altering the execution of programs. Valgrind includes runtime tools to find memory errors, profile your program’s performance, and more.
 
 We have also provided a folder named sandbox alongside the lab folders. Use this folder to play with the LLVM API.
+
+##### Setting up Gemini
+
+For Lab 1 and if you want to use the Gemini CLI yourself, you'll have to sign in.
+Run `gemini` and follow the instructions to sign into your UPenn email.
 
 ##### Installing Software on the Docker Image.
 

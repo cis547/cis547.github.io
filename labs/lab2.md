@@ -4,8 +4,7 @@ title: "Lab 2: The LLVM Framework"
 parent: Labs
 nav_order: 2
 ---
-
-### Objective
+## Objective
 
 The objective of this lab is three-fold:
 + Understanding a representation of C programs called [LLVM IR][llvm-lang] that we
@@ -18,7 +17,7 @@ instrument them.
 + Understanding the differences between static and dynamic properties of a program,
 by executing instrumented code.
 
-### Pre-Requisites
+## Pre-Requisites
 
 + Read the [LLVM Primer][llvm-primer]: Part I (Overview of LLVM) and Part II
 (Structure of LLVM IR).
@@ -27,7 +26,7 @@ of the course to be able to read LLVM IR for debugging purposes.
 + Keep [LLVM Primer][llvm-primer]: Part III (The LLVM API) at hand as a quick
 reference for most of the LLVM API used in this lab and also throughout the course.
 
-### Setup
+## Setup
 
 + Open the `lab2` folder in VS Code, using the 'Open Folder' option in VS Code or the terminal command:
 ```
@@ -40,9 +39,9 @@ code <lab2 directory>
 under `/lab2`.
 + Afterwards, if VS Code prompts you to select a kit for the lab then pick Clang 8.
 
-### Part 1: Understanding the LLVM IR
+## Part 1: Understanding the LLVM IR
 
-##### Step 1
+### Step 1
 
 Study the [LLVM Primer][llvm-primer] to understand the structure of the LLVM IR.
 The primer shows how to run `clang` on a sample C program to generate the
@@ -64,7 +63,7 @@ Briefly,
 + `-fno-discard-value-names` preserves names of values in the generated
 LLVM for improving readability.
 
-##### Step 2
+### Step 2
 
 Write by hand the C programs corresponding to the LLVM IR programs
 under the `/lab2/ir_programs` directory by filling in the provided
@@ -86,9 +85,9 @@ Alternatively you can let the provided Makefile automatically do this for you:
 /lab2/c_programs$ make test1
 ```
 
-### Part 2: Understanding the LLVM API
+## Part 2: Understanding the LLVM API
 
-##### Step 1
+### Step 1
 
 In this and future labs, we will use `CMake`, a modern tool for managing the
 build process.
@@ -115,10 +114,10 @@ and `StaticAnalysisPass.so` from code that we have provided in
 named `libruntime.so` that provides some functions that are used in the lab.
 The remaining steps follow the depicted workflow from left to right:
 
-<img src="/images/labs/lab2/flowchart.png"
+<img src="images/flowchart.png"
   style="height: auto; width: 100%">
 
-##### Step 2
+### Step 2
 
 As noted in Step 1, you will implement the functionality of this lab as two
 LLVM passes called `StaticAnalysisPass` and `DynamicAnalysisPass`.
@@ -134,18 +133,18 @@ program to LLVM IR, as you did in Part 1:
 simple0.c -g
 ```
 
-##### Step 3
+### Step 3
 
 Next, we use opt to run the provided StaticAnalysisPass pass on the compiled C program:
 
 ```sh
-/lab2/test$ opt -load ../build/StaticAnalysisPass.so -StaticAnalysisPass -S
+/lab2/test$ opt -load-pass-plugin=../build/StaticAnalysisPass.so -passes="StaticAnalysisPass" -S
 simple0.ll -o simple0.static.ll
 ...
 ```
 
 `opt` is an LLVM tool that performs analyses and optimizations on LLVM IR.
-The option `-load` loads our LLVM pass library while `-StaticAnalysisPass` instructs
+The option `-load-pass-plugin` loads our LLVM pass library while `-passes="StaticAnalysisPass"` instructs
 opt to run the pass on `simple0.ll`.
 (Libraries can and often do contain multiple LLVM passes.)
 Consult the [documentation of opt][opt-doc] to understand the potential ways to use
@@ -154,7 +153,7 @@ Similarly, we use `opt` to run the provided `DynamicAnalysisPass` pass on the
 compiled C program:
 
 ```sh
-/lab2/test$ opt -load ../build/DynamicAnalysisPass.so -DynamicAnalysisPass -S
+/lab2/test$ opt -load-pass-plugin=../build/DynamicAnalysisPass.so -passes="DynamicAnalysisPass" -S
 simple0.ll -o simple0.dynamic.ll
 ```
 
@@ -172,7 +171,7 @@ You can use `diff` to verify this:
 ...
 ```
 
-##### Step 4
+### Step 4
 
 Next, compile the instrumented program and link it with the provided runtime
 library to produce a standalone executable named `simple0`:
@@ -181,7 +180,7 @@ library to produce a standalone executable named `simple0`:
 /lab2/test$ clang -o simple0 -L../build -lruntime simple0.dynamic.ll
 ```
 
-##### Step 5
+### Step 5
 
 Finally run the executable on the empty input; note that you may have to manually
 provide test input for programs that expect non-empty input:
@@ -241,9 +240,9 @@ After completing `DynamicAnalysisPass`, executing `simple0` should create two fi
 Division on Line 4, Column 13 with first operand=3 and second operand=2
 ```
 
-### Lab Instructions
+## Lab Instructions
 
-##### Static Analysis
+### Static Analysis
 As mentioned previously, you are provided with `src/StaticAnalysisPass.cpp` that
 contains one static analysis that reports the location of all instructions in the
 program, and you will be adding another analysis to it.
@@ -266,7 +265,7 @@ of `getBinOpSymbol`.
 You can use the `variable` function from `Utils.h` to get the name of an operand from
 its corresponding LLVM Value.
 
-##### Dynamic Analysis
+### Dynamic Analysis
 
 It involves inspecting a running program for information about its state and
 behavior during runtime; this is in contrast to static analysis which analyzes
@@ -294,7 +293,7 @@ In order to get the runtime values of the operands, it is necessary to keep in m
 that in LLVM **a variable defined by an instruction is represented by the
 instruction itself**.
 
-##### Code Coverage Primer
+### Code Coverage Primer
 
 Code coverage is a measure of how much of a program’s code is executed in a
 particular run.
@@ -311,10 +310,10 @@ In the next lab, you will use line coverage information to guide an automated te
 input generator, thereby realizing the architecture of modern industrial-strength
 fuzzers.
 
-<img src="/images/labs/lab2/example-coverage-report.png"
+<img src="images/example-coverage-report.png"
   style="height: auto; width: 100%">
 
-##### Debug Location Primer
+### Debug Location Primer
 
 When you compile a C program with the `-g` option, LLVM will include debug information
 for LLVM IR instructions.
@@ -322,7 +321,7 @@ Using the aforementioned instrumentation techniques, your LLVM pass can gather t
 debug information for an `Instruction`, and use it in your analysis.
 We will discuss the specifics of this interface in the following sections.
 
-##### Instrumentation Pass
+### Instrumentation Pass
 
 We have provided a framework from which you can build your LLVM pass.
 You will need to edit the `src/DynamicAnalysisPass.cpp` file to implement features to
@@ -341,7 +340,7 @@ level tasks:
 + Check for binary operators and instrument it using `instrumentBinOpOperands`.
 + Implement `instrumentBinOpOperands` to insert calls to `__binop_op__`.
 
-##### Inserting Instructions into LLVM code
+### Inserting Instructions into LLVM code
 
 Once you are familiar with the organization of LLVM IR, LLVM instructions, and the
 `Instruction` class after finishing Part 1 and completing static analysis, you can
@@ -365,7 +364,7 @@ instruction (`CallInst`), as discussed below.
 You should also take a look at how a call instruction was inserted into a program
 in the `instrumentCoverage` function, as an example of the instructions below.
 
-##### Loading C functions into LLVM code
+### Loading C functions into LLVM code
 
 We have provided the definition of C functions in the `runtime.c` file for you, but
 you have to inject LLVM instructions to call them from instrumented code.
@@ -401,7 +400,7 @@ Furthermore, the `Instruction` class is a subclass of the `Value`; this makes
 passing a variable defined by an Instruction to a function as an argument
 relatively straightforward.
 
-##### Debug Locations
+### Debug Locations
 
 As we alluded previously, LLVM will store code location information of the
 _original C program for_ LLVM instructions when compiled with `-g`.
@@ -418,7 +417,7 @@ Not every single LLVM instruction corresponds to a specific line in its C source
 So before using debug information, you generally need to check if an Instruction
 actually has it.
 
-### Understanding Static and Dynamic Properties of Code
+## Understanding Static and Dynamic Properties of Code
 
 Code has two types of properties, static and dynamic.
 Static properties are things that can be inferred from the source representation of
@@ -433,7 +432,7 @@ Both static and dynamic properties tell us interesting facts about a program tha
 be leveraged in various ways.
 In particular, for this course we shall use them to find bugs in a program.
 
-### Submission
+## Submission
 
 Once you are done with the lab, you can create a `submission.zip` file by using
 the following command:

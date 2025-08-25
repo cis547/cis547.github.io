@@ -20,7 +20,7 @@ timeline:
 schedule:
   - name: Monday
     events:
-      - name: CIS 547 Lecture
+      - name: CIS 5470 Lecture
         start: 12:00 PM
         end: 1:30 PM
         location: DRLB A1
@@ -28,7 +28,7 @@ schedule:
   - name: Tuesday
   - name: Wednesday
     events:
-      - name: CIS 547 Lecture
+      - name: CIS 5470 Lecture
         start: 12:00 PM
         end: 1:30 PM
         location: DRLB A1
