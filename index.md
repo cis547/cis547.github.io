@@ -269,9 +269,10 @@ This course provides a **rigorous and hands-on introduction** to the field of so
 - 🔒 Prevent security vulnerabilities  
 - ⚙️ Automate testing and debugging
 - ✅ Improve confidence in software behavior, even _mathematically_
-- 
+
 ⚠️ **New:** Starting this semester, we'll also address the trillion-parameter elephant in the room: Large Language Models (LLMs). With LLMs writing more vibe-code than ever, it's important to devise _automatic_ ways of ensuring code doesn't blow up in production. We'll explore how LLMs can assist in software analysis tasks and their limitations. Our team is re-working the labs as we go, so bear with us!
 
+---
 ### Topics Covered
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
