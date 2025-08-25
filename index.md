@@ -135,7 +135,7 @@ td {
 <tbody>
 <tr class="odd-week">
 <td class="week-cell">1</td>
-<td>27</td>
+<td>Aug 27</td>
 <td>Introduction to Software Analysis</td>
 <td><a href="/labs/lab1" class="lab-link">Lab 1: Introduction to Software Analysis</a></td>
 <td>-</td>
