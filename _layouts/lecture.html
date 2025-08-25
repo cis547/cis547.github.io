@@ -6,10 +6,17 @@ layout: default
 
 <div class="lecture-resources">
 	{% if page.video %}
-	<a href="{{ page.video }}" class="resource-link video-link" target="_blank">Video</a>
+	<a href="{{ page.video }}" class="resource-link video-link" target="_blank" rel="noopener noreferrer">
+		🎥 Watch Video
+	</a>
+	{% endif %}
+	{% if page.video and page.slides %}
+	<span class="resource-separator">•</span>
 	{% endif %}
 	{% if page.slides %}
-	<a href="/downloads/lecture/{{ page.slides }}" class="resource-link slides-link" target="_blank">Slides</a>
+	<a href="/downloads/lecture/{{ page.slides }}" class="resource-link slides-link" target="_blank" rel="noopener noreferrer">
+		📊 View Slides
+	</a>
 	{% endif %}
 </div>
 

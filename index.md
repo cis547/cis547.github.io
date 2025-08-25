@@ -9,7 +9,7 @@ permalink: /
 # CIS 5470: Software Analysis
 {: .text-center}
 
-**Spring 2025 • University of Pennsylvania**
+**Fall 2025 • University of Pennsylvania**
 {: .text-center .text-muted}
 
 ---
@@ -57,126 +57,198 @@ permalink: /
 
 ## 📅 Course Schedule
 
-<table class="table" style="width: 100%;">
-<thead style="background: #011F5B; color: white;">
+<br>
+
+<style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+thead {
+  background: #011F5B;
+  color: #333;
+}
+th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+}
+td {
+  padding: 12px;
+}
+.week-cell {
+  font-weight: bold;
+}
+.odd-week {
+  background: #e3f2fd;
+}
+.break-week {
+  background: #f5f5f5;
+  font-style: italic;
+}
+.finals-week {
+  background: #ffebee;
+}
+.lab-link {
+  color: #1976d2;
+  text-decoration: none;
+}
+.current-week {
+  background-color: #c8e6c9 !important;
+  font-weight: bold;
+}
+.current-week td {
+  background-color: #c8e6c9 !important;
+  color: #1a1a1a !important;
+  border-top: 2px solid #4caf50;
+  border-bottom: 2px solid #4caf50;
+}
+.current-week td:first-child {
+  border-left: 2px solid #4caf50;
+}
+.current-week td:last-child {
+  border-right: 2px solid #4caf50;
+}
+.current-week .lab-link {
+  color: #1565c0 !important;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.current-week .lab-link:hover {
+  color: #0d47a1 !important;
+}
+</style>
+
+<script src="/assets/js/week-highlighter.js"></script>
+
+<table>
+<thead>
 <tr>
 <th>Week</th>
-<th>Date</th>
+<th>Dates</th>
 <th>Topic</th>
 <th>Lab</th>
 <th>Due</th>
 </tr>
 </thead>
 <tbody>
-<tr style="background: #e3f2fd;">
-<td><strong>1</strong></td>
-<td>Jan 14, 16</td>
-<td><strong>Introduction to Software Analysis</strong></td>
-<td><a href="/labs/lab01">Lab 1: LLVM Setup</a></td>
+<tr class="odd-week">
+<td class="week-cell">1</td>
+<td>27</td>
+<td>Introduction to Software Analysis</td>
+<td><a href="/labs/lab1" class="lab-link">Lab 1: Introduction to Software Analysis</a></td>
 <td>-</td>
 </tr>
 <tr>
-<td>2</td>
-<td>Jan 21, 23</td>
-<td>LLVM Framework & IR</td>
-<td><a href="/labs/lab02">Lab 2: LLVM Passes</a></td>
+<td class="week-cell">2</td>
+<td>Sep 1, 3</td>
+<td>The LLVM Framework</td>
+<td><a href="/labs/lab2" class="lab-link">Lab 2: The LLVM Framework</a></td>
 <td>Lab 1</td>
 </tr>
 <tr>
-<td>3</td>
-<td>Jan 28, 30</td>
-<td>Software Specifications</td>
-<td><a href="/labs/lab03">Lab 3: Random Testing</a></td>
+<td class="week-cell">3</td>
+<td>Sep 8, 10</td>
+<td>Random Input Generation</td>
+<td><a href="/labs/lab3" class="lab-link">Lab 3: Random Input Generation</a></td>
 <td>Lab 2</td>
 </tr>
 <tr>
-<td>4</td>
-<td>Feb 4, 6</td>
-<td>Random Testing & Fuzzing</td>
-<td>-</td>
+<td class="week-cell">4</td>
+<td>Sep 15, 17</td>
+<td>Automated Test Generation</td>
+<td><a href="/labs/lab4" class="lab-link">Lab 4: Delta Debugging</a></td>
 <td>Lab 3</td>
 </tr>
 <tr>
-<td>5</td>
-<td>Feb 11, 13</td>
+<td class="week-cell">5</td>
+<td>Sep 22, 24</td>
 <td>Delta Debugging</td>
-<td><a href="/labs/lab04">Lab 4: Delta Debug</a></td>
-<td>-</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Feb 18, 20</td>
-<td>Statistical Debugging</td>
-<td><a href="/labs/lab05">Lab 5: Stats Debug</a></td>
+<td><a href="/labs/lab5" class="lab-link">Lab 5: Statistical Debugging</a></td>
 <td>Lab 4</td>
 </tr>
-<tr style="background: #ffebee;">
-<td>7</td>
-<td>Feb 25, 27</td>
-<td><strong>MIDTERM EXAM</strong></td>
-<td>-</td>
+<tr>
+<td class="week-cell">6</td>
+<td>Sep 29, Oct 1</td>
+<td>Statistical Debugging</td>
+<td><a href="/labs/lab6" class="lab-link">Lab 6: Dataflow Analysis</a></td>
 <td>Lab 5</td>
 </tr>
-<tr style="background: #f5f5f5;">
-<td>8</td>
-<td>Mar 4, 6</td>
-<td><em>Spring Break</em></td>
-<td>-</td>
-<td>-</td>
-</tr>
 <tr>
-<td>9</td>
-<td>Mar 11, 13</td>
+<td class="week-cell">7</td>
+<td>Oct 6, 8</td>
 <td>Dataflow Analysis I</td>
-<td><a href="/labs/lab06">Lab 6: Dataflow</a></td>
-<td>-</td>
-</tr>
-<tr>
-<td>10</td>
-<td>Mar 18, 20</td>
-<td>Dataflow Analysis II</td>
 <td>-</td>
 <td>Lab 6</td>
 </tr>
-<tr>
-<td>11</td>
-<td>Mar 25, 27</td>
-<td>Pointer Analysis</td>
-<td><a href="/labs/lab07">Lab 7: Pointers</a></td>
+<tr class="break-week">
+<td class="week-cell">8</td>
+<td>Oct 13, 15</td>
+<td>Fall Break (Oct 9-12) / Dataflow Analysis II</td>
+<td><a href="/labs/lab7" class="lab-link">Lab 7: Pointer Analysis</a></td>
 <td>-</td>
 </tr>
 <tr>
-<td>12</td>
-<td>Apr 1, 3</td>
-<td>Constraint-Based Analysis</td>
-<td><a href="/labs/lab08">Lab 8: Constraints</a></td>
+<td class="week-cell">9</td>
+<td>Oct 20, 22</td>
+<td>Pointer Analysis</td>
+<td><a href="/labs/lab8" class="lab-link">Lab 8: Constraint-Based Analysis</a></td>
 <td>Lab 7</td>
 </tr>
 <tr>
-<td>13</td>
-<td>Apr 8, 10</td>
-<td>Type Systems</td>
-<td>-</td>
+<td class="week-cell">10</td>
+<td>Oct 27, 29</td>
+<td>Constraint-Based Analysis</td>
+<td><a href="/labs/lab9" class="lab-link">Lab 9: Dynamic Symbolic Execution</a></td>
 <td>Lab 8</td>
 </tr>
 <tr>
-<td>14</td>
-<td>Apr 15, 17</td>
-<td>Symbolic Execution</td>
-<td><a href="/labs/lab09">Lab 9: SymEx</a></td>
-<td>-</td>
-</tr>
-<tr>
-<td>15</td>
-<td>Apr 22, 24</td>
-<td>Advanced Topics & Review</td>
+<td class="week-cell">11</td>
+<td>Nov 3, 5</td>
+<td>Type Inference</td>
 <td>-</td>
 <td>Lab 9</td>
 </tr>
-<tr style="background: #ffebee;">
-<td>16</td>
-<td>May 1</td>
-<td><strong>FINAL EXAM</strong></td>
+<tr>
+<td class="week-cell">12</td>
+<td>Nov 10, 12</td>
+<td>Symbolic Execution</td>
+<td>Group Project</td>
+<td>-</td>
+</tr>
+<tr>
+<td class="week-cell">13</td>
+<td>Nov 17, 19</td>
+<td>Advanced Topics</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="break-week">
+<td class="week-cell">14</td>
+<td>Nov 24</td>
+<td>Thanksgiving Break (Nov 27-30)</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td class="week-cell">15</td>
+<td>Dec 1, 3</td>
+<td>Course Review & Project Presentations</td>
+<td>-</td>
+<td>Group Project</td>
+</tr>
+<tr>
+<td class="week-cell">16</td>
+<td>Dec 8</td>
+<td>Last Day of Classes</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="finals-week">
+<td class="week-cell">Finals</td>
+<td><strong>Dec 11-18</strong></td>
+<td><strong>Final Exam Period</strong></td>
 <td>-</td>
 <td>-</td>
 </tr>
@@ -187,12 +259,18 @@ permalink: /
 
 ## 📚 Course Description
 
+Your 500-line vibe-coded class project works perfectly. Google's 100+ million line codebase? That's a different universe.
+
+At scale, software is complex, buggy, and insecure. Enter **software analysis**: a suite of techniques to automatically analyze code, uncover bugs, and ensure reliability. And this has real-world impact: when Google deploys to billions of devices, a *single* divide-by-zero error can drain millions of batteries worldwide -- or worse, [crash a warship](https://web.archive.org/web/20221230163646/https://www.wired.com/1998/07/sunk-by-windows-nt/) or [rocket's](https://www-users.cse.umn.edu/~arnold/disasters/ariane5rep.html) propulsion system. Software analys tools are live: [Meta's Infer has prevented thousands of crashes](https://engineering.fb.com/2021/10/20/security/static-analysis-award/) has prevented thousands of crashes, while [Google's Tricoder fixes 5000+ bugs daily](https://cacm.acm.org/research/lessons-from-building-static-analysis-tools-at-google/), to name a few.
+
 This course provides a **rigorous and hands-on introduction** to the field of software analysis — a body of powerful techniques and tools for analyzing modern software, with applications to:
 
 - 🐛 Systematically uncover insidious bugs
 - 🔒 Prevent security vulnerabilities  
 - ⚙️ Automate testing and debugging
-- ✅ Improve confidence in software behavior
+- ✅ Improve confidence in software behavior, even _mathematically_
+- 
+⚠️ **New:** Starting this semester, we'll also address the trillion-parameter elephant in the room: Large Language Models (LLMs). With LLMs writing more vibe-code than ever, it's important to devise _automatic_ ways of ensuring code doesn't blow up in production. We'll explore how LLMs can assist in software analysis tasks and their limitations. Our team is re-working the labs as we go, so bear with us!
 
 ### Topics Covered
 
@@ -217,7 +295,7 @@ This course provides a **rigorous and hands-on introduction** to the field of so
 </div>
 </div>
 
-All topics include **hands-on implementation** using the **LLVM compiler infrastructure**.
+All topics include **hands-on implementation** using the [**LLVM compiler infrastructure**](https://llvm.org/). LLVM, created by [Chris Lattner](https://nondot.org/sabre/) during his [UIUC PhD](https://llvm.org/pubs/2005-05-04-LattnerPHDThesis-book.pdf), powers modern compiler technology. His work led to [Clang](https://clang.llvm.org/), caught Apple's attention, and enabled Swift's development. Today LLVM underlies Apple's toolchain, Google's optimizations, and Meta's production tools—making it ideal for understanding real-world analysis.
 
 ---
 

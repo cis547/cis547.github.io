@@ -336,18 +336,12 @@ blockquote > p {
   box-shadow: 0 6px 20px rgba(123, 31, 162, 0.3);
 }
 
-/* Icons using Unicode symbols */
-.resource-link::before {
-  font-size: 1.2em;
-  font-weight: normal;
-}
-
-.resource-link.video-link::before {
-  content: "▶";
-}
-
-.resource-link.slides-link::before {
-  content: "📄";
+/* Resource separator */
+.resource-separator {
+  margin: 0 1rem;
+  color: #ccc;
+  font-size: 1.5rem;
+  vertical-align: middle;
 }
 
 

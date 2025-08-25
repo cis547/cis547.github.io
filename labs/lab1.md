@@ -4,22 +4,22 @@ title: "Lab 1: Introduction to Software Analysis"
 parent: Labs
 nav_order: 1
 ---
-## Objective
+### Objective
 
 The objective of this lab is to use standard analysis tools and an LLM for static and
 dynamic analysis on C programs to discover divide-by-zero errors and interpreting
 their results to better understand various trade-offs between the techniques.
 
-## Pre-Requisites
+### Pre-Requisites
 
 + Watch the video lectures corresponding to the module on
 “Introduction to Software Analysis”.
 The lectures introduce various terminology used throughout this lab such as:
 static and dynamic analysis, soundness, completeness, precision, F1, and more.
 
-## Setup
+### Setup
 
-### Step 1.
+##### Step 1.
 
 Set up the course development environment by following the instructions outlined
 in [Course VM and Lab Instructions][course-vm].
@@ -27,7 +27,7 @@ The skeleton code for Lab 1 is located under `/lab1`.
 We will refer to this top-level directory for Lab 1 simply as `lab1`
 when describing file locations for the lab.
 
-### Step 2.
+##### Step 2.
 
 Run the following command on your *local* machine under cis547vm folder to obtain
 the latest changes to the lab:
@@ -36,7 +36,7 @@ the latest changes to the lab:
 ./cis547vm$ git pull
 ```
 
-### Step 3.
+##### Step 3.
 
 Throughout the labs, we will use `CMake`, a modern tool for
 managing the build process.
@@ -50,7 +50,7 @@ or [Learn Make in Y minutes][learn-make-in-y-minutes] first,
 and then peruse file `lab1/Makefile`.
 Ensure that you are comfortable with using `Makefile` in this lab.
 
-### Step 4.
+##### Step 4.
 
 Inspect the Makefile to see the commands used to run AFL++, IKOS and Gemini.
 
@@ -66,12 +66,12 @@ ikos --opt none -a dbz -d dbm c_programs/test1.c
 gemini -p "analyze @test1.c and report any divide-by-zero errors (YES or NO). Prefer false positives over false negatives."
 ```
 
-## Lab Instructions
+### Lab Instructions
 
 In this lab, you will run three analysis tools on a suite of C programs,
 study the tools’ results, and report your findings.
 
-### Step 1.
+##### Step 1.
 
 Run the provided analysis tools, AFL++, IKOS, and Gemini on all C programs
 located under the `lab1/c_programs` directory.
@@ -137,7 +137,7 @@ under the `lab1/results` directory:
        ...
 ```
 
-### Step 2.
+##### Step 2.
 
 Determine the ground truth (right vs. wrong) of the C programs with respect to
 division-by-zero errors.
@@ -148,7 +148,7 @@ Write your answers in file `lab1/answers.txt` in the “ground truth” column
 of the table for each test.
 We provide the ground truth for the last programs already.
 
-### Step 3.
+##### Step 3.
 
 Study the output of AFL++, IKOS, and Gemini, and determine if they accept or reject each program.
 Fill in your answers in file `lab1/answers.txt` in the corresponding columns of
@@ -161,17 +161,17 @@ The files have idiosyncratic names of the form
 It is the *contents* of these files that AFL++ used as the input
 to the test program when it encountered a crash.
 
-### Step 4.
+##### Step 4.
 
 Using your entries from Steps 2 and 3, calculate the
 Precision, Recall, and F1 Score of each column.
 Enter them in the corresponding rows in `lab1/answers.txt`
 
-### Step 5.
+##### Step 5.
 
 Answer the questions in `answers.txt` with the help of the table you filled in.
 
-## Submission
+### Submission
 
 Once you are done with the lab, you can create a `submission.zip` file by using the following command:
 
