@@ -515,4 +515,4 @@ Then upload the submission file to Gradescope.
 [LLVM SetVector]: https://llvm.org/doxygen/classllvm_1_1SetVector.html
 [CMake Ref]: https://en.wikipedia.org/wiki/CMake
 [Make Ref]: https://www.gnu.org/software/make/manual/html_node/Simple-Makefile.html#Simple-Makefile
-[Menagerie Link]: https://drive.google.com/open?id=1uhCWzfBxsaBQQ6NyMTY64Y6x_qRR1YQwiTpWT0_N2Xc
+[Menagerie Link]: {{ site.baseurl }}/resources/abstractions
