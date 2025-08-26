@@ -1,13 +1,13 @@
 ---
 layout: default
-title: "A Menagerie of Program Abstractions"
+title: "Program Abstractions"
 parent: Resources
 nav_order: 3
 author: "Elizabeth Dinella and Aaditya Naik"
 editor: "Zain K Aamer"
 ---
 
-## {{ page.title }}
+## A Menagerie of Program Abstractions
 
 Authors: {{ page.author }} | Editor: {{ page.editor }}
 
