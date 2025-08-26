@@ -21,8 +21,7 @@ static and dynamic analysis, soundness, completeness, precision, F1, and more.
 
 ## Setup
 
-<details>
-<summary><h3>Step 1: Environment Setup</h3></summary>
+### Step 1: Environment Setup
 
 Set up the course development environment by following the instructions outlined
 in [Course VM and Lab Instructions][course-vm].
@@ -30,10 +29,7 @@ The skeleton code for Lab 1 is located under `/lab1`.
 We will refer to this top-level directory for Lab 1 simply as `lab1`
 when describing file locations for the lab.
 
-</details>
-
-<details>
-<summary><h3>Step 2: Update Lab Files</h3></summary>
+### Step 2: Update Lab Files
 
 Run the following command on your *local* machine under cis547vm folder to obtain
 the latest changes to the lab:
@@ -42,10 +38,7 @@ the latest changes to the lab:
 ./cis547vm$ git pull
 ```
 
-</details>
-
-<details>
-<summary><h3>Step 3: Build System Overview</h3></summary>
+### Step 3: Build System Overview
 
 Throughout the labs, we will use `CMake`, a modern tool for
 managing the build process.
@@ -59,10 +52,7 @@ or [Learn Make in Y minutes][learn-make-in-y-minutes] first,
 and then peruse file `lab1/Makefile`.
 Ensure that you are comfortable with using `Makefile` in this lab.
 
-</details>
-
-<details>
-<summary><h3>Step 4: Inspect Analysis Commands</h3></summary>
+### Step 4: Inspect Analysis Commands
 
 Inspect the Makefile to see the commands used to run AFL++, IKOS and Gemini.
 
@@ -77,8 +67,6 @@ ikos --opt none -a dbz -d dbm c_programs/test1.c
 # Run Gemini on test1.c, asking it to be more conservative
 gemini -p "analyze @test1.c and report any divide-by-zero errors (YES or NO). Prefer false positives over false negatives."
 ```
-
-</details>
 
 ---
 
@@ -104,7 +92,7 @@ followed by using the Gemini CLI with two different prompts.
 On running the above command, you will see the output that looks
 something like this:
 
-```txt
+```sh
 AFL_DONT_OPTIMIZE=1 AFL_USE_UBSAN=1 afl-gcc c_programs/test1.c -o ...
 AFL_NO_UI=1 timeout 30s afl-fuzz -i afl_input -o ...
 Makefile:8: recipe for target 'results/afl_logs/test1/out.txt' failed
@@ -131,9 +119,6 @@ cd /tmp/tmp.wHgzI1ZHNu && gemini -p ...
 On running the make command, the following files and directories should be generated
 under the `lab1/results` directory:
 
-<details>
-<summary>Expected Directory Structure</summary>
-
 ```txt
    ├── afl_logs/
    │   ├── test1/
@@ -155,8 +140,6 @@ under the `lab1/results` directory:
        ├── ... // similar for test2
        ...
 ```
-
-</details>
 
 ### Step 2: Determine Ground Truth
 
