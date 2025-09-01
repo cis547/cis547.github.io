@@ -142,7 +142,7 @@ td {
 </tr>
 <tr>
 <td class="week-cell">2</td>
-<td>Sep 1, 3</td>
+<td>Sep 3</td>
 <td>The LLVM Framework</td>
 <td><a href="/labs/lab2" class="lab-link">Lab 2: The LLVM Framework</a></td>
 <td>Lab 1</td>
