@@ -326,12 +326,12 @@ Upon completion of this course, you will be able to:
 
 | Component | Weight |
 |:----------|:-------|
-| **Labs** (9 total) | 54% |
+| **Labs** (upto 9) | 54% |
 | **Quizzes** | 3% |
-| **Group Project** | 20% |
-| **Final Exam** | 23% |
+| **Group Project** | 23% |
+| **Final Exam** | 20% |
 
-**Late Policy:** 6 late days total, then -10% per day
+**Late Policy:** 6 late days total
 
 ---
 
