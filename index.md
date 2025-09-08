@@ -236,14 +236,14 @@ td {
 <td>Dec 1, 3</td>
 <td>Course Review and Wrap-Up / Final Exam</td>
 <td>-</td>
-<td>Group Project</td>
+<td>-</td>
 </tr>
 <tr>
 <td class="week-cell">16</td>
 <td>Dec 8</td>
 <td>Project Presentations</td>
 <td>-</td>
-<td>-</td>
+<td>Group Project</td>
 </tr>
 </tbody>
 </table>
