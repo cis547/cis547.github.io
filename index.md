@@ -150,14 +150,14 @@ td {
 <tr>
 <td class="week-cell">3</td>
 <td>Sep 8, 10</td>
-<td>Random Input Generation</td>
-<td><a href="/labs/lab3" class="lab-link">Lab 3: Random Input Generation</a></td>
+<td>Software Specifications</td>
+<td><a href="/labs/lab3" class="lab-link">Lab 3: Random Testing</a></td>
 <td>Lab 2</td>
 </tr>
 <tr>
 <td class="week-cell">4</td>
 <td>Sep 15, 17</td>
-<td>Automated Test Generation</td>
+<td>Random Testing</td>
 <td><a href="/labs/lab4" class="lab-link">Lab 4: Delta Debugging</a></td>
 <td>Lab 3</td>
 </tr>
@@ -206,21 +206,21 @@ td {
 <tr>
 <td class="week-cell">11</td>
 <td>Nov 3, 5</td>
-<td>Type Inference</td>
+<td>Dynamic Symbolic Execution</td>
 <td>-</td>
 <td>Lab 9</td>
 </tr>
 <tr>
 <td class="week-cell">12</td>
 <td>Nov 10, 12</td>
-<td>Symbolic Execution</td>
-<td>Group Project</td>
+<td>Automated Test Generation</td>
+<td>-</td>
 <td>-</td>
 </tr>
 <tr>
 <td class="week-cell">13</td>
 <td>Nov 17, 19</td>
-<td>Advanced Topics</td>
+<td>Type Systems</td>
 <td>-</td>
 <td>-</td>
 </tr>
@@ -234,21 +234,14 @@ td {
 <tr>
 <td class="week-cell">15</td>
 <td>Dec 1, 3</td>
-<td>Course Review & Project Presentations</td>
+<td>Course Review and Wrap-Up / Final Exam</td>
 <td>-</td>
 <td>Group Project</td>
 </tr>
 <tr>
 <td class="week-cell">16</td>
 <td>Dec 8</td>
-<td>Last Day of Classes</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="finals-week">
-<td class="week-cell">Finals</td>
-<td><strong>Dec 11-18</strong></td>
-<td><strong>Final Exam Period</strong></td>
+<td>Project Presentations</td>
 <td>-</td>
 <td>-</td>
 </tr>
