@@ -158,57 +158,57 @@ td {
 <td class="week-cell">4</td>
 <td>Sep 15, 17</td>
 <td>Random Testing</td>
-<td><a href="/labs/lab4" class="lab-link">Lab 4: Delta Debugging</a></td>
-<td>Lab 3</td>
+<td>-</td>
+<td>-</td>
 </tr>
 <tr>
 <td class="week-cell">5</td>
 <td>Sep 22, 24</td>
 <td>Delta Debugging</td>
-<td><a href="/labs/lab5" class="lab-link">Lab 5: Statistical Debugging</a></td>
-<td>Lab 4</td>
+<td><a href="/labs/lab4" class="lab-link">Lab 4: Delta Debugging</a></td>
+<td>Lab 3</td>
 </tr>
 <tr>
 <td class="week-cell">6</td>
 <td>Sep 29, Oct 1</td>
 <td>Statistical Debugging</td>
-<td><a href="/labs/lab6" class="lab-link">Lab 6: Dataflow Analysis</a></td>
-<td>Lab 5</td>
+<td><a href="/labs/lab5" class="lab-link">Lab 5: Statistical Debugging</a></td>
+<td>Lab 4</td>
 </tr>
 <tr>
 <td class="week-cell">7</td>
 <td>Oct 6, 8</td>
 <td>Dataflow Analysis I</td>
-<td>-</td>
-<td>Lab 6</td>
+<td><a href="/labs/lab6" class="lab-link">Lab 6: Dataflow Analysis</a></td>
+<td>Lab 5</td>
 </tr>
 <tr class="break-week">
 <td class="week-cell">8</td>
 <td>Oct 13, 15</td>
 <td>Fall Break (Oct 9-12) / Dataflow Analysis II</td>
-<td><a href="/labs/lab7" class="lab-link">Lab 7: Pointer Analysis</a></td>
+<td>-</td>
 <td>-</td>
 </tr>
 <tr>
 <td class="week-cell">9</td>
 <td>Oct 20, 22</td>
 <td>Pointer Analysis</td>
-<td><a href="/labs/lab8" class="lab-link">Lab 8: Constraint-Based Analysis</a></td>
-<td>Lab 7</td>
+<td><a href="/labs/lab7" class="lab-link">Lab 7: Pointer Analysis</a></td>
+<td>Lab 6</td>
 </tr>
 <tr>
 <td class="week-cell">10</td>
 <td>Oct 27, 29</td>
 <td>Constraint-Based Analysis</td>
-<td><a href="/labs/lab9" class="lab-link">Lab 9: Dynamic Symbolic Execution</a></td>
-<td>Lab 8</td>
+<td><a href="/labs/lab8" class="lab-link">Lab 8: Constraint-Based Analysis</a></td>
+<td>Lab 7</td>
 </tr>
 <tr>
 <td class="week-cell">11</td>
 <td>Nov 3, 5</td>
 <td>Dynamic Symbolic Execution</td>
 <td>-</td>
-<td>Lab 9</td>
+<td>Lab 8</td>
 </tr>
 <tr>
 <td class="week-cell">12</td>
@@ -317,12 +317,12 @@ Upon completion of this course, you will be able to:
 
 ## 📊 Grading
 
-| Component | Weight |
-|:----------|:-------|
-| **Labs** (upto 9) | 54% |
-| **Quizzes** | 3% |
-| **Group Project** | 23% |
-| **Final Exam** | 20% |
+| Component         | Weight |
+| :---------------- | :----- |
+| **Labs** (upto 9) | 54%    |
+| **Quizzes**       | 3%     |
+| **Group Project** | 23%    |
+| **Final Exam**    | 20%    |
 
 **Late Policy:** 6 late days total
 
