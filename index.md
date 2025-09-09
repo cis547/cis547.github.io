@@ -21,19 +21,20 @@ permalink: /
 
 ### Instructor
 **Prof. Mayur Naik**  
-📍 AGH 642  
-🕐 Office Hours: TBA
-📧 [mhnaik@seas.upenn.edu](mailto:mhnaik@seas.upenn.edu)
+📧 [mhnaik@seas.upenn.edu](mailto:mhnaik@seas.upenn.edu)  
+🕐 Office Hours: TBA  
+📍 Location: AGH 642
 
 ### Teaching Assistants
-**Mayank Keoliya**  
-📧 [mkeoliya@seas.upenn.edu](mailto:mkeoliya@seas.upenn.edu)
-
 **Zain Aamer**  
-📧 [zaamer@seas.upenn.edu](mailto:zaamer@seas.upenn.edu)
+📧 [zaamer@seas.upenn.edu](mailto:zaamer@seas.upenn.edu)  
+🕐 Office Hours: Tues 3-4pm  
+📍 Location: Levine 501 bump space
 
-📍 TA Office: AGH 642  
-🕐 TA Hours: By Appointment
+**Mayank Keoliya**  
+📧 [mkeoliya@seas.upenn.edu](mailto:mkeoliya@seas.upenn.edu)  
+🕐 Office Hours: By Appointment  
+📍 Location: AGH 642
 
 </div>
 <div markdown="1">
