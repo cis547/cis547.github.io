@@ -5,7 +5,7 @@ parent: Labs
 nav_order: 3
 ---
 
-### Objective
+## Objective
 
 In this lab, you will develop a _fuzzer_ for testing C programs.
 Fuzzing is a popular software testing technique wherein the program under test
@@ -17,13 +17,13 @@ of test as _feedback_ to direct future test generation.
 You will use the code coverage metrics you saw in Lab 2 to help select interesting
 inputs for your fuzzer to mutate.
 
-### Pre-Requisites
+## Pre-Requisites
 
 + Watch the video lectures corresponding to the module on “Random Testing”.
 The lectures introduce various terminology used throughout this lab
 such as seed inputs, mutations, and feedback-directed testing.
 
-### Setup
+## Setup
 
 The code for Lab3 is located under `cis547vm/lab3`.
 We will frequently refer to the top level directory for Lab 3 as `lab3`
@@ -41,7 +41,7 @@ before every division instruction.
 This function gracefully exits the program with return code `1`
 if the denominator is zero, otherwise the program continues running normally.
 
-##### Step 1.
+### Step 1.
 
 The fuzzer and the instrumentation is built using CMake and you can run the following command to build both of them:
 
@@ -57,7 +57,7 @@ The `fuzzer` is the tool that will feed randomized input (that you will generate
 to a compiled C program that was instrumented to exit gracefully
 when it hits a Divide-by-Zero error and report code coverage during execution.
 
-##### Step 2.
+### Step 2.
 
 Next, we want to prepare a test program to fuzz with the `fuzzer`.
 This will be done by first instrumenting the program, similar to Lab 2.
@@ -76,7 +76,7 @@ lab3/test$ make sanity1  # To instrument an build just sanity1.
 lab3/test$ make all      # To instrument and build everything.
 ```
 
-##### Step 3.
+### Step 3.
 
 Now to run the the `fuzzer` you will need to create the output directory
 where fuzzer will store its results.
@@ -131,7 +131,7 @@ fuzz_output_sanity1
 
 Here `N` is the last case that caused a crash before the timeout.
 
-### Lab Instructions
+## Lab Instructions
 
 A full-fledged fuzzer consists of three key features:
 
@@ -139,7 +139,7 @@ A full-fledged fuzzer consists of three key features:
 2. strategies to mutate test inputs to increase code coverage,
 3. a feedback mechanism to help drive the types of mutations used.
 
-##### Mutation-Fuzzing Primer
+### Mutation-Fuzzing Primer
 
 Consider the following code that reads some string input from the command line:
 
@@ -189,9 +189,9 @@ Through the use of various mutations on an input string, we were able to
 exhaust all program execution paths,
 i.e., more varied mutations in the input increased our code coverage.
 In its simplest form, this is exactly what a fuzzer does.
-You may take a look at the [Mutation-Based Fuzzing][fuzzing-book-mutaion] chapter in the Fuzzing Book.
+You may take a look at the [Mutation-Based Fuzzing][fuzzing-book-mutation] chapter in the Fuzzing Book.
 
-##### Feedback-Directed Fuzzing
+### Feedback-Directed Fuzzing
 
 We’ve seen how randomized testing can find bugs and is
 a useful software analysis tool.
@@ -217,7 +217,25 @@ In both cases, the tests increased our knowledge of the program;
 hence, we insert these tests into our set of seeds and use them as a
 starting point for future test generation.
 
-##### Building the Fuzzer
+Feel free to check out the [Greybox Fuzzing][fuzzing-book-greybox] chapter in the Fuzzing Book.
+
+### Fuzzing Dictionaries
+
+Fuzzing dictionaries are lists of keywords and magic numbers that guide fuzzers toward generating more meaningful test inputs.
+Dictionary-guided fuzzing incorporates domain-specific knowledge to increase the likelihood of triggering interesting program behaviors.
+These dictionaries might contain file format signatures (for a image processing library), keywords (for a compiler), and more.
+Dictionaries can significantly improve code coverage and bug-finding ability compared to less-informed approaches.
+
+Static analysis offers an opportunity for automatically extracting dictionary entries from target programs.
+We can analyze the LLVM IR to identify string literals, integer constants, and comparison operands.
+For instance, if the code contains a comparison like `if (header == 0xFEED)`, static analysis can extract `0xFEED` and add it to the fuzzing dictionary.
+This automated extraction process can discover constants that would be nearly impossible for random fuzzing to generate.
+
+We can also extend the dictionary with position hints, specifying where certain tokens should appear.
+These hints might indicate that certain magic bytes must appear at specific offsets.
+By encoding positional constraints alongside the dictionary tokens themselves, we can more efficiently generate structurally valid inputs.
+
+### Building the Fuzzer
 
 In this lab, you will modify `src/Fuzzer.cpp` to build a coverage guided fuzzer.
 You'll need to implement some variety of mutation functions, a mutation function
@@ -260,7 +278,12 @@ while (true) {
 
 Refer to the function `fuzz` in `src/Fuzzer.cpp` for the implementation of this logic.
 
-##### Possible Mutations
+### Extracting a Dictionary
+
+You will also modify `src/BuildDictionary.cpp` to extract constants and automatically build a dictionary for your fuzzer.
+You'll likely need to implement extraction for string and/or integer constants, saving them to a file via `addToDictionary`.
+
+### Possible Mutations
 
 The following is a list of potential suggestions for your mutations:
 
@@ -269,6 +292,8 @@ The following is a list of potential suggestions for your mutations:
 + Cycle through all values for each byte.
 + Remove a random byte.
 + Insert a random byte.
+
+We also give placeholders for two dictionary-driven mutations, `mutationDictDeterministic` and `mutationDictRandom`, especially the latter.
 
 Feel free to play around with additional mutations, and see if you can speed up
 the search for bugs on the binaries.
@@ -280,26 +305,27 @@ strategies in the middle of the fuzzing process.
 You are expected to include a mechanism that will try to choose the best
 strategy for the input program based on the coverage feedback.
 
-##### Overview of the tasks
+### Overview of the tasks
 
-The lab consists of the following tasks in `Fuzzer.cpp`:
+The lab consists of the following tasks in `Fuzzer.cpp` and `BuildDictionary.cpp`:
 
 1. Implement your logic for `selectInput` function,
 which selects a mutant string from the `SeedInputs` vector.
-2. Implement mutation functions you think will help your fuzzer
-generate a rich variety of strings.
+2. Implement constant extraction to build a dictionary of keywords.
+3. Implement mutation functions you think will help your fuzzer
+generate a rich variety of strings. We've described some mutations that use our dictionary.
 Take inspiration from the aforementioned list of mutations.
-3. Implement your logic for `selectMutationFn` to decide which mutation function to pick.
-4. In `feedback` decide whether the mutation was interesting
+4. Implement your logic for `selectMutationFn` to decide which mutation function to pick.
+5. In `feedback` decide whether the mutation was interesting
 based on success or failure of the program, and the code coverage.
 Again, you may follow our groundwork and fill in `feedback`.
-5. Insert an interesting Mutant into the pool of  `SeedInput` to drive further mutation.
+6. Insert an interesting Mutant into the pool of  `SeedInput` to drive further mutation.
 
 One thing to keep in mind is that none of these tasks are compulsorily required,
 your fuzzer can use the default implementations we provide for some of these
 and still get full points, as long as it meets the grading requirements.
 
-##### Code Coverage Metric
+### Code Coverage Metric
 
 Recall that you have a way of checking how much of a particular program gets
 executed using the coverage information output by the instrumentation.
@@ -308,7 +334,7 @@ that is getting fuzzed. This file is read and is made available to you
 through `RawCoverageData` variable inside the `feedback` function.
 You can then use it to decide if a particular mutation is interesting.
 
-##### Few tips
+### Few tips
 
 Read through the Notes, Hints, and Comments in `Fuzzer.cpp` file
 before you start, to get a better idea of how everything fits together.
@@ -326,17 +352,17 @@ which one generates a test that increases code coverage,
 and then exploit that strategy.
 
 
-##### Grading
+### Grading
 
 We expect your fuzzer to be able to generate crashing inputs for
 all programs we have provided you in `lab3/test`.
 
 Beyond that we will also be testing your fuzzer on ten hidden test programs.
 These programs serve as more challenging test cases for your fuzzer.
-To get full points on the hidden tests, your fuzzer should be able to find
-a crashing input in at least seven of them.
+Four of these test cases are marked as "magic", meaning that they incorporate magic numbers.
+To get full points on the hidden tests, your fuzzer should be able to find a crashing input in at least seven of the hidden inputs, with at least two of them being "magic".
 
-### Submission
+## Submission
 
 Once you are done with the lab, you can create a `submission.zip` file by using the following command:
 
@@ -353,4 +379,5 @@ The same seed value will be used for all test cases.
 
 
 [course-vm]: {{ site.baseurl }}/resources/course-vm
-[fuzzing-book-mutaion]: https://fuzzingbook.org/html/MutationFuzzer.html
+[fuzzing-book-mutation]: https://fuzzingbook.org/html/MutationFuzzer.html
+[fuzzing-book-greybox]: https://www.fuzzingbook.org/html/GreyboxFuzzer.html
