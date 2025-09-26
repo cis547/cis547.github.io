@@ -5,169 +5,116 @@ parent: Labs
 nav_order: 4
 ---
 
-### Objective
+## Objective
 
-In this lab, you will build a delta debugger that implements
-an efficient algorithm for finding a 1-minimal crashing input
-given a large crashing input.
-You will combine this tool with a fuzzer like the one you built
-in `lab3` to minimize the crashing inputs found by the fuzzer.
+In this lab, you will implement a delta debugger. This tool efficiently finds a 1-minimal crashing input given a larger input that causes a program to crash. You will then combine this delta debugger with a fuzzer (similar to the one developed in Lab 3) to minimize crashing inputs discovered by the fuzzer.
 
-### Setup
+## Setup
 
-The code for Lab 4 is located under `cis547vm/lab4/`.
-We will frequently refer to this directory `lab4`.
-Open the `lab4` directory in VSCode following the Instructions from
-[Course VM document][course-vm].
+The code for Lab 4 is located in the `/llvmlabs/reference/lab4/` directory. Throughout this document, we will refer to this as the `lab4` directory. Please open this directory in VSCode, following the instructions in the [Course VM document][course-vm].
 
-This lab builds on top of the previous labs.
-We have provided you with pre-compiled binaries for
-the `runtime` library,
-`InstrumentPass` for `coverage` and `sanitize`,
-and a `fuzzer` executable; you can find them under `lab4/lib`.
-Their implementations are identical to the implementations in `lab3`.
+This lab builds upon previous labs. You will compile the runtime library, `InstrumentPass` (for coverage and sanitization), and a fuzzer executable as part of the lab setup. Their implementations are identical to those in Lab 3.
 
+### Step 1: Install the Delta Debugger Package
 
-##### Step 1.
+This lab utilizes Python for the delta debugger implementation, packaged as `delta_debugger`. To build and install this package, run the following command from the `lab4` directory:
 
-This lab uses python to implement delta debugger.
-We do so by building a python package called `delta_debugger`.
-
-To build and install the package, run:
-
-```sh
-/lab4$ make install
+```bash
+make install
 ```
 
-Unlike with `c++`, you *won't* need to re-run this command
-after making changes to your code.
-Further, you will be able to use your delta debugger using the
-`delta-debugger` command from the terminal.
+Unlike C++ projects, you generally won't need to re-run this command after making changes to your Python code. Once installed, you can use your delta debugger directly from the terminal via the `delta-debugger` command. This tool is designed to shrink a crashing input for a given program.
 
-The `delta-debugger` tool performs delta debugging to shrink
-a crashing input to a program.
+### Step 2: Find Crashing Inputs with a Fuzzer
 
-##### Step 2.
+Before using the delta debugger, you need an input that causes a program to crash. We will use a fuzzer for this purpose.
 
-To use `delta-debugger` with a program you first need to find some input
-that will crash the program.
-To find such an input we will use a fuzzer.
+Similar to Lab 3, you'll first need to instrument the target program and set up output directories for the fuzzer's results. Navigate to the `lab4/test` directory and use the provided Makefile commands:
 
-Just like [`lab3`][lab03], to run the `fuzzer` you will first need to instrument
-the program and setup appropriate output directories
-where fuzzer will store its results.
-
-```sh
-/lab4/test$ make sanity1               # Instrument and build sanity1
-/lab4/test$ mkdir fuzz_output_sanity1  # Create output directory
-# Run the fuzzer on sanity1 with a timeout of 6 seconds.
-/lab4/test$ timeout 6s fuzzer ./sanity1 fuzz_input fuzz_output_sanity1
+```bash
+make sanity1          # Instrument and build sanity1
+make fuzz-sanity1     # Run the fuzzer on sanity1
 ```
 
-You can also use the Makefile to instrument, build,
-setup output directory and run the fuzzer for you:
+The `make fuzz-sanity1` command will automatically instrument, build, set up the output directory, and run the fuzzer for you.
 
-```sh
-/lab4/test$ make sanity1               # Instrument and build sanity1
-/lab4/test$ make fuzz-sanity1          # Run the fuzzer on sanity1
-```
+### Step 3: Minimize Crashing Inputs using Delta Debugger
 
-##### Step 3.
-
-Once you have run the fuzzer you will find inputs
-that couse the program to crash under
-`test/fuzz_output_sanity1/failure`.
+After running the fuzzer, crashing inputs will be stored under `lab4/test/fuzz_output_sanity1/failure/`. The directory structure will look like this:
 
 ```
-fuzz_output_sanity1
-├── success
+fuzz_output_sanity1/
+├── success/
 ├── randomSeed.txt
-└── failure                            # Inputs that cause a crash.
-    ├── input0
-    ├── input1
-    │    ...
-    └── inputN
+└── failure/          # Inputs that cause a crash.
+    ├── input0
+    ├── input1
+    │    ...
+    └── inputN
 ```
 
-You can now use `delta-debugger` to minimize the crashing
-inputs found by the fuzzer.
+You can now use `delta-debugger` to minimize these crashing inputs. For example, to minimize `input1`:
 
-```
-/lab4/test$ delta-debugger ./sanity1 fuzz_output_sanity1/failure/input1
-```
-
-The last argument is path to the crashing input and depends on which input you want to minimize.
-In this example the reduced input is stored in `fuzz_output/failure/input1.delta`.
-Additionally, before running another invocation of `delta-debugger`, make sure to clean up the `fuzz_output` directory.
-
-You can do this by running:
-
-```sh
-/lab4/test$ rm -rf fuzz_output_sanity1 && mkdir fuzz_output_sanity1
+```bash
+delta-debugger ./sanity1 fuzz_output_sanity1/failure/input1
 ```
 
-### Lab Instructions
+The last argument is the path to the crashing input you wish to minimize. The reduced input will be stored in a new file, for instance, `fuzz_output_sanity1/failure/input1.delta`.
 
-You will need to edit the `lab4/delta_debugger/delta.py` file to build a delta debugging tool.
-We have provided a template function --- `delta_debug` --- for you to
-implement your minimization logic.
-The `delta_debug` function takes a `target` program, and `input` that causes `target` to crash,
-and is supposed to return a 1-minimal input that still crashes the `target` program.
+**Important:** Before running another invocation of `delta-debugger` or the fuzzer, ensure you clean up the `fuzz_output_sanity1` directory to avoid conflicts:
 
-To perform delta debugging, you will have to repeatedly run `target` with various `input` strings.
-We provide a `run_target` function to help you run `target` program with an `input`.
-It returns a value of 0 if the target didn't crash.
+```bash
+rm -rf fuzz_output_sanity1 && mkdir fuzz_output_sanity1
+```
 
-```py
+## Lab Instructions
+
+Your primary task is to implement the delta debugging logic within the `lab4/delta_debugger/delta.py` file. We have provided a template function, `delta_debug`, for you to complete. This function takes a target program and a crashing input, and it should return a 1-minimal input that still causes the target program to crash.
+
+To perform delta debugging, you will repeatedly execute the target program with various input strings. A `run_target` function is provided to facilitate this:
+
+```python
 def run_target(target: str, input: Union[str, bytes]) -> int:
     """
     Run the target program with input on its stdin.
     :param target: The target program to run.
     :param input: The input to pass to the target program.
-    :return: The return code of the target program.
+    :return: The return code of the target program (0 if no crash, non-zero otherwise).
     """
     ...
 ```
 
-For this lab you will modify the `delta_debug` function to implement the algorithm to
-you learn in class to find a 1-minimal crashing input.
+You will modify the `delta_debug` function to implement the delta debugging algorithm discussed in class. You might find it helpful to create a recursive helper function, for example, `_delta_debug`, which could take the target, an input, and a granularity parameter `n` to manage the search process.
 
-You likely want to add a helper function for example called `_delta_debug`
-that takes a `target`, an `input` and a parameter `n`
-that correspond to search granularity, and performs one iteration of delta debugging algorithm to
-return the next `input` and `n`.
+## Example Input and Output
 
-### Example Input and Output
+Your delta debugger should be capable of running on any executable that accepts input from stdin.
 
-Your delta debugger should run on any executable that accepts input from `stdin`.
+To run the delta debugger on a test program, use the following command format:
 
-You run the delta debugger on a test program by passing in the following arguments:
-
-```sh
+```bash
 delta-debugger ./test crashing-input
 ```
 
-And the delta debugger will store its result in `crashing-input.delta` file.
+The minimized result will be saved to a file named `crashing-input.delta`.
 
-As a specific example consider the string: "abckdanmvelcbaghcajbtkzxmntplwqsrakstuvbxyz", which causes `test3` to fail:
+Consider this specific example where the string "abckdanmvelcbaghcajbtkzxmntplwqsrakstuvbxyz" causes `test3` to fail:
 
-```sh
+```bash
 /lab4/test$ echo -n "abckdanmvelcbaghcajbtkzxmntplwqsrakstuvbxyz" > tmp
 /lab4/test$ delta-debugger ./test3 tmp
 /lab4/test$ cat tmp.delta
 abckdanmvel
 ```
 
-### Items to Submit
+## Items to Submit
 
-Once you are done with the lab, you can create a `submission.zip` file by using the following command:
+Once you have completed the lab, create a `submission.zip` file using the following command from the `lab4` directory:
 
-```sh
-lab4$ make submit
-...
-submission.zip created successfully.
+```bash
+make submit
 ```
-Then upload the `submission.zip` file to Gradescope.
 
-[lab03]: {{ site.baseurl }}/labs/lab03
+This will generate `submission.zip` successfully. Please upload this file to Gradescope.
+
 [course-vm]: {{ site.baseurl }}/resources/course-vm
