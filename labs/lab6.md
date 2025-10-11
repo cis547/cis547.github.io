@@ -255,7 +255,7 @@ define dso_local i32 @main() {
 Run your DivZero pass:
 
 ```sh
-lab6/test$ opt -load ../build/DivZeroPass.so -DivZero -disable-output test01.opt.ll > test01.out 2> test01.err
+lab6/test$ opt -load-pass-plugin=../build/DivZeroPass.so -passes="DivZero" -disable-output test01.opt.ll > test01.out 2> test01.err
 ```
 
 Output files:
