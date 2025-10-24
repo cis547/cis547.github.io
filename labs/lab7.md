@@ -5,18 +5,18 @@ parent: Labs
 nav_order: 7
 ---
 
-### Objective 
+## Objective 
 
 The goal of this lab is to extend the static **divide-by-zero** sanitizer in Lab 6 to perform its analysis in the presence of pointers.
 You will combine the dataflow analysis from the previous lab with a flow-insensitive pointer analysis, resulting in a more comprehensive overall static analysis.
 
-### Setup
+## Setup
 
 The skeleton code for Lab 7 is located under `/lab7`.
 We will frequently refer to the top level directory for Lab 7 as `lab7` when describing file locations.
 This lab is built upon your work from [Lab 6][Lab06], so you can reuse most of your content from the `/lab6/src` directory.
 
-#### Step 1.
+### Step 1.
 
 The following commands set up the lab, using the CMake/Makefile pattern seen before.
 
@@ -32,13 +32,13 @@ Most of these changes can be copied over from the previous lab and then be modif
 
 We are now ready to run our bare-bones lab on a sample input C program.
 
-#### Step 2.
+### Step 2.
 
 Before running the pass, the LLVM IR code must be generated.
 
 ```sh
 /lab7/test$ clang -emit-llvm -S -fno-discard-value-names -Xclang -disable-O0-optnone -c test03.c -o test03.ll
-/lab7/test$ opt -load ../build/DivZeroPass.so -DivZero test03.ll
+/lab7/test$ opt -load-pass-plugin=../build/DivZeroPass.so -passes="DivZero" test03.ll
 ```
 
 The first line (`clang`) generates LLVM IR code from the input C program `test03.c`.
@@ -51,13 +51,13 @@ However, in this lab we no longer do that so you will extend your previous code 
 Upon successful completion of this lab, the output should be as follows:
 
 ```sh
-/lab7/test$ opt -load ../build/DivZeroPass.so -DivZero test03.ll
+/lab7/test$ opt -load-pass-plugin=../build/DivZeroPass.so -passes="DivZero" test03.ll
 Running DivZero on f
 Potential Instructions by DivZero:
     %div = sdiv i32 1, %2
 ```
 
-### Format of Input Programs
+## Format of Input Programs
 
 The input format of this lab is the same as that of Lab 6 except now you will handle pointers:
 
@@ -68,7 +68,7 @@ The input format of this lab is the same as that of Lab 6 except now you will ha
 * User inputs are *only* introduced via the set of functions where the provided `isInput` function returns `True`.
 * You *can ignore* other call instructions to other functions.
 
-### Lab Instructions
+## Lab Instructions
 
 In this lab, you will extend the **divide-by-zero** analysis that you implemented in Lab 6 to analyze and catch potential **divide-by-zero** errors in the presence of aliased memory locations.
 
@@ -78,9 +78,9 @@ You will use a **flow-insensitive pointer analysis**
 --- where we abstract away control flow and build a global **points-to graph**
 --- to help your sanitizer analyze more meaningful programs.
 
-### Part 1: Function Arguments/Call Instructions
+## Part 1: Function Arguments/Call Instructions
 
-#### Step 1.
+### Step 1.
 
 Recall that in previous lab, all of the test programs were basic functions that accepted no arguments.
 
@@ -103,7 +103,7 @@ and even of different types (but for this lab, consider all arguments as `int`�
 
 So in `doAnalysis`, you will need to handle functions with arguments and set up their domains accordingly.
 
-#### Step 2.
+### Step 2.
 
 Familiarize yourself with the `doAnalysis()` routine that acts as the entrypoint to your **divide-by-zero** LLVM pass.
 In last lab, you implemented the chaotic iteration algorithm here.
@@ -120,7 +120,7 @@ We will go over this in Part 2.
 void DivZeroAnalysis::doAnalysis(Function &F, PointerAnalysis *PA)
 ```
 
-#### Step 3.
+### Step 3.
 
 Given an arbitrary function `F` passed into your `doAnalysis()` routine, find the arguments of the function call and instantiate abstract domain values for each argument.
 Note that the object `F` here is of type `Function`, which can be used to find all the arguments available.
@@ -129,7 +129,7 @@ Furthermore, once you’ve initialized these starting argument abstract values,
 pass these values into your existing implementation of the **divide-by-zero** pass
 such that these variables get propagated throughout the entire **reaching definitions analysis**.
 
-#### Step 4.
+### Step 4.
 
 In addition to handling arguments of the function `F` being analyzed,
 we also want to cover other function calls made within the program.
@@ -147,9 +147,9 @@ void main() {
 In the above example, `getchar()` is an external function call made without arguments that returns an `int`.
 Update your analysis to handle arbitrary `CallInst` instructions, but only if the return type is an `int`.
 
-### Part 2: Store/Load Instructions
+## Part 2: Store/Load Instructions
 
-#### Step 1.
+### Step 1.
 
 As mentioned above, there’s a change made to the former doAnalysis() function:
 
@@ -169,16 +169,22 @@ Please make sure when reusing code from the previous assignment that you copy yo
 These arguments are necessary as we explore pointer aliasing.
 
 To help understand how the code is different from lab6 and how its tied together,
-consider the following snippet from `DivZeroAnalysis::runOnFunction()`:
+consider the following snippet from `DivZeroAnalysis::run`:
 
 ```cpp
-bool DivZeroAnalysis::runOnFunction(Function &F) {
-  outs() << "Running " << getAnalysisName() << " on " << F.getName() << "\n";
+PreservedAnalyses DivZeroAnalysis::run(Module &M, ModuleAnalysisManager &AM) {
+  // some code ...
 
-  // more code here...
-  PointerAnalysis *PA = new PointerAnalysis(F);
-  doAnalysis(F, PA);
-  // more code here...
+  for (auto &F : M) {
+    outs() << "Running " << getAnalysisName() << " on " << F.getName() << "\n";
+
+    // more code here...
+    PointerAnalysis *PA = new PointerAnalysis(F);
+    doAnalysis(F, PA);
+    // more code here...
+  }
+
+  return PreservedAnalyses::all();
 }
 ```
 
@@ -199,7 +205,7 @@ void DivZeroAnalysis::doAnalysis(Function &F, PointerAnalysis *PA) {
 And, note that the transfer function now gets PointerAnalysis and a PointerSet as inputs.
 Keep this in mind when reusing your code from Lab 6.
 
-#### Step 2.
+### Step 2.
 
 At a high level, you will modify the `transfer()` function in `Transfer.cpp` to perform a more sophisticated **divide-by-zero** analysis by keeping track of pointers.
 
@@ -211,7 +217,7 @@ and `PointerSet` will contain all pointers from the Function.
 We will discuss in more detail what this `PointerAnalysis` class does in the following sections,
 but read through the docstrings and the code and make sense of what is being done in each of the methods provided.
 
-##### Modeling LLVM alloca, store, and load.
+#### Modeling LLVM alloca, store, and load.
 
 Here we provide an interface for working with pointers in LLVM.
 
@@ -284,7 +290,7 @@ M[variable(I6)] = M[variable(I2)]
 
 As in Lab 6, the `variable()` method is still used to encode the variable of an instruction.
 
-##### Building the Points-To Graph.
+#### Building the Points-To Graph.
 
 The `PointerAnalysis` class builds a points-to graph that you will use in your `transfer` function.
 `PointsToInfo` represents a mapping from variables to a `PointsToSet`,
@@ -305,12 +311,12 @@ The implementation for the `PointerAnalysis` constructor that will go through al
 
 Additionally, we have also provided an `alias()` method which returns true if two pointers may be aliases to one another.
 
-#### Step 3.
+### Step 3.
 
 Using the `PointerAnalysis` object, augment your `transfer()` function in `Transfer.cpp` to take into account pointer aliasing during its analysis.
 This should be done by adding code to handle `StoreInst` and `LoadInst` instructions in the `transfer` function.
 
-##### LoadInst
+#### LoadInst
 
 We can rely on the existing variables defined within the `In` memory to know the abstract domain
 should be assigned for the new variable introduced by a load instruction.
@@ -336,7 +342,7 @@ This is loading the value of the pointer at `%d` (which itself is a pointer) int
 You can retrieve this load instruction’s type using `getType()`,
 and further check the type using methods like `isIntegerTy()` or `isPointerTy()`.
 
-##### StoreInst
+#### StoreInst
 
 Store instruction can either add new variables or overwrite existing variables into our memory maps.
 
@@ -381,7 +387,7 @@ join them all together via `Domain::join()`,
 then proceed to update the current assignment as well as **all** may-aliased assignments with this abstract value.
 This ensures that all pointer references are in-sync and will converge upon a precise abstract value in our analysis.
 
-### Submission
+## Submission
 
 Once you are done with the lab, you can create a `submission.zip` file by using the following command:
 
