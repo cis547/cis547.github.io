@@ -44,9 +44,9 @@ permalink: /
 
 ### Quick Links 
 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-<a href="https://edstem.org/us/courses/83416" class="btn" style="background: #7B1FA2; color: white;">Ed Discussion</a>
-<a href="https://canvas.upenn.edu/courses/1869358" class="btn" style="background: #4A90E2; color: white;">Canvas</a>
-<a href="https://www.gradescope.com/courses/1102804" class="btn" style="background: #00C853; color: white;">Gradescope</a>
+<a href="https://edstem.org/us/courses/103722/" class="btn" style="background: #7B1FA2; color: white;">Ed Discussion</a>
+<a href="https://canvas.upenn.edu/courses/1948877/" class="btn" style="background: #4A90E2; color: white;">Canvas</a>
+<a href="https://www.gradescope.com/courses/1369244/" class="btn" style="background: #00C853; color: white;">Gradescope</a>
 </div>
 
 </div>
