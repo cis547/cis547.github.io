@@ -2,14 +2,14 @@
 layout: default
 title: Home
 nav_order: 1
-description: "CIS 5470: Software Analysis - Fall 2025 at University of Pennsylvania"
+description: "CIS 5470: Software Analysis - Fall 2026 at University of Pennsylvania"
 permalink: /
 ---
 
 # CIS 5470: Software Analysis
 {: .text-center}
 
-**Fall 2025 • University of Pennsylvania**
+**Fall 2026 • University of Pennsylvania**
 {: .text-center .text-muted}
 
 ---
@@ -21,20 +21,18 @@ permalink: /
 
 ### Instructor
 **Prof. Mayur Naik**  
-📧 [mhnaik@seas.upenn.edu](mailto:mhnaik@seas.upenn.edu)  
+📧 [mhnaik@cis.upenn.edu](mailto:mhnaik@cis.upenn.edu)  
 🕐 Office Hours: TBA  
 📍 Location: AGH 642
 
 ### Teaching Assistants
-**Zain Aamer**  
-📧 [zaamer@seas.upenn.edu](mailto:zaamer@seas.upenn.edu)  
-🕐 Office Hours: Tues 3-4pm  
-📍 Location: Levine 501 bump space
+**Claire Wang**  
+📧 [cdwang@engineering.upenn.edu](mailto:cdwang@engineering.upenn.edu)  
+🕐 Office Hours: By Appointment
 
-**Mayank Keoliya**  
-📧 [mkeoliya@seas.upenn.edu](mailto:mkeoliya@seas.upenn.edu)  
-🕐 Office Hours: By Appointment  
-📍 Location: AGH 642
+**Zain Aamer**  
+📧 [zaamer@engineering.upenn.edu](mailto:zaamer@engineering.upenn.edu)  
+🕐 Office Hours: By Appointment
 
 </div>
 <div markdown="1">
@@ -42,7 +40,7 @@ permalink: /
 ### Lectures
 📅 **Monday & Wednesday**  
 🕐 **1:45pm - 3:15pm**  
-📍 **AGH 203**
+📍 **AGH 105**
 
 ### Quick Links 
 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -136,112 +134,112 @@ td {
 <tbody>
 <tr class="odd-week">
 <td class="week-cell">1</td>
-<td>Aug 27</td>
+<td>Aug 26</td>
 <td>Introduction to Software Analysis</td>
 <td><a href="/labs/lab1" class="lab-link">Lab 1: Introduction to Software Analysis</a></td>
 <td>-</td>
 </tr>
 <tr>
 <td class="week-cell">2</td>
-<td>Sep 3</td>
+<td>Aug 31, Sep 2</td>
 <td>The LLVM Framework</td>
 <td><a href="/labs/lab2" class="lab-link">Lab 2: The LLVM Framework</a></td>
 <td>Lab 1</td>
 </tr>
 <tr>
 <td class="week-cell">3</td>
-<td>Sep 8, 10</td>
+<td>Sep 9</td>
 <td>Software Specifications</td>
 <td><a href="/labs/lab3" class="lab-link">Lab 3: Random Testing</a></td>
 <td>Lab 2</td>
 </tr>
 <tr>
 <td class="week-cell">4</td>
-<td>Sep 15, 17</td>
+<td>Sep 14, 16</td>
 <td>Random Testing</td>
 <td>-</td>
 <td>-</td>
 </tr>
 <tr>
 <td class="week-cell">5</td>
-<td>Sep 22, 24</td>
+<td>Sep 21, 23</td>
 <td>Delta Debugging</td>
 <td><a href="/labs/lab4" class="lab-link">Lab 4: Delta Debugging</a></td>
 <td>Lab 3</td>
 </tr>
 <tr>
 <td class="week-cell">6</td>
-<td>Sep 29, Oct 1</td>
+<td>Sep 28, 30</td>
 <td>Statistical Debugging</td>
 <td><a href="/labs/lab5" class="lab-link">Lab 5: Statistical Debugging</a></td>
 <td>Lab 4</td>
 </tr>
-<tr>
+<tr class="break-week">
 <td class="week-cell">7</td>
-<td>Oct 6, 8</td>
-<td>Dataflow Analysis I</td>
+<td>Oct 5, 7</td>
+<td>Fall Break (Oct 1-4) / Dataflow Analysis I</td>
 <td><a href="/labs/lab6" class="lab-link">Lab 6: Dataflow Analysis</a></td>
 <td>Lab 5</td>
 </tr>
-<tr class="break-week">
+<tr>
 <td class="week-cell">8</td>
-<td>Oct 13, 15</td>
-<td>Fall Break (Oct 9-12) / Dataflow Analysis II</td>
+<td>Oct 12, 14</td>
+<td>Dataflow Analysis II</td>
 <td>-</td>
 <td>-</td>
 </tr>
 <tr>
 <td class="week-cell">9</td>
-<td>Oct 20, 22</td>
+<td>Oct 19, 21</td>
 <td>Pointer Analysis</td>
 <td><a href="/labs/lab7" class="lab-link">Lab 7: Pointer Analysis</a></td>
 <td>Lab 6</td>
 </tr>
 <tr>
 <td class="week-cell">10</td>
-<td>Oct 27, 29</td>
+<td>Oct 26, 28</td>
 <td>Constraint-Based Analysis</td>
 <td><a href="/labs/lab8" class="lab-link">Lab 8: Constraint-Based Analysis</a></td>
 <td>Lab 7</td>
 </tr>
 <tr>
 <td class="week-cell">11</td>
-<td>Nov 3, 5</td>
+<td>Nov 2, 4</td>
 <td>Dynamic Symbolic Execution</td>
 <td>-</td>
 <td>Lab 8</td>
 </tr>
 <tr>
 <td class="week-cell">12</td>
-<td>Nov 10, 12</td>
+<td>Nov 9, 11</td>
 <td>Automated Test Generation</td>
 <td>-</td>
-<td>-</td>
+<td>Project Proposal</td>
 </tr>
 <tr>
 <td class="week-cell">13</td>
-<td>Nov 17, 19</td>
+<td>Nov 16, 18</td>
 <td>Type Systems</td>
 <td>-</td>
 <td>-</td>
 </tr>
 <tr class="break-week">
 <td class="week-cell">14</td>
-<td>Nov 24</td>
-<td>Thanksgiving Break (Nov 27-30)</td>
+<td>Nov 23</td>
+<td>Thanksgiving Break (Nov 26-29)</td>
 <td>-</td>
 <td>-</td>
 </tr>
 <tr>
 <td class="week-cell">15</td>
-<td>Dec 1, 3</td>
+<td>Nov 30, Dec 2</td>
 <td>Course Review and Wrap-Up / Final Exam</td>
 <td>-</td>
 <td>-</td>
 </tr>
 <tr>
 <td class="week-cell">16</td>
-<td>Dec 8</td>
+<td>Dec 7</td>
 <td>Project Presentations</td>
 <td>-</td>
 <td>Group Project</td>
