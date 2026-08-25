@@ -14,17 +14,18 @@
       { start: new Date('2026-09-07'), end: new Date('2026-09-13') }, // Week 3
       { start: new Date('2026-09-14'), end: new Date('2026-09-20') }, // Week 4
       { start: new Date('2026-09-21'), end: new Date('2026-09-27') }, // Week 5
-      { start: new Date('2026-09-28'), end: new Date('2026-10-04') }, // Week 6 (Fall Break starts)
-      { start: new Date('2026-10-05'), end: new Date('2026-10-11') }, // Week 7
-      { start: new Date('2026-10-12'), end: new Date('2026-10-18') }, // Week 8
-      { start: new Date('2026-10-19'), end: new Date('2026-10-25') }, // Week 9
-      { start: new Date('2026-10-26'), end: new Date('2026-11-01') }, // Week 10
-      { start: new Date('2026-11-02'), end: new Date('2026-11-08') }, // Week 11
-      { start: new Date('2026-11-09'), end: new Date('2026-11-15') }, // Week 12
-      { start: new Date('2026-11-16'), end: new Date('2026-11-22') }, // Week 13
-      { start: new Date('2026-11-23'), end: new Date('2026-11-29') }, // Week 14 (Thanksgiving)
-      { start: new Date('2026-11-30'), end: new Date('2026-12-06') }, // Week 15
-      { start: new Date('2026-12-07'), end: new Date('2026-12-09') }, // Week 16
+      { start: new Date('2026-09-28'), end: new Date('2026-09-30') }, // Week 6
+      { start: new Date('2026-10-01'), end: new Date('2026-10-04') }, // Week 7 (Fall Break)
+      { start: new Date('2026-10-05'), end: new Date('2026-10-11') }, // Week 8
+      { start: new Date('2026-10-12'), end: new Date('2026-10-18') }, // Week 9
+      { start: new Date('2026-10-19'), end: new Date('2026-10-25') }, // Week 10
+      { start: new Date('2026-10-26'), end: new Date('2026-11-01') }, // Week 11
+      { start: new Date('2026-11-02'), end: new Date('2026-11-08') }, // Week 12
+      { start: new Date('2026-11-09'), end: new Date('2026-11-15') }, // Week 13
+      { start: new Date('2026-11-16'), end: new Date('2026-11-22') }, // Week 14
+      { start: new Date('2026-11-23'), end: new Date('2026-11-29') }, // Week 15 (Thanksgiving)
+      { start: new Date('2026-11-30'), end: new Date('2026-12-06') }, // Week 16
+      { start: new Date('2026-12-07'), end: new Date('2026-12-09') }, // Week 17
       { start: new Date('2026-12-10'), end: new Date('2026-12-17') }  // Finals
     ];
     

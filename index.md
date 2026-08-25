@@ -125,7 +125,7 @@ td {
 <thead>
 <tr>
 <th>Week</th>
-<th>Dates</th>
+<th>Lectures</th>
 <th>Topic</th>
 <th>Lab</th>
 <th>Due</th>
@@ -142,7 +142,7 @@ td {
 <tr>
 <td class="week-cell">2</td>
 <td>Aug 31, Sep 2</td>
-<td>The LLVM Framework</td>
+<td>Introduction to Software Analysis / Software Specifications</td>
 <td><a href="/labs/lab2" class="lab-link">Lab 2: The LLVM Framework</a></td>
 <td>Lab 1</td>
 </tr>
@@ -175,9 +175,16 @@ td {
 <td>Lab 4</td>
 </tr>
 <tr class="break-week">
+<td class="week-cell">-</td>
+<td>-</td>
+<td>Fall Break (Oct 1-4)</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
 <td class="week-cell">7</td>
 <td>Oct 5, 7</td>
-<td>Fall Break (Oct 1-4) / Dataflow Analysis I</td>
+<td>Dataflow Analysis I</td>
 <td><a href="/labs/lab6" class="lab-link">Lab 6: Dataflow Analysis</a></td>
 <td>Lab 5</td>
 </tr>
@@ -246,6 +253,8 @@ td {
 </tr>
 </tbody>
 </table>
+
+*Labs are due by end of day (11:59pm ET) on the Wednesday of the week listed in the "Due" column.*
 
 ---
 
