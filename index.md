@@ -344,7 +344,7 @@ Upon completion of this course, you will be able to:
 - *Reference:* Principles of Program Analysis (Nielson et al.)
 
 ### Links
-- [Course GitHub](https://github.com/cis547vm)
+- [Course GitHub](https://github.com/cis547/cis547vm)
 - [LLVM Documentation](https://llvm.org/docs/)
 
 ---
