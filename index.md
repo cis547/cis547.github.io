@@ -150,29 +150,29 @@ td {
 <td class="week-cell">3</td>
 <td>Sep 9</td>
 <td>Software Specifications</td>
-<td><a href="/labs/lab3" class="lab-link">Lab 3: Random Testing</a></td>
-<td>Lab 2</td>
+<td>-</td>
+<td>-</td>
 </tr>
 <tr>
 <td class="week-cell">4</td>
 <td>Sep 14, 16</td>
 <td>Random Testing</td>
 <td>-</td>
-<td>-</td>
+<td>Lab 2</td>
 </tr>
 <tr>
 <td class="week-cell">5</td>
 <td>Sep 21, 23</td>
 <td>Delta Debugging</td>
-<td><a href="/labs/lab4" class="lab-link">Lab 4: Delta Debugging</a></td>
-<td>Lab 3</td>
+<td><a href="/labs/lab3" class="lab-link">Lab 3: Random Testing</a></td>
+<td>-</td>
 </tr>
 <tr>
 <td class="week-cell">6</td>
 <td>Sep 28, 30</td>
 <td>Statistical Debugging</td>
-<td><a href="/labs/lab5" class="lab-link">Lab 5: Statistical Debugging</a></td>
-<td>Lab 4</td>
+<td>-</td>
+<td>-</td>
 </tr>
 <tr class="break-week">
 <td class="week-cell">-</td>
@@ -185,50 +185,50 @@ td {
 <td class="week-cell">7</td>
 <td>Oct 5, 7</td>
 <td>Dataflow Analysis I</td>
-<td><a href="/labs/lab6" class="lab-link">Lab 6: Dataflow Analysis</a></td>
-<td>Lab 5</td>
+<td><a href="/labs/lab4" class="lab-link">Lab 4: Delta Debugging</a></td>
+<td>Lab 3</td>
 </tr>
 <tr>
 <td class="week-cell">8</td>
 <td>Oct 12, 14</td>
 <td>Dataflow Analysis II</td>
-<td>-</td>
-<td>-</td>
+<td><a href="/labs/lab5" class="lab-link">Lab 5: Statistical Debugging</a></td>
+<td>Lab 4</td>
 </tr>
 <tr>
 <td class="week-cell">9</td>
 <td>Oct 19, 21</td>
 <td>Pointer Analysis</td>
-<td><a href="/labs/lab7" class="lab-link">Lab 7: Pointer Analysis</a></td>
-<td>Lab 6</td>
+<td><a href="/labs/lab6" class="lab-link">Lab 6: Dataflow Analysis</a></td>
+<td>Lab 5</td>
 </tr>
 <tr>
 <td class="week-cell">10</td>
 <td>Oct 26, 28</td>
 <td>Constraint-Based Analysis</td>
-<td><a href="/labs/lab8" class="lab-link">Lab 8: Constraint-Based Analysis</a></td>
-<td>Lab 7</td>
+<td>-</td>
+<td>-</td>
 </tr>
 <tr>
 <td class="week-cell">11</td>
 <td>Nov 2, 4</td>
 <td>Dynamic Symbolic Execution</td>
-<td>-</td>
-<td>Lab 8</td>
+<td><a href="/labs/lab7" class="lab-link">Lab 7: Pointer Analysis</a></td>
+<td>Lab 6</td>
 </tr>
 <tr>
 <td class="week-cell">12</td>
 <td>Nov 9, 11</td>
 <td>Automated Test Generation</td>
-<td>-</td>
-<td>Project Proposal</td>
+<td><a href="/labs/lab8" class="lab-link">Lab 8: Constraint-Based Analysis</a></td>
+<td>Lab 7</td>
 </tr>
 <tr>
 <td class="week-cell">13</td>
 <td>Nov 16, 18</td>
 <td>Type Systems</td>
 <td>-</td>
-<td>-</td>
+<td>Lab 8, Project Proposal</td>
 </tr>
 <tr class="break-week">
 <td class="week-cell">14</td>
@@ -249,12 +249,12 @@ td {
 <td>Dec 7</td>
 <td>Project Presentations</td>
 <td>-</td>
-<td>Group Project</td>
+<td>Project Report</td>
 </tr>
 </tbody>
 </table>
 
-*Labs are due by end of day (11:59pm ET) on the Wednesday of the week listed in the "Due" column.*
+*Exact lab due dates/times are posted on Gradescope; most labs are due one week after being assigned (see Gradescope for exact times).*
 
 ---
 
