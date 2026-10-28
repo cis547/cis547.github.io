@@ -76,177 +76,234 @@ th {
 td {
   padding: 12px;
 }
-.week-cell {
-  font-weight: bold;
-}
-.odd-week {
-  background: #e3f2fd;
-}
-.break-week {
+.break-row {
   background: #f5f5f5;
   font-style: italic;
-}
-.finals-week {
-  background: #ffebee;
 }
 .lab-link {
   color: #1976d2;
   text-decoration: none;
 }
-.current-week {
+.current-lecture {
   background-color: #c8e6c9 !important;
   font-weight: bold;
 }
-.current-week td {
+.current-lecture td {
   background-color: #c8e6c9 !important;
   color: #1a1a1a !important;
   border-top: 2px solid #4caf50;
   border-bottom: 2px solid #4caf50;
 }
-.current-week td:first-child {
+.current-lecture td:first-child {
   border-left: 2px solid #4caf50;
 }
-.current-week td:last-child {
+.current-lecture td:last-child {
   border-right: 2px solid #4caf50;
 }
-.current-week .lab-link {
+.current-lecture .lab-link {
   color: #1565c0 !important;
   font-weight: 600;
   text-decoration: underline;
 }
-.current-week .lab-link:hover {
+.current-lecture .lab-link:hover {
   color: #0d47a1 !important;
 }
 </style>
 
-<script src="/assets/js/week-highlighter.js"></script>
+<script src="/assets/js/schedule-highlighter.js"></script>
 
-<table>
+<table id="schedule">
 <thead>
 <tr>
-<th>Week</th>
-<th>Lectures</th>
+<th>Date</th>
 <th>Topic</th>
-<th>Lab</th>
+<th>Lab Released</th>
 <th>Due</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd-week">
-<td class="week-cell">1</td>
-<td>Aug 26</td>
+<tr data-date="2026-08-26">
+<td>Wed Aug 26</td>
 <td>Introduction to Software Analysis</td>
 <td><a href="/labs/lab1" class="lab-link">Lab 1: Introduction to Software Analysis</a></td>
 <td>-</td>
 </tr>
-<tr>
-<td class="week-cell">2</td>
-<td>Aug 31, Sep 2</td>
-<td>Introduction to Software Analysis / Software Specifications</td>
-<td><a href="/labs/lab2" class="lab-link">Lab 2: The LLVM Framework</a></td>
-<td>Lab 1</td>
+<tr data-date="2026-08-31">
+<td>Mon Aug 31</td>
+<td>Introduction to Software Analysis</td>
+<td>-</td>
+<td>-</td>
 </tr>
-<tr>
-<td class="week-cell">3</td>
-<td>Sep 9</td>
+<tr data-date="2026-09-02">
+<td>Wed Sep 2</td>
+<td>The LLVM Framework</td>
+<td><a href="/labs/lab2" class="lab-link">Lab 2: The LLVM Framework</a></td>
+<td>-</td>
+</tr>
+<tr data-date="2026-09-07" class="break-row">
+<td>Mon Sep 7</td>
+<td>No lecture (Labor Day)</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr data-date="2026-09-09">
+<td>Wed Sep 9</td>
+<td>Software Specifications</td>
+<td>-</td>
+<td>Lab 1 (Fri Sep 11)</td>
+</tr>
+<tr data-date="2026-09-14">
+<td>Mon Sep 14</td>
 <td>Software Specifications</td>
 <td>-</td>
 <td>-</td>
 </tr>
-<tr>
-<td class="week-cell">4</td>
-<td>Sep 14, 16</td>
+<tr data-date="2026-09-16">
+<td>Wed Sep 16</td>
+<td>Random Testing</td>
+<td><a href="/labs/lab3" class="lab-link">Lab 3: Random Testing</a></td>
+<td>Lab 2 (Fri Sep 18)</td>
+</tr>
+<tr data-date="2026-09-21">
+<td>Mon Sep 21</td>
 <td>Random Testing</td>
 <td>-</td>
-<td>Lab 2</td>
-</tr>
-<tr>
-<td class="week-cell">5</td>
-<td>Sep 21, 23</td>
-<td>Delta Debugging</td>
-<td><a href="/labs/lab3" class="lab-link">Lab 3: Random Testing</a></td>
 <td>-</td>
 </tr>
-<tr>
-<td class="week-cell">6</td>
-<td>Sep 28, 30</td>
+<tr data-date="2026-09-23">
+<td>Wed Sep 23</td>
+<td>Delta Debugging</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr data-date="2026-09-28">
+<td>Mon Sep 28</td>
 <td>Statistical Debugging</td>
 <td>-</td>
 <td>-</td>
 </tr>
-<tr class="break-week">
-<td class="week-cell">-</td>
+<tr data-date="2026-09-30" class="break-row">
+<td>Wed Sep 30</td>
+<td>No lecture</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="break-row">
 <td>-</td>
 <td>Fall Break (Oct 1-4)</td>
 <td>-</td>
 <td>-</td>
 </tr>
-<tr>
-<td class="week-cell">7</td>
-<td>Oct 5, 7</td>
-<td>Dataflow Analysis I</td>
+<tr data-date="2026-10-05">
+<td>Mon Oct 5</td>
+<td>Delta Debugging</td>
 <td><a href="/labs/lab4" class="lab-link">Lab 4: Delta Debugging</a></td>
-<td>Lab 3</td>
+<td>-</td>
 </tr>
-<tr>
-<td class="week-cell">8</td>
-<td>Oct 12, 14</td>
-<td>Dataflow Analysis II</td>
+<tr data-date="2026-10-07" class="break-row">
+<td>Wed Oct 7</td>
+<td>No lecture</td>
+<td>-</td>
+<td>Lab 3 (Fri Oct 9)</td>
+</tr>
+<tr data-date="2026-10-12">
+<td>Mon Oct 12</td>
+<td>Statistical Debugging</td>
 <td><a href="/labs/lab5" class="lab-link">Lab 5: Statistical Debugging</a></td>
 <td>Lab 4</td>
 </tr>
-<tr>
-<td class="week-cell">9</td>
-<td>Oct 19, 21</td>
-<td>Pointer Analysis</td>
+<tr data-date="2026-10-14">
+<td>Wed Oct 14</td>
+<td>Statistical Debugging</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr data-date="2026-10-19">
+<td>Mon Oct 19</td>
+<td>Dataflow Analysis I</td>
 <td><a href="/labs/lab6" class="lab-link">Lab 6: Dataflow Analysis</a></td>
+<td>-</td>
+</tr>
+<tr data-date="2026-10-21" class="break-row">
+<td>Wed Oct 21</td>
+<td>No lecture</td>
+<td>-</td>
 <td>Lab 5</td>
 </tr>
-<tr>
-<td class="week-cell">10</td>
-<td>Oct 26, 28</td>
+<tr data-date="2026-10-26">
+<td>Mon Oct 26</td>
+<td>Dataflow Analysis II</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr data-date="2026-10-28">
+<td>Wed Oct 28</td>
+<td>Pointer Analysis</td>
+<td><a href="/labs/lab7" class="lab-link">Lab 7: Pointer Analysis</a></td>
+<td>-</td>
+</tr>
+<tr data-date="2026-11-02">
+<td>Mon Nov 2</td>
+<td>Pointer Analysis</td>
+<td>-</td>
+<td>Lab 6</td>
+</tr>
+<tr data-date="2026-11-04">
+<td>Wed Nov 4</td>
 <td>Constraint-Based Analysis</td>
 <td>-</td>
 <td>-</td>
 </tr>
-<tr>
-<td class="week-cell">11</td>
-<td>Nov 2, 4</td>
-<td>Dynamic Symbolic Execution</td>
-<td><a href="/labs/lab7" class="lab-link">Lab 7: Pointer Analysis</a></td>
-<td>Lab 6</td>
-</tr>
-<tr>
-<td class="week-cell">12</td>
-<td>Nov 9, 11</td>
-<td>Automated Test Generation</td>
+<tr data-date="2026-11-09">
+<td>Mon Nov 9</td>
+<td>Constraint-Based Analysis</td>
 <td><a href="/labs/lab8" class="lab-link">Lab 8: Constraint-Based Analysis</a></td>
 <td>Lab 7</td>
 </tr>
-<tr>
-<td class="week-cell">13</td>
-<td>Nov 16, 18</td>
-<td>Type Systems</td>
+<tr data-date="2026-11-11">
+<td>Wed Nov 11</td>
+<td>Dynamic Symbolic Execution</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr data-date="2026-11-16">
+<td>Mon Nov 16</td>
+<td>Dynamic Symbolic Execution</td>
 <td>-</td>
 <td>Lab 8, Project Proposal</td>
 </tr>
-<tr class="break-week">
-<td class="week-cell">14</td>
-<td>Nov 23</td>
+<tr data-date="2026-11-18">
+<td>Wed Nov 18</td>
+<td>Automated Test Generation</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr data-date="2026-11-23">
+<td>Mon Nov 23</td>
+<td>Type Systems</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="break-row">
+<td>-</td>
 <td>Thanksgiving Break (Nov 26-29)</td>
 <td>-</td>
 <td>-</td>
 </tr>
-<tr>
-<td class="week-cell">15</td>
-<td>Nov 30, Dec 2</td>
-<td>Course Review and Wrap-Up / Final Exam</td>
+<tr data-date="2026-11-30">
+<td>Mon Nov 30</td>
+<td>Type Systems</td>
 <td>-</td>
 <td>-</td>
 </tr>
-<tr>
-<td class="week-cell">16</td>
-<td>Dec 7</td>
+<tr data-date="2026-12-02">
+<td>Wed Dec 2</td>
+<td>Final Exam</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr data-date="2026-12-07">
+<td>Mon Dec 7</td>
 <td>Project Presentations</td>
 <td>-</td>
 <td>Project Report</td>
