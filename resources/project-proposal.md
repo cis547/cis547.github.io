@@ -34,16 +34,16 @@ Projects are completed in teams of two. After proposals are approved, each team 
 
 To keep progress steady we will follow the timeline below.
 
-| Project Proposal | Nov 6 |
+| Project Proposal | Nov 13 |
 | :---- | ----: |
-| Check-in with Project TA | Nov 17 |
-| Project Submission | Dec 6 |
+| Check-in with Project TA | Nov 25 |
+| Project Submission | Dec 7 |
 
-Submit the proposal no later than Nov 6 so there is room for feedback. Aim to have a prototype analysis and evaluation harness ready for the Nov 17 check-in.
+Submit the proposal no later than Nov 13 so there is room for feedback. Aim to have a prototype analysis and evaluation harness ready for the Nov 25 check-in.
 
 ### Initial and Intermediate Deliverables
 
-#### Project Proposal (Due Nov 6)
+#### Project Proposal (Due Nov 13)
 
 Submit a private Ed post for your team that includes:
 
@@ -60,16 +60,16 @@ Submit a private Ed post for your team that includes:
 
 Keep the proposal to roughly one page. Use the “Domain Tracks & Example Techniques” section below to align your ideas with course expectations.
 
-#### Check-in (Due Nov 17)
+#### Check-in (Due Nov 25)
 
-No written submission. Schedule a 20-minute meeting with your TA to:
+No written submission. Schedule a 20-minute meeting with your TA (latest by Nov 25) to:
 
 - Show the analysis architecture and early code.
 - Demo progress on at least one bug class and its benchmark harness.
 - Report preliminary metrics or experiments.
 - Surface blockers and update the timeline for the final stretch.
 
-### Final Deliverable (Due Dec 6)
+### Final Deliverable (Due Dec 7)
 
 #### Project Code
 
