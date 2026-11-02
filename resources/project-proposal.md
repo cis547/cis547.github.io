@@ -28,7 +28,7 @@ You may propose other classes, but they must be comparable in difficulty and req
 
 ### Project Team
 
-Projects are completed in teams of two. After proposals are approved, each team is paired with a project TA who will serve as your primary contact. Schedule meetings with your TA early and often—they will help keep you on track.
+Projects are completed in teams of two or three people. No teams of one allowed. After proposals are approved, each team is paired with a project TA who will serve as your primary contact. Schedule meetings with your TA early and often—they will help keep you on track.
 
 ### Project Timeline
 
