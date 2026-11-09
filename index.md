@@ -220,7 +220,7 @@ td {
 </tr>
 <tr data-date="2026-10-19">
 <td>Mon Oct 19</td>
-<td>Dataflow Analysis I</td>
+<td>Dataflow Analysis</td>
 <td><a href="/labs/lab6" class="lab-link">Lab 6: Dataflow Analysis</a></td>
 <td>-</td>
 </tr>
@@ -232,25 +232,25 @@ td {
 </tr>
 <tr data-date="2026-10-26">
 <td>Mon Oct 26</td>
-<td>Dataflow Analysis II</td>
+<td>Dataflow Analysis</td>
 <td>-</td>
 <td>-</td>
 </tr>
 <tr data-date="2026-10-28">
 <td>Wed Oct 28</td>
-<td>Pointer Analysis</td>
-<td><a href="/labs/lab7" class="lab-link">Lab 7: Pointer Analysis</a></td>
+<td>Dataflow Analysis</td>
+<td>-</td>
 <td>-</td>
 </tr>
 <tr data-date="2026-11-02">
 <td>Mon Nov 2</td>
 <td>Pointer Analysis</td>
-<td>-</td>
+<td><a href="/labs/lab7" class="lab-link">Lab 7: Pointer Analysis</a></td>
 <td>Lab 6</td>
 </tr>
 <tr data-date="2026-11-04">
 <td>Wed Nov 4</td>
-<td>Constraint-Based Analysis</td>
+<td>Pointer Analysis</td>
 <td>-</td>
 <td>-</td>
 </tr>
